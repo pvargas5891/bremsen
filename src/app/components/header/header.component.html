@@ -1,33 +1,140 @@
-    <header class="ae-container-fluid ae-container-fluid--full rk-header ">
-      <input type="checkbox" id="mobile-menu" class="rk-mobile-menu">
-      <label for="mobile-menu">
-        <svg>
-          <use xlink:href="assets/img/symbols.svg#bar"></use>
-        </svg>
-        <svg>
-          <use xlink:href="assets/img/symbols.svg#bar"></use>
-        </svg>
-        <svg>
-          <use xlink:href="assets/img/symbols.svg#bar"></use>
-        </svg>
-      </label>
-      <div class="ae-container-fluid rk-topbar">
-        <h1 class="rk-logo"><a routerLink="/">{{ _is.info.titulo }}<sup>tm</sup></a></h1>
-        <nav class="rk-navigation">
-          <ul class="rk-menu">
-            <li class="rk-menu__item" routerLinkActive="active"><a routerLink="home" class="rk-menu__link">Home</a>
-            </li>
-            <li class="rk-menu__item" routerLinkActive="active"><a routerLink="about" class="rk-menu__link">Sobre nosotros</a>
-            </li>
+<div id="header">
+    <!-- Top Bar Start-->
+    <nav id="top" class="htop">
+      <div class="container">
+        <div class="row">
+          <div class="pull-right flip left-top">
+            <div id="search" class="input-group">
+              <input id="filter_name" type="text" name="search" value="" placeholder="Search" class="form-control input-lg" />
+              <button type="button" class="button-search"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+          <div class="nav pull-right flip">
+
+            <div class="links">
+              <ul>
+                <li class="mobile"><i style="color:#1bd744;" class="fa fa-whatsapp" aria-hidden="true"></i>&nbsp; <i class="fa fa-phone"></i><b style="color:#fff;">+91 9898777656</b></li>
+              </ul>
+            </div>
+
+          </div>
+          <div id="top-links" class="nav pull-right flip">
+            <ul>
+              <li><a href="#"  style="color: #fff;">Ingresar / Registrarse</a></li>
+               <li><a href="#"  style="color: #fff;">Live Chat</a></li>
+             </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Top Bar End-->
+    <!-- Header Start-->
+    <header class="header-row">
+      <div class="container" style="padding-right: 0px;">
+        <div class="table-container">
+          <!-- Logo Start -->
+          <div class="col-table-cell col-lg-1 col-md-1 col-sm-12 col-xs-12 inner">
+            <div id="logo"><a href="index.html"><img class="img-responsive" src="assets/image/logo.png" width="200" title="MarketShop" alt="MarketShop" /></a></div>
+          </div>
+          <!-- Logo End -->
+          <!-- Mini Cart Start-->
+
+
+          <!-- Search Start-->
+          <div class="col-table-cell col-lg-2 col-md-2 col-sm-6 col-xs-12 inner">
+               <nav id="menu" class="navbar custom-link-right">
+        <div class="navbar-header"> <span class="visible-xs visible-sm"> Menu <b></b></span></div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown sub"> <a href="category.html">Neumatico <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                  <span class="submore"></span><div class="dropdown-menu" style="display: none;">
+                    <ul>
+                      <li> <a href="#">Packs</a></li>
+                      <li> <a href="#">Para Camionetas</a></li>
+                      <li> <a href="#">Para Autos</a></li>
+
+                    </ul>
+                  </div>
+                </li>
+            <li><a class="home_link" title="Home" href="#">Instalación</a></li>
+             <li><a class="home_link" title="Home" href="#">Bremsen</a></li>
+            <li class="dropdown"><a href="blog.html">Blog</a></li>
+
           </ul>
-          <form class="rk-search">
-            <input type="text" placeholder="Search" id="urku-search" class="rk-search-field">
-            <label for="urku-search">
-              <svg>
-                <use xlink:href="assets/img/symbols.svg#icon-search"></use>
-              </svg>
-            </label>
-          </form>
-        </nav>
+        </div>
+
+      </nav>
+
+          </div>
+          <!-- Search End-->
+
+          <div class="col-table-cell col-lg-1 col-md-1 col-sm-6 col-xs-12" style="padding-right: 0px;">
+            <div id="cart">
+              <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;
+              <span id="cart-total">2 item(s) - $1,132.00</span></button>
+              <ul class="dropdown-menu">
+                <li>
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td class="text-center"><a href="producto.html"><img class="img-thumbnail" title="" alt="" width="60px" src="assets/image/product/540x576.jpg"></a></td>
+                        <td class="text-left"><a href="product.html">Marca - modelo</a></td>
+                        <td class="text-right">x 1</td>
+                        <td class="text-right"><b>$ 40,000</b></td>
+                        <td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center"><a href="product.html"><img class="img-thumbnail" title="" alt=""  width="60px" src="assets/image/product/540x576.jpg"></a></td>
+                        <td class="text-left"><a href="product.html">Marca - modelo</a></td>
+                        <td class="text-right">x 1</td>
+                        <td class="text-right"><b>$ 30,000</b></td>
+                        <td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </li>
+                <li>
+                  <div>
+                    <table class="table  table-precio" style="font-size: 14px;: ">
+                <tbody><tr>
+                  <td class="text-lett">Neumáticos</td>
+                  <td class="text-right">$70.00</td>
+                </tr>
+                <tr>
+                  <td class="text-left">Instalación / despacho</td>
+                  <td class="text-right">$0</td>
+                </tr>
+                <tr>
+                  <td class="text-left">Descuento</td>
+                  <td class="text-right">$0<p></p></td>
+                </tr>
+                <tr style="border-top: 1px solid #f2f2f2;">
+                  <td class="text-left"><strong>TOTAL</strong></td>
+                  <td class="text-right"><h4><b>$70.000</b></h4></td>
+                </tr>
+                <tr>
+                 <td></td>
+                  <td class="text-right">
+                    <button type="button" class="btn btn-default btn-block">Comprar con mi cuenta</button><br>
+                   <a href="#"><small>¿Aun no tienes cuenta?</small></a><br>
+                   <button type="button" class="btn btn-primary btn-block">Comprar como visita</button></td>
+                </tr>
+              </tbody></table>
+
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Mini Cart End-->
+        </div>
       </div>
     </header>
+    <!-- Header End-->
+    <!-- Main Menu Start-->
+
+
+
+  </div>

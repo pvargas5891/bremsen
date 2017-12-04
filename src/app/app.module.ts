@@ -11,9 +11,8 @@ import { ProductosService } from './services/productos.service';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { PortafolioComponent } from './components/portafolio/portafolio.component';
-import { AboutComponent } from './components/about/about.component';
-import { ProductoComponent } from './components/producto/producto.component';
+import { HomeComponent } from './components/home/home.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 
 @NgModule({
@@ -21,9 +20,8 @@ import { ProductoComponent } from './components/producto/producto.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    PortafolioComponent,
-    AboutComponent,
-    ProductoComponent
+    HomeComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
