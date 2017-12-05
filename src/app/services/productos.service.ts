@@ -13,11 +13,11 @@ export class ProductosService {
 
   public cargar_productos(){
 
-        this.http.get('https://bremsen-d8cc6.firebaseio.com/productos_idx.json').subscribe(
+        /*this.http.get('https://bremsen-d8cc6.firebaseio.com/productos_idx.json').subscribe(
           res => {
               console.debug(res.json());
           }
-        )
+        )*/
 
 
   }

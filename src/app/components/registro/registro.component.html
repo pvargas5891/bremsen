@@ -14,57 +14,53 @@
 
       <form>
                   <div class="form-group required">
-                    <label for="">Nombre completo</label>
-                    <input type="text" class="form-control" id="">
+                    <label for="nombreCompleto">Nombre completo</label>
+                    <input type="text" class="form-control" id="nombreCompleto" name="cliente.nombreCompleto" [(ngModel)]="cliente.nombreCompleto" required>
                   </div>
 
                   <div class="form-group required">
-                    <label for="">Email</label>
-                    <input type="email" class="form-control" id="" >
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" [(ngModel)]="this.cliente.email" required>
                   </div>
 
                   <div class="form-group required">
-                    <label for="">Telefono</label>
-                    <input type="tel" class="form-control" id="" >
+                    <label for="telefono">Telefono</label>
+                    <input type="tel" class="form-control" id="telefono" name="telefono" [(ngModel)]="this.cliente.telefono" required>
                   </div>
 
 
                   <div class="form-group required">
-                    <label for="">Genero </label>
-                      <select class="form-control" id="input-select" name="input-select">
-                        <option value="">. </option>
+                    <label for="genero">Genero </label>
+                      <select class="form-control" id="genero" name="input-select" name="genero" [(ngModel)]="cliente.genero" required>
                         <option value="1">Masculino </option>
                         <option value="2">Femenino </option>
                     </select>
                   </div>
                   <div class="form-group required">
-                    <label for="">Dirección</label>
-                    <input type="text" class="form-control" id="">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="cliente.direccion" required>
                   </div>
 
                   <div class="form-group required">
-                    <label for="">Región </label>
-                      <select class="form-control" id="input-select" name="input-select" (ngModel)="regionSeleccion" (ngModelChange)="cambiaCiudad=$event">
-                        <option *ngFor="let region of _is.regiones" value="{{region[0]}}">{{region[1]}}</option>
-                       
+                    <label for="region">Región </label>
+                      <select class="form-control" #selectedRegion (change)="cambiaCiudad(selectedRegion.value)" name="region" [(ngModel)]="cliente.region" id="region" required>
+                        <option *ngFor="let region of _is.regiones" [value]="region[0]">{{region[1]}}</option>
+
                     </select>
                   </div>
                   <div class="form-group required">
-                    <label for="">Ciudad </label>
-                    <select *ngIf="_is.ciudades.length > 0" class="form-control" id="input-select" name="input-select">
-                      <option  *ngFor="let ciudad of _is.ciudades" value="{{ciudad[0]}}">{{ciudad[1]}}</option>
-                      
+                    <label for="ciudad">Ciudad </label>
+                    <select *ngIf="_is.ciudades.length > 0" #selectedCiudad class="form-control" (change)="cambiaComuna(selectedCiudad.value)" name="ciudad" id="ciudad" [(ngModel)]="cliente.ciudad" required>
+                      <option  *ngFor="let ciudad of _is.ciudades" [value]="ciudad[0]">{{ciudad[1]}}</option>
                     </select>
+
                   </div>
                    <div class="form-group required">
-                    <label for="">Comuna </label>
-                      <select class="form-control" id="input-select" name="input-select">
-                        <option value="">. </option>
-                        <option value="1">1 </option>
-                        <option value="2">2 </option>
-                        <option value="3">3 </option>
-                        <option value="4">4 </option>
+                    <label for="comuna">Comuna </label>
+                      <select *ngIf="_is.comunas.length > 0" #selectedComuna class="form-control" id="input-select" name="input-select" name="comuna" id="comuna" [(ngModel)]="cliente.comuna" required>
+                        <option  *ngFor="let comuna of _is.comunas" [value]="comuna[0]">{{comuna[1]}}</option>
                     </select>
+
                   </div>
 
 
@@ -72,10 +68,11 @@
 
 
          <div class="col-md-12"  style="padding: 25px 0px 25px 0px; ">
-            <button type="button" class="btn btn-default btn-block">Crear cuenta  </button>
+            <button type="button" class="btn btn-default btn-block" (click)="saveRegistro()">Crear cuenta  </button>
             <p class="lead">Tranfiere directamente a nuestra cuenta y envia el comprobante a xxxx@bremsen.cl</p>
          </div>
-
+         <div *ngIf="estado" [ngClass] = "'success'"> Cliente fue agregado correctamente. </div>
+        <div *ngIf="errorMessage" [ngClass] = "'error'"> {{errorMessage}} </div>
         </div>
 
         <!--Middle Part End -->
@@ -101,7 +98,7 @@
                         <input type="checkbox"><small>Recordarme</small>
                       </label>
                     </div>
-                    <button type="submit" class="btn btn-default btn-block">Log In </button>
+                    <button type="button" class="btn btn-default btn-block">Entrar </button>
                   </form>
 
                 <br>

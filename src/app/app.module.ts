@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from "@angular/http";
+import { FormsModule } from '@angular/forms';
 //RUTAS
 import { app_routing }  from "./app.routes";
 
@@ -29,6 +30,7 @@ import { CategoriaFiltradaComponent } from './components/categoria-filtrada/cate
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule,
     app_routing
   ],
   providers: [
