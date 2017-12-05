@@ -8,11 +8,12 @@ export class InformacionService {
   cargada:boolean = false;
   cargada_sobre_nosotros:boolean = false;
   equipo:any[] = [];
-
+  regiones:any[] = [];
   constructor( public http:Http ) {
 
     this.carga_info();
     this.carga_sobre_nosotros();
+    this.getRegiones();
 
   }
 
@@ -23,6 +24,17 @@ export class InformacionService {
                this.cargada = true;
                this.info = data.json();
              })*/
+  }
+  public getRegiones(){
+    
+    this.http.get("http://bremsen.kodamas.cl/maqueta/location.php")
+             .subscribe( data =>{
+              console.debug(data.json());
+               this.cargada = true;
+               this.regiones = data.json();
+               console.debug(this.regiones[0][0]);
+               console.debug(this.regiones[0][1]);
+             })
   }
   public carga_sobre_nosotros(){
 
