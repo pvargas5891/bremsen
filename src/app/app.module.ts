@@ -13,6 +13,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { CategoriaFiltradaComponent } from './components/categoria-filtrada/categoria-filtrada.component';
+
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { RegistroComponent } from './components/registro/registro.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    RegistroComponent
+    RegistroComponent,
+    CategoriaFiltradaComponent
   ],
   imports: [
     BrowserModule,
