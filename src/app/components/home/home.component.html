@@ -24,43 +24,43 @@ Multiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
 
             <div class="tab-content" style="background: #c0bebf; padding: 25px 14%;">
               <div role="tabpanel" class="tab-pane active" id="comprarAro">
-                 <form>
+                 <div>
                   <div class="form-group">
-                    <label for="ancho">Marca</label>
-                    <input type="email" class="form-control" id="ancho">
+                    <label for="marca">Marca</label>
+                    <input type="text" class="form-control" id="marca" [(ngModel)]="marca">
                   </div>
                   <div class="form-group">
-                    <label for="perfil">Modelo</label>
-                    <input type="password" class="form-control" id="perfil" >
+                    <label for="modelo">Modelo</label>
+                    <input type="text" class="form-control" id="modelo" [(ngModel)]="modelo">
                   </div>
                   <div class="form-group">
-                    <label for="perfil">Año</label>
-                    <input type="password" class="form-control" id="perfil" >
+                    <label for="ano">Año</label>
+                    <input type="text" class="form-control" id="anoperfil" [(ngModel)]="ano">
                   </div>
 
-                  <button type="submit" class="btn btn-default bremsen btn-lg">BUSCAR</button>
+                  <button (click)="btnBuscarClick(1)" type="button" class="btn btn-default bremsen btn-lg">BUSCAR</button>
                     <div class="pad-12">&nbsp;</div>
-                </form>
+                </div>
 
 
               </div>
               <div role="tabpanel" class="tab-pane" id="comprarMedida">
-                  <form>
+                  <div>
                   <div class="form-group">
                     <label for="ancho">Ancho</label>
-                    <input type="email" class="form-control" id="ancho" placeholder="Medida">
+                    <input type="text" class="form-control" id="ancho" placeholder="ancho" [(ngModel)]="ancho">
                   </div>
                   <div class="form-group">
                     <label for="perfil">Perfil</label>
-                    <input type="password" class="form-control" id="perfil" placeholder="Medida">
+                    <input type="text" class="form-control" id="perfil" placeholder="perfil" [(ngModel)]="perfil">
                   </div>
                   <div class="form-group">
                     <label for="aro">Aro</label>
-                    <input type="password" class="form-control" id="aro" placeholder="Medida">
+                    <input type="text" class="form-control" id="aro" placeholder="aro" [(ngModel)]="aro">
                   </div>
 
-                  <button type="submit" class="btn btn-default bremsen btn-lg"><b>BUSCAR</b></button>
-                </form>
+                  <button type="button" (click)="btnBuscarClick(2)" class="btn btn-default bremsen btn-lg"><b>BUSCAR</b></button>
+                </div>
                  <div class="pad-15">&nbsp;</div>
               </div>
 
@@ -87,7 +87,7 @@ Multiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
           <div class="pad50"></div>
 
           <p class="lead"><b>Regístrate para recibir ofertas personalizadas</b> </p>
-          <p>  <button type="button" class="btn btn-primary btn-lg">Crear Cuenta</button></p>
+          <p>  <button type="button" (click)="btnRegistro()" class="btn btn-primary btn-lg">Crear Cuenta</button></p>
           <div class="pad50"></div>
         </div>
     </div>

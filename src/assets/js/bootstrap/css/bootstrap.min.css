@@ -2413,7 +2413,7 @@ th {
     padding: 5px
 }
 .table-bordered {
-    border: 1px solid #ddd
+   
 }
 .table-bordered>thead>tr>th,
 .table-bordered>tbody>tr>th,
@@ -2743,7 +2743,7 @@ input[type="search"] {
     position: relative;
     display: block;
     margin-top: 10px;
-    margin-bottom: 10px
+    margin-bottom: 16px
 }
 .radio label,
 .checkbox label {

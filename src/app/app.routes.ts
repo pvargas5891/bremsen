@@ -3,14 +3,16 @@ import {RouterModule, Routes} from '@angular/router';
 import {
   HomeComponent,
   RegistroComponent,
-  CategoriaFiltradaComponent
+  CategoriaFiltradaComponent,
+  CategoriaNoFiltradaComponent
 } from "./components/index.paginas";
 
 const app_routes: Routes = [
 
     { path: 'home', component: HomeComponent },
     { path: 'registro', component: RegistroComponent },
-    { path: 'filtrado', component: CategoriaFiltradaComponent},
+    { path: 'filtrada/:param1/:param2/:param3/:origen', component: CategoriaFiltradaComponent},
+    { path: 'categoria', component: CategoriaNoFiltradaComponent},
     { path: '**', pathMatch: 'full', redirectTo: 'home'}
 
 ];

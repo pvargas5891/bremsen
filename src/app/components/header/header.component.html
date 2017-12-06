@@ -20,7 +20,7 @@
           </div>
           <div id="top-links" class="nav pull-right flip">
             <ul>
-              <li><a href="#"  style="color: #fff;">Ingresar / Registrarse</a></li>
+              <li><a routerLink="registro"  style="color: #fff;">Ingresar / Registrarse</a></li>
                <li><a href="#"  style="color: #fff;">Live Chat</a></li>
              </ul>
           </div>
@@ -34,7 +34,7 @@
         <div class="table-container">
           <!-- Logo Start -->
           <div class="col-table-cell col-lg-1 col-md-1 col-sm-12 col-xs-12 inner">
-            <div id="logo"><a href="index.html"><img class="img-responsive" src="assets/image/logo.png" width="200" title="MarketShop" alt="MarketShop" /></a></div>
+            <div id="logo"><a routerLink="/"><img class="img-responsive" src="assets/image/logo.png" width="200" title="MarketShop" alt="MarketShop" /></a></div>
           </div>
           <!-- Logo End -->
           <!-- Mini Cart Start-->
@@ -47,7 +47,7 @@
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li class="dropdown sub"> <a href="category.html">Neumatico <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <li class="dropdown sub"> <a routerLink="categoria">Neumatico <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                   <span class="submore"></span><div class="dropdown-menu" style="display: none;">
                     <ul>
                       <li> <a href="#">Packs</a></li>
@@ -59,7 +59,7 @@
                 </li>
             <li><a class="home_link" title="Home" href="#">Instalación</a></li>
              <li><a class="home_link" title="Home" href="#">Bremsen</a></li>
-            <li class="dropdown"><a href="blog.html">Blog</a></li>
+            <li class="dropdown"><a routerLink="blog">Blog</a></li>
 
           </ul>
         </div>
@@ -118,7 +118,7 @@
                  <td></td>
                   <td class="text-right">
                     <button type="button" class="btn btn-default btn-block">Comprar con mi cuenta</button><br>
-                   <a href="#"><small>¿Aun no tienes cuenta?</small></a><br>
+                   <a routerLink="registro"><small>¿Aun no tienes cuenta?</small></a><br>
                    <button type="button" class="btn btn-primary btn-block">Comprar como visita</button></td>
                 </tr>
               </tbody></table>

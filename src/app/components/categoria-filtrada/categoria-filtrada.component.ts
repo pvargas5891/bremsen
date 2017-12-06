@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-categoria-filtrada',
   templateUrl: './categoria-filtrada.component.html',
@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriaFiltradaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {
+
+      route.params.subscribe( parametros =>{
+            console.debug(parametros);
+      });
+
+  }
 
   ngOnInit() {
   }

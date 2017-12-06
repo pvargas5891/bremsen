@@ -15,6 +15,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { CategoriaFiltradaComponent } from './components/categoria-filtrada/categoria-filtrada.component';
+import { CategoriaNoFiltradaComponent } from './components/categoria-no-filtrada/categoria-no-filtrada.component';
 
 
 
@@ -25,7 +26,8 @@ import { CategoriaFiltradaComponent } from './components/categoria-filtrada/cate
     FooterComponent,
     HomeComponent,
     RegistroComponent,
-    CategoriaFiltradaComponent
+    CategoriaFiltradaComponent,
+    CategoriaNoFiltradaComponent
   ],
   imports: [
     BrowserModule,

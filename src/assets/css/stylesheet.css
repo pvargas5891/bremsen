@@ -555,7 +555,7 @@ background: #ccc !important;
 	color: #555;
 	line-height:40px;
 	text-decoration: none;
-	padding:0px 0px 0px 48px;
+	padding:0px 0px 0px 33px;
 	z-index: 1009;
 	-webkit-transition: all 0.3s ease-in-out;
 	-moz-transition: all 0.3s ease-in-out;
@@ -994,6 +994,10 @@ visibility:hidden;
 	.form-control2 {height: 30px; font-size: 15px;}
 /**** Cerrar ****/
 	.borderTop { border-bottom: 1px solid #f2f2f2;  }
+	.borderBottomActive { border-bottom: 3px solid #1e1e1e; }
+	.borderBottom {border-bottom: 3px solid #F2F2F2; font-weight: bold;  }
+	.borderBottomActive h3 { color: #1e1e1e; font-weight: bold; }
+	.borderBottom h3 {color:#F2F2F2;  }
 	.borderCaja { border:1px solid #f2f2f2; padding: 10px; }
 	.pad-15 {padding: 15px;}
     .pad-100 {padding-top: 100px;}
@@ -1001,13 +1005,16 @@ visibility:hidden;
     .pad-10px {padding-top: 10px;}
 	.pest-home {}
 	.formulario01 {padding-left:0px;}
-	.bloque1 { background:#333333c4 ;color:#ffffff; padding: 15px 6%; height: 408px; }
+	.bloque1 { background:#333333c4 ;color:#ffffff; padding: 15px 6%; height: 396px; }
 	.bloque1 p { font-size: 21px; line-height: 27px; }
 	.bremsen { background-color:#e00034; color:#ffffff; width: 100%; text-transform: uppercase; }
 	.bremsen2 { background-color:#cc0033; color:#ffffff; text-transform: uppercase; } 
 	.bremsen3  {background-color:#383838; color:#ffffff; text-transform: uppercase;}
 	h1.nuestros-servicios  { text-transform: uppercase;  font-size: 50px; }
-
+	.volver { float: left; }
+	@media (max-width: 460px) {
+  		 .video { width: 360px; height:203px; }
+	}
 	.table2>tbody>tr>td, .table2>tbody>tr>th, .table>tfoot>tr>td, .table2>tfoot>tr>th, .table2>thead>tr>td, .table2>thead>tr>th { 
 		border: none !important; padding: 4px 8px !important; }
 	h1.valor-unidad  {}
