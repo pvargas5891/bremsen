@@ -17,49 +17,14 @@
           <div class="pad"></div>
           <h3 class="subtitle">Marca</h3>
           <div class="box-category">
-              <div class="radio">
+              <div class="radio" *ngFor="let marca of detallesCategoria.todasMarcas">
                 <label>
-                  <input type="radio" value="">&nbsp;&nbsp;
-                  Goodgear
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="" >&nbsp;&nbsp;
-                  Kumbo
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="" >&nbsp;&nbsp;
-                  Firestone
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="" >&nbsp;&nbsp;
-                  Falken
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="" >&nbsp;&nbsp;
-                  Michelin
+                  <input type="radio" [value]="marca" name="filtromarcamodel" (click)="filtroMarca(marca)">&nbsp;&nbsp;
+
+                  {{marca}}
                 </label>
               </div>
 
-              <div class="radio">
-                <label>
-                  <input type="radio" value="" >&nbsp;&nbsp;
-                  Kumbo
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="" >&nbsp;&nbsp;
-                  Firestone
-                </label>
-              </div>
 
           </div>
 
@@ -68,28 +33,10 @@
           <h3 class="subtitle">Atributo</h3>
 
           <div class="box-category">
-              <div class="radio">
+              <div class="radio" *ngFor="let atributo of atributoRadio">
                 <label>
-                  <input type="radio" value="">&nbsp;&nbsp;
-                  Run flat
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="" >&nbsp;&nbsp;
-                  Carga pesada
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="" >&nbsp;&nbsp;
-                  Eco
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="" >&nbsp;&nbsp;
-                  Otro x
+                  <input type="radio" [value]="atributo" name="atributomodel" (click)="filtroAtributo(atributo)">&nbsp;&nbsp;
+                  {{atributo}}
                 </label>
               </div>
 
@@ -98,31 +45,12 @@
           <h3 class="subtitle">Opciones</h3>
 
           <div class="box-category">
-              <div class="radio">
+              <div class="radio" *ngFor="let opcion of opcionesRadio">
                 <label>
-                  <input type="radio" value="">&nbsp;&nbsp;
-                  Ofertas
+                  <input type="radio" [value]="opcion" name="opcionesmodel" (click)="filtroOpciones(opcion)">&nbsp;&nbsp;
+                  {{opcion}}
                 </label>
               </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="" >&nbsp;&nbsp;
-                  Pack
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="" >&nbsp;&nbsp;
-                  Instalación rapida
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="" >&nbsp;&nbsp;
-                  Otro x
-                </label>
-              </div>
-
           </div>
 
 
@@ -148,50 +76,43 @@
 
             <div class="tab-content" style="background: #c0bebf;">
               <div role="tabpanel" class="buscador2 tab-pane active" id="comprarAro">
-                  <form class="form-inline">
                  <div class="form-group row">
                     <div class="col-md-4 ">
                      <label>Marca</label>
-                      <input class="form-control" id="" type="text" >
+                      <input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.marca">
                     </div>
                     <div class="col-md-4 ">
                        <label>Modelo</label>
-                      <input class="form-control" id="" type="text">
+                      <input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.modelo">
                     </div>
                     <div class="col-md-2 ">
                        <label>Año</label>
-                      <input class="form-control" id="" type="text">
+                      <input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.ano">
                     </div>
                     <div class="col-md-2 " style="padding-top: 22px;">
-                     <button type="submit" class="btn btn-default bremsen2" style="padding: 10px;">Buscar </button>
+                     <button type="button" (click)="buscador1()" class="btn btn-default bremsen2" style="padding: 10px;">Buscar </button>
                    </div>
                   </div>
-
-              </form>
               </div>
 
               <div role="tabpanel2" class="buscador2 tab-pane" id="comprarMedida">
-                 <form class="form-inline">
-
                    <div class="form-group row">
                     <div class="col-md-4 ">
                      <label>Ancho</label>
-                      <input class="form-control" id="" type="text" >
+                      <input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.ancho">
                     </div>
                     <div class="col-md-4 ">
                        <label>Perfil</label>
-                      <input class="form-control" id="" type="text">
+                      <input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.perfil">
                     </div>
                     <div class="col-md-2 ">
                        <label>Aro</label>
-                      <input class="form-control" id="" type="text">
+                      <input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.aro">
                     </div>
                     <div class="col-md-2" style="padding-top: 22px;">
-                     <button type="submit" class="btn btn-default bremsen2" style="padding: 10px;">Buscar </button>
+                     <button type="submit" (click)="buscador2()" class="btn btn-default bremsen2" style="padding: 10px;">Buscar </button>
                    </div>
                   </div>
-
-              </form>
               </div>
             </div>
 
@@ -204,21 +125,19 @@
 
           <div class="product-filter">
             <div class="row">
-              <div class="col-sm-6 text-left"> <label class="control-label" for="input-sort">Showing 1 - 10 of 120</label></div>
+              <div class="col-sm-6 text-left"> <label class="control-label" for="input-sort">Mostrando {{ detallesCategoria.inicio}} - {{ detallesCategoria.fin}} de {{detallesCategoria.totalProductos}} Productos</label></div>
               <div class="col-sm-3 text-right">
                 <label class="control-label" for="input-sort">Ordenar por:</label>
               </div>
               <div class="col-md-3 col-sm-2 text-right">
-                <select id="input-sort" class="form-control col-sm-3">
-                  <option value="" selected="selected">Default</option>
-                  <option value="">Name (A - Z)</option>
-                  <option value="">Name (Z - A)</option>
-                  <option value="">Price (Low &gt; High)</option>
-                  <option value="">Price (High &gt; Low)</option>
-                  <option value="">Rating (Highest)</option>
-                  <option value="">Rating (Lowest)</option>
-                  <option value="">Model (A - Z)</option>
-                  <option value="">Model (Z - A)</option>
+                <select id="input-sort" class="form-control col-sm-3" (change)="ordenadorProductos()" name="ordenador" [(ngModel)]="detallesCategoria.marca">
+                  <option value="" selected="selected">Todos</option>
+                  <option value="marca1">Marca (A - Z)</option>
+                  <option value="marca2">Marca (Z - A)</option>
+                  <option value="precio1">Precio (Mas Bajo)</option>
+                  <option value="precio2">Precio (Mas Alto)</option>
+                  <option value="modelo1">Modelo (A - Z)</option>
+                  <option value="modelo">Modelo (Z - A)</option>
                 </select>
               </div>
 
@@ -231,7 +150,7 @@
               <div class="product-thumb">
                 <div class="image">
 
-                      <a href="producto.html">
+                      <a routerLink="/producto/{{producto.ID}}">
                         <div class="logo-img">
                          <img  src="assets/image/product/logo-marcas.png" width="200px" alt="" title="" class="img-responsive" />
                       </div>
@@ -247,16 +166,16 @@
 
                         -->
                     </div>
-                    <h4><a href="producto.html"> {{producto[0]}} {{producto[1]}} </a></h4>
+                    <h4><a routerLink="/producto/{{producto.ID}}"> {{producto.MARCA}} {{producto.MODELO}} </a></h4>
                     <div>
                       <ul class="lista-producto">
-                          <li>Ancho: {{producto[5]}}</li>
-                          <li> Pefil: </li>
-                          <li>Aro: 13</li>
-                          <li>Indice de carga: KUMHO</li>
-                          <li>Marca: KUMHO</li>
-                          <li>Instalación gratis: Si</li>
-                          <li>Despacho gratis: Si</li>
+                          <li>Ancho: {{producto.ANCHO}}</li>
+                          <li>Pefil: {{producto.PERFIL}}</li>
+                          <li>Aro: {{producto.ARO}}</li>
+                          <li>Indice de carga: {{producto.CARGA}}</li>
+                          <li>Marca: {{producto.MARCA}}</li>
+                          <li>Instalación gratis: {{producto.INCLUYE_INSTALACION}}</li>
+                          <li>Despacho gratis: {{producto.DESPACHO}}</li>
                       </ul>
                     </div>
 
@@ -266,25 +185,20 @@
         <div class="col-md-4">
           <table class="table2 table table-precio" style="padding-right: 0px;">
             <tr >
-              <td>Valor unitario</td>
-              <td  style="text-align:right;"> Cantidad</td>
+              <td>Cantidad</td>
+              <td style="text-align:right;"> Valor unitario</td>
 
             </tr>
             <tr>
               <td class="col-sm-6">
 
-                <select class="form-control" style="width: 75%;">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <select class="form-control" style="width: 75%;" >
+                <option *ngFor="let stock = totalStock" ng-value="stock">{{stock}}</option>
               </select>
               </td>
               <td class="col-sm-6">
-
-                <p style="text-align:right; margin-bottom: 3px;" class="precio"><b>$ 10,000</b></p>
-                <p style="text-align:right; font-size: 12px;">Ahorro $60,000</p>
+                <p style="text-align:right; margin-bottom: 3px;" class="precio"><b>$ {{producto.TOTAL}}</b></p>
+                <!--p style="text-align:right; font-size: 12px;">Ahorro $60,000</p-->
               </td>
             </tr>
           </table>
@@ -297,7 +211,7 @@
                 <p class="total">Total</p>
               </td>
               <td style="text-align:right;" class="col-sm-6">
-                <h3 class="precio"><b>$ 10,000</b></h3>
+                <h3 class="precio"><b>$ {{producto.TOTAL}}</b></h3>
 
               </td>
             </tr>
@@ -325,7 +239,7 @@
                 <li><a href="#">&gt;|</a></li>
               </ul>
             </div>
-            <div class="col-sm-6 text-right">Showing 1 to 12 of 15 (2 Pages)</div>
+            <div class="col-sm-6 text-right">Mostrando {{ detallesCategoria.inicio}} - {{ detallesCategoria.fin}} de {{detallesCategoria.totalProductos}} Productos</div>
           </div>
         </div>
         <!--Middle Part End -->

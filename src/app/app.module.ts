@@ -16,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { CategoriaFiltradaComponent } from './components/categoria-filtrada/categoria-filtrada.component';
 import { CategoriaNoFiltradaComponent } from './components/categoria-no-filtrada/categoria-no-filtrada.component';
+import { ProductoComponent } from './components/producto/producto.component';
 
 
 
@@ -27,7 +28,8 @@ import { CategoriaNoFiltradaComponent } from './components/categoria-no-filtrada
     HomeComponent,
     RegistroComponent,
     CategoriaFiltradaComponent,
-    CategoriaNoFiltradaComponent
+    CategoriaNoFiltradaComponent,
+    ProductoComponent
   ],
   imports: [
     BrowserModule,

@@ -74,7 +74,7 @@ legend {
 	font-size: 18px;
 	padding: 7px 0px
 }
-label { font-weight:bold; font-family:'Lato', sans-serif; font-size: 14px !important; }
+label { font-weight:normal; font-family:'Lato', sans-serif; font-size: 14px !important; }
 form {
 	padding:0;
 	margin:0;
@@ -94,10 +94,35 @@ a:focus { outline:none; }
 /**===== Title =====**/
 .title { margin:0px 0px 20px 0px; }
 
+.padBottom { padding-bottom: 24px; }
+
+
+h1 { 
+	font-size: 36px !important;
+	text-transform: uppercase !important;
+	color: #4a4a4a !important;
+	font-weight: lighter !important;
+}
+
+h2 { 
+	font-weight: bold !important;
+	font-size: 24px !important;
+	color: #4a4a4a !important;
+}
+
+h2.bolder { font-size: 36px !important; }
+
+h3 { 
+	color: #4a4a4a !important;
+}
+h4 { font-size: 16px !important; font-weight: bold !important; color: #1e1e1e; }
+
 
 h1.title { text-transform: uppercase;font-weight: bold; }
 h4.nombre-producto { font-size: 14px;}
 h2.titulo-ligh  { font-weight: lighter; font-size: 24px; }
+
+
 
 .boton-tab {
 background: #ccc !important;
@@ -552,7 +577,7 @@ background: #ccc !important;
 #menu .nav > li { height:40px; }
 #menu .nav > li > a {
 	font-size:16px;
-	color: #555;
+	color: #aaa;
 	line-height:40px;
 	text-decoration: none;
 	padding:0px 0px 0px 33px;
@@ -983,15 +1008,17 @@ visibility:hidden;
 	top:25px;
 	left:16px;
 }
-	b.titulosDetalles { font-size: 16px; text-transform: uppercase;  }
+	p.titulosDetalles { font-size: 16px; text-transform: uppercase;  }
 	 .p-botnes  {color: #ccc; padding-top: 8px;}
 	.bg-home {  background-image: url('../image/neumaticos-home.jpg'); }
+	.img-bremsen {  background-image: url('../image/img-bremsen.jpg'); height: 430px; }
 	label.aro { float: right; }
 	.buscador2  {padding: 25px 7% !important;}
 	.nav-tabs>li>a {border-radius: 0px; background:#e8e8e8; color: #c0bebf;}
 	.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {background: #c0bebf;}
-	.form-control {height: 40px; font-size: 14px; border-radius: 4px !important;}
+	.form-control {height: 40px; font-size: 14px; border-radius: 4px}
 	.form-control2 {height: 30px; font-size: 15px;}
+	.gris-oscuro { background: #4a4a4a; }
 /**** Cerrar ****/
 	.borderTop { border-bottom: 1px solid #f2f2f2;  }
 	.borderBottomActive { border-bottom: 3px solid #1e1e1e; }
@@ -1327,7 +1354,6 @@ visibility:hidden;
 /*  11. buttons
 /*===================================================================================*/
 .buttons {
-	border-top:1px solid #EEEEEE;
 	overflow: auto;
 	padding:15px 6px 0px 6px;
 	margin-bottom: 20px;
@@ -1336,6 +1362,7 @@ visibility:hidden;
 	padding:6.2px 12px;
 	border-radius: 4px !important;
 	border:0px none;
+	text-transform: uppercase;
 	border-radius:0px;
 	box-shadow:none;
 	-webkit-transition: all 0.3s ease-in-out;
@@ -2084,7 +2111,7 @@ h4.panel-title { padding:0 }
     height:40px;
     text-align: center;
     width:40px; float:left;}
-.feature-box .feature-content{padding-left:50px;}
+.feature-box .feature-content{padding:20px; color:#4a4a4a ;}
 .feature-box h4{font-size:22px; margin-top:0;}
 /* Infographic */
 .infographic{position:relative; margin-top:30px;}
@@ -2197,7 +2224,7 @@ h4.panel-title { padding:0 }
 /*  23. Extra
 /*===================================================================================*/
 /* Fix some bootstrap improvment */
-.form-control,.input-group-addon { border-radius:0px; }
+.form-control,.input-group-addon { border-radius:4px; }
 .radio-inline + .radio-inline .checkbox-inline + .checkbox-inline{margin-left:10px;}
 input[type="radio"], input[type="checkbox"]{margin-top:2px;}
 .checkbox-inline input[type="checkbox"]{margin-top:3px;}

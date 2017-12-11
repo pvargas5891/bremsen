@@ -1299,12 +1299,13 @@ h6,
 }
 p {
     margin: 0 0 10px;
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 24px;
 }
 .lead {
     margin-bottom: 20px;
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 3005
     line-height: 1.4
 }
 @media (min-width: 768px) {
@@ -4146,7 +4147,7 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 .nav>li>a:hover,
 .nav>li>a:focus {
     text-decoration: none;
-    background-color: #eee
+  
 }
 .nav>li.disabled>a {
     color: #777
