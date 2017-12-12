@@ -4,6 +4,8 @@ export class DetalleCatProductos {
   public fin: string;
   public order: string;
   public marca: string;
+  public marcaFiltro: string;
+  public marcaOrder: string;
   public atributo: string;
   public opciones: string;
   public modelo: string;

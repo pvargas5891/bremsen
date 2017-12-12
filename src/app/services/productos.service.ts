@@ -14,17 +14,14 @@ export class ProductosService {
      // this.cargar_productos();
 
   }
+  private getParametrosBusquedas(detalleCatProductos: DetalleCatProductos): URLSearchParams{
 
-  public getProductos(detalleCatProductos: DetalleCatProductos): Promise<any>{
-
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
       const params = new URLSearchParams();
-
       params.append('inicio', detalleCatProductos.inicio);
       params.append('fin', detalleCatProductos.fin);
       params.append('order', detalleCatProductos.order);
       params.append('marca', detalleCatProductos.marca);
+      params.append('marcaFiltro', detalleCatProductos.marcaFiltro);
       params.append('atributo', detalleCatProductos.atributo);
       params.append('opciones', detalleCatProductos.opciones);
       params.append('modelo', detalleCatProductos.modelo);
@@ -33,9 +30,42 @@ export class ProductosService {
       params.append('perfil', detalleCatProductos.perfil);
       params.append('aro', detalleCatProductos.aro);
 
-      let body = params.toString();
-      //console.debug(body);
-      return this.http.get(this.url+ 'productos.php?' + body, options).toPromise()
+      return params;
+  }
+  public getProductosFiltrado(detalleCatProductos: DetalleCatProductos): Promise<any>{
+
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      const params = this.getParametrosBusquedas(detalleCatProductos);
+      params.append('accion','filtro');
+
+      return this.http.get(this.url+ 'productos.php?' + params.toString() , options).toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+
+  }
+
+  public getDetalleProductosFiltrado(detalleCatProductos: DetalleCatProductos): Promise<any>{
+
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      const params = this.getParametrosBusquedas(detalleCatProductos);
+      params.append('accion','detallefiltro');
+
+      return this.http.get(this.url+ 'productos.php?'+ params.toString(), options).toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+
+  }
+
+  public getProductos(): Promise<any>{
+
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      const params = new URLSearchParams();
+      params.append('accion','todos');
+
+      return this.http.get(this.url+ 'productos.php?' + params.toString(), options).toPromise()
 	           .then(this.extractData)
              .catch(this.handleErrorPromise);
 
@@ -45,11 +75,16 @@ export class ProductosService {
 
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.get(this.url+ 'productos.php?totalProductos=1', options).toPromise()
+      const params = new URLSearchParams();
+      params.append('accion','detalle');
+
+      return this.http.get(this.url+ 'productos.php?'+ params.toString(), options).toPromise()
 	           .then(this.extractData)
              .catch(this.handleErrorPromise);
 
   }
+
+
 
    private extractData(res: Response) {
         //console.debug(res);

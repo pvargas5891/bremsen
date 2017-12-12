@@ -1,501 +1,277 @@
-<div id="container">
-  <div class="container">
-    <!-- Breadcrumb Start-->
-    <ul class="breadcrumb">
-      <li>
-        <a href="index.html">
-          <i class="fa fa-home"></i>
-        </a>
-      </li>
-      <li>
-        <a href="#">Pagina actual</a>
-      </li>
-    </ul>
-    <!-- Breadcrumb End-->
+  <div id="container">
+    <div class="container">
+      <!-- Breadcrumb Start-->
+      <ul class="breadcrumb">
+       <li><a routerLink="/home"><i class="fa fa-home"></i></a></li>
+        <li><a routerLink="/filtrada/{{parametros.param1}}/{{parametros.param2}}/{{parametros.param3}}/{{parametros.origen}}">Pagina actual</a></li>
+      </ul>
+      <!-- Breadcrumb End-->
 
 
 
 
-    <div class="row">
-      <!--Left Part Start -->
-      <aside id="column-left" class="col-sm-3 hidden-xs">
-        <div class="pad"></div>
-        <h3 class="subtitle">Marca</h3>
-        <div class="box-category">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Goodgear
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Kumbo
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Firestone
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Falken
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Michelin
-            </label>
-          </div>
-
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Kumbo
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Firestone
-            </label>
-          </div>
-
-        </div>
-        <div class="pad"></div>
-        <h3 class="subtitle">Atributo</h3>
-
-        <div class="box-category">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Run flat
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Carga pesada
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Eco
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Otro x
-            </label>
-          </div>
-
-        </div>
-        <div class="pad"></div>
-        <h3 class="subtitle">Opciones</h3>
-
-        <div class="box-category">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Ofertas
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Pack
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Instalación rapida
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value=""> Otro x
-            </label>
-          </div>
-
-        </div>
-
-        <button type="button" class="btn btn-primary">Nueva búsqueda</button>
-
-
-      </aside>
-      <!--Left Part End -->
-
-
-
-
-
-
-
-
-
-      <!--Middle Part Start-->
-      <div id="content" class="col-sm-9">
-        <h1 class="title">Para: Auto Marca Modelo 2013</h1>
-
-
-
-
-        <div class="product-filter">
-          <div class="row">
-            <div class="col-sm-6 text-left">
-              <label class="control-label" for="input-sort">Showing 1 - 10 of 120</label>
-            </div>
-            <div class="col-sm-3 text-right">
-              <label class="control-label" for="input-sort">Ordenar por:</label>
-            </div>
-            <div class="col-md-3 col-sm-2 text-right">
-              <select id="input-sort" class="form-control col-sm-3">
-                <option value="" selected="selected">Default</option>
-                <option value="">Name (A - Z)</option>
-                <option value="">Name (Z - A)</option>
-                <option value="">Price (Low &gt; High)</option>
-                <option value="">Price (High &gt; Low)</option>
-                <option value="">Rating (Highest)</option>
-                <option value="">Rating (Lowest)</option>
-                <option value="">Model (A - Z)</option>
-                <option value="">Model (Z - A)</option>
-              </select>
-            </div>
-
-          </div>
-        </div>
-        <br />
-        <div class="row products-category">
-
-
-
-
-          <div class=" product-list col-xs-12">
-            <div class="product-thumb">
-              <div class="image">
-
-                <a href="producto.html">
-                  <div class="logo-img">
-                    <img src="assets/image/product/logo-marcas.png" width="200px" alt="" title="" class="img-responsive" />
-                  </div>
-                  <img src="assets/image/product/540x576.jpg" width="220px" alt=" Strategies for Acquiring Your Own Laptop " title="" class="img-responsive"
-                  />
-                </a>
+      <div class="row">
+        <!--Left Part Start -->
+        <aside id="column-left" class="col-sm-3 hidden-xs">
+          <div class="pad"></div>
+          <h3 class="subtitle">Marca</h3>
+           <div class="box-category">
+            <div class="radio">
+                <label>
+                  <input type="radio" name="filtromarcamodel" (click)="filtroMarca()">&nbsp;&nbsp;
+                  Todas
+                </label>
               </div>
-              <div class="col-md-4">
-                <div class="caption">
-                  <div class="oferta-inst" style="background: #fff;">
+              <div class="radio" *ngFor="let marca of detallesCategoria.todasMarcas">
+                <label>
+                  <input type="radio" [value]="marca" name="filtromarcamodel" (click)="filtroMarca(marca)">&nbsp;&nbsp;
 
-                  </div>
-                  <h4>
-                    <a href="producto.html"> Marca modelo </a>
-                  </h4>
-                  <div>
-                    <ul class="lista-producto">
-                      <li> Ancho: 145</li>
-                      <li> Pefil: </li>
-                      <li>Aro: 13</li>
-                      <li>Indice de carga: KUMHO</li>
-                      <li>Marca: KUMHO</li>
-                      <li>Instalación gratis: Si</li>
-                      <li>Despacho gratis: Si</li>
-                    </ul>
-                  </div>
-
-                </div>
-
+                  {{marca}}
+                </label>
               </div>
-              <div class="col-md-4">
-                <table class="table2 table table-precio" style="padding-right: 0px;">
-                  <tr>
-                    <td>Valor unitario</td>
-                    <td style="text-align:right;"> Cantidad</td>
 
-                  </tr>
-                  <tr>
-                    <td class="col-sm-6">
 
-                      <select class="form-control" style="width: 75%;">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </select>
-                    </td>
-                    <td class="col-sm-6">
+          </div>
 
-                      <p style="text-align:right; margin-bottom: 3px;" class="precio">
-                        <b>$ 10,000</b>
-                      </p>
-                      <p style="text-align:right; font-size: 12px;">Ahorro $60,000</p>
-                    </td>
-                  </tr>
-                </table>
-                <hr class="hr1">
+          <div class="pad"></div>
+          <h3 class="subtitle">Atributo</h3>
 
-                <table class="table2 table table-precio">
-
-                  <tr>
-                    <td class="col-sm-6">
-                      <p class="total">Total</p>
-                    </td>
-                    <td style="text-align:right;" class="col-sm-6">
-                      <h3 class="precio">
-                        <b>$ 10,000</b>
-                      </h3>
-
-                    </td>
-                  </tr>
-                  <tr style="text-align:right; ">
-                    <td>
-                      <button type="submit" class="btn btn-default bremsen ">Comprar</button>
-                    </td>
-                    <td>
-                      <button type="submit" class="btn btn-primary bremsen3 ">
-                        <i class="fa fa-plus" aria-hidden="true"></i> Carro</button>
-                    </td>
-                  </tr>
-                </table>
-
+          <div class="box-category">
+              <div class="radio" *ngFor="let atributo of atributoRadio">
+                <label>
+                  <input type="radio" [value]="atributo" name="atributomodel" (click)="filtroAtributo(atributo)">&nbsp;&nbsp;
+                  {{atributo}}
+                </label>
               </div>
+
+          </div>
+          <div class="pad"></div>
+          <h3 class="subtitle">Opciones</h3>
+
+          <div class="box-category">
+              <div class="radio" *ngFor="let opcion of opcionesRadio">
+                <label>
+                  <input type="radio" [value]="opcion" name="opcionesmodel" (click)="filtroOpciones(opcion)">&nbsp;&nbsp;
+                  {{opcion}}
+                </label>
+              </div>
+          </div>
+
+
+        </aside>
+        <!--Left Part End -->
+
+
+
+
+
+
+
+
+
+        <!--Middle Part Start-->
+        <div id="content" class="col-sm-9">
+          <h1 class="title">Para: {{param1}} {{param2}} {{param3}}</h1>
+
+        <!-- 1 -->
+<div class="loader loader--style1" title="0" *ngIf="mostrarLoading">
+  <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+  <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+    s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+    c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+  <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+    C22.32,8.481,24.301,9.057,26.013,10.047z">
+    <animateTransform attributeType="xml"
+      attributeName="transform"
+      type="rotate"
+      from="0 20 20"
+      to="360 20 20"
+      dur="0.5s"
+      repeatCount="indefinite"/>
+    </path>
+  </svg>
+</div>
+
+
+          <div class="product-filter">
+            <div class="row">
+              <div class="col-sm-6 text-left"> <label class="control-label" for="input-sort">Mostrando {{ detallesCategoria.inicio}} - {{ detallesCategoria.fin}} de {{detallesCategoria.totalProductos}} Productos</label></div>
+              <div class="col-sm-3 text-right">
+                <label class="control-label" for="input-sort">Ordenar por:</label>
+              </div>
+              <div class="col-md-3 col-sm-2 text-right">
+                <select id="input-sort" class="form-control col-sm-3" (change)="ordenadorProductos()" name="ordenador" [(ngModel)]="detallesCategoria.order">
+                  <option value="marca1" selected="selected">Marca (A - Z)</option>
+                  <option value="marca2">Marca (Z - A)</option>
+                  <option value="precio1">Precio (Mas Bajo)</option>
+                  <option value="precio2">Precio (Mas Alto)</option>
+                  <option value="modelo1">Modelo (A - Z)</option>
+                  <option value="modelo2">Modelo (Z - A)</option>
+                </select>
+              </div>
+
             </div>
           </div>
+          <br />
+          <div class="row products-category">
 
 
+        <!-- *********** Cuando no encuentra el producto sale este form   **********
 
-          <div class=" product-list col-xs-12">
-            <div class="product-thumb">
-              <div class="image">
-
-                <a href="producto.html">
-                  <div class="logo-img">
-                    <img src="assets/image/product/logo-marcas.png" width="200px" alt="" title="" class="img-responsive" />
-                  </div>
-                  <img src="assets/image/product/540x576.jpg" width="220px" alt=" Strategies for Acquiring Your Own Laptop " title="" class="img-responsive"
-                  />
-                </a>
-              </div>
-              <div class="col-md-4">
-                <div class="caption">
-                  <div class="oferta-inst">
-                    <p>Oferta /insta rap</p>
-                  </div>
-                  <h4>
-                    <a href="producto.html"> Marca modelo </a>
-                  </h4>
-
-                  <div>
-                    <ul class="lista-producto">
-                      <li> Ancho: 145</li>
-                      <li> Pefil: </li>
-                      <li>Aro: 13</li>
-                      <li>Indice de carga: KUMHO</li>
-                      <li>Marca: KUMHO</li>
-                      <li>Instalación gratis: Si</li>
-                      <li>Despacho gratis: Si</li>
-                    </ul>
+            <div class="col-sm-12" style="padding: 0px;">
+            <h2>No se han encontrado neumáticos para tu búsqueda</h2>
+            <p>Dejanos tus datos y nosotros seguiremos buscando por ti. Te escribiremos con las mejores opciones.</p>
+                <form>
+                  <div class="form-group required">
+                    <label for="">Nombre completo</label>
+                    <input type="text" class="form-control" id="">
                   </div>
 
-                </div>
-
-              </div>
-              <div class="col-md-4">
-                <table class="table2 table table-precio" style="padding-right: 0px;">
-                  <tr>
-                    <td>Valor unitario</td>
-                    <td style="text-align:right;"> Cantidad</td>
-
-                  </tr>
-                  <tr>
-                    <td class="col-sm-6">
-
-                      <select class="form-control" style="width: 75%;">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </select>
-                    </td>
-                    <td class="col-sm-6">
-
-                      <p style="text-align:right; margin-bottom: 3px;" class="precio">
-                        <b>$ 10,000</b>
-                      </p>
-                      <p style="text-align:right; font-size: 12px;">Ahorro $60,000</p>
-                    </td>
-                  </tr>
-                </table>
-                <hr class="hr1">
-
-                <table class="table2 table table-precio">
-
-                  <tr>
-                    <td class="col-sm-6">
-                      <p class="total">Total</p>
-                    </td>
-                    <td style="text-align:right;" class="col-sm-6">
-                      <h3 class="precio">
-                        <b>$ 10,000</b>
-                      </h3>
-
-                    </td>
-                  </tr>
-                  <tr style="text-align:right; ">
-                    <td>
-                      <button type="submit" class="btn btn-default bremsen ">Comprar</button>
-                    </td>
-                    <td>
-                      <button type="submit" class="btn btn-primary bremsen3 ">
-                        <i class="fa fa-plus" aria-hidden="true"></i> Carro</button>
-                    </td>
-                  </tr>
-                </table>
-
-              </div>
-            </div>
-          </div>
-
-
-
-
-
-          <div class=" product-list col-xs-12">
-            <div class="product-thumb">
-              <div class="image">
-
-                <a href="producto.html">
-                  <div class="logo-img">
-                    <img src="assets/image/product/logo-marcas.png" width="200px" alt="" title="" class="img-responsive" />
+                  <div class="form-group required">
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" id="" >
                   </div>
-                  <img src="assets/image/product/540x576.jpg" width="220px" alt=" Strategies for Acquiring Your Own Laptop " title="" class="img-responsive"
-                  />
-                </a>
-              </div>
-              <div class="col-md-4">
-                <div class="caption">
-                  <div class="oferta-inst">
-                    <p>Oferta /insta rap</p>
-                  </div>
-                  <h4>
-                    <a href="product.html"> Marca modelo </a>
-                  </h4>
-                  <div>
-                    <ul class="lista-producto">
-                      <li> Ancho: 145</li>
-                      <li> Pefil: </li>
-                      <li>Aro: 13</li>
-                      <li>Indice de carga: KUMHO</li>
-                      <li>Marca: KUMHO</li>
-                      <li>Instalación gratis: Si</li>
-                      <li>Despacho gratis: Si</li>
-                    </ul>
-                  </div>
+              </form>
+                <button type="button" class="btn btn-default btn-lg">Enviar</button>
+                <br>
+          </div>-->
 
-                </div>
 
-              </div>
-              <div class="col-md-4">
-                <table class="table2 table table-precio" style="padding-right: 0px;">
-                  <tr>
-                    <td>Valor unitario</td>
-                    <td style="text-align:right;"> Cantidad</td>
 
-                  </tr>
-                  <tr>
-                    <td class="col-sm-6">
 
-                      <select class="form-control" style="width: 75%;">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </select>
-                    </td>
-                    <td class="col-sm-6">
+            <div *ngFor="let producto of productos"  class=" product-list col-xs-12">
+              <div class="product-thumb">
+                <div class="image">
 
-                      <p style="text-align:right; margin-bottom: 3px;" class="precio">
-                        <b>$ 10,000</b>
-                      </p>
-                      <p style="text-align:right; font-size: 12px;">Ahorro $60,000</p>
-                    </td>
-                  </tr>
-                </table>
-                <hr class="hr1">
-
-                <table class="table2 table table-precio">
-
-                  <tr>
-                    <td class="col-sm-6">
-                      <p class="total">Total</p>
-                    </td>
-                    <td style="text-align:right;" class="col-sm-6">
-                      <h3 class="precio">
-                        <b>$ 10,000</b>
-                      </h3>
-
-                    </td>
-                  </tr>
-
-                </table>
-
-                <table class="table2 table table-precio">
-                  <tr>
-
-                    <td class="col-md-12" style="text-align: right;">
-                      <button class="btn btn-default " type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
-                        aria-controls="collapseExample">
-                        Verificar stock
-                        <i class="fa fa-sort" aria-hidden="true"></i>
-
-                      </button>
-                      <div class="collapse" id="collapseExample" style="text-align: left !important;">
-                        <div class="well">
-                          <br> Deja tus datos y te contactaremos con la confirmación.
-                          <form>
-                            <div class="form-group required">
-                              <label for="">Nombre completo</label>
-                              <input type="text" class="form-control" id="">
-                            </div>
-
-                            <div class="form-group required">
-                              <label for="">Email</label>
-                              <input type="email" class="form-control" id="">
-                            </div>
-                          </form>
-                          <button type="submit" class="btn btn-default bremsen ">Enviar</button>
-                        </div>
+                     <a routerLink="/producto/{{producto.ID}}">
+                        <div class="logo-img">
+                         <img  src="assets/image/product/logo-marcas.png" width="200px" alt="" title="" class="img-responsive" />
                       </div>
-                    </td>
-                  </tr>
-                </table>
+                        <img src="assets/image/product/540x576.jpg" width="220px" alt=" Strategies for Acquiring Your Own Laptop " title="" class="img-responsive" />
+                      </a>
+                </div>
+                <div class="col-md-4">
+                  <div class="caption">
+                    <div class="oferta-inst" style="background: #fff;">
+                        <!-- va a variar 2 fotos 1."oferta instantania" ó 2."Instatania rapida"
 
+                         <a href=# > <img src="#" class=""></a>
+
+                        -->
+                    </div>
+                    <h4><a href="producto.html"> Marca modelo </a></h4>
+                    <div>
+                      <ul class="lista-producto">
+                          <li>Ancho: {{producto.ANCHO}}</li>
+                          <li>Pefil: {{producto.PERFIL}}</li>
+                          <li>Aro: {{producto.ARO}}</li>
+                          <li>Indice de carga: {{producto.CARGA}}</li>
+                          <li>Marca: {{producto.MARCA}}</li>
+                          <li>Instalación gratis: {{producto.INCLUYE_INSTALACION}}</li>
+                          <li>Despacho gratis: {{producto.DESPACHO}}</li>
+                      </ul>
+                    </div>
+
+                  </div>
+
+                </div>
+        <div class="col-md-4">
+          <table class="table2 table table-precio" style="padding-right: 0px;">
+            <tr >
+              <td>Cantidad</td>
+              <td style="text-align:right;"> Valor unitario</td>
+
+            </tr>
+            <tr>
+              <td class="col-sm-6">
+
+                <select class="form-control" style="width: 75%;" >
+                <option *ngFor="let stock = totalStock" ng-value="stock">{{stock}}</option>
+              </select>
+              </td>
+              <td class="col-sm-6">
+                <p style="text-align:right; margin-bottom: 3px;" class="precio"><b>$ {{producto.TOTAL}}</b></p>
+                <!--p style="text-align:right; font-size: 12px;">Ahorro $60,000</p-->
+              </td>
+            </tr>
+          </table>
+    <hr class="hr1">
+
+          <table class="table2 table table-precio">
+
+            <tr  >
+              <td class="col-sm-6">
+                <p class="total">Total</p>
+              </td>
+              <td style="text-align:right;" class="col-sm-6">
+                <h3 class="precio"><b>$ {{producto.TOTAL}}</b></h3>
+
+              </td>
+            </tr>
+            <tr style="text-align:right; ">
+              <td><button type="submit" class="btn btn-default bremsen ">Comprar</button></td>
+              <td><button type="submit" class="btn btn-primary bremsen3 "><i class="fa fa-plus" aria-hidden="true"></i> Carro</button></td>
+            </tr>
+          </table>
+
+      </div>
+      <div class="collapse" id="carro" style="text-align: left !important;" aria-expanded="true">
+                      <div class="well">
+                        <br>
+                        <div class="col-md-12 text-right">
+                          <h3>Sumando al carro</h3>
+                          <hr>
+                        </div>
+
+                         <div class="col-md-3 col-sm-12">
+                             <img src="image/product/540x576.jpg" width="220px" alt=" Strategies for Acquiring Your Own Laptop " title="" class="img-responsive">
+                        </div>
+
+                        <div class="col-md-3 col-sm-12">
+                            <h4>Marca modelo</h4>
+                              <ul class="lista-producto">
+                                <li>Medida: 24 145 7h</li>
+                                <li>SKU: 653fg54</li>
+                                <li>Cantidad: 4</li>
+
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <button type="button" class="btn btn-default ">Seguir comprando </button>
+                             <button type="button" class="btn btn-default ">Seguir comprando </button>
+                        </div>
+
+                      </div>
+         </div>
 
               </div>
             </div>
 
 
 
-          </div>
 
-        </div>
-        <div class="row">
-          <div class="col-sm-6 text-left">
-            <ul class="pagination">
-              <li class="active">
-                <span>1</span>
-              </li>
-              <li>
-                <a href="#">2</a>
-              </li>
-              <li>
-                <a href="#">&gt;</a>
-              </li>
-              <li>
-                <a href="#">&gt;|</a>
-              </li>
-            </ul>
+
           </div>
-          <div class="col-sm-6 text-right">Showing 1 to 12 of 15 (2 Pages)</div>
+          <div class="row">
+            <div class="col-sm-6 text-left" style="margin-top: -18px;">
+              <ul class="pagination">
+                <li *ngFor="let item of resultProductos | paginate: { itemsPerPage: itemsPerPage, currentPage: p }"></li>
+              </ul>
+              <pagination-controls (pageChange)="pageChanged($event)"
+                                  maxSize="9"
+                      directionLinks="true"
+                      autoHide="true"
+                      previousLabel="Previo"
+                      nextLabel="Siguiente"
+                      screenReaderPaginationLabel="Paginación"
+                      screenReaderPageLabel="Página"
+                      screenReaderCurrentLabel="Tu estas en esta página"></pagination-controls>
+            </div>
+            <div class="col-sm-6 text-right">Mostrando {{ detallesCategoria.inicio}} - {{ detallesCategoria.fin}} de {{detallesCategoria.totalProductos}} Productos</div>
+          </div>
         </div>
+        <!--Middle Part End -->
       </div>
-      <!--Middle Part End -->
     </div>
   </div>
-</div>
