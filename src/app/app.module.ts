@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from "@angular/http";
 import { FormsModule } from '@angular/forms';
-import {NgxPaginationModule} from 'ngx-pagination';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgAutoCompleteModule } from "ng-auto-complete";
 //RUTAS
 import { app_routing }  from "./app.routes";
 
@@ -38,7 +38,8 @@ import { ProductoComponent } from './components/producto/producto.component';
     HttpModule,
     FormsModule,
     app_routing,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgAutoCompleteModule
   ],
   providers: [
     InformacionService,

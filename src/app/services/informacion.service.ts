@@ -15,13 +15,53 @@ export class InformacionService {
   public regiones: any[] = [];
   public ciudades: any[] = [];
   public comunas:any[] = [];
+
+  public marcas:any[] = [];
+  public modelos:any[] = [];
+  public anos:any[] = [];
+
+  public anchos:any[] = [];
+  public perfiles:any[] = [];
+  public aros:any[] = [];
   constructor( public http:Http ) {
 
     this.getRegiones();
     this.getCiudades("1");
     this.getComunas("1");
+
+    //this.getVehiculos(1);
   }
 
+  public getMarcaVehiculos(){
+
+    this.http.get(this.url+"vehiculos.php?accion=marca")
+             .subscribe( data =>{
+              console.debug(data.json());
+               this.cargada = true;
+               this.marcas = data.json();
+
+             })
+  }
+public getModeloVehiculos(marca){
+
+    this.http.get(this.url+"vehiculos.php?accion=modelo&marca="+marca)
+             .subscribe( data =>{
+              console.debug(data.json());
+               this.cargada = true;
+               this.modelos = data.json();
+
+             })
+  }
+  public getAnoVehiculos(modelo){
+
+    this.http.get(this.url+"vehiculos.php?accion=ano&modelo="+modelo)
+             .subscribe( data =>{
+              console.debug(data.json());
+               this.cargada = true;
+               this.anos = data.json();
+
+             })
+  }
   public getCiudades(region:string ){
 
     this.http.get(this.url+"location.php?region=" + region)
@@ -32,6 +72,7 @@ export class InformacionService {
 
              })
   }
+
   public getComunas(ciudad:string) {
 
     this.http.get(this.url+"location.php?ciudad=" + ciudad)

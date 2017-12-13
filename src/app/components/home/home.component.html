@@ -27,15 +27,23 @@ Multiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
                  <div>
                   <div class="form-group">
                     <label for="marca">Marca</label>
-                    <input type="text" class="form-control" id="marca" [(ngModel)]="marca">
+                    <ng-autocomplete (selected)="getModeloVehiculos($event)" [classes]="['']" [group]="group"></ng-autocomplete>
+                    <!--md-autocomplete [items]="getMarcaVehiculos()"
+                      item-text="marca"
+                      item-value="value"
+                      [(ngModel)]="marca"
+                      (change)="getModeloVehiculos($event)"
+                      placeholder="Placeholder Text">
+                  </md-autocomplete-->
+                    <!--input auto-complete type="text" class="form-control" id="marca" [(ngModel)]="marca" [source]="getMarcaVehiculos()"-->
                   </div>
                   <div class="form-group">
                     <label for="modelo">Modelo</label>
-                    <input type="text" class="form-control" id="modelo" [(ngModel)]="modelo">
+                    <!--input auto-complete type="text" class="form-control" id="modelo" [(ngModel)]="modelo" [source]="getModeloVehiculos()"-->
                   </div>
                   <div class="form-group">
                     <label for="ano">Año</label>
-                    <input type="text" class="form-control" id="anoperfil" [(ngModel)]="ano">
+                    <!--input auto-complete type="text" class="form-control" id="anoperfil" [(ngModel)]="ano" [source]="getAnoVehiculos()"-->
                   </div>
 
                   <button (click)="btnBuscarClick(1)" type="button" class="btn btn-default bremsen btn-lg">BUSCAR</button>
