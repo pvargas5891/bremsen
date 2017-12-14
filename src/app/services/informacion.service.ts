@@ -32,36 +32,50 @@ export class InformacionService {
     //this.getVehiculos(1);
   }
 
-  public getMarcaVehiculos(){
+  public getMarcaVehiculos(): Promise<string> {
 
-    this.http.get(this.url+"vehiculos.php?accion=marca")
-             .subscribe( data =>{
-              console.debug(data.json());
-               this.cargada = true;
-               this.marcas = data.json();
+    return this.http.get(this.url+"vehiculos.php?accion=marca").toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
 
-             })
   }
-public getModeloVehiculos(marca){
+public getModeloVehiculos(marca): Promise<string>{
 
-    this.http.get(this.url+"vehiculos.php?accion=modelo&marca="+marca)
-             .subscribe( data =>{
-              console.debug(data.json());
-               this.cargada = true;
-               this.modelos = data.json();
-
-             })
+   return this.http.get(this.url+"vehiculos.php?accion=modelo&marca="+marca)
+             .toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
   }
-  public getAnoVehiculos(modelo){
+  public getAnoVehiculos(modelo): Promise<string>{
 
-    this.http.get(this.url+"vehiculos.php?accion=ano&modelo="+modelo)
-             .subscribe( data =>{
-              console.debug(data.json());
-               this.cargada = true;
-               this.anos = data.json();
-
-             })
+   return this.http.get(this.url+"vehiculos.php?accion=ano&modelo="+modelo)
+            .toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
   }
+
+   public getAnchoVehiculos(): Promise<string> {
+
+    return this.http.get(this.url+"vehiculos.php?accion=ancho").toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+
+  }
+public getPerfilVehiculos(ancho): Promise<string>{
+
+   return this.http.get(this.url+"vehiculos.php?accion=perfil&ancho="+ancho)
+             .toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+  }
+  public getAroVehiculos(perfil): Promise<string>{
+
+   return this.http.get(this.url+"vehiculos.php?accion=aro&perfil="+perfil)
+            .toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+  }
+
   public getCiudades(region:string ){
 
     this.http.get(this.url+"location.php?region=" + region)

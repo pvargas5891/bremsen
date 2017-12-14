@@ -14,6 +14,7 @@ export class DetalleCatProductos {
   public perfil: string;
   public aro: string;
   public totalProductos: number;
+  public origen: string;
   public todasMarcas: string[]= [];
    constructor() {
    }

@@ -1155,7 +1155,7 @@ img {
     border-radius: 50%
 }
 hr {
-    margin-top: 20px;
+    margin-top: 0px;
     margin-bottom: 20px;
     border: 0;
     border-top: 1px solid #eee
@@ -3109,6 +3109,7 @@ select[multiple].input-lg {
     }
 }
 .btn {
+    letter-spacing:0.7px;
     display: inline-block;
     margin-bottom: 0;
     font-weight: normal;
@@ -5611,10 +5612,10 @@ button.list-group-item-danger.active:focus {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05)
 }
 .panel-body {
-    padding: 15px
+    padding: 40px 15px;
 }
 .panel-heading {
-    padding: 10px 15px;
+    padding: 25px 15px;
     border-bottom: 1px solid transparent;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px

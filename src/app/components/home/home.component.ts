@@ -16,35 +16,29 @@ export class HomeComponent {
   ancho: string = '';
   perfil: string = '';
   aro: string = '';
+  errorMessage: String;
+  public marcaGroup = [];
+  public modeloGroup = [];
+  public anoGroup = [];
+
+  public anchoGroup = [];
+  public perfilGroup = [];
+  public aroGroup = [];
 
    @ViewChild(NgAutocompleteComponent) public completer: NgAutocompleteComponent;
 
-    public group = [
-        CreateNewAutocompleteGroup(
-            'Search / choose in / from list',
-            'completer',
-            [
-                {title: 'Option 1', id: '1'},
-                {title: 'Option 2', id: '2'},
-                {title: 'Option 3', id: '3'},
-                {title: 'Option 4', id: '4'},
-                {title: 'Option 5', id: '5'},
-            ],
-            {titleKey: 'title', childrenKey: null}
-        ),
-    ];
+
 
   constructor(
     public _is:InformacionService,
     private router: Router
   ) {
-
     this.getMarcaVehiculos();
-
+    this.getAnchoVehiculos();
   }
 
   btnBuscarClick= function (origen:number) {
-      //console.debug(this.router);
+      console.debug("ejecutado");
       let param1:string = this.marca;
       let param2:string = this.modelo;
       let param3:string = this.ano;
@@ -58,21 +52,135 @@ export class HomeComponent {
   btnRegistro = function (){
     this.router.navigateByUrl('/registro');
   }
+
+  getAnchoVehiculos = function (){
+    this._is.getAnchoVehiculos().then( data => {
+        this.anchoGroup = [
+        CreateNewAutocompleteGroup(
+            'Seleccione el ancho de la rueda',
+            'completer',
+            data,
+            {titleKey: 'title', childrenKey: null}
+            ),
+        ];
+
+        this.perfilGroup = [
+        CreateNewAutocompleteGroup(
+            'Seleccione el perfil de la rueda',
+            'completer',
+            [],
+            {titleKey: 'title', childrenKey: null}
+            ),
+        ];
+        this.aroGroup = [
+        CreateNewAutocompleteGroup(
+            'Seleccione el aro de la rueda',
+            'completer',
+            [],
+            {titleKey: 'title', childrenKey: null}
+            ),
+        ];
+		    },
+        error => this.errorMessage = <any>error);
+
+  }
+  getPerfilVehiculos = function (event: SelectedAutocompleteItem){
+
+    this.ancho = event.item.title;
+    this._is.getPerfilVehiculos(this.ancho).then( data => {
+        this.perfilGroup = [
+        CreateNewAutocompleteGroup(
+            'Seleccione el perfil de la rueda',
+            'completer',
+            data,
+            {titleKey: 'title', childrenKey: null}
+            ),
+        ];
+		    },
+        error => this.errorMessage = <any>error);
+  }
+  getAroVehiculos = function (event: SelectedAutocompleteItem){
+      this.perfil = event.item.title;
+      this._is.getAroVehiculos(this.perfil).then( data => {
+      this.aroGroup = [
+      CreateNewAutocompleteGroup(
+          'Seleccione el aro de la rueda',
+          'completer',
+          data,
+          {titleKey: 'title', childrenKey: null}
+          ),
+      ];
+      },
+      error => this.errorMessage = <any>error);
+  }
+  setAroVehiculos = function (event: SelectedAutocompleteItem){
+    this.aro = event.item.title;
+  }
+
+
   getMarcaVehiculos = function (){
-    this._is.getMarcaVehiculos();
-    return this._is.marcas;
+    this._is.getMarcaVehiculos().then( data => {
+        this.marcaGroup = [
+        CreateNewAutocompleteGroup(
+            'Seleccione su marca de vehiculo',
+            'completer',
+            data,
+            {titleKey: 'title', childrenKey: null}
+            ),
+        ];
+
+        this.modeloGroup = [
+        CreateNewAutocompleteGroup(
+            'Seleccione el modelo de vehiculo',
+            'completer',
+            [],
+            {titleKey: 'title', childrenKey: null}
+            ),
+        ];
+        this.anoGroup = [
+        CreateNewAutocompleteGroup(
+            'Seleccione el modelo de vehiculo',
+            'completer',
+            [],
+            {titleKey: 'title', childrenKey: null}
+            ),
+        ];
+		    },
+        error => this.errorMessage = <any>error);
+
   }
-   getModeloVehiculos = function (event){
-     console.debug(event);
-     if(this.marca=='undefined')
-        return;
-    this._is.getModeloVehiculos(this.marca);
-    return this._is.modelos;
+
+
+   getModeloVehiculos = function (event: SelectedAutocompleteItem){
+
+    this.marca = event.item.title;
+    this._is.getModeloVehiculos(this.marca).then( data => {
+        this.modeloGroup = [
+        CreateNewAutocompleteGroup(
+            'Seleccione el modelo de vehiculo',
+            'completer',
+            data,
+            {titleKey: 'title', childrenKey: null}
+            ),
+        ];
+		    },
+        error => this.errorMessage = <any>error);
   }
-   getAnoVehiculos = function (){
-     if(this.modelo=='undefined')
-        return;
-    this._is.getAnoVehiculos(this.modelo);
-    return this._is.anos;
+   getAnoVehiculos = function (event: SelectedAutocompleteItem){
+    this.modelo = event.item.title;
+    this._is.getAnoVehiculos(this.modelo).then( data => {
+        this.anoGroup = [
+        CreateNewAutocompleteGroup(
+            'Seleccione el modelo de vehiculo',
+            'completer',
+            data,
+            {titleKey: 'title', childrenKey: null}
+            ),
+        ];
+		    },
+        error => this.errorMessage = <any>error);
+  }
+  setAnoVehiculos = function (event: SelectedAutocompleteItem){
+    this.ano = event.item.title;
   }
 }

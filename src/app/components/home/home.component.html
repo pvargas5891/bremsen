@@ -1,49 +1,41 @@
 
 
-<div class=" bg-home container-fluid" style="padding: 0px 86px;"> <!-- pasar el css-->
+<div class=" bg-home container-fluid" style="padding: 0px 74px;"> <!-- pasar el css-->
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="row pad-50">
-    <div class="col-md-4 bloque1 ">
-      <h1 class="nuestros-servicios"><b>Nuestro Servicio</b></h1>
+    <div class="col-md-4 bloque1 noView">
+      <h1><b style="color: #fff; font-size: 26px !important; line-height: 36px; ">Facilitamos la compra de tus neumáticos</b></h1>
       <p>Nos encargamos de todo para que cambies tus neumáticos sin moverte de casa.
-Multiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
+Múltiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
     </div>
     <div class="col-md-8 formulario01">
         <div class="pest-home">
 
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation"  style="width: 50%" class="active text-center"><a href="#comprarAro" aria-controls="comprarAro" role="tab" data-toggle="tab">
-                <b class="titulosDetalles">Comprar por auto</b></a></li>
+                <p class="titulosDetalles">buscar por auto</p></a></li>
 
               <li role="presentation" class="text-center"  style="width: 50%"><a href="#comprarMedida" aria-controls="comprarMedida" role="tab" data-toggle="tab">
-                <b class="titulosDetalles">Comprar por medida</b></a></li>
+                <p class="titulosDetalles">buscar por medida</p></a></li>
             </ul>
-
 
             <div class="tab-content" style="background: #c0bebf; padding: 25px 14%;">
               <div role="tabpanel" class="tab-pane active" id="comprarAro">
                  <div>
                   <div class="form-group">
                     <label for="marca">Marca</label>
-                    <ng-autocomplete (selected)="getModeloVehiculos($event)" [classes]="['']" [group]="group"></ng-autocomplete>
-                    <!--md-autocomplete [items]="getMarcaVehiculos()"
-                      item-text="marca"
-                      item-value="value"
-                      [(ngModel)]="marca"
-                      (change)="getModeloVehiculos($event)"
-                      placeholder="Placeholder Text">
-                  </md-autocomplete-->
-                    <!--input auto-complete type="text" class="form-control" id="marca" [(ngModel)]="marca" [source]="getMarcaVehiculos()"-->
+                    <ng-autocomplete (selected)="getModeloVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="marcaGroup"></ng-autocomplete>
+
                   </div>
                   <div class="form-group">
                     <label for="modelo">Modelo</label>
-                    <!--input auto-complete type="text" class="form-control" id="modelo" [(ngModel)]="modelo" [source]="getModeloVehiculos()"-->
+                     <ng-autocomplete (selected)="getAnoVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="modeloGroup"></ng-autocomplete>
                   </div>
                   <div class="form-group">
                     <label for="ano">Año</label>
-                    <!--input auto-complete type="text" class="form-control" id="anoperfil" [(ngModel)]="ano" [source]="getAnoVehiculos()"-->
+                     <ng-autocomplete class="ng-autocomplete-input" (selected)="setAnoVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="anoGroup"></ng-autocomplete>
                   </div>
 
                   <button (click)="btnBuscarClick(1)" type="button" class="btn btn-default bremsen btn-lg">BUSCAR</button>
@@ -56,15 +48,18 @@ Multiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
                   <div>
                   <div class="form-group">
                     <label for="ancho">Ancho</label>
-                    <input type="text" class="form-control" id="ancho" [(ngModel)]="ancho">
+                    <!--input type="text" class="form-control" id="ancho" [(ngModel)]="ancho"-->
+                     <ng-autocomplete (selected)="getPerfilVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="anchoGroup"></ng-autocomplete>
                   </div>
                   <div class="form-group">
                     <label for="perfil">Perfil</label>
-                    <input type="text" class="form-control" id="perfil"  [(ngModel)]="perfil">
+                    <!--input type="text" class="form-control" id="perfil"  [(ngModel)]="perfil"-->
+                    <ng-autocomplete (selected)="getAroVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="perfilGroup"></ng-autocomplete>
                   </div>
                   <div class="form-group">
                     <label for="aro">Aro</label>
-                    <input type="text" class="form-control" id="aro" [(ngModel)]="aro">
+                    <!--input type="text" class="form-control" id="aro" [(ngModel)]="aro"-->
+                    <ng-autocomplete (selected)="setAroVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="aroGroup"></ng-autocomplete>
                   </div>
 
                   <button type="button" (click)="btnBuscarClick(2)" class="btn btn-default bremsen btn-lg"><b>BUSCAR</b></button>
@@ -87,21 +82,19 @@ Multiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
 </div>
 
 
-
-<div class="container-fluid" style="background: #f2f2f2; padding: 40px 0px;">
+<div class="container-fluid" style="background: #f2f2f2; padding: 25px 0px;">
    <div class="container" >
     <div class="row">
         <div class="col-md-12 text-center">
           <div class="pad50"></div>
 
-          <p class="lead"><b>Regístrate para recibir ofertas personalizadas</b> </p>
+          <h3>Regístrate para recibir ofertas personalizadas</h3>
           <p>  <button type="button" (click)="btnRegistro()" class="btn btn-primary btn-lg">Crear Cuenta</button></p>
           <div class="pad50"></div>
         </div>
     </div>
   </div>
 </div>
-
 
 
 <div class="container">
@@ -127,21 +120,15 @@ Multiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
 </div>
 
 
-
-
-
-
-
 <div class="container" style="padding: 70px 0px;">
-  <h1 class="title text-center">Sugeridos</h1>
           <!-- Product Tab Start -->
           <div id="product-tab" class="product-tab">
   <ul id="tabs" class="tabs">
-    <li><a href="#tab-featured">Featured</a></li>
-    <li><a href="#tab-latest">Latest</a></li>
-    <li><a href="#tab-bestseller">Bestseller</a></li>
-    <li><a href="#tab-special">Special</a></li>
+    <li><a href="#tab-sugeridos">Sugeridos</a></li>
+    <li><a href="#tab-ofertas">Ofertas</a></li>
   </ul>
+
+
   <div id="tab-featured" class="tab_content">
       <div class="owl-carousel product_carousel_tab">
             <div class="product-thumb clearfix">
@@ -217,189 +204,178 @@ Multiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
           </div>
   </div>
 
-  <div id="tab-latest" class="tab_content">
+  <div id="tab-sugeridos" class="tab_content">
     <div class="owl-carousel product_carousel_tab">
-            <div class="product-thumb">
-              <div class="assets/image"><a href="product.html"><img src="assets/image/product/macbook_2-220x330.jpg" alt="Pnina Tornai Perfume" title="Pnina Tornai Perfume" class="img-responsive" /></a></div>
+
+                  <div class="product-thumb">
+                    <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="FinePix S8400W Long Zoom Camera" title="FinePix S8400W Long Zoom Camera" class="img-responsive" /></a></div>
+                    <div class="caption">
+                       <h4><a href="producto.html">Marca - Modelo</a></h4>
+                      <p class="price"> $12,000 </p>
+                    </div>
+                    <div>
+                      <button class="btn btn-primary"><span>Ver producto</span></button>
+
+                    </div>
+                  </div>
+
+                  <div class="product-thumb">
+                    <div class="image"><a href="product.html"><img src="image/product/540x576.jpg" alt="FinePix S8400W Long Zoom Camera" title="FinePix S8400W Long Zoom Camera" class="img-responsive" /></a></div>
+                    <div class="caption">
+                       <h4><a href="producto.html">Marca - Modelo</a></h4>
+                      <p class="price"> $12,000 </p>
+                    </div>
+                    <div>
+                     <button class="btn btn-primary"><span>Ver producto</span></button>
+
+                    </div>
+                  </div>
+
+                  <div class="product-thumb">
+                    <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="FinePix S8400W Long Zoom Camera" title="FinePix S8400W Long Zoom Camera" class="img-responsive" /></a></div>
+                    <div class="caption">
+                       <h4><a href="producto.html">Marca - Modelo</a></h4>
+                         <p class="price"> $12,000 </p>
+
+                    <div>
+                     <button class="btn btn-primary"><span>Ver producto</span></button>
+
+                    </div>
+                  </div>
+                </div>
+
+                  <div class="product-thumb">
+                    <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="FinePix S8400W Long Zoom Camera" title="FinePix S8400W Long Zoom Camera" class="img-responsive" /></a></div>
+                    <div class="caption">
+                       <h4><a href="producto.html">Marca - Modelo</a></h4>
+                          <p class="price"> $12,000 </p>
+                    </div>
+                    <div>
+                     <button class="btn btn-primary"><span>Ver producto</span></button>
+
+                    </div>
+                  </div>
+
+                  <div class="product-thumb">
+                    <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="FinePix S8400W Long Zoom Camera" title="FinePix S8400W Long Zoom Camera" class="img-responsive" /></a></div>
+                    <div class="caption">
+                       <h4><a href="producto.html">Marca - Modelo</a></h4>
+                        <p class="price"> $12,000 </p>
+                    </div>
+                    <div>
+                      <button class="btn btn-primary"><span>Ver producto</span></button>
+
+                    </div>
+                  </div>
+
+
+                  <div class="product-thumb">
+                    <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="Digital Camera for Elderly" title="Digital Camera for Elderly" class="img-responsive" /></a></div>
+                    <div class="caption">
+                       <h4><a href="producto.html">Marca - Modelo</a></h4>
+                       <p class="price"> $12,000 </p>
+                    </div>
+                    <div>
+                      <button class="btn btn-primary"><span>Ver producto</span></button>
+                    </div>
+                  </div>
+        </div>
+  </div>
+
+   <div id="tab-ofertas" class="tab_content">
+      <div class="owl-carousel product_carousel_tab">
+
+
+            <div class="product-thumb clearfix">
+              <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="Brand Fashion Cotton T-Shirt" title="Brand Fashion Cotton T-Shirt" class="img-responsive" /></a></div>
               <div class="caption">
-                <h4><a href="product.html">Pnina Tornai Perfume</a></h4>
-                <p class="price"> $110.00 </p>
+                <h4><a href="producto.html">Marca - Modelo</a></h4>
+                <p class="price"><span class="price-new">$20,000</span> <span class="price-old">$32,000</span></p>
               </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
+              <div>
+                <button class="btn btn-primary"><span>Ver producto</span></button>
 
               </div>
             </div>
-            <div class="product-thumb">
-              <div class="assets/image"><a href="product.html"><img src="assets/image/product/macbook_3-220x330.jpg" alt="Make Up for Naturally Beautiful Better" title="Make Up for Naturally Beautiful Better" class="img-responsive" /></a></div>
+
+
+            <div class="product-thumb clearfix">
+              <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-responsive" /></a></div>
               <div class="caption">
-                <h4><a href="product.html">Make Up for Naturally Beautiful Better</a></h4>
-                <p class="price"> $123.00 </p>
+ 				<h4><a href="producto.html">Marca - Modelo</a></h4>
+                       <p class="price"><span class="price-new">$20,000</span> <span class="price-old">$32,000</span></p>
+
               </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
+              <div >
+                <button class="btn btn-primary"><span>Ver producto</span></button>
 
               </div>
             </div>
-            <div class="product-thumb">
-              <div class="assets/image"><a href="product.html"><img src="assets/image/product/macbook_4-220x330.jpg" alt="Perfumes for Women" title="Perfumes for Women" class="img-responsive" /></a></div>
+
+
+            <div class="product-thumb clearfix">
+              <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="Xitefun Causal Wear Fancy Shoes" title="Xitefun Causal Wear Fancy Shoes" class="img-responsive" /></a></div>
               <div class="caption">
-                <h4><a href="product.html">Perfumes for Women</a></h4>
-                <p class="price"> $85.00 </p>
+                 <h4><a href="producto.html">Marca - Modelo</a></h4>
+                     <p class="price"><span class="price-new">$20,000</span> <span class="price-old">$32,000</span></p>
 
               </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
+              <div >
+                <button class="btn btn-primary"><span>Ver producto</span></button>
 
               </div>
             </div>
-            <div class="product-thumb">
-              <div class="assets/image"><a href="product.html"><img src="assets/image/product/iphone_6-220x330.jpg" alt="Hair Care Cream for Men" title="Hair Care Cream for Men" class="img-responsive" /></a></div>
+
+
+
+            <div class="product-thumb clearfix">
+              <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="Xitefun Causal Wear Fancy Shoes" title="Xitefun Causal Wear Fancy Shoes" class="img-responsive" /></a></div>
               <div class="caption">
-                <h4><a href="product.html">Hair Care Cream for Men</a></h4>
-                <p class="price"> $134.00 </p>
+                 <h4><a href="producto.html">Marca - Modelo</a></h4>
+                <p class="price"><span class="price-new">$20,000</span> <span class="price-old">$32,000</span></p>
 
               </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
+              <div >
+                 <button class="btn btn-primary"><span>Ver producto</span></button>
+              </div>
+            </div>
+
+
+
+            <div class="product-thumb clearfix">
+              <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="" title="" class="img-responsive" /></a></div>
+              <div class="caption">
+                 <h4><a href="producto.html">Marca - Modelo</a></h4>
+                <p class="price"><span class="price-new">$20,000</span> <span class="price-old">$32,000</span></p>
+
+              </div>
+              <div >
+                 <button class="btn btn-primary"><span>Ver producto</span></button>
 
               </div>
             </div>
-            <div class="product-thumb">
-              <div class="assets/image"><a href="product.html"><img src="assets/image/product/nikon_d300_5-220x330.jpg" alt="Hair Care Products" title="Hair Care Products" class="img-responsive" /></a></div>
+
+
+
+            <div class="product-thumb clearfix">
+              <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="Xitefun Causal Wear Fancy Shoes" title="Xitefun Causal Wear Fancy Shoes" class="img-responsive" /></a></div>
               <div class="caption">
-                <h4><a href="product.html">Hair Care Products</a></h4>
-                <p class="price"> <span class="price-new">$66.80</span> <span class="price-old">$90.80</span>  </p>
+                 <h4><a href="producto.html">Marca - Modelo</a></h4>
+               <p class="price"><span class="price-new">$20,000</span> <span class="price-old">$32,000</span></p>
 
               </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
+              <div >
+                <button class="btn btn-primary"><span>Ver producto</span></button>
 
               </div>
             </div>
-            <div class="product-thumb">
-              <div class="assets/image"><a href="product.html"><img src="assets/image/product/nikon_d300_4-220x330.jpg" alt="Bed Head Foxy Curls Contour Cream" title="Bed Head Foxy Curls Contour Cream" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.html">Bed Head Foxy Curls Contour Cream</a></h4>
-                <p class="price"> $88.00 </p>
-              </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
 
-              </div>
-            </div>
-            <div class="product-thumb">
-              <div class="assets/image"><a href=""><img src="assets/image/product/macbook_5-220x330.jpg" alt="Shower Gel Perfume for Women" title="Shower Gel Perfume for Women" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.html">Shower Gel Perfume for Women</a></h4>
-                <p class="price"> <span class="price-new">$95.00</span> <span class="price-old">$99.00</span>  </p>
-              </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick="cart.add('61');"><span>Add to Cart</span></button>
 
-              </div>
-            </div>
+
+
           </div>
   </div>
-  <div id="tab-bestseller" class="tab_content">
-    <div class="owl-carousel product_carousel_tab">
-                  <div class="product-thumb">
-                    <div class="assets/image"><a href="product.html"><img src="assets/image/product/FinePix-Long-Zoom-Camera-220x330.jpg" alt="FinePix S8400W Long Zoom Camera" title="FinePix S8400W Long Zoom Camera" class="img-responsive" /></a></div>
-                    <div class="caption">
-                      <h4><a href="product.html">FinePix S8400W Long Zoom Camera</a></h4>
-                      <p class="price"> $122.00 </p>
-                    </div>
-                    <div class="button-group">
-                      <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-
-                    </div>
-                  </div>
-                  <div class="product-thumb">
-                    <div class="assets/image"><a href="product.html"><img src="assets/image/product/nikon_d300_1-220x330.jpg" alt="Digital Camera for Elderly" title="Digital Camera for Elderly" class="img-responsive" /></a></div>
-                    <div class="caption">
-                      <h4><a href="product.html">Digital Camera for Elderly</a></h4>
-                      <p class="price"> <span class="price-new">$92.00</span> <span class="price-old">$98.00</span>  </p>
-                    </div>
-                    <div class="button-group">
-                      <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-
-                    </div>
-                  </div>
-                </div>
-  </div>
 <br>
-  <div id="tab-special" class="tab_content">
-    <div class="owl-carousel product_carousel_tab">
-                  <div class="product-thumb">
-                    <div class="assets/image"><a href="product.html"><img src="assets/image/product/ipod_touch_1-220x330.jpg" alt="Samsung Galaxy S4" title="Samsung Galaxy S4" class="img-responsive" /></a></div>
-                    <div class="caption">
-                      <h4><a href="product.html">Samsung Galaxy S4</a></h4>
-                      <p class="price"> <span class="price-new">$62.00</span> <span class="price-old">$122.00</span>  </p>
-                    </div>
-                    <div class="button-group">
-                      <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-
-                    </div>
-                  </div>
-                  <div class="product-thumb">
-              <div class="assets/image"><a href=""><img src="assets/image/product/macbook_5-220x330.jpg" alt="Shower Gel Perfume for Women" title="Shower Gel Perfume for Women" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.html">Shower Gel Perfume for Women</a></h4>
-                <p class="price"> <span class="price-new">$95.00</span> <span class="price-old">$99.00</span>  </p>
-              </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick="cart.add('61');"><span>Add to Cart</span></button>
-
-              </div>
-            </div>
-                  <div class="product-thumb">
-                    <div class="assets/image"><a href="product.html"><img src="assets/image/product/macbook_air_1-220x330.jpg" alt="Laptop Silver black" title="Laptop Silver black" class="img-responsive" /></a></div>
-                    <div class="caption">
-                      <h4><a href="product.html">Laptop Silver black</a></h4>
-                      <p class="price"> <span class="price-new">$1,142.00</span> <span class="price-old">$1,202.00</span> </p>
-                    </div>
-                    <div class="button-group">
-                      <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-
-                    </div>
-                  </div>
-                  <div class="product-thumb clearfix">
-              <div class="assets/image"><a href="product.html"><img src="assets/image/product/apple_cinema_30-220x330.jpg" alt="Brand Fashion Cotton T-Shirt" title="Brand Fashion Cotton T-Shirt" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.html">Brand Fashion Cotton T-Shirt</a></h4>
-                <p class="price"><span class="price-new">$110.00</span> <span class="price-old">$122.00</span></p>
-              </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick="cart.add('42');"><span>Add to Cart</span></button>
-
-              </div>
-            </div>
-                  <div class="product-thumb">
-                    <div class="assets/image"><a href="product.html"><img src="assets/image/product/macbook_pro_1-220x330.jpg" alt=" Strategies for Acquiring Your Own Laptop " title=" Strategies for Acquiring Your Own Laptop " class="img-responsive" /></a></div>
-                    <div class="caption">
-                      <h4><a href="product.html"> Strategies for Acquiring Your Own Laptop </a></h4>
-                      <p class="price"> <span class="price-new">$1,400.00</span> <span class="price-old">$1,900.00</span>  </p>
-                    </div>
-                    <div class="button-group">
-                      <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-
-                    </div>
-                  </div>
-                  <div class="product-thumb">
-                    <div class="assets/image"><a href="product.html"><img src="assets/image/product/samsung_tab_1-220x330.jpg" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-responsive" /></a></div>
-                    <div class="caption">
-                      <h4><a href="product.html">Aspire Ultrabook Laptop</a></h4>
-                      <p class="price"> <span class="price-new">$230.00</span> <span class="price-old">$241.99</span>  </p>
-
-                    </div>
-                    <div class="button-group">
-                      <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-
-                    </div>
-                  </div>
-                </div>
-
-  </div>
 </div>    <!-- Product Tab Start -->
 
 </div>
@@ -408,7 +384,7 @@ Multiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
     <div class="row">
         <div class="col-md-4">
             <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
-            <h2>Lorem ipsum dolor sit amet. </h2>
+            <h3>Lorem ipsum dolor sit amet. </h3>
             <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
             <button type="submit" class="btn btn-primary  ">Leer</button>
 
@@ -418,24 +394,25 @@ Multiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
         <div class="col-md-8">
           <div class="row">
             <div class="col-md-6">
-               <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+               <img class="img-responsive center-block" src="assets/image/BANNERS_at-home.jpg">
             </div>
             <div class="col-md-6">
-                 <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+                 <img class="img-responsive center-block" src="assets/image/BANNERS_ht-home.jpg">
             </div>
            </div>
            <br>
            <div class="row">
             <div class="col-md-6">
-               <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+               <img class="img-responsive center-block" src="assets/image/BANNERS_mt-home.jpg">
             </div>
             <div class="col-md-6">
-                 <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+                 <img class="img-responsive center-block" src="assets/image/BANNERS_oferta-runflat.jpg">
             </div>
           </div>
         </div>
     </div>
 </div>
+
 
 
 <br><br>
@@ -448,41 +425,42 @@ Multiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
          <h1 class="title">Marcas </h1>
       </div>
 
-      <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+      <div class="col-md-3" style="padding: 15px; padding-bottom: 30px; ">
+            <img class="img-responsive center-block" src="assets/image/yokohama.png">
       </div>
-      <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+
+      <div class="col-md-3" style="padding: 15px; padding-bottom: 30px; ">
+            <img class="img-responsive center-block" src="assets/image/michelin.png">
       </div>
-      <div class="col-md-3" style="padding: 15px">
-            <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+      <div class="col-md-3" style="padding: 15px; padding-bottom: 30px;">
+            <img class="img-responsive center-block" src="assets/image/BFGoodrich.png">
       </div>
-      <div class="col-md-3" style="padding: 15px">
-            <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+      <div class="col-md-3" style="padding: 15px; padding-bottom: 30px;">
+            <img class="img-responsive center-block" src="assets/image/falken.png">
       </div>
-      <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+      <div class="col-md-3" style="padding: 15px; padding-bottom: 30px; ">
+            <img class="img-responsive center-block" src="assets/image/KumhoTire.png">
       </div>
-      <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+      <div class="col-md-3" style="padding: 15px; padding-bottom: 30px; ">
+            <img class="img-responsive center-block" src="assets/image/hankook.png">
       </div>
-      <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+      <div class="col-md-3" style="padding: 15px; padding-bottom: 30px; ">
+            <img class="img-responsive center-block" src="assets/image/Dunlop.png">
       </div>
-      <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+      <div class="col-md-3" style="padding: 15px; padding-bottom: 30px; ">
+            <img class="img-responsive center-block" src="assets/image/pirelli.png">
       </div>
        <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+            <img class="img-responsive center-block" src="assets/image/westLake.png">
       </div>
       <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+            <img class="img-responsive center-block" src="assets/image/tigar.png">
       </div>
       <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+            <img class="img-responsive center-block" src="assets/image/sumitomo.png">
       </div>
       <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
+            <img class="img-responsive center-block" src="assets/image/ohtsu.png">
       </div>
   </div>
 </div>

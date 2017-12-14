@@ -85,15 +85,18 @@
                  <div class="form-group row">
                     <div class="col-md-4 ">
                      <label>Marca</label>
-                      <input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.marca">
+                      <!--input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.marca"-->
+                      <ng-autocomplete (selected)="getModeloVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="marcaGroup"></ng-autocomplete>
                     </div>
                     <div class="col-md-4 ">
                        <label>Modelo</label>
-                      <input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.modelo">
+                      <!--input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.modelo"-->
+                      <ng-autocomplete (selected)="getAnoVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="modeloGroup"></ng-autocomplete>
                     </div>
                     <div class="col-md-2 ">
                        <label>Año</label>
-                      <input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.ano">
+                      <!--input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.ano"-->
+                      <ng-autocomplete class="ng-autocomplete-input" (selected)="setAnoVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="anoGroup"></ng-autocomplete>
                     </div>
                     <div class="col-md-2 " style="padding-top: 22px;">
                      <button type="button" (click)="buscador1()" class="btn btn-default bremsen2" style="padding: 10px;">Buscar </button>
@@ -105,15 +108,18 @@
                    <div class="form-group row">
                     <div class="col-md-4 ">
                      <label>Ancho</label>
-                      <input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.ancho">
+                      <!--input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.ancho"-->
+                       <ng-autocomplete (selected)="getPerfilVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="anchoGroup"></ng-autocomplete>
                     </div>
                     <div class="col-md-4 ">
                        <label>Perfil</label>
-                      <input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.perfil">
+                      <!--input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.perfil"-->
+                      <ng-autocomplete (selected)="getAroVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="perfilGroup"></ng-autocomplete>
                     </div>
                     <div class="col-md-2 ">
                        <label>Aro</label>
-                      <input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.aro">
+                      <!--input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.aro"-->
+                      <ng-autocomplete (selected)="setAroVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="aroGroup"></ng-autocomplete>
                     </div>
                     <div class="col-md-2" style="padding-top: 22px;">
                      <button type="submit" (click)="buscador2()" class="btn btn-default bremsen2" style="padding: 10px;">Buscar </button>

@@ -42,12 +42,13 @@ export class CategoriaFiltradaComponent {
              this.detallesCategoria.marca=parametros.param1;
              this.detallesCategoria.modelo=parametros.param2;
              this.detallesCategoria.ano=parametros.param3;
+
           }else{
              this.detallesCategoria.ancho=parametros.param1;
              this.detallesCategoria.perfil=parametros.param2;
              this.detallesCategoria.aro=parametros.param3;
           }
-
+          this.detallesCategoria.origen=parametros.origen;
       });
 
       this.detallesCategoria.inicio="1";

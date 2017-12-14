@@ -29,6 +29,7 @@ export class ProductosService {
       params.append('ancho', detalleCatProductos.ancho);
       params.append('perfil', detalleCatProductos.perfil);
       params.append('aro', detalleCatProductos.aro);
+      params.append('origen', detalleCatProductos.origen);
 
       return params;
   }

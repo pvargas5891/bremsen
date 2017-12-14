@@ -27,7 +27,7 @@ a:hover, a b:hover, .category .tabs li a:hover, .sitemap li a:hover, .pagination
 #header .links > ul > li > a, #header .links > ul > li .wrap_custom_block > a, #header .links > ul > li.mobile, #header .links > ul > li.email, #language span, #currency span, #header #top-links > ul > li > a {
 	color:#959595;
 	text-transform:uppercase;
-	font-size: 10px;
+	
 }
 #header .links > ul > li.wrap_custom_block > a b { border-color:#959595 transparent transparent; }
 #header .links, #header .links > ul > li, #language, #currency, #header #top-links > ul > li, #header #top-links { border-color:#131313; }
@@ -41,7 +41,7 @@ a:hover, a b:hover, .category .tabs li a:hover, .sitemap li a:hover, .pagination
 }
 #header .button-search { color:#999; }
 /**===== Mini Cart =====**/
-#header #cart .heading { color:#aaa; }
+#header #cart .heading { color:#fff; }
 #header #cart.open .heading { color:#fff; }
 #header #cart.open .heading span:after { border-color:transparent transparent #ccc; }
 #header #cart .heading .cart-icon:before, #header #cart .heading .cart-icon:after, #header #cart .dropdown-menu { border-color:#ccc; }

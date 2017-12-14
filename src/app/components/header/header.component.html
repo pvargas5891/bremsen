@@ -1,9 +1,13 @@
-<div id="header">
+  <div id="header">
+
+
     <!-- Top Bar Start-->
-    <nav id="top" class="htop">
+
+    <!--
+   <nav id="top" class="htop">
       <div class="container">
         <div class="row">
-          <div class="pull-right flip left-top">
+          <div class="pull-right flip left-top searchBuscar">
             <div id="search" class="input-group">
               <input id="filter_name" type="text" name="search" value="" placeholder="Search" class="form-control input-lg" />
               <button type="button" class="button-search"><i class="fa fa-search"></i></button>
@@ -13,20 +17,150 @@
 
             <div class="links">
               <ul>
-                <li class="mobile"><i style="color:#1bd744;" class="fa fa-whatsapp" aria-hidden="true"></i>&nbsp; <i class="fa fa-phone"></i><b style="color:#fff;">+91 9898777656</b></li>
+                <li><a href="#"  style="color: #fff;">Live Chat</a></li>
+                <li class="mobile">
+                <span><i style="color:#1bd744;" class="fa fa-whatsapp" aria-hidden="true"></i>
+                  &nbsp; <i style="color: #fff;" class="fa fa-phone"></i></span> <span> <a href="tel:+56989568901"><b style="color:#fff;">+56 9 8956 8901</b></a></span>
+                </li>
+
               </ul>
             </div>
 
           </div>
           <div id="top-links" class="nav pull-right flip">
-            <ul>
-              <li><a routerLink="registro"  style="color: #fff;">Ingresar / Registrarse</a></li>
-               <li><a href="#"  style="color: #fff;">Live Chat</a></li>
-             </ul>
+
+         <div id="cart">
+              <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle">
+              <span id="cart-total">Ingresa / Registrate</span></button>
+             <ul class="dropdown-menu">
+                <li>
+                  <div>
+           <form><br>
+                  <div class="form-group required">
+                    <label style="color:#1e1e1e;" for="">Email</label>
+                    <input type="email" class="form-control" id="" >
+                  </div>
+
+                    <div class="form-group required">
+                    <label style="color:#1e1e1e;" for="">Contraseña</label>
+                    <input type="password" class="form-control" id="" >
+                  </div>
+                  <table class="table" style="margin-bottom: 0px !important;">
+                  	<tr>
+                  		<td style="padding: 0px;">
+                  			<div class="checkbox" style="margin-top: 0px;">
+								<label>
+								  <input type="checkbox"><span  style="color:#1e1e1e; ">Recordarme</span>
+								</label>
+							</div>
+                 		</td>
+                  		<td style="text-align: right; padding: 0px;"><span><a style="color:#6b8bc0;" href="#">¿Olvidaste tu clave?</a></span></td>
+                  	</tr>
+                  </table>
+
+			</form>
+                    <table class="table  table-precio" style="font-size: 14px;"
+                <tbody>
+                <tr>
+
+                  <td class="text-right">
+                    <button type="button" class="btn btn-default btn-block">Log in</button><br>
+                   <a href="#"><small>¿Aun no tienes cuenta?</small></a><br>
+                   <button type="button" class="btn btn-primary btn-block">Crear cuenta</button></td>
+                </tr>
+              </tbody></table>
+
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+
+
           </div>
         </div>
       </div>
-    </nav>
+    </nav>-->
+
+     <nav id="top" class="htop">
+      <div class="container">
+        <div class="row">
+			<div class="col-md-3">&nbsp;</div>
+        	<div class="col-md-3">
+        			<div id="cart">
+              <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle" style="  padding-right: 15px;">
+              <span id="cart-total">Ingresa / Registrate</span></button>
+             <ul class="dropdown-menu">
+                <li>
+                  <div>
+           <form><br>
+                  <div class="form-group required">
+                    <label style="color:#1e1e1e;" for="">Email</label>
+                    <input type="email" class="form-control" id="" >
+                  </div>
+
+                    <div class="form-group required">
+                    <label style="color:#1e1e1e;" for="">Contraseña</label>
+                    <input type="password" class="form-control" id="" >
+                  </div>
+                  <table class="table" style="margin-bottom: 0px !important;">
+                  	<tr>
+                  		<td style="padding: 0px;">
+                  			<div class="checkbox" style="margin-top: 0px;">
+								<label>
+								  <input type="checkbox"><span  style="color:#1e1e1e; ">Recordarme</span>
+								</label>
+							</div>
+                 		</td>
+                  		<td style="text-align: right; padding: 0px;"><span><a style="color:#6b8bc0;" href="#">¿Olvidaste tu clave?</a></span></td>
+                  	</tr>
+                  </table>
+
+			</form>
+              <table class="table  table-precio" style="font-size: 14px;">
+                <tbody>
+                <tr>
+
+                  <td class="text-right">
+                    <button type="button" class="btn btn-default btn-block">Log in</button><br>
+                   <a href="#"><small>¿Aun no tienes cuenta?</small></a><br>
+                   <button type="button" class="btn btn-primary btn-block">Crear cuenta</button></td>
+                </tr>
+              </tbody>
+            </table>
+
+                  </div>
+                </li>
+              </ul>
+            </div>
+        	</div>
+
+        	<div class="col-md-3 center-block text-center" style="padding-top: 7px;">
+        		 <div class="links">
+					<span><a href="#"  style="color: #fff;">Live Chat</a></span>
+
+						<span> &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;<i style="color:#1bd744;" class="fa fa-whatsapp" aria-hidden="true"></i>
+						  &nbsp; <i style="color: #fff;" class="fa fa-phone"></i></span>
+
+					 <span> <a href="tel:+56989568901"><b style="color:#fff;">+56 9 8956 8901</b></a></span>
+
+					</div>
+        	</div>
+
+        	<div class="col-md-1">&nbsp;</div>
+			<div class="col-md-2" >
+					 <div id="search" class="input-group">
+					  <input id="filter_name" type="text" name="search" value="" placeholder="Search" class="form-control input-lg" />
+					  <button type="button" class="button-search"><i class="fa fa-search"></i></button>
+					</div>
+            </div>
+		</div>
+		 </div>
+	</nav>
+
+
+
+
     <!-- Top Bar End-->
     <!-- Header Start-->
     <header class="header-row">
@@ -34,7 +168,7 @@
         <div class="table-container">
           <!-- Logo Start -->
           <div class="col-table-cell col-lg-1 col-md-1 col-sm-12 col-xs-12 inner">
-            <div id="logo"><a routerLink="/"><img class="img-responsive" src="assets/image/logo.png" width="200" title="MarketShop" alt="MarketShop" /></a></div>
+            <div id="logo"><a href="index.html"><img class="img-responsive" src="assets/image/logo.png" width="200" title="MarketShop" alt="MarketShop" /></a></div>
           </div>
           <!-- Logo End -->
           <!-- Mini Cart Start-->
@@ -42,13 +176,15 @@
 
           <!-- Search Start-->
           <div class="col-table-cell col-lg-2 col-md-2 col-sm-6 col-xs-12 inner">
-               <nav id="menu" class="navbar custom-link-right">
-        <div class="navbar-header"> <span class="visible-xs visible-sm"> Menu <b></b></span></div>
+
+      <nav id="menu" class="navbar custom-link-center">
+
+        <div class="navbar-header">  <span class="drop-icon visible-sm visible-xs"><i class="fa fa-align-justify" style="font-size: 30px;"></i></span></div>
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li class="dropdown sub"> <a routerLink="categoria">Neumatico <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                  <span class="submore"></span><div class="dropdown-menu" style="display: none;">
+            <li class="dropdown sub"> <a href="category.html">Neumático &nbsp; &nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                  <span class="submore"></span><div class="dropdown-menu" >
                     <ul>
                       <li> <a href="#">Packs</a></li>
                       <li> <a href="#">Para Camionetas</a></li>
@@ -57,24 +193,28 @@
                     </ul>
                   </div>
                 </li>
-            <li><a class="home_link" title="Home" href="#">Instalación</a></li>
-             <li><a class="home_link" title="Home" href="#">Bremsen</a></li>
-            <li class="dropdown"><a routerLink="blog">Blog</a></li>
+            <li><a class="home_link" title="Home" href="#">Instalación &nbsp; &nbsp;</a></li>
+             <li><a class="home_link" title="Home" href="#">Bremsen &nbsp; &nbsp;</a></li>
+            <li class="dropdown"><a href="blog.html">Blog &nbsp; &nbsp;</a></li>
 
           </ul>
         </div>
 
       </nav>
 
+
+
+
+
           </div>
           <!-- Search End-->
 
-          <div class="col-table-cell col-lg-1 col-md-1 col-sm-6 col-xs-12" style="padding-right: 0px;">
+          <div class="col-table-cell col-lg-1 col-md-1 col-sm-6 col-xs-12">
             <div id="cart">
               <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle">
               <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;
-              <span id="cart-total">2 item(s) - $1,132.00</span></button>
-              <ul class="dropdown-menu">
+              <span id="cart-total">2 item(s) - $60,000</span></button>
+             <ul class="dropdown-menu">
                 <li>
                   <table class="table">
                     <tbody>
@@ -97,7 +237,7 @@
                 </li>
                 <li>
                   <div>
-                    <table class="table  table-precio" style="font-size: 14px;: ">
+                    <table class="table  table-precio" style="font-size: 14px; ">
                 <tbody><tr>
                   <td class="text-lett">Neumáticos</td>
                   <td class="text-right">$70.00</td>
@@ -118,7 +258,7 @@
                  <td></td>
                   <td class="text-right">
                     <button type="button" class="btn btn-default btn-block">Comprar con mi cuenta</button><br>
-                   <a routerLink="registro"><small>¿Aun no tienes cuenta?</small></a><br>
+                   <a href="#"><small>¿Aun no tienes cuenta?</small></a><br>
                    <button type="button" class="btn btn-primary btn-block">Comprar como visita</button></td>
                 </tr>
               </tbody></table>
@@ -134,6 +274,7 @@
     </header>
     <!-- Header End-->
     <!-- Main Menu Start-->
+
 
 
 

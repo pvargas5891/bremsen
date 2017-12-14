@@ -94,7 +94,7 @@ a:focus { outline:none; }
 /**===== Title =====**/
 .title { margin:0px 0px 20px 0px; }
 
-.padBottom { padding-bottom: 24px; }
+.padBottom { padding-bottom: 24px; border-bottom: 2px solid #F2F2F2; }
 
 
 h1 { 
@@ -421,7 +421,7 @@ background: #ccc !important;
 	background: #FFF;
 	border:3px solid #3e7cb4;
 	border-width:3px 0px 0px 0px;
-	width:420px;
+	width:330px;
 	border-radius:0px;
 	right:0;
 	left:auto;
@@ -482,7 +482,7 @@ background: #ccc !important;
 /*===================================================================================*/
 #menu .navbar-collapse {
 	padding-left:0px;
-	padding-right:0px;
+	padding-right:15px;
 }
 #menu.navbar {
 	border-radius:0px;
@@ -577,7 +577,7 @@ background: #ccc !important;
 #menu .nav > li { height:40px; }
 #menu .nav > li > a {
 	font-size:16px;
-	color: #aaa;
+	color: #fff;
 	line-height:40px;
 	text-decoration: none;
 	padding:0px 0px 0px 33px;
@@ -977,7 +977,7 @@ visibility:hidden;
 .product-list {
 	position:relative;
 	padding:20px 0px;
-	border:1px solid #eae9e9;
+	border-bottom: 1px solid #eae9e9;
 	margin-bottom: 20px;
 }
 
@@ -1008,10 +1008,12 @@ visibility:hidden;
 	top:25px;
 	left:16px;
 }
-	p.titulosDetalles { font-size: 16px; text-transform: uppercase;  }
+	.blanco { background: #fff; color:#1e1e1e; }
+	p.titulosDetalles { font-size: 15px; text-transform: uppercase;  }
 	 .p-botnes  {color: #ccc; padding-top: 8px;}
+	 .bg-bremsen {  background-image: url('../image/neumatico-porque-bremsen.jpg'); }
 	.bg-home {  background-image: url('../image/neumaticos-home.jpg'); }
-	.img-bremsen {  background-image: url('../image/img-bremsen.jpg'); height: 430px; }
+	.img-bremsen {  background-image: url('../image/img-bremsen.jpg'); height: 436px; }
 	label.aro { float: right; }
 	.buscador2  {padding: 25px 7% !important;}
 	.nav-tabs>li>a {border-radius: 0px; background:#e8e8e8; color: #c0bebf;}
@@ -1026,22 +1028,37 @@ visibility:hidden;
 	.borderBottomActive h3 { color: #1e1e1e; font-weight: bold; }
 	.borderBottom h3 {color:#F2F2F2;  }
 	.borderCaja { border:1px solid #f2f2f2; padding: 10px; }
+	.pad-5 {padding: 5px;}
 	.pad-15 {padding: 15px;}
     .pad-100 {padding-top: 100px;}
     .pad-50 {padding-top: 50px;}
     .pad-10px {padding-top: 10px;}
 	.pest-home {}
 	.formulario01 {padding-left:0px;}
-	.bloque1 { background:#333333c4 ;color:#ffffff; padding: 15px 6%; height: 396px; }
-	.bloque1 p { font-size: 21px; line-height: 27px; }
+	.bloque1 { background:#333333c4 ;color:#ffffff; padding: 15px 6%; height: 408px; }
+	.bloque1 p { font-size: 16px; line-height: 27px; }
 	.bremsen { background-color:#e00034; color:#ffffff; width: 100%; text-transform: uppercase; }
 	.bremsen2 { background-color:#cc0033; color:#ffffff; text-transform: uppercase; } 
 	.bremsen3  {background-color:#383838; color:#ffffff; text-transform: uppercase;}
 	h1.nuestros-servicios  { text-transform: uppercase;  font-size: 50px; }
+
 	.volver { float: left; }
 	@media (max-width: 460px) {
   		 .video { width: 360px; height:203px; }
+  		/* .searchBuscar { display: none; } */
+
+  		.noView { display: none; 
 	}
+
+	@media (min-width: 460px) {
+
+		}
+	}
+
+
+
+
+
 	.table2>tbody>tr>td, .table2>tbody>tr>th, .table>tfoot>tr>td, .table2>tfoot>tr>th, .table2>thead>tr>td, .table2>thead>tr>th { 
 		border: none !important; padding: 4px 8px !important; }
 	h1.valor-unidad  {}
@@ -1389,7 +1406,7 @@ visibility:hidden;
 	background-color: #e00034;
 }
 .btn-default:hover {
-	background:#444;
+	background:#1e1e1e;
 	color:#fff;
 }
 .btn-primary {
@@ -1397,7 +1414,7 @@ visibility:hidden;
 	color:#ffffff;
 }
 .btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
-	background:#444;
+	background:#1e1e1e;
 	color:#fff;
 }
 .btn-warning {
@@ -1472,7 +1489,7 @@ visibility:hidden;
 	color:#666;
 }
 .tab-content {
-	padding:15px 15px 10px;
+	padding:0px 15px 10px;
 	margin-bottom: 20px;
 	z-index:2;
 	border-top:0px;
@@ -1569,7 +1586,7 @@ visibility:hidden;
 }
 .product-tab .tabs li.active a {
 	opacity:1;
-	padding-bottom:8px;
+	padding-bottom:9px;
 	background: #FFFFFF;
 	border-top:2px solid #ddd;
 	border-left: 2px solid #ddd;
