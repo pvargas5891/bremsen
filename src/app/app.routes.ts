@@ -5,7 +5,13 @@ import {
   RegistroComponent,
   CategoriaFiltradaComponent,
   CategoriaNoFiltradaComponent,
-  ProductoComponent
+  ProductoComponent,
+  InstalacionComponent,
+  TerminosComponent,
+  PreguntasComponent,
+  BremsenComponent,
+  BlogComponent,
+  OlvidoComponent
 } from "./components/index.paginas";
 
 const app_routes: Routes = [
@@ -14,6 +20,12 @@ const app_routes: Routes = [
     { path: 'registro', component: RegistroComponent },
     { path: 'filtrada/:param1/:param2/:param3/:origen', component: CategoriaFiltradaComponent},
     { path: 'categoria', component: CategoriaNoFiltradaComponent},
+    { path: 'instalacion', component: InstalacionComponent},
+    { path: 'terminos', component: TerminosComponent},
+    { path: 'preguntas', component: PreguntasComponent},
+    { path: 'bremsen', component: BremsenComponent},
+    { path: 'blog', component: BlogComponent},
+    { path: 'olvido', component: OlvidoComponent},
     { path: 'producto/:id', component: ProductoComponent},
     { path: '**', pathMatch: 'full', redirectTo: 'home'}
 

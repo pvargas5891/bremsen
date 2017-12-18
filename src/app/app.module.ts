@@ -19,6 +19,12 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { CategoriaFiltradaComponent } from './components/categoria-filtrada/categoria-filtrada.component';
 import { CategoriaNoFiltradaComponent } from './components/categoria-no-filtrada/categoria-no-filtrada.component';
 import { ProductoComponent } from './components/producto/producto.component';
+import { InstalacionComponent } from './components/instalacion/instalacion.component';
+import { TerminosComponent } from './components/terminos/terminos.component';
+import { PreguntasComponent } from './components/preguntas/preguntas.component';
+import { BremsenComponent } from './components/bremsen/bremsen.component';
+import { BlogComponent } from './components/blog/blog.component';
+import { OlvidoComponent } from './components/olvido/olvido.component';
 
 
 
@@ -31,7 +37,13 @@ import { ProductoComponent } from './components/producto/producto.component';
     RegistroComponent,
     CategoriaFiltradaComponent,
     CategoriaNoFiltradaComponent,
-    ProductoComponent
+    ProductoComponent,
+    InstalacionComponent,
+    TerminosComponent,
+    PreguntasComponent,
+    BremsenComponent,
+    BlogComponent,
+    OlvidoComponent
   ],
   imports: [
     BrowserModule,

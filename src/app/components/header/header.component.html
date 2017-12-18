@@ -93,7 +93,7 @@
              <ul class="dropdown-menu">
                 <li>
                   <div>
-           <form><br>
+           <br>
                   <div class="form-group required">
                     <label style="color:#1e1e1e;" for="">Email</label>
                     <input type="email" class="form-control" id="" >
@@ -112,19 +112,18 @@
 								</label>
 							</div>
                  		</td>
-                  		<td style="text-align: right; padding: 0px;"><span><a style="color:#6b8bc0;" href="#">¿Olvidaste tu clave?</a></span></td>
+                  		<td style="text-align: right; padding: 0px;"><span><a style="color:#6b8bc0;" routerLink="/olvido">¿Olvidaste tu clave?</a></span></td>
                   	</tr>
                   </table>
 
-			</form>
               <table class="table  table-precio" style="font-size: 14px;">
                 <tbody>
                 <tr>
 
                   <td class="text-right">
                     <button type="button" class="btn btn-default btn-block">Log in</button><br>
-                   <a href="#"><small>¿Aun no tienes cuenta?</small></a><br>
-                   <button type="button" class="btn btn-primary btn-block">Crear cuenta</button></td>
+                   <a routerLink="/registro"><small>¿Aun no tienes cuenta?</small></a><br>
+                   <button type="button" routerLink="/registro" class="btn btn-primary btn-block">Crear cuenta</button></td>
                 </tr>
               </tbody>
             </table>
@@ -183,30 +182,16 @@
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li class="dropdown sub"> <a href="category.html">Neumático &nbsp; &nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                  <span class="submore"></span><div class="dropdown-menu" >
-                    <ul>
-                      <li> <a href="#">Packs</a></li>
-                      <li> <a href="#">Para Camionetas</a></li>
-                      <li> <a href="#">Para Autos</a></li>
-
-                    </ul>
-                  </div>
-                </li>
-            <li><a class="home_link" title="Home" href="#">Instalación &nbsp; &nbsp;</a></li>
-             <li><a class="home_link" title="Home" href="#">Bremsen &nbsp; &nbsp;</a></li>
-            <li class="dropdown"><a href="blog.html">Blog &nbsp; &nbsp;</a></li>
+            <li><a class="home_link" title="Neumaticos" routerLink="/categoria">Neumáticos &nbsp; &nbsp;</a></li>
+            <li><a class="home_link" title="Instalacion" routerLink="/instalacion">Instalación &nbsp; &nbsp;</a></li>
+             <li><a class="home_link" title="Bremsen" routerLink="/bremsen">Bremsen &nbsp; &nbsp;</a></li>
+            <li><a class="home_link" title="Blog" routerLink="/blog">Blog &nbsp; &nbsp;</a></li>
 
           </ul>
         </div>
 
       </nav>
-
-
-
-
-
-          </div>
+         </div>
           <!-- Search End-->
 
           <div class="col-table-cell col-lg-1 col-md-1 col-sm-6 col-xs-12">
