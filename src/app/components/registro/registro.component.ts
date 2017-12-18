@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InformacionService } from '../../services/informacion.service';
+import { UserService } from "../../_services/user.service";
 import { Cliente } from './cliente';
 
 @Component({
@@ -13,7 +14,8 @@ export class RegistroComponent {
    estado:boolean = false;
    errorMessage: String;
   constructor(
-    public _is: InformacionService
+    public _is: InformacionService,
+    public users: UserService
   ) {}
 
    cambiaCiudad(selectedRegion: string): void{
@@ -24,7 +26,7 @@ export class RegistroComponent {
     }
 
     saveRegistro(): void {
-     this._is.saveRegistroUser(this.cliente)
+     this.users.create(this.cliente)
 	     .then( data => {
            this.reset();
            if(data=='OK'){

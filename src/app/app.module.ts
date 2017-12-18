@@ -4,12 +4,22 @@ import { HttpModule } from "@angular/http";
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgAutoCompleteModule } from "ng-auto-complete";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 //RUTAS
 import { app_routing }  from "./app.routes";
 
 //servicios
 import { InformacionService } from "./services/informacion.service";
 import { ProductosService } from './services/productos.service';
+
+
+import { fakeBackendProvider } from './_helpers/index';
+
+import { AlertComponent } from './_directives/index';
+import { AuthGuard } from './_guards/index';
+import { JwtInterceptor } from './_helpers/index';
+import { AlertService, AuthenticationService, UserService } from './_services/index'
+
 //Componentes
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -43,11 +53,13 @@ import { OlvidoComponent } from './components/olvido/olvido.component';
     PreguntasComponent,
     BremsenComponent,
     BlogComponent,
-    OlvidoComponent
+    OlvidoComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     FormsModule,
     app_routing,
     NgxPaginationModule,
@@ -55,7 +67,19 @@ import { OlvidoComponent } from './components/olvido/olvido.component';
   ],
   providers: [
     InformacionService,
-    ProductosService
+    ProductosService,
+    AuthGuard,
+    AlertService,
+    AuthenticationService,
+    UserService,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: JwtInterceptor,
+        multi: true
+    },
+
+    // provider used to create fake backend
+    fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })

@@ -110,27 +110,6 @@ public getPerfilVehiculos(ancho): Promise<string>{
       })
   }
 
-  public saveRegistroUser(registro: Cliente): Promise<string>{
-
-
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
-        let options = new RequestOptions({ headers: headers });
-        const params = new URLSearchParams();
-        params.append('nombreCompleto', registro.nombreCompleto);
-        params.append('comuna', registro.comuna);
-        params.append('ciudad', registro.ciudad);
-        params.append('region', registro.region);
-        params.append('direccion', registro.direccion);
-        params.append('genero', registro.genero);
-        params.append('telefono', registro.telefono);
-        params.append('email', registro.email);
-        let body = params.toString()
-        return this.http.post(this.url+ 'registro.php', body, options).toPromise()
-	           .then(this.extractData)
-             .catch(this.handleErrorPromise);
-
-
-  }
 
   private extractData(res: Response) {
         //console.debug(res);

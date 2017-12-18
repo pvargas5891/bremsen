@@ -1,5 +1,6 @@
 export class Cliente {
 
+   public id: string;
    public nombreCompleto: string;
    public comuna: string;
    public ciudad: string;
@@ -8,6 +9,8 @@ export class Cliente {
    public genero: string;
    public telefono: string;
    public email: string;
+   public username: string;
+   public password: string;
    constructor() {
    }
 }
