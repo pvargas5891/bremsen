@@ -9,3 +9,4 @@ export { PreguntasComponent } from "./preguntas/preguntas.component";
 export { BremsenComponent } from "./bremsen/bremsen.component";
 export { BlogComponent } from "./blog/blog.component";
 export { OlvidoComponent } from "./olvido/olvido.component";
+export { MisdatosComponent } from "./misdatos/misdatos.component";

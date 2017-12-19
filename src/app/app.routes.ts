@@ -11,7 +11,8 @@ import {
   PreguntasComponent,
   BremsenComponent,
   BlogComponent,
-  OlvidoComponent
+  OlvidoComponent,
+  MisdatosComponent
 } from "./components/index.paginas";
 
 const app_routes: Routes = [
@@ -27,6 +28,7 @@ const app_routes: Routes = [
     { path: 'blog', component: BlogComponent},
     { path: 'olvido', component: OlvidoComponent},
     { path: 'producto/:id', component: ProductoComponent},
+    { path: 'misdatos', component: MisdatosComponent},
     { path: '**', pathMatch: 'full', redirectTo: 'home'}
 
 ];

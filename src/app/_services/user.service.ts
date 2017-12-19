@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Http, RequestOptions,Response, Headers  } from '@angular/http';
-import { Cliente } from '../_models/index';
+import { Cliente } from '../components/registro/cliente';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -10,24 +10,54 @@ export class UserService {
     url:string = 'http://bremsen.kodamas.cl/maqueta/';
     constructor(public http:Http) { }
 
-    /*getAll() {
-        return this.http.get<Cliente[]>('/api/users');
-    }*/
 
-    getById(id: number) {
-        return this.http.get('/api/users/' + id);
+    getById(id: string) {
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+        let options = new RequestOptions({ headers: headers });
+        const params = new URLSearchParams();
+        params.append('id', id);
+
+        let body = params.toString();
+        return this.http.post(this.url+ 'getCliente.php', body, options).toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
     }
 
-    update(user: Cliente) {
-        return this.http.put('/api/users/' + user.id, user);
+    getHistorialById(id: string) {
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+        let options = new RequestOptions({ headers: headers });
+        const params = new URLSearchParams();
+        params.append('id', id);
+
+        let body = params.toString();
+        return this.http.post(this.url+ 'getClienteHistorial.php', body, options).toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
     }
 
-   /* delete(id: number) {
-        return this.http.delete('/api/users/' + id);
-    }*/
+    update(registro: Cliente) {
+
+       let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+        let options = new RequestOptions({ headers: headers });
+        const params = new URLSearchParams();
+        params.append('id', registro.id);
+        params.append('nombreCompleto', registro.nombreCompleto);
+        params.append('comuna', registro.comuna);
+        params.append('ciudad', registro.ciudad);
+        params.append('region', registro.region);
+        params.append('direccion', registro.direccion);
+        params.append('genero', registro.genero);
+        params.append('telefono', registro.telefono);
+        params.append('email', registro.email);
+        let body = params.toString();
+        return this.http.post(this.url+ 'updateCliente.php', body, options).toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+
+    }
+
 
     public create(registro: Cliente): Promise<string>{
-
 
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
         let options = new RequestOptions({ headers: headers });
@@ -48,7 +78,7 @@ export class UserService {
 
   }
 
-  public loginUserService(registro: Cliente):Promise<string>{
+  public loginUserService(registro: Cliente): Promise<string>{
 
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
         let options = new RequestOptions({ headers: headers });
@@ -57,6 +87,7 @@ export class UserService {
         params.append('password', registro.password);
 
         let body = params.toString();
+        let rs: string;
         return this.http.post(this.url+ 'valida.php', body, options).toPromise()
 	           .then(this.extractData)
              .catch(this.handleErrorPromise);

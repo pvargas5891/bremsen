@@ -12,13 +12,12 @@ import { app_routing }  from "./app.routes";
 import { InformacionService } from "./services/informacion.service";
 import { ProductosService } from './services/productos.service';
 
-
-import { fakeBackendProvider } from './_helpers/index';
-
-import { AlertComponent } from './_directives/index';
+//import { fakeBackendProvider } from './_helpers/index';
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import { BaseRequestOptions } from '@angular/http';
 import { AuthGuard } from './_guards/index';
 import { JwtInterceptor } from './_helpers/index';
-import { AlertService, AuthenticationService, UserService } from './_services/index'
+import { AuthenticationService, UserService } from './_services/index'
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -35,6 +34,7 @@ import { PreguntasComponent } from './components/preguntas/preguntas.component';
 import { BremsenComponent } from './components/bremsen/bremsen.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { OlvidoComponent } from './components/olvido/olvido.component';
+import { MisdatosComponent } from './components/misdatos/misdatos.component';
 
 
 
@@ -54,7 +54,7 @@ import { OlvidoComponent } from './components/olvido/olvido.component';
     BremsenComponent,
     BlogComponent,
     OlvidoComponent,
-    AlertComponent
+    MisdatosComponent
   ],
   imports: [
     BrowserModule,
@@ -68,18 +68,19 @@ import { OlvidoComponent } from './components/olvido/olvido.component';
   providers: [
     InformacionService,
     ProductosService,
-    AuthGuard,
-    AlertService,
+    //AuthGuard,
     AuthenticationService,
     UserService,
-    {
+    /*{
         provide: HTTP_INTERCEPTORS,
         useClass: JwtInterceptor,
         multi: true
-    },
+    },*/
 
     // provider used to create fake backend
-    fakeBackendProvider
+    /*fakeBackendProvider,
+    MockBackend,
+    BaseRequestOptions*/
   ],
   bootstrap: [AppComponent]
 })

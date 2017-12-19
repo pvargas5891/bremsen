@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-
-import { AlertService, AuthenticationService } from '../../_services/index';
+import { AuthenticationService } from '../../_services/index';
 
 @Component({
   selector: 'app-header',
@@ -13,31 +11,39 @@ export class HeaderComponent implements OnInit {
 model: any = {};
     loading = false;
     returnUrl: string;
+    error = '';
+    autenticado = false;
+     constructor(
+        private authenticationService: AuthenticationService) {
 
-    constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private authenticationService: AuthenticationService,
-        private alertService: AlertService) { }
+          var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          if(currentUser.token === 'active'){
+              this.autenticado = true;
+          }
+         }
 
-  ngOnInit() {
-          // reset login status
-          //this.authenticationService.logout();
-
-          // get return url from route parameters or default to '/'
-          this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-      }
-
-  login() {
-        this.loading = true;
-        this.authenticationService.login(this.model.username, this.model.password)
-            .subscribe(
-                data => {
-                    this.router.navigate([this.returnUrl]);
-                },
-                error => {
-                    this.alertService.error(error);
-                    this.loading = false;
-                });
+    ngOnInit() {
+        // reset login status
+       // this.authenticationService.logout();
     }
+
+login() {
+        this.loading = true;
+        this.authenticationService.login(this.model.username, this.model.password)
+            .then(result => {
+                console.debug(result);
+                if (result === true) {
+                    // login successful
+                    //this.router.navigate(['/']);
+                  var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                  console.debug(currentUser);
+                    this.autenticado = true;
+                    this.loading = false;
+                } else {
+                    // login failed
+                    this.error = 'Usuario y password son incorrectos';
+                    this.loading = false;
+                }
+            });
+    }
 }

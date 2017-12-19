@@ -1008,6 +1008,8 @@ visibility:hidden;
 	top:25px;
 	left:16px;
 }
+
+	h4.tabs-h4 { text-align: center; }
 	.blanco { background: #fff; color:#1e1e1e; }
 	p.titulosDetalles { font-size: 15px; text-transform: uppercase;  }
 	 .p-botnes  {color: #ccc; padding-top: 8px;}
@@ -1045,15 +1047,11 @@ visibility:hidden;
 	.volver { float: left; }
 	@media (max-width: 460px) {
   		 .video { width: 360px; height:203px; }
-  		/* .searchBuscar { display: none; } */
+  		h4.tabs-h4 { font-size: 11px !important; }
 
-  		.noView { display: none; 
+  		.noView { display: none; }
 	}
 
-	@media (min-width: 460px) {
-
-		}
-	}
 
 
 

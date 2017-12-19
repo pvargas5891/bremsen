@@ -84,9 +84,39 @@
 
      <nav id="top" class="htop">
       <div class="container">
-        <div class="row">
 
+        <div class="row" *ngIf="autenticado">
+			<div class="col-md-1">&nbsp;</div>
+        	<div class="col-md-5">
+        			<div id="cart">
+              <button type="button" class="heading " style="  padding-right: 15px;">
+              <span id="cart-total"><small><a routerLink="/misdatos" style="color: #fff;">Hola César Tapia Rosales  / Cambiar mis datos</a></small></span></button>
 
+            </div>
+        	</div>
+
+        	<div class="col-md-3 center-block text-center" style="padding-top: 7px;">
+        		 <div class="links">
+					<span><a href="#" style="color: #fff;">Live Chat</a></span>
+
+						<span> &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;<i style="color:#1bd744;" class="fa fa-whatsapp" aria-hidden="true"></i>
+						  &nbsp; <i style="color: #fff;" class="fa fa-phone"></i></span>
+
+					 <span> <a href="tel:+56989568901"><b style="color:#fff;">+56 9 8956 8901</b></a></span>
+
+					</div>
+        	</div>
+
+        	<div class="col-md-1">&nbsp;</div>
+			<div class="col-md-2">
+					 <div id="search" class="input-group">
+					  <input id="filter_name" type="text" name="search" value="" placeholder="Search" class="form-control input-lg">
+					  <button type="button" class="button-search"><i class="fa fa-search"></i></button>
+					</div>
+            </div>
+    </div>
+
+        <div class="row" *ngIf="!autenticado">
 			<div class="col-md-3">&nbsp;</div>
         	<div class="col-md-3">
         			<div id="cart">
@@ -127,7 +157,7 @@
                         <td class="text-right">
                           <button [disabled]="loading" class="btn btn-primary">Entrar</button>
                           <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-
+                          <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 
                           <br>
 
