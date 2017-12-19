@@ -13,12 +13,18 @@ model: any = {};
     returnUrl: string;
     error = '';
     autenticado = false;
+    nombreCliente = "";
      constructor(
         private authenticationService: AuthenticationService) {
 
           var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          if(currentUser.token === 'active'){
-              this.autenticado = true;
+
+          if(currentUser != null){
+             console.debug(currentUser);
+            if(currentUser.token === 'active'){
+                this.nombreCliente = currentUser.usuario.nombre;
+                this.autenticado = true;
+            }
           }
          }
 
@@ -46,4 +52,10 @@ login() {
                 }
             });
     }
+     logout(): void {
+            // clear token remove user from local storage to log user out
+          //this.token = null;
+          localStorage.removeItem('currentUser');
+         this.autenticado = false;
+        }
 }

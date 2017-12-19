@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InformacionService } from '../../services/informacion.service';
 import { UserService } from "../../_services/user.service";
 import { Cliente } from './cliente';
-
+import { Router } from '@angular/router'
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html'
@@ -15,8 +15,17 @@ export class RegistroComponent {
    errorMessage: String;
   constructor(
     public _is: InformacionService,
-    public users: UserService
-  ) {}
+    public users: UserService,
+    private route: Router
+  ) {
+
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if(currentUser != null){
+      if(currentUser.token === 'active'){
+             this.route.navigate(['/home']);
+      }
+    }
+  }
 
    cambiaCiudad(selectedRegion: string): void{
       this._is.getCiudades(selectedRegion);
