@@ -23,7 +23,7 @@ export class UserService {
              .catch(this.handleErrorPromise);
     }
 
-    getHistorialById(id: string) {
+    /*getHistorialById(id: string) {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
         let options = new RequestOptions({ headers: headers });
         const params = new URLSearchParams();
@@ -33,7 +33,7 @@ export class UserService {
         return this.http.post(this.url+ 'getClienteHistorial.php', body, options).toPromise()
 	           .then(this.extractData)
              .catch(this.handleErrorPromise);
-    }
+    }*/
 
     update(registro: Cliente) {
 
@@ -56,6 +56,20 @@ export class UserService {
 
     }
 
+    public updatePassword(registro: Cliente): Promise<string>{
+
+      let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+        let options = new RequestOptions({ headers: headers });
+        const params = new URLSearchParams();
+        params.append('id', registro.id);
+        params.append('password', registro.password);
+        params.append('accion', 'password');
+
+        let body = params.toString();
+        return this.http.post(this.url+ 'updateCliente.php', body, options).toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+    }
 
     public create(registro: Cliente): Promise<string>{
 

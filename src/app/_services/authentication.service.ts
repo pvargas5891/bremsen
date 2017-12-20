@@ -18,7 +18,8 @@ export class AuthenticationService {
  
     login(username: string, password: string): Promise<boolean> {
         let registro = new Cliente();
-
+        registro.username = username;
+        registro.password = password;
         return this.userService.loginUserService(registro).then( response => {
 
                 if ( response[0] === 'OK') {

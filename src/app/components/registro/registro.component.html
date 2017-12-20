@@ -2,8 +2,8 @@
     <div class="container">
       <!-- Breadcrumb Start-->
       <ul class="breadcrumb">
-        <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="#">Pagina actual</a></li>
+        <li><a routerLink="/home"><i class="fa fa-home"></i></a></li>
+        <li>Crear Cuenta</li>
       </ul>
       <!-- Breadcrumb End-->
       <div class="row">
@@ -12,65 +12,71 @@
         <h1 class="title">Formulario de registro</h1>
 
 
-      <form>
-                  <div class="form-group required">
+       <form name="form" (ngSubmit)="f.form.valid && saveRegistro()" #f="ngForm" novalidate>
+                   <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !nombreCompleto.valid }">
                     <label for="nombreCompleto">Nombre completo</label>
-                    <input type="text" class="form-control" id="nombreCompleto" name="cliente.nombreCompleto" [(ngModel)]="cliente.nombreCompleto" required>
+                        <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto" [(ngModel)]="cliente.nombreCompleto" required>
+                     <div *ngIf="f.submitted && !nombreCompleto.valid" class="help-block">Nombre completo es requerido</div>
                   </div>
 
-                  <div class="form-group required">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" [(ngModel)]="this.cliente.email" required>
+                  <div *ngIf="f.submitted && !email.valid" class="help-block">Email es requerido</div>
                   </div>
 
-                  <div class="form-group required">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !telefono.valid }">
                     <label for="telefono">Telefono</label>
                     <input type="tel" class="form-control" id="telefono" name="telefono" [(ngModel)]="this.cliente.telefono" required>
+                 <div *ngIf="f.submitted && !telefono.valid" class="help-block">Telefono es requerido</div>
                   </div>
 
 
-                  <div class="form-group required">
+                  <div class="form-group">
                     <label for="genero">Genero </label>
                       <select class="form-control" id="genero" name="input-select" name="genero" [(ngModel)]="cliente.genero" required>
-                        <option value="1">Masculino </option>
+                        <option value="1" selected>Masculino </option>
                         <option value="2">Femenino </option>
                     </select>
                   </div>
-                  <div class="form-group required">
+                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !direccion.valid }">
                     <label for="direccion">Dirección</label>
                     <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="cliente.direccion" required>
+                  <div *ngIf="f.submitted && !direccion.valid" class="help-block">Dirección es requerido</div>
                   </div>
 
-                  <div class="form-group required">
+                  <div class="form-group">
                     <label for="region">Región </label>
                       <select class="form-control" #selectedRegion (change)="cambiaCiudad(selectedRegion.value)" name="region" [(ngModel)]="cliente.region" id="region" required>
                         <option *ngFor="let region of _is.regiones" [value]="region[0]">{{region[1]}}</option>
-
                     </select>
                   </div>
-                  <div class="form-group required">
+
+                  <div class="form-group">
                     <label for="ciudad">Ciudad </label>
                     <select *ngIf="_is.ciudades.length > 0" #selectedCiudad class="form-control" (change)="cambiaComuna(selectedCiudad.value)" name="ciudad" id="ciudad" [(ngModel)]="cliente.ciudad" required>
                       <option  *ngFor="let ciudad of _is.ciudades" [value]="ciudad[0]">{{ciudad[1]}}</option>
                     </select>
-
                   </div>
-                   <div class="form-group required">
+
+                   <div class="form-group">
                     <label for="comuna">Comuna </label>
                       <select *ngIf="_is.comunas.length > 0" #selectedComuna class="form-control" id="input-select" name="input-select" name="comuna" id="comuna" [(ngModel)]="cliente.comuna" required>
                         <option  *ngFor="let comuna of _is.comunas" [value]="comuna[0]">{{comuna[1]}}</option>
                     </select>
-
                   </div>
 
 
         </form>
 
 
+
          <div class="col-md-12"  style="padding: 25px 0px 25px 0px; ">
-            <button type="button" class="btn btn-default btn-block" (click)="saveRegistro()">Crear cuenta  </button>
-            <p class="lead">Tranfiere directamente a nuestra cuenta y envia el comprobante a xxxx@bremsen.cl</p>
-         </div>
+            <button [disabled]="loading" class="btn btn-default btn-block">Crear cuenta</button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+              <p class="lead">Tranfiere directamente a nuestra cuenta y envia el comprobante a xxxx@bremsen.cl</p>
+            </div>
          <div *ngIf="estado" [ngClass] = "'success'"> Cliente fue agregado correctamente. </div>
         <div *ngIf="errorMessage" [ngClass] = "'error'"> {{errorMessage}} </div>
         </div>
@@ -83,22 +89,26 @@
             <div class="col-md-9" style=" border: 1px solid #ccc;">
               <br>
                   <h3 class="subtitle">Ya tienes cuenta?</h3>
-                 <form>
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Email </label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Contraseña</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
+                 <form name="form" (ngSubmit)="f2.form.valid && login()" #f2="ngForm" novalidate>
+                  <div class="form-group" [ngClass]="{ 'has-error': f2.submitted && !username2.valid }">
+                      <label for="username">Email</label>
+                      <input type="text" class="form-control" name="username2" [(ngModel)]="model.username" #username2="ngModel" required />
+                      <div *ngIf="f2.submitted && !username2.valid" class="help-block">Usuario es requerido</div>
+                  </div>
+                  <div class="form-group" [ngClass]="{ 'has-error': f2.submitted && !password2.valid }">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" name="password2" [(ngModel)]="model.password" #password2="ngModel" required />
+                      <div *ngIf="f2.submitted && !password2.valid" class="help-block">Password es requerido</div>
+                  </div>
 
                     <div class="checkbox">
                       <label>
                         <input type="checkbox"><small>Recordarme</small>
                       </label>
                     </div>
-                    <button type="button" class="btn btn-default btn-block">Entrar </button>
+                   <button [disabled]="loading2" class="btn btn-default btn-block">Entrar</button>
+                          <img *ngIf="loading2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                          <div *ngIf="error2" class="alert alert-danger">{{error2}}</div>
                   </form>
 
                 <br>

@@ -56,60 +56,59 @@
               <p>Ingresa tus datos para agilizar próximas compras</p><br>
                 <form>
                   <div class="form-group required">
-                    <label for="">Nombre completo</label>
-                    <input type="text" class="form-control" id="">
+                    <label for="nombreCompleto">Nombre completo</label>
+                    <input type="text" class="form-control" id="nombreCompleto" name="cliente.nombreCompleto" [(ngModel)]="cliente.nombreCompleto" required>
                   </div>
 
                   <div class="form-group required">
-                    <label for="">Email</label>
-                    <input type="email" class="form-control" id="" >
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" [(ngModel)]="this.cliente.email" required>
                   </div>
 
                   <div class="form-group required">
-                    <label for="">Teléfono</label>
-                    <input type="tel" class="form-control" id="" >
+                    <label for="telefono">Telefono</label>
+                    <input type="tel" class="form-control" id="telefono" name="telefono" [(ngModel)]="this.cliente.telefono" required>
                   </div>
 
 
                   <div class="form-group required">
-                    <label for="">Género </label>
-                      <select class="form-control" id="input-select" name="input-select">
-                        <option value="">. </option>
+                    <label for="genero">Genero </label>
+                      <select class="form-control" id="genero" name="input-select" name="genero" [(ngModel)]="cliente.genero" required>
                         <option value="1">Masculino </option>
                         <option value="2">Femenino </option>
                     </select>
                   </div>
                   <div class="form-group required">
-                    <label for="">Dirección</label>
-                    <input type="text" class="form-control" id="">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="cliente.direccion" required>
                   </div>
 
                   <div class="form-group required">
-                    <label for="">Región </label>
-                      <select class="form-control" id="input-select" name="input-select">
-                        <option value="">. </option>
-                        <option value="1">1 </option>
-                        <option value="2">2 </option>
-                        <option value="3">3 </option>
-                        <option value="4">4 </option>
+                    <label for="region">Región </label>
+                      <select class="form-control" #selectedRegion (change)="cambiaCiudad(selectedRegion.value)" name="region" [(ngModel)]="cliente.region" id="region" required>
+                        <option *ngFor="let region of _is.regiones" [value]="region[0]">{{region[1]}}</option>
+
                     </select>
                   </div>
-
-                   <div class="form-group required">
-                    <label for="">Comuna </label>
-                      <select class="form-control" id="input-select" name="input-select">
-                        <option value="">. </option>
-                        <option value="1">1 </option>
-                        <option value="2">2 </option>
-                        <option value="3">3 </option>
-                        <option value="4">4 </option>
+                  <div class="form-group required">
+                    <label for="ciudad">Ciudad </label>
+                    <select *ngIf="_is.ciudades.length > 0" #selectedCiudad class="form-control" (change)="cambiaComuna(selectedCiudad.value)" name="ciudad" id="ciudad" [(ngModel)]="cliente.ciudad" required>
+                      <option  *ngFor="let ciudad of _is.ciudades" [value]="ciudad[0]">{{ciudad[1]}}</option>
                     </select>
+
+                  </div>
+                   <div class="form-group required">
+                    <label for="comuna">Comuna </label>
+                      <select *ngIf="_is.comunas.length > 0" #selectedComuna class="form-control" id="input-select" name="input-select" name="comuna" id="comuna" [(ngModel)]="cliente.comuna" required>
+                        <option  *ngFor="let comuna of _is.comunas" [value]="comuna[0]">{{comuna[1]}}</option>
+                    </select>
+
                   </div>
 
 
         </form>
 
-                  <p>  <button type="button" class="btn btn-default btn-lg">Guardar datos</button></p>
+                  <p>  <button type="button" class="btn btn-default btn-lg" (click)="updateCliente()">Guardar datos</button></p>
 
 <br>
 
@@ -117,21 +116,22 @@
                   <form>
                       <div class="form-group required">
                         <label for="">Contraseña actual</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" name="actual" id="actual" [(ngModel)]="actual">
                       </div>
 
                       <div class="form-group required">
                         <label for="">Nueva contraseña</label>
-                        <input type="password" class="form-control" id="">
+                        <input type="password" class="form-control" name="nueva1" id="nueva1" [(ngModel)]="nueva1">
                       </div>
 
                       <div class="form-group required">
                         <label for="">Repetir nueva contraseña </label>
-                        <input type="password" class="form-control" id="">
+                        <input type="password" class="form-control" name="nueva2" id="nueva2" [(ngModel)]="nueva2">
                       </div>
                      </form>
 
-                     <p>  <button type="button" class="btn btn-default btn-lg">Guardar contraseña</button></p>
+                     <p>  <button type="button" class="btn btn-default btn-lg" (click)="updatePassword()">Guardar contraseña</button></p>
+                     <div *ngIf="errorPass" class="alert alert-danger">{{errorMsg}}</div>
 
 
             </div>

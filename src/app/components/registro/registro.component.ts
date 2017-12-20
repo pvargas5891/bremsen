@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InformacionService } from '../../services/informacion.service';
 import { UserService } from "../../_services/user.service";
+import { AuthenticationService } from '../../_services/index';
 import { Cliente } from './cliente';
 import { Router } from '@angular/router'
 @Component({
@@ -13,9 +14,16 @@ export class RegistroComponent {
    cliente = new Cliente();
    estado:boolean = false;
    errorMessage: String;
+   loading = false;
+   loading2 = false;
+   returnUrl: string;
+   error = '';
+   error2 = '';
+   model: any = {};
   constructor(
     public _is: InformacionService,
     public users: UserService,
+    private authenticationService: AuthenticationService,
     private route: Router
   ) {
 
@@ -35,15 +43,16 @@ export class RegistroComponent {
     }
 
     saveRegistro(): void {
+      this.loading = true;
      this.users.create(this.cliente)
 	     .then( data => {
            this.reset();
            if(data=='OK'){
               this.estado = true;
+              this.loading = false;
            }
-			      console.debug(data);
 		    },
-        error => this.errorMessage = <any>error);
+        error => this.errorMessage = <any> error );
    }
 
    private reset() {
@@ -58,5 +67,27 @@ export class RegistroComponent {
 	   this.errorMessage = null;
 	   this.estado = false;
    }
+
+   login() {
+        this.loading2 = true;
+        this.authenticationService.login(this.model.username, this.model.password)
+            .then(result => {
+                //console.debug(result);
+                if (result === true) {
+                    // login successful
+                    //this.router.navigate(['/']);
+                  var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                  //console.debug(currentUser);
+                    //this.nombreCliente = currentUser.usuario.nombre;
+                   //this.autenticado = true;
+                    this.loading2 = false;
+                    this.route.navigate(['/']);
+                } else {
+                    // login failed
+                    this.error2 = 'Usuario y password son incorrectos';
+                    this.loading2 = false;
+                }
+            });
+    }
 
 }
