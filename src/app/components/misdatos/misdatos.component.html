@@ -54,61 +54,74 @@
              <div class="col-md-9">
               <h3>Mis datos</h3>
               <p>Ingresa tus datos para agilizar próximas compras</p><br>
-                <form>
-                  <div class="form-group required">
+
+                  <form name="form" (ngSubmit)="f.form.valid && updateCliente()" #f="ngForm" novalidate>
+                   <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !nombreCompleto.valid }">
                     <label for="nombreCompleto">Nombre completo</label>
-                    <input type="text" class="form-control" id="nombreCompleto" name="cliente.nombreCompleto" [(ngModel)]="cliente.nombreCompleto" required>
+                        <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto" #nombreCompleto="ngModel" [(ngModel)]="cliente.nombreCompleto" required>
+                     <div *ngIf="f.submitted && !nombreCompleto.valid" class="help-block">Nombre completo es requerido</div>
                   </div>
 
-                  <div class="form-group required">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email1.valid }">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" [(ngModel)]="this.cliente.email" required>
+                    <input type="email" class="form-control" id="email" name="email1" [(ngModel)]="cliente.email" #email1="ngModel" required>
+                  <div *ngIf="f.submitted && !email1.valid" class="help-block">Email es requerido</div>
                   </div>
 
-                  <div class="form-group required">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !telefono.valid }">
                     <label for="telefono">Telefono</label>
-                    <input type="tel" class="form-control" id="telefono" name="telefono" [(ngModel)]="this.cliente.telefono" required>
+                    <input type="tel" class="form-control" id="telefono" name="telefono" [(ngModel)]="cliente.telefono" #telefono="ngModel" required>
+                 <div *ngIf="f.submitted && !telefono.valid" class="help-block">Telefono es requerido</div>
                   </div>
 
 
-                  <div class="form-group required">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !genero.valid }">
                     <label for="genero">Genero </label>
-                      <select class="form-control" id="genero" name="input-select" name="genero" [(ngModel)]="cliente.genero" required>
-                        <option value="1">Masculino </option>
+                      <select class="form-control" id="genero" name="input-select" name="genero" #genero="ngModel" [(ngModel)]="cliente.genero" required>
+                        <option value="1" selected="selected">Masculino </option>
                         <option value="2">Femenino </option>
                     </select>
+                      <div *ngIf="f.submitted && !genero.valid" class="help-block">Debe seleccionar su sexo</div>
                   </div>
-                  <div class="form-group required">
+                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !direccion.valid }">
                     <label for="direccion">Dirección</label>
-                    <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="cliente.direccion" required>
+                    <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="cliente.direccion" #direccion="ngModel" required>
+                  <div *ngIf="f.submitted && !direccion.valid" class="help-block">Dirección es requerido</div>
                   </div>
 
-                  <div class="form-group required">
+                  <div class="form-group" [ngClass]="{ 'has-error': !regionValido }">
                     <label for="region">Región </label>
-                      <select class="form-control" #selectedRegion (change)="cambiaCiudad(selectedRegion.value)" name="region" [(ngModel)]="cliente.region" id="region" required>
+                      <select class="form-control" #selectedRegion (change)="cambiaCiudad(selectedRegion.value)" name="region1" #region1="ngModel" [(ngModel)]="cliente.region" id="region1">
                         <option *ngFor="let region of _is.regiones" [value]="region[0]">{{region[1]}}</option>
-
                     </select>
+                      <div *ngIf="f.submitted && !regionValido" class="help-block">Debe seleccionar una region</div>
                   </div>
-                  <div class="form-group required">
+
+                  <div class="form-group" [ngClass]="{ 'has-error': !ciudadValido }">
                     <label for="ciudad">Ciudad </label>
-                    <select *ngIf="_is.ciudades.length > 0" #selectedCiudad class="form-control" (change)="cambiaComuna(selectedCiudad.value)" name="ciudad" id="ciudad" [(ngModel)]="cliente.ciudad" required>
+                    <select *ngIf="_is.ciudades.length > 0" #selectedCiudad class="form-control" (change)="cambiaComuna(selectedCiudad.value)" #ciudad1="ngModel" name="ciudad1" id="ciudad1" [(ngModel)]="cliente.ciudad">
                       <option  *ngFor="let ciudad of _is.ciudades" [value]="ciudad[0]">{{ciudad[1]}}</option>
                     </select>
-
+                      <div *ngIf="f.submitted && !ciudadValido" class="help-block">Debe seleccionar una ciudad</div>
                   </div>
-                   <div class="form-group required">
+
+                   <div class="form-group" [ngClass]="{ 'has-error': !comunaValido }">
                     <label for="comuna">Comuna </label>
-                      <select *ngIf="_is.comunas.length > 0" #selectedComuna class="form-control" id="input-select" name="input-select" name="comuna" id="comuna" [(ngModel)]="cliente.comuna" required>
+                      <select *ngIf="_is.comunas.length > 0" #selectedComuna class="form-control" id="input-select" name="input-select" #comuna1="ngModel" name="comuna1" id="comuna1" [(ngModel)]="cliente.comuna">
                         <option  *ngFor="let comuna of _is.comunas" [value]="comuna[0]">{{comuna[1]}}</option>
                     </select>
-
+                       <div *ngIf="f.submitted && !comunaValido" class="help-block">Debe seleccionar una comuna</div>
                   </div>
 
+         <div class="col-md-12"  style="padding: 25px 0px 25px 0px; ">
+            <button [disabled]="loading" class="btn btn-default btn-lg">Guardar datos</button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        </div>
+         <div *ngIf="estado" [ngClass] = "'success'"> Tus datos fueron actualizados correctamente. </div>
+        <div *ngIf="errorMessage" [ngClass] = "'error'"> {{errorMessage}} </div>
+         </form>
 
-        </form>
-
-                  <p>  <button type="button" class="btn btn-default btn-lg" (click)="updateCliente()">Guardar datos</button></p>
 
 <br>
 
@@ -131,6 +144,7 @@
                      </form>
 
                      <p>  <button type="button" class="btn btn-default btn-lg" (click)="updatePassword()">Guardar contraseña</button></p>
+                     <div *ngIf="estado2" [ngClass] = "'success'"> Tu contraseña ha sido actualizada. </div>
                      <div *ngIf="errorPass" class="alert alert-danger">{{errorMsg}}</div>
 
 

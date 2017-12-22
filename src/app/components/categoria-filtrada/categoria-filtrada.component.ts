@@ -106,6 +106,9 @@ export class CategoriaFiltradaComponent {
   }
   public filtroMarca= function(marcaSeleccion){
       //console.debug(marcaSeleccion);
+      if(marcaSeleccion === 'all'){
+        marcaSeleccion = '';
+      }
       this.detallesCategoria.marcaFiltro=marcaSeleccion;
       this.getProductosFiltrado();
   }

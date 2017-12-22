@@ -87,6 +87,7 @@ export class CategoriaNoFiltradaComponent {
         for(let i = this.detallesCategoria.inicio; i <= this.detallesCategoria.fin;i++){
             this.productos.push(this.resultProductos[i-1]);
         }
+        console.debug(this.productos);
   }
   public pageChanged = function (event){
       //this.p = event;
@@ -109,6 +110,9 @@ export class CategoriaNoFiltradaComponent {
   }
   public filtroMarca= function(marcaSeleccion){
       //console.debug(marcaSeleccion);
+      if(marcaSeleccion === 'all'){
+        marcaSeleccion = '';
+      }
       this.detallesCategoria.marcaFiltro=marcaSeleccion;
       this.getProductosFiltrado();
   }

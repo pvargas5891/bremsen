@@ -11,6 +11,7 @@ import { app_routing }  from "./app.routes";
 //servicios
 import { InformacionService } from "./services/informacion.service";
 import { ProductosService } from './services/productos.service';
+import { CarroCompraService } from './services/carro-compra.service';
 
 //import { fakeBackendProvider } from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -35,6 +36,9 @@ import { BremsenComponent } from './components/bremsen/bremsen.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { OlvidoComponent } from './components/olvido/olvido.component';
 import { MisdatosComponent } from './components/misdatos/misdatos.component';
+import { CarroComponent } from './components/carro/carro.component';
+import { CheckoutInComponent } from './components/checkout-in/checkout-in.component';
+import { CheckoutOutComponent } from './components/checkout-out/checkout-out.component';
 
 
 
@@ -54,7 +58,10 @@ import { MisdatosComponent } from './components/misdatos/misdatos.component';
     BremsenComponent,
     BlogComponent,
     OlvidoComponent,
-    MisdatosComponent
+    MisdatosComponent,
+    CarroComponent,
+    CheckoutInComponent,
+    CheckoutOutComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +75,7 @@ import { MisdatosComponent } from './components/misdatos/misdatos.component';
   providers: [
     InformacionService,
     ProductosService,
+    CarroCompraService,
     //AuthGuard,
     AuthenticationService,
     UserService,

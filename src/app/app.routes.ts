@@ -12,7 +12,10 @@ import {
   BremsenComponent,
   BlogComponent,
   OlvidoComponent,
-  MisdatosComponent
+  MisdatosComponent,
+  CarroComponent,
+  CheckoutInComponent,
+  CheckoutOutComponent
 } from "./components/index.paginas";
 
 const app_routes: Routes = [
@@ -27,6 +30,9 @@ const app_routes: Routes = [
     { path: 'bremsen', component: BremsenComponent},
     { path: 'blog', component: BlogComponent},
     { path: 'olvido', component: OlvidoComponent},
+    { path: 'carro', component: CarroComponent},
+    { path: 'checkin', component: CheckoutInComponent},
+    { path: 'checkout', component: CheckoutOutComponent},
     { path: 'producto/:id', component: ProductoComponent},
     { path: 'misdatos', component: MisdatosComponent},
     { path: '**', pathMatch: 'full', redirectTo: 'home'}

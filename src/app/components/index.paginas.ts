@@ -10,3 +10,6 @@ export { BremsenComponent } from "./bremsen/bremsen.component";
 export { BlogComponent } from "./blog/blog.component";
 export { OlvidoComponent } from "./olvido/olvido.component";
 export { MisdatosComponent } from "./misdatos/misdatos.component";
+export { CarroComponent } from "./carro/carro.component";
+export { CheckoutInComponent } from "./checkout-in/checkout-in.component";
+export { CheckoutOutComponent } from "./checkout-out/checkout-out.component";

@@ -71,6 +71,19 @@ export class UserService {
              .catch(this.handleErrorPromise);
     }
 
+    public recuperaPassword(email: string): Promise<string>{
+
+      let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+        let options = new RequestOptions({ headers: headers });
+        const params = new URLSearchParams();
+        params.append('email', email);
+        params.append('accion', 'recupera');
+
+        let body = params.toString();
+        return this.http.post(this.url+ 'updateCliente.php', body, options).toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+    }
     public create(registro: Cliente): Promise<string>{
 
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });

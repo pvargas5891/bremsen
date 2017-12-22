@@ -1,3 +1,174 @@
-<p>
-  producto works!
-</p>
+
+
+  <div id="container">
+    <div class="container">
+      <!-- Breadcrumb Start-->
+      <ul class="breadcrumb">
+        <li><a routerLink="/"><i class="fa fa-home"></i></a></li>
+        <li>Detalle Producto</li>
+      </ul>
+      <!-- Breadcrumb End-->
+
+      <div class="row">
+        <!--Middle Part Start-->
+        <div id="content" class="col-sm-12">
+          <div itemscope itemtype="http://schema.org/Product">
+            <h1 class="title" itemprop="name">Detalle del producto</h1>
+
+
+
+            <div class="row product-info">
+              <div class="col-sm-4">
+                <div class="image"><img class="img-responsive" itemprop="image" id="" src="assets/image/product/540x576.jpg" title="Laptop Silver black" alt="" /> </div>
+
+
+              </div>
+              <div class="col-sm-8">
+
+
+                <div class="col-md-6">
+                  <div class="caption">
+                    <h4> {{producto.MARCA}} {{producto.MODELO}}</h4>
+                    <div>
+                      <ul class="lista-producto">
+                          <li>Ancho: {{producto.ANCHO}}</li>
+                          <li>Pefil: {{producto.PERFIL}}</li>
+                          <li>Aro: {{producto.ARO}}</li>
+                          <li>Indice de carga: {{producto.CARGA}}</li>
+                          <li>Marca: {{producto.MARCA}}</li>
+                          <li>Instalación gratis: {{producto.INCLUYE_INSTALACION}}</li>
+                          <li>Despacho gratis: {{producto.DESPACHO}}</li>
+                      </ul>
+                    </div>
+
+                  </div>
+
+                </div>
+        <div class="col-md-6">
+          <table class="table2 table table-precio" style="padding-right: 0px;">
+            <tr >
+              <td>Cantidad </td>
+              <td  style="text-align:right;">Valor unitario </td>
+
+            </tr>
+            <tr>
+              <td class="col-sm-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': cantidadValido }">
+                    <select class="form-control" name="cantidad" id="cantidad" [(ngModel)]="cantidad">
+                    <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo">{{stock.nombre}}</option>
+                    </select>
+                     <div *ngIf="cantidadValido" class="help-block">Debe seleccionar una cantidad</div>
+                     </div>
+              </td>
+              <td class="col-sm-6">
+
+                <p style="text-align:right; margin-bottom: 3px;" class="precio"><b>$ {{producto.TOTAL}}</b></p>
+                <!--p style="text-align:right; font-size: 12px;">Ahorro $60,000</p-->
+              </td>
+            </tr>
+          </table>
+    <hr class="hr1">
+
+          <table class="table2 table table-precio">
+
+            <tr  >
+              <td class="col-sm-6">
+                <p class="total">Total</p>
+              </td>
+              <td style="text-align:right;" class="col-sm-6">
+                <h3 class="precio"><b>$ {{producto.TOTAL}}</b></h3>
+
+              </td>
+            </tr>
+
+          </table>
+
+          <table class="table2 table table-precio">
+                <tr>
+              <td>
+                <button type="submit" class="btn btn-primary bremsen3" (click)="agregarCarro(1)"><i class="fa fa-plus" aria-hidden="true"></i> Carro</button>
+
+              </td>
+              <td  style="text-align: right;">
+                   <button class="btn btn-default " type="button" data-target="" aria-expanded="false" (click)="agregarCarro(2)">
+                      COMPRAR
+                    </button>
+
+
+              </td>
+            </tr>
+              </table>
+<div *ngIf="estadoCarro" [ngClass] = "'success'"> Producto fue agregado correctamente. </div>
+                <div *ngIf="errorMessage" [ngClass] = "'error'"> {{errorMessage}} </div>
+
+      </div>
+
+
+             <h3>Ficha técnica</h3>
+             <hr>
+            <table class="table table-bordered table-striped">
+                 <colgroup> <col class="col-xs-6"> <col class="col-xs-6"> </colgroup>
+
+                 <tbody>
+                  <tr>
+                      <th scope="row">Marca</th>
+                      <td>{{producto.MARCA}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row">Modelo</th>
+                      <td>{{producto.MODELO}}</td>
+
+                  </tr>
+                   <tr>
+                       <th scope="row">Ancho</th>
+                        <td>{{producto.ANCHO}}</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Perfil </th>
+                        <td>{{producto.PERFIL}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Dimensiones</th>
+                        <td>{{producto.MEDIDA}}</td>
+                    </tr>
+                     <tr>
+                        <th scope="row">Peso</th>
+                        <td>{{producto.PESO}} kg</td>
+                    </tr>
+                     <tr>
+                        <th scope="row">Indice de carga/ velocidad</th>
+                        <td>{{producto.CARGA}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Runflat</th>
+                        <td>{{producto.RUNFLAT}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Instalación gratis</th>
+                        <td>{{producto.INCLUYE_INSTALACION}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Despacho gratis</th>
+                        <td>{{producto.DESPACHO}}</td>
+                    </tr>
+                 </tbody>
+               </table>
+
+
+
+                <iframe class="video" width="632"  height="365" [src]="producto.VIDEO" frameborder="0" allowfullscreen></iframe>
+
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+        <!--Middle Part End -->
+
+
+      </div>
+    </div>
+  </div>

@@ -18,7 +18,7 @@
            <div class="box-category">
             <div class="radio">
                 <label>
-                  <input type="radio" name="filtromarcamodel" (click)="filtroMarca()">&nbsp;&nbsp;
+                  <input type="radio" name="filtromarcamodel" (click)="filtroMarca('all')">&nbsp;&nbsp;
                   Todas
                 </label>
               </div>
@@ -160,7 +160,7 @@
 
                         -->
                     </div>
-                    <h4><a href="producto.html"> Marca modelo </a></h4>
+                    <h4><a routerLink="/producto/{{producto.ID}}"> {{producto.MARCA}} {{producto.MODELO}} </a></h4>
                     <div>
                       <ul class="lista-producto">
                           <li>Ancho: {{producto.ANCHO}}</li>
@@ -187,7 +187,7 @@
               <td class="col-sm-6">
 
                 <select class="form-control" style="width: 75%;" >
-                <option *ngFor="let stock = totalStock" ng-value="stock">{{stock}}</option>
+                <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo">{{stock.nombre}}</option>
               </select>
               </td>
               <td class="col-sm-6">

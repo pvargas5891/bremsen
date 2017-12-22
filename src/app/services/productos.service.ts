@@ -71,7 +71,16 @@ export class ProductosService {
              .catch(this.handleErrorPromise);
 
   }
-
+  public getProductosById(id: string): Promise<any>{
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      const params = new URLSearchParams();
+      params.append('id',id);
+      params.append('accion','unico');
+      return this.http.get(this.url+ 'productos.php?' + params.toString(), options).toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+  }
   public getDetalleProductos(): Promise<any>{
 
       let headers = new Headers({ 'Content-Type': 'application/json' });

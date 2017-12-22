@@ -20,6 +20,9 @@ export class RegistroComponent {
    error = '';
    error2 = '';
    model: any = {};
+   regionValido: boolean = true;
+   ciudadValido: boolean = true;
+   comunaValido: boolean = true;
   constructor(
     public _is: InformacionService,
     public users: UserService,
@@ -43,6 +46,20 @@ export class RegistroComponent {
     }
 
     saveRegistro(): void {
+
+
+      if(typeof this.cliente.region == 'undefined'){
+        this.regionValido = false;
+        return;
+      }
+      if(typeof this.cliente.ciudad == 'undefined'){
+        this.ciudadValido = false;
+        return;
+      }
+      if(typeof this.cliente.comuna == 'undefined'){
+        this.comunaValido = false;
+        return;
+      }
       this.loading = true;
      this.users.create(this.cliente)
 	     .then( data => {

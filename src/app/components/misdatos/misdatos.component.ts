@@ -18,6 +18,20 @@ export class MisdatosComponent implements OnInit {
   public nueva2: string="";
   public errorPass = false;
   public errorMsg: string = "";
+
+  estado:boolean = false;
+  estado2:boolean = false;
+   errorMessage: String;
+   loading = false;
+   loading2 = false;
+   returnUrl: string;
+   error = '';
+   error2 = '';
+   model: any = {};
+   regionValido: boolean = true;
+   ciudadValido: boolean = true;
+   comunaValido: boolean = true;
+
  constructor(private userService: UserService,
               private route: Router,
               public _is: InformacionService
@@ -72,7 +86,30 @@ export class MisdatosComponent implements OnInit {
   }
 
   public updateCliente = function (){
-    this.userService.update(this.cliente);
+
+    if(typeof this.cliente.region == 'undefined'){
+        this.regionValido = false;
+        return;
+      }
+      if(typeof this.cliente.ciudad == 'undefined'){
+        this.ciudadValido = false;
+        return;
+      }
+      if(typeof this.cliente.comuna == 'undefined'){
+        this.comunaValido = false;
+        return;
+      }
+
+    this.userService.update(this.cliente).then(
+          data => {
+
+             if(data=='OK'){
+              this.estado = true;
+              this.loading = false;
+           }
+
+          }
+        );
   }
   public updatePassword = function (){
     if(this.actual == 'undefined' || this.actual == ''){
@@ -102,7 +139,16 @@ export class MisdatosComponent implements OnInit {
     }
     this.errorPass =false;
     this.cliente.password=this.nueva2;
-    this.userService.updatePassword(this.cliente);
+    this.userService.updatePassword(this.cliente).then(
+
+        data => {
+           if(data=='OK'){
+              this.estado2 = true;
+              this.loading2 = false;
+           }
+        }
+
+    );
   }
 
     /*  private getHistorialCliente = function (){

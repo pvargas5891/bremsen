@@ -19,7 +19,7 @@
           <div class="box-category">
             <div class="radio">
                 <label>
-                  <input type="radio" name="filtromarcamodel" (click)="filtroMarca()">&nbsp;&nbsp;
+                  <input type="radio" name="filtromarcamodel" (click)="filtroMarca('all')">&nbsp;&nbsp;
                   Todas
                 </label>
               </div>
@@ -223,7 +223,7 @@
               <td class="col-sm-6">
 
                 <select class="form-control" style="width: 75%;" >
-                <option *ngFor="let stock = totalStock" ng-value="stock">{{stock}}</option>
+                <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo">{{stock.nombre}}</option>
               </select>
               </td>
               <td class="col-sm-6">
