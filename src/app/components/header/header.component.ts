@@ -8,11 +8,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-header',
-  moduleId: module.id,
-  templateUrl: './header.component.html',
-
+  templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent{
 model: any = {};
     loading = false;
     returnUrl: string;
@@ -36,7 +34,7 @@ model: any = {};
           var currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
           if(currentUser != null){
-             console.debug(currentUser);
+             //console.debug(currentUser);
             if(currentUser.token === 'active'){
                 this.nombreCliente = currentUser.usuario.nombre;
                 this.autenticado = true;
@@ -47,11 +45,6 @@ model: any = {};
           }
          }
 
-    ngOnInit() {
-        // reset login status
-       // this.authenticationService.logout();
-    }
-
 login() {
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
@@ -61,7 +54,7 @@ login() {
                     // login successful
                     //this.router.navigate(['/']);
                   var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-                  console.debug(currentUser);
+                  //console.debug(currentUser);
                     this.nombreCliente = currentUser.usuario.nombre;
                     this.autenticado = true;
                     this.loading = false;

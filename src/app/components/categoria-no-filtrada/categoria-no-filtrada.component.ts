@@ -7,7 +7,6 @@ import { CarroCompraService } from '../../services/carro-compra.service';
 @Component({
   selector: 'app-categoria-no-filtrada',
   templateUrl: './categoria-no-filtrada.component.html',
-  styles: []
 })
 export class CategoriaNoFiltradaComponent {
 
@@ -88,7 +87,7 @@ export class CategoriaNoFiltradaComponent {
         for(let i = this.detallesCategoria.inicio; i <= this.detallesCategoria.fin;i++){
             this.productos.push(this.resultProductos[i-1]);
         }
-        console.debug(this.productos);
+       // console.debug(this.productos);
   }
   public pageChanged = function (event){
       //this.p = event;

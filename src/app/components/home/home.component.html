@@ -67,7 +67,6 @@ Múltiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
                 </div>
               </div>
 
-
             </div>
 
         </div>
@@ -123,195 +122,37 @@ Múltiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
 <div class="container" style="padding: 70px 0px;">
           <!-- Product Tab Start -->
           <div id="product-tab" class="product-tab">
+
   <ul id="tabs" class="tabs">
-    <li><a href="#tab-sugeridos">Sugeridos</a></li>
-    <li><a href="#tab-ofertas">Ofertas</a></li>
+    <li><a (click)="activaSugeridos()">Sugeridos</a></li>
+    <li><a (click)="activaOfertas()">Ofertas</a></li>
   </ul>
 
+  <div id="tab-sugeridos" class="tab_content" *ngIf="sugeridosTab">
 
-  <div id="tab-featured" class="tab_content">
-      <div class="owl-carousel product_carousel_tab">
-            <div class="product-thumb clearfix">
-              <div class="assets/image"><a href="product.html"><img src="assets/image/product/apple_cinema_30-220x330.jpg" alt="Brand Fashion Cotton T-Shirt" title="Brand Fashion Cotton T-Shirt" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.html">Brand Fashion Cotton T-Shirt</a></h4>
-                <p class="price"><span class="price-new">$110.00</span> <span class="price-old">$122.00</span></p>
-              </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick="cart.add('42');"><span>Add to Cart</span></button>
+    <div>
 
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="assets/image"><a href="product.html"><img src="assets/image/product/samsung_tab_1-220x330.jpg" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.html">Aspire Ultrabook Laptop</a></h4>
-                <p class="price"> <span class="price-new">$230.00</span> <span class="price-old">$241.99</span>  </p>
+     <owl-carousel #owlElement [options]="{items: 6, dots: false, navigation: false}" [items]="productos">
 
-              </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick="cart.add('49');"><span>Add to Cart</span></button>
+      <div class="product-thumb" *ngFor="let producto of productos">
+      <div class="image"><a routerLink="/producto/{{producto.ID}}"><img src="assets/image/product/540x576.jpg" class="img-responsive" /></a></div>
+      <div class="caption">
+          <h4><a routerLink="/producto/{{producto.ID}}">{{producto.MARCA}} {{producto.MODELO}}</a></h4>
+          <p class="price"> $12,000 </p>
+      </div>
+      <div>
+        <button class="btn btn-primary"><span>Ver producto</span></button>
+      </div>
+    </div>
 
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="assets/image"><a href="product.html"><img src="assets/image/product/sony_vaio_1-220x330.jpg" alt="Xitefun Causal Wear Fancy Shoes" title="Xitefun Causal Wear Fancy Shoes" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.html">Xitefun Causal Wear Fancy Shoes</a></h4>
-                <p class="price"> <span class="price-new">$902.00</span> <span class="price-old">$1,202.00</span>  </p>
-
-              </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick="cart.add('46');"><span>Add to Cart</span></button>
-
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="assets/image"><a href="product.html"><img src="assets/image/product/macbook_1-220x330.jpg" alt="Ideapad Yoga 13-59341124 Laptop" title="Ideapad Yoga 13-59341124 Laptop" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.html">Ideapad Yoga 13-59341124 Laptop</a></h4>
-                <p class="price"> $211.00 </p>
-
-              </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick="cart.add('43');"><span>Add to Cart</span></button>
-
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="assets/image"><a href="product.html"><img src="assets/image/product/iphone_1-220x330.jpg" alt="iPhone5" title="iPhone5" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.html">iPhone5</a></h4>
-                <p class="price"> $123.20 </p>
-
-              </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="assets/image"><a href="product.html"><img src="assets/image/product/canon_eos_5d_1-220x330.jpg" alt="Long Sleeve Shirt Fashion Men" title="Long Sleeve Shirt Fashion Men" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.html">Long Sleeve Shirt Fashion Men</a></h4>
-                <p class="price"> <span class="price-new">$98.00</span> <span class="price-old">$122.00</span>  </p>
-              </div>
-              <div class="button-group">
-                <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-
-              </div>
-            </div>
-          </div>
+ </owl-carousel>
+ </div>
   </div>
 
-  <div id="tab-sugeridos" class="tab_content">
-    <div class="owl-carousel product_carousel_tab">
+   <div id="tab-ofertas" class="tab_content" *ngIf="ofertasTab">
 
-                  <div class="product-thumb">
-                    <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="FinePix S8400W Long Zoom Camera" title="FinePix S8400W Long Zoom Camera" class="img-responsive" /></a></div>
-                    <div class="caption">
-                       <h4><a href="producto.html">Marca - Modelo</a></h4>
-                      <p class="price"> $12,000 </p>
-                    </div>
-                    <div>
-                      <button class="btn btn-primary"><span>Ver producto</span></button>
-
-                    </div>
-                  </div>
-
-                  <div class="product-thumb">
-                    <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="FinePix S8400W Long Zoom Camera" title="FinePix S8400W Long Zoom Camera" class="img-responsive" /></a></div>
-                    <div class="caption">
-                       <h4><a href="producto.html">Marca - Modelo</a></h4>
-                      <p class="price"> $12,000 </p>
-                    </div>
-                    <div>
-                     <button class="btn btn-primary"><span>Ver producto</span></button>
-
-                    </div>
-                  </div>
-
-                  <div class="product-thumb">
-                    <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="FinePix S8400W Long Zoom Camera" title="FinePix S8400W Long Zoom Camera" class="img-responsive" /></a></div>
-                    <div class="caption">
-                       <h4><a href="producto.html">Marca - Modelo</a></h4>
-                         <p class="price"> $12,000 </p>
-
-                    <div>
-                     <button class="btn btn-primary"><span>Ver producto</span></button>
-
-                    </div>
-                  </div>
-                </div>
-
-                  <div class="product-thumb">
-                    <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="FinePix S8400W Long Zoom Camera" title="FinePix S8400W Long Zoom Camera" class="img-responsive" /></a></div>
-                    <div class="caption">
-                       <h4><a href="producto.html">Marca - Modelo</a></h4>
-                          <p class="price"> $12,000 </p>
-                    </div>
-                    <div>
-                     <button class="btn btn-primary"><span>Ver producto</span></button>
-
-                    </div>
-                  </div>
-
-                  <div class="product-thumb">
-                    <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="FinePix S8400W Long Zoom Camera" title="FinePix S8400W Long Zoom Camera" class="img-responsive" /></a></div>
-                    <div class="caption">
-                       <h4><a href="producto.html">Marca - Modelo</a></h4>
-                        <p class="price"> $12,000 </p>
-                    </div>
-                    <div>
-                      <button class="btn btn-primary"><span>Ver producto</span></button>
-
-                    </div>
-                  </div>
-
-
-                  <div class="product-thumb">
-                    <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="Digital Camera for Elderly" title="Digital Camera for Elderly" class="img-responsive" /></a></div>
-                    <div class="caption">
-                       <h4><a href="producto.html">Marca - Modelo</a></h4>
-                       <p class="price"> $12,000 </p>
-                    </div>
-                    <div>
-                      <button class="btn btn-primary"><span>Ver producto</span></button>
-                    </div>
-                  </div>
-        </div>
-  </div>
-
-   <div id="tab-ofertas" class="tab_content">
-      <div class="owl-carousel product_carousel_tab">
-
-
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="Brand Fashion Cotton T-Shirt" title="Brand Fashion Cotton T-Shirt" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="producto.html">Marca - Modelo</a></h4>
-                <p class="price"><span class="price-new">$20,000</span> <span class="price-old">$32,000</span></p>
-              </div>
-              <div>
-                <button class="btn btn-primary"><span>Ver producto</span></button>
-
-              </div>
-            </div>
-
-
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-responsive" /></a></div>
-              <div class="caption">
- 				<h4><a href="producto.html">Marca - Modelo</a></h4>
-                       <p class="price"><span class="price-new">$20,000</span> <span class="price-old">$32,000</span></p>
-
-              </div>
-              <div >
-                <button class="btn btn-primary"><span>Ver producto</span></button>
-
-              </div>
-            </div>
-
+      <div  class="owl-carousel product_carousel_tab">
+ pico2
 
             <div class="product-thumb clearfix">
               <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="Xitefun Causal Wear Fancy Shoes" title="Xitefun Causal Wear Fancy Shoes" class="img-responsive" /></a></div>
@@ -328,47 +169,8 @@ Múltiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
 
 
 
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="Xitefun Causal Wear Fancy Shoes" title="Xitefun Causal Wear Fancy Shoes" class="img-responsive" /></a></div>
-              <div class="caption">
-                 <h4><a href="producto.html">Marca - Modelo</a></h4>
-                <p class="price"><span class="price-new">$20,000</span> <span class="price-old">$32,000</span></p>
-
-              </div>
-              <div >
-                 <button class="btn btn-primary"><span>Ver producto</span></button>
-              </div>
-            </div>
 
 
-
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="" title="" class="img-responsive" /></a></div>
-              <div class="caption">
-                 <h4><a href="producto.html">Marca - Modelo</a></h4>
-                <p class="price"><span class="price-new">$20,000</span> <span class="price-old">$32,000</span></p>
-
-              </div>
-              <div >
-                 <button class="btn btn-primary"><span>Ver producto</span></button>
-
-              </div>
-            </div>
-
-
-
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="Xitefun Causal Wear Fancy Shoes" title="Xitefun Causal Wear Fancy Shoes" class="img-responsive" /></a></div>
-              <div class="caption">
-                 <h4><a href="producto.html">Marca - Modelo</a></h4>
-               <p class="price"><span class="price-new">$20,000</span> <span class="price-old">$32,000</span></p>
-
-              </div>
-              <div >
-                <button class="btn btn-primary"><span>Ver producto</span></button>
-
-              </div>
-            </div>
 
 
 

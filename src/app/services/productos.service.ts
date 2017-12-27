@@ -46,6 +46,19 @@ export class ProductosService {
 
   }
 
+   public getProductosHome(): Promise<any>{
+
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      const params = new URLSearchParams();
+      params.append('accion','todos');
+
+      return this.http.get(this.url+ 'productos.php?' + params.toString() , options).toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+
+  }
+
   public getDetalleProductosFiltrado(detalleCatProductos: DetalleCatProductos): Promise<any>{
 
       let headers = new Headers({ 'Content-Type': 'application/json' });

@@ -8,6 +8,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 //RUTAS
 import { app_routing }  from "./app.routes";
 
+import {OwlModule } from 'ngx-owl-carousel';
+
 //servicios
 import { InformacionService } from "./services/informacion.service";
 import { ProductosService } from './services/productos.service';
@@ -65,6 +67,7 @@ import { CheckoutOutComponent } from './components/checkout-out/checkout-out.com
   ],
   imports: [
     BrowserModule,
+    OwlModule,
     HttpModule,
     HttpClientModule,
     FormsModule,
