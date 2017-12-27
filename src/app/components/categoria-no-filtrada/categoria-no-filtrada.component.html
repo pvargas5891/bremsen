@@ -174,14 +174,15 @@
             </div>
           </div>
           <br />
+          <div *ngIf="errorMessage" class="help-block">{{errorMessage}}</div>
           <div class="row products-category">
 
-              <div *ngFor="let producto of productos"  class=" product-list col-xs-12">
+              <div *ngFor="let producto of productos" class=" product-list col-xs-12">
               <div class="product-thumb">
                 <div class="image">
                       <a routerLink="/producto/{{producto.ID}}">
                         <div class="logo-img">
-                         <img  src="assets/image/product/logo-marcas.PNG" width="200px" alt="" title="" class="img-responsive" />
+                         <img  src="assets/image/{{producto.LOGO}}" width="200px" alt="" title="" class="img-responsive" />
                       </div>
                         <img src="assets/image/product/540x576.jpg" width="220px" alt=" Strategies for Acquiring Your Own Laptop " title="" class="img-responsive" />
                       </a>
@@ -194,6 +195,7 @@
                          <a href=# > <img src="#" class=""></a>
 
                         -->
+
                     </div>
                     <h4><a routerLink="/producto/{{producto.ID}}"> {{producto.MARCA}} {{producto.MODELO}} </a></h4>
                     <div>
@@ -251,11 +253,11 @@
               <td><button type="button" class="btn btn-primary bremsen3 " (click)="agregarCarro(2,selectCantidad.value,producto.ID)"><i class="fa fa-plus" aria-hidden="true"></i> Carro</button></td>
             </tr>
           </table>
-         <div *ngIf="errorMessage" class="help-block">{{errorMessage}}</div>
+
       </div>
               </div>
 
-                <div id="carro" *ngIf="estadoCarro" style="text-align: left !important;">
+                <!--div #elem style="text-align: left !important;">
                       <div class="well">
                         <br>
                         <div class="col-md-12 text-right">
@@ -280,7 +282,7 @@
 
 
                       </div>
-         </div>
+               </div-->
 
 
 

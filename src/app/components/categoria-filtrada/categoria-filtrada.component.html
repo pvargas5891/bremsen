@@ -94,7 +94,7 @@
 </div>
 
 
-          <div class="product-filter">
+          <div class="product-filter" *ngIf="detallesCategoria.totalProductos > 0">
             <div class="row">
               <div class="col-sm-6 text-left"> <label class="control-label" for="input-sort">Mostrando {{ detallesCategoria.inicio}} - {{ detallesCategoria.fin}} de {{detallesCategoria.totalProductos}} Productos</label></div>
               <div class="col-sm-3 text-right">
@@ -114,12 +114,11 @@
             </div>
           </div>
           <br />
+          <div *ngIf="errorMessage" class="help-block">{{errorMessage}}</div>
           <div class="row products-category">
 
 
-        <!-- *********** Cuando no encuentra el producto sale este form   **********
-
-            <div class="col-sm-12" style="padding: 0px;">
+            <div class="col-sm-12" style="padding: 0px;"  *ngIf="detallesCategoria.totalProductos == 0">
             <h2>No se han encontrado neumáticos para tu búsqueda</h2>
             <p>Dejanos tus datos y nosotros seguiremos buscando por ti. Te escribiremos con las mejores opciones.</p>
                 <form>
@@ -135,18 +134,18 @@
               </form>
                 <button type="button" class="btn btn-default btn-lg">Enviar</button>
                 <br>
-          </div>-->
+          </div>
 
 
 
-
+<div  *ngIf="detallesCategoria.totalProductos > 0">
             <div *ngFor="let producto of productos"  class=" product-list col-xs-12">
               <div class="product-thumb">
                 <div class="image">
 
                      <a routerLink="/producto/{{producto.ID}}">
                         <div class="logo-img">
-                         <img  src="assets/image/product/logo-marcas.png" width="200px" alt="" title="" class="img-responsive" />
+                         <img  src="assets/image/{{producto.LOGO}}" width="200px" alt="" title="" class="img-responsive" />
                       </div>
                         <img src="assets/image/product/540x576.jpg" width="220px" alt=" Strategies for Acquiring Your Own Laptop " title="" class="img-responsive" />
                       </a>
@@ -214,43 +213,19 @@
               <td><button type="submit" class="btn btn-primary bremsen3 " (click)="agregarCarro(2,selectCantidad.value,producto.ID)"><i class="fa fa-plus" aria-hidden="true"></i> Carro</button></td>
             </tr>
           </table>
-           <div *ngIf="errorMessage" class="help-block">{{errorMessage}}</div>
+
       </div>
-      <div  id="carro" style="text-align: left !important;">
-                      <div class="well">
-                        <br>
-                        <div class="col-md-12 text-right">
-                         <h3>Sumado al carro</h3>
-                          <hr>
-                        </div>
 
-                         <div class="col-md-3 col-sm-12">
-                             <img src="image/product/540x576.jpg" width="220px" alt=" Strategies for Acquiring Your Own Laptop " title="" class="img-responsive">
-                        </div>
-
-                        <div class="col-md-3 col-sm-12">
-                            {{producto.MARCA}} {{producto.MODELO}}
-                              <ul class="lista-producto">
-                                <li>Medida: {{producto.MEDIDA}}</li>
-                                <li>Instalación gratis: {{producto.INCLUYE_INSTALACION}}</li>
-                                <li>Despacho gratis: {{producto.DESPACHO}}</li>
-                                <li>Cantidad: {{selectCantidad.value}}</li>
-
-                            </ul>
-                        </div>
-
-                      </div>
-         </div>
 
               </div>
             </div>
 
-
+</div>
 
 
 
           </div>
-          <div class="row">
+          <div class="row"  *ngIf="detallesCategoria.totalProductos > 0">
             <div class="col-sm-6 text-left" style="margin-top: -18px;">
               <ul class="pagination">
                 <li *ngFor="let item of resultProductos | paginate: { itemsPerPage: itemsPerPage, currentPage: p }"></li>

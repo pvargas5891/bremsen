@@ -10,7 +10,7 @@
 /*  General
 /*===================================================================================*/
 body { font-family: 'Lato', sans-serif; }
-a, a b, .articleHeader span a, .pagination > li > a { color:#1e1e1e; }
+a, a b, .articleHeader span a, .pagination > li > a { color:#131313; }
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
 	background-color:#222;
 	border-color:#222;
@@ -20,28 +20,28 @@ a:hover, a b:hover, .category .tabs li a:hover, .sitemap li a:hover, .pagination
 /*  Header
 /*===================================================================================*/
 #header .header-row {
-	background-color:#1e1e1e;
+	background-color:#131313;
 	padding:0px ;
 }
-#header .htop { background-color:#1e1e1e; padding-top: 7px; }
+#header .htop { background-color:#131313; padding-top: 7px; }
 #header .links > ul > li > a, #header .links > ul > li .wrap_custom_block > a, #header .links > ul > li.mobile, #header .links > ul > li.email, #language span, #currency span, #header #top-links > ul > li > a {
 	color:#959595;
 	text-transform:uppercase;
-	
+	font-size: 10px;
 }
 #header .links > ul > li.wrap_custom_block > a b { border-color:#959595 transparent transparent; }
-#header .links, #header .links > ul > li, #language, #currency, #header #top-links > ul > li, #header #top-links { border-color:#1e1e1e; }
+#header .links, #header .links > ul > li, #language, #currency, #header #top-links > ul > li, #header #top-links { border-color:#131313; }
 #top .dropdown-menu li a, #currency ul li .currency-select, #language ul li .language-select { color:#000; }
 #top .dropdown-menu li a:hover, #currency ul li .currency-select:hover, #language ul li .language-select:hover { color:#e00034; }
 /**===== Search Bar =====**/
 #header #search input {
-	background:#1e1e1e;
+	background:#131313;
 	color:#fff;
 	border-color:#333;
 }
 #header .button-search { color:#999; }
 /**===== Mini Cart =====**/
-#header #cart .heading { color:#fff; }
+#header #cart .heading { color:#aaa; }
 #header #cart.open .heading { color:#fff; }
 #header #cart.open .heading span:after { border-color:transparent transparent #ccc; }
 #header #cart .heading .cart-icon:before, #header #cart .heading .cart-icon:after, #header #cart .dropdown-menu { border-color:#ccc; }
@@ -54,7 +54,7 @@ a:hover, a b:hover, .category .tabs li a:hover, .sitemap li a:hover, .pagination
 	border:none;
 }
 #menu .nav > li > a, #menu .navbar-header > span {
-	
+	color:#ddd;
 	text-transform:uppercase;
 	font-size:14px;
 }
@@ -64,7 +64,7 @@ a:hover, a b:hover, .category .tabs li a:hover, .sitemap li a:hover, .pagination
 #menu .nav > li > .dropdown-menu, #menu .nav > li > .dropdown-menu li .dropdown-menu { border-top-color:#e00034; }
 #menu .nav > li.sub:hover > a:after { border-bottom-color:#e00034; }
 #menu .nav > li:hover > a {
-	background-color:#1e1e1e;
+	background-color:#131313;
 	color:#e00034;
 }
 #menu .nav > li div > ul > li > a, #menu .nav > li.menu_brands > div > div a { color:#222; }
@@ -137,7 +137,7 @@ a:hover, a b:hover, .category .tabs li a:hover, .sitemap li a:hover, .pagination
 .faq .panel-title:hover, .sitemap li a:hover { color:#e00034; }
 /*media responsive*/
 .drop-icon { color:#959595; }
-.left-top { background-color:#1e1e1e; }
+.left-top { background-color:#131313; }
 #menu .navbar-header > span > b:before { border-color: transparent transparent #fff; }
 #menu .navbar-header > span > b:after { border-color:#fff transparent transparent; }
 #menu .nav > li > span.submore:after { color:#fff; }

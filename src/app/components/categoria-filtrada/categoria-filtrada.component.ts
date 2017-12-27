@@ -63,7 +63,7 @@ export class CategoriaFiltradaComponent {
       this.mostrarLoading = true;
        this._productoService.getDetalleProductosFiltrado(this.detallesCategoria)
 	     .then( data => {
-           // console.debug(data);
+            console.debug(data);
             this.detallesCategoria.totalProductos = data[0].TOTALPRODUCTOS;
             this.detallesCategoria.todasMarcas=data[1];
 
