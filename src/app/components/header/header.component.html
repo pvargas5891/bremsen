@@ -237,53 +237,38 @@
             <div id="cart">
               <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle">
               <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;
-              <span id="cart-total">2 item(s) - $60,000</span></button>
+              <span id="cart-total">{{cantidadProductos}} item(s) - ${{totalCarro}}</span></button>
              <ul class="dropdown-menu">
                 <li>
                   <table class="table">
                     <tbody>
-                      <tr>
-                        <td class="text-center"><a href="producto.html"><img class="img-thumbnail" title="" alt="" width="60px" src="assets/image/product/540x576.jpg"></a></td>
-                        <td class="text-left"><a href="product.html">Marca - modelo</a></td>
-                        <td class="text-right">x 1</td>
-                        <td class="text-right"><b>$ 40,000</b></td>
-                        <td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
+
+                      <tr *ngFor="let producto of carroCompra">
+                        <td class="text-center"><a routerLink="/producto/{{producto.ID}}"><img class="img-thumbnail" title="" alt="" width="60px" src="assets/image/product/540x576.jpg"></a></td>
+                        <td class="text-left"><a routerLink="/producto/{{producto.ID}}">{{producto.MARCA}} {{producto.MODELO}}</a></td>
+                        <td class="text-right">x {{producto.cantidadCarro}}</td>
+                        <td class="text-right"><b>$ {{producto.totalParcial}}</b></td>
+                        <!--td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td-->
                       </tr>
-                      <tr>
-                        <td class="text-center"><a href="product.html"><img class="img-thumbnail" title="" alt=""  width="60px" src="assets/image/product/540x576.jpg"></a></td>
-                        <td class="text-left"><a href="product.html">Marca - modelo</a></td>
-                        <td class="text-right">x 1</td>
-                        <td class="text-right"><b>$ 30,000</b></td>
-                        <td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
-                      </tr>
+
                     </tbody>
                   </table>
                 </li>
                 <li>
                   <div>
                     <table class="table  table-precio" style="font-size: 14px; ">
-                <tbody><tr>
-                  <td class="text-lett">Neumáticos</td>
-                  <td class="text-right">$70.00</td>
-                </tr>
-                <tr>
-                  <td class="text-left">Instalación / despacho</td>
-                  <td class="text-right">$0</td>
-                </tr>
-                <tr>
-                  <td class="text-left">Descuento</td>
-                  <td class="text-right">$0<p></p></td>
-                </tr>
-                <tr style="border-top: 1px solid #f2f2f2;">
-                  <td class="text-left"><strong>TOTAL</strong></td>
-                  <td class="text-right"><h4><b>$70.000</b></h4></td>
-                </tr>
+                <tbody>
                 <tr>
                  <td></td>
-                  <td class="text-right">
-                    <button type="button" class="btn btn-default btn-block">Comprar con mi cuenta</button><br>
+                  <td class="text-right" *ngIf="!logueado">
+                    <button type="button" class="btn btn-default btn-block" routerLink="carro">Comprar con mi cuenta</button><br>
                    <a href="#"><small>¿Aun no tienes cuenta?</small></a><br>
                    <button type="button" class="btn btn-primary btn-block">Comprar como visita</button></td>
+                </tr>
+                  <tr>
+                 <td></td>
+                  <td class="text-right" *ngIf="logueado">
+                    <button type="button" class="btn btn-default btn-block" routerLink="carro">Ir a mi Carrito</button>
                 </tr>
               </tbody></table>
 

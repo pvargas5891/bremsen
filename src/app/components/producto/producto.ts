@@ -33,7 +33,12 @@ public RUNFLAT: string;
 public OFERTA: string;
 public ALTO_DESEMPENO: string;
 public VIDEO: string;
-public STOCK[];
+public STOCK=[];
+public cantidadCarro: string;
+public idCarro: string;
+public idPago: string;
+public TBK_MONTO: string;
+public totalParcial: number;
    constructor() {
    }
 }

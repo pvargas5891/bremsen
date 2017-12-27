@@ -3,7 +3,7 @@ import { InformacionService} from "../../services/informacion.service";
 import { ProductosService } from '../../services/productos.service';
 import { DetalleCatProductos } from './detalleCatProductos';
 import {CreateNewAutocompleteGroup, SelectedAutocompleteItem, NgAutocompleteComponent} from "ng-auto-complete";
-
+import { CarroCompraService } from '../../services/carro-compra.service';
 @Component({
   selector: 'app-categoria-no-filtrada',
   templateUrl: './categoria-no-filtrada.component.html',
@@ -11,7 +11,7 @@ import {CreateNewAutocompleteGroup, SelectedAutocompleteItem, NgAutocompleteComp
 })
 export class CategoriaNoFiltradaComponent {
 
-  public productos: string[]=[];
+  public productos;
   public resultProductos;
   public p: number = 1;
   public itemsPerPage = 10;
@@ -25,13 +25,14 @@ export class CategoriaNoFiltradaComponent {
   public marcaGroup = [];
   public modeloGroup = [];
   public anoGroup = [];
-
+  public estadoCarro:boolean = false;
   public anchoGroup = [];
   public perfilGroup = [];
   public aroGroup = [];
-
+  public cantidadValido = false;
   constructor(private _productoService: ProductosService,
-              public _is:InformacionService) {
+              public _is:InformacionService,
+              private _carroCompra: CarroCompraService) {
 
      this.detallesCategoria.inicio="1";
      this.detallesCategoria.fin="10";
@@ -274,4 +275,33 @@ export class CategoriaNoFiltradaComponent {
     this.detallesCategoria.ano = event.item.title;
   }
 
+  public agregarCarro = function (indice,cantidad,producto) {
+
+  //this.cantidadValido = false;
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if(typeof cantidad == 'undefined'){
+      this.cantidadValido=true;
+      return;
+    }
+
+    var usuario = currentUser.usuario.id;
+    this._carroCompra.agregarCarro(cantidad,producto, usuario)
+    .then(
+      data => {
+          if(data=='STOCK'){
+            this.errorMessage = 'No hay stock suficiente para tu pedido';
+            return;
+          }
+          if(data=='STOCKTEMP'){
+            this.errorMessage = 'No hay stock suficiente para tu pedido';
+            return;
+          }
+
+          this.estadoCarro = true;
+      },
+      error => {
+
+      }
+    );
+  }
 }

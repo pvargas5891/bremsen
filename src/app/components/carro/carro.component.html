@@ -3,8 +3,8 @@
     <div class="container">
       <!-- Breadcrumb Start-->
       <ul class="breadcrumb">
-        <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="#">Carro de compra</a></li>
+        <li><a routerLink="/"><i class="fa fa-home"></i></a></li>
+        <li>Carro de compra</li>
       </ul>
 
       <div class="col-md-12">
@@ -38,61 +38,30 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="borderTop">
-                    <td class="text-center"><a href="producto.html"><img src="assets/image/product/540x576.jpg" width="50px" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-thumbnail" /></a>
-                    </td>
-                    <td class="text-left">
-                        <a href="#producto.html"><h4><b>Marca modelo</b></h4>
-                           Medida: <span>24 75 7h</span>
-                         </a>
-                    </td>
-					  <td class="text-left"><h4><b>$ 10,000</b></h4></td>
-                    <td class="text-left" style="padding-top: 14px;">
-                        <select class="form-control" style="width: 45%;">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                      </select>
-                    </td>
-					  <td class="text-left">
-               			<table>
-               				<tr>
-								<td><h4><b>$ 40,000</b></h4></td>
-               					<td>&nbsp; &nbsp;<i style="color: red; font-size: 18px" class="fa fa-times-circle"></i></td>
-               				</tr>
 
-               			</table>
-
-                 	  </td>
-                  </tr>
-                  <tr class="borderTop">
+                  <tr class="borderTop" *ngFor="let producto of carroCompra">
                     <td class="text-center">
-                      <a href="producto.html">
+                      <a routerLink="/producto/{{producto.ID}}">
                       <img src="assets/image/product/540x576.jpg" width="50px" alt="Xitefun Causal Wear Fancy Shoes" title="">
                     </a>
                     </td>
                     <td class="text-left">
-                        <a href="#producto.html"><h4><b>Marca modelo</b></h4>
-                           Medida: <span>24 75 7h</span>
+
+                        <a routerLink="/producto/{{producto.ID}}"><h4><b>{{producto.MARCA}} {{producto.MODELO}}</b></h4>
+                           Medida: <span>{{producto.MEDIDA}}</span>
                          </a>
                     </td>
-						<td class="text-left"><h4><b>$ 10,000</b></h4></td>
+						<td class="text-left"><h4><b>$ {{producto.PRECIO_FINAL}}</b></h4></td>
                     <td class="text-left" style="padding-top: 24px;">
-                        <select class="form-control" style="width: 45%;">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
+                        <select class="form-control" style="width: 75%;" #cantidadSeleccionada (change)="cambiaCantidad(producto.idCarro,cantidadSeleccionada.value)">
+                        <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo" [selected]="stock.codigo == producto.cantidadCarro">{{stock.nombre}}</option>
                       </select>
                     </td>
 					  <td class="text-left">
                			<table>
                				<tr>
-								        <td><h4><b>$ 40,000</b></h4></td>
-               					<td>&nbsp; &nbsp;<i style="color: red; font-size: 18px" class="fa fa-times-circle"></i></td>
+								        <td><h4><b>$ {{producto.totalParcial}}</b></h4></td>
+               					<td>&nbsp; &nbsp;<i style="color: red; font-size: 18px" class="fa fa-times-circle" (click)="eliminaProductoCarro(producto.idCarro)"></i></td>
                				</tr>
 
                			</table>
@@ -106,37 +75,40 @@
 
             <br>
 
-       <h2 class="titulo-light subtile">2- Elige tu Despacho o Instalación</h2>
-       <div class="col-md-12 gris" style="padding: 10px;">
+       <h2 class="titulo-light subtile" *ngIf="incluyeInstalacion">2- Elige tu Despacho o Instalación</h2>
+       <div class="col-md-12 gris" style="padding: 10px;" *ngIf="incluyeInstalacion">
        					<p>Haz click en el tipo de instalación que deseas. Conoce más <a href="#"><b style="color:#6b8bc0;">Aquí</b></a></p>
        				</div>
 
-       <div class=" col-md-12 borderCaja">
+       <div class=" col-md-12 borderCaja" *ngIf="incluyeInstalacion">
        				<br>
 
 					<div class="col-md-6">
+               <form name="form" (ngSubmit)="fregion.form.valid" #fregion="ngForm" novalidate>
+										  <div class="form-group" [ngClass]="{ 'has-error': !regionValido }">
+                    <label for="region">Región </label>
+                      <select class="form-control" #selectedRegion (change)="cambiaCiudad(selectedRegion.value)" name="region1" #region1="ngModel" [(ngModel)]="regionInstalacion" id="region1">
+                        <option *ngFor="let region of _is.regiones" [value]="region[0]">{{region[1]}}</option>
+                    </select>
+                      <div *ngIf="!regionValido" class="help-block">Debe seleccionar una region</div>
+                  </div>
 
-										  <div class="form-group required">
-													 <label for="">Región </label>
-															 <select class="form-control" id="input-select" name="input-select">
-																	<option value="">. </option>
-																	<option value="1">1 </option>
-																	<option value="2">2 </option>
-																	<option value="3">3 </option>
-																	<option value="4">4 </option>
-															  </select>
-										  </div>
+                  <div class="form-group" [ngClass]="{ 'has-error': !ciudadValido }">
+                    <label for="ciudad">Ciudad </label>
+                    <select *ngIf="_is.ciudades.length > 0" #selectedCiudad class="form-control" (change)="cambiaComuna(selectedCiudad.value)" #ciudad1="ngModel" name="ciudad1" id="ciudad1" [(ngModel)]="ciudadInstalacion">
+                      <option  *ngFor="let ciudad of _is.ciudades" [value]="ciudad[0]">{{ciudad[1]}}</option>
+                    </select>
+                      <div *ngIf="!ciudadValido" class="help-block">Debe seleccionar una ciudad</div>
+                  </div>
 
-										  <div class="form-group required">
-													 <label for="">Comuna </label>
-																<select class="form-control" id="input-select" name="input-select">
-																  <option value="">. </option>
-																  <option value="1">1 </option>
-																  <option value="2">2 </option>
-																  <option value="3">3 </option>
-																  <option value="4">4 </option>
-													 </select>
-										  </div>
+                   <div class="form-group" [ngClass]="{ 'has-error': !comunaValido }">
+                    <label for="comuna">Comuna </label>
+                      <select *ngIf="_is.comunas.length > 0" #selectedComuna class="form-control" id="input-select" name="input-select" #comuna1="ngModel" name="comuna1" id="comuna1" [(ngModel)]="comunaInstalacion">
+                        <option  *ngFor="let comuna of _is.comunas" [value]="comuna[0]">{{comuna[1]}}</option>
+                    </select>
+                       <div *ngIf="!comunaValido" class="help-block">Debe seleccionar una comuna</div>
+                  </div>
+               </form>
 
    				 </div>
 
@@ -152,7 +124,7 @@
               <a href="#intalacion-domicilio" aria-controls="intalacion-domicilio" role="tab" data-toggle="tab">
                 <img class="img-responsive center-block noView" src="assets/image/Instalacion-a-domicilio-04.png">
                   <h4 class="tabs-h4"><b>Instalación a domicilio</b></h4>
-                  <button type="submit" class="btn btn-sm btn-default bremsen ">$ 40,000</button>
+                  <button type="button" class="btn btn-sm btn-default bremsen" (click)="tipoInstalacionBoton(1)">$ 40,000</button>
 
                 </a>
 
@@ -165,7 +137,7 @@
                <a href="#retiramos-autos" aria-controls="retiramos-autos" role="tab" data-toggle="tab">
                  <img class="img-responsive center-block noView" src="assets/image/retiro-a-domicilio-05.png">
                         <h4 class="tabs-h4"><b>Retiramos tu auto</b></h4>
-                          <button type="submit" class="btn btn-sm btn-default bremsen ">$ 40,000</button>
+                          <button type="button" class="btn btn-sm btn-default bremsen " (click)="tipoInstalacionBoton(2)">$ 40,000</button>
                       </a>
 
 
@@ -179,7 +151,7 @@
                     <img class="img-responsive center-block noView" src="assets/image/talleres-asociados-06.png">
                     <h4 class="tabs-h4"><b>Talleres asociados</b></h4>
 
-                     <button type="submit" class="btn btn-sm btn-default bremsen ">$ 0</button>
+                     <button type="button" class="btn btn-sm btn-default bremsen " (click)="tipoInstalacionBoton(3)">$ 0</button>
 
                 </a>
 
@@ -189,7 +161,7 @@
                  <a href="#despacho-adomicilio" aria-controls="despacho-adomicilio" role="tab" data-toggle="tab">
                               <img class="img-responsive center-block noView" src="assets/image/despacho-a-domicilio-07.png">
                               <h4 class="tabs-h4"><b>Despacho a domicilio</b></h4>
-                                  <button type="submit" class="btn btn-sm btn-default bremsen ">$ 40,000</button>
+                                  <button type="button" class="btn btn-sm btn-default bremsen " (click)="tipoInstalacionBoton(4)">$ 40,000</button>
 
 
               </a>
@@ -203,33 +175,36 @@
             <div class="tab-content" style="background: #fff; padding-left: 0px;">
 
               <div role="tabpanel" class="tab-pane active" id="intalacion-domicilio">
+                <form name="form" (ngSubmit)="finstalacion1.form.valid && guardaInstalacion1()" #finstalacion1="ngForm" novalidate>
                   <div class="col-md-6" style="padding-left: 0px;">
 
-                 <form>
-                  <div class="form-group"><br>
+                  <div class="form-group" [ngClass]="{ 'has-error': finstalacion1.submitted && !direccionInstalacion1.valid }">
                     <label for="ancho">Dirección</label>
-                    <input type="text" class="form-control" id="" placeholder="Calle y número">
+                    <input type="text" class="form-control" id="" placeholder="Calle y número" #direccionInstalacion1="ngModel" name="direccionInstalacion1value" [(ngModel)]="direccionInstalacion1value" required>
+                    <div *ngIf="finstalacion1.submitted && !direccionInstalacion1.valid" class="help-block">Debe ingresar una dirección</div>
                   </div>
 
                   <p>¿Quién entrega el auto?</p>
-                  <div class="form-group">
+                  <div class="form-group" [ngClass]="{ 'has-error': finstalacion1.submitted && !nombresInstalacion1.valid }">
                     <label for="perfil">Nombre y apellido</label>
-                    <input type="text" class="form-control" id="perfil" placeholder="Nombre y apellido">
+                    <input type="text" class="form-control" id="perfil" placeholder="Nombre y apellido" #nombresInstalacion1="ngModel" name="nombresInstalacion1value" [(ngModel)]="nombresInstalacion1value" required>
+                  <div *ngIf="finstalacion1.submitted && !nombresInstalacion1.valid" class="help-block">Debe ingresar nombre y apellido</div>
                   </div>
 
 
-
                		<div class="checkbox">
-						<label>
-						  <input type="checkbox"> Acepto <a href="terminos-condiciones.html" style="color:#6b8bc0;">Términos y Condiciones</a>
-						</label>
+						<!--label>
+              <input type="checkbox" [(ngModel)]="aceptaInstalacion1"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
+                <div *ngIf="!aceptaInstalacion1Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
+						</label-->
 					  </div>
 
                   <button type="submit" class="btn btn-default">GUARDAR DATOS</button>
-                </form>
+
 
                  </div>
                  <div class="col-md-6"></div>
+                </form>
               </div>
 
 
@@ -238,28 +213,32 @@
                  <div class="col-md-6" style="padding-left: 0px;">
                   <br>
 
-                 <form>
-                  <div class="form-group">
+                 <form name="form" (ngSubmit)="finstalacion2.form.valid && guardaInstalacion2()" #finstalacion2="ngForm" novalidate>
+                  <div class="form-group" [ngClass]="{ 'has-error': finstalacion2.submitted && !direccionInstalacion2.valid }">
                     <label for="ancho">Dirección</label>
-                    <input type="text" class="form-control" id="" placeholder="Calle y número">
+                    <input type="text" class="form-control" id="" placeholder="Calle y número"  #direccionInstalacion2="ngModel" name="direccionInstalacion2value" [(ngModel)]="direccionInstalacion2value" required>
+                     <div *ngIf="finstalacion2.submitted && !direccionInstalacion2.valid" class="help-block">Debe ingresar una dirección</div>
                   </div>
 
                   <p>¿Quién entrega el auto?</p>
 
-                  <div class="form-group">
+                  <div class="form-group" [ngClass]="{ 'has-error': finstalacion2.submitted && !nombresInstalacion2.valid }">
                     <label for="perfil">Nombre y apellido</label>
-                    <input type="text" class="form-control" id="perfil" placeholder="Nombre y apellido">
+                    <input type="text" class="form-control" id="perfil" placeholder="Nombre y apellido"  #nombresInstalacion2="ngModel" name="nombresInstalacion2value" [(ngModel)]="nombresInstalacion2value" required>
+                     <div *ngIf="finstalacion2.submitted && !nombresInstalacion2.valid" class="help-block">Debe ingresar nombre y apellido</div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group" [ngClass]="{ 'has-error': finstalacion2.submitted && !rutInstalacion2.valid }">
                     <label for="perfil">R.U.T</label>
-                    <input type="text" class="form-control" id="perfil" placeholder="">
+                    <input type="text" class="form-control" id="perfil" placeholder="" [(ngModel)]="rutInstalacion2value" #rutInstalacion2="ngModel" name="rutInstalacion2value" required>
+                     <div *ngIf="finstalacion2.submitted && !rutInstalacion2.valid" class="help-block">Debe ingresar un rut</div>
                   </div>
 
                		<div class="checkbox">
-						<label>
-						  <input type="checkbox"> Acepto <a href="terminos-condiciones.html" style="color:#6b8bc0;">Términos y Condiciones</a>
-						</label>
+						<!--label>
+              <input type="checkbox"  [(ngModel)]="aceptaInstalacion2" > Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
+                 <div *ngIf="!aceptaInstalacion2Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
+						</label-->
 					  </div>
 
                   <button type="submit" class="btn btn-default">GUARDAR DATOS</button>
@@ -272,64 +251,73 @@
 
 
               <div role="tabpanel" class="tab-pane" id="talleres-asosiados">
+                <form name="form" (ngSubmit)="finstalacion3.form.valid && guardaInstalacion3()" #finstalacion3="ngForm" novalidate>
                     <div class="col-md-6">
-                   <form><br>
+                <div class="form-group" [ngClass]="{ 'has-error': finstalacion3.submitted && !tallerAsociado.valid }">
                    <label>Elige un taller</label>
-                  <select class="form-control">
+                  <select class="form-control" #tallerAsociado="ngModel" name="tallerAsociadovalue" [(ngModel)]="tallerAsociadovalue" required>
           					  <option>1</option>
           					  <option>2</option>
           					  <option>3</option>
           					  <option>4</option>
           					  <option>5</option>
-					         </select>
+                   </select>
+                    <div *ngIf="finstalacion3.submitted && !tallerAsociado.valid" class="help-block">Debe seleccionar un taller asociado</div>
+                  </div>
            <br>
-              		<div class="form-group ">
+              		<div class="form-group" [ngClass]="{ 'has-error': finstalacion3.submitted && !fechaInstalacion.valid }">
                 		<label for="date" class="control-label">Elige tu fecha de instalación</label>
 							<div class="input-group date">
-							  <input type="text" class="form-control" id="date" data-date-format="YYYY-MM-DD" value="2018-02-20" name="">
+							  <input type="text" class="form-control" id="date" data-date-format="YYYY-MM-DD" value="2018-02-20" name="fechaInstalacionvalue" #fechaInstalacion="ngModel" [(ngModel)]="fechaInstalacionvalue" required>
 							  <span class="input-group-btn">
 							  <button style="padding: 10.1px;" type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
 							  </span>
-							</div>
+              </div>
+               <div *ngIf="finstalacion3.submitted && !fechaInstalacion.valid" class="help-block">Debe seleccionar una fecha de instalacion</div>
              		 </div>
 
-             	  <div class="form-group ">
+             	  <div class="form-group" [ngClass]="{ 'has-error': finstalacion3.submitted && !bloqueHorario.valid }">
 						      	<label for="time" class="control-label">Bloque horario</label>
-							         <select class="form-control">
+							         <select class="form-control" [(ngModel)]="bloqueHorariovalue" name="bloqueHorariovalue" #bloqueHorario="ngModel" required>
                       <option>AM</option>
                       <option>PM</option>
 
                    </select>
+                     <div *ngIf="finstalacion3.submitted && !bloqueHorario.valid" class="help-block">Debe seleccionar un rango de horario</div>
              		</div>
 
 
                		<div class="checkbox">
-						<label>
-						  <input type="checkbox"> Acepto <a href="terminos-condiciones.html" style="color:#6b8bc0;">Términos y Condiciones</a>
-						</label>
+						<!--label>
+              <input type="checkbox" [(ngModel)]="aceptaInstalacion3"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
+                 <div *ngIf="!aceptaInstalacion3Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
+						</label-->
 					  </div>
 
-                  <button type="submit" class="btn btn-default ">GUARDA DATOS</button>
-                </form>
+                  <button type="submit" class="btn btn-default">GUARDA DATOS</button>
+
                   </div>
+             </form>
 				  <div class="col-md-6"></div>
 
               </div>
 
                <div role="tabpanel" class="tab-pane" id="despacho-adomicilio">
                  <div class="col-md-6">
-                  <form><br>
+                    <form name="form" (ngSubmit)="finstalacion4.form.valid && guardaInstalacion4()" #finstalacion4="ngForm" novalidate>
                       <div class="pad-10">&nbsp;</div>
-                      <div class="form-group">
+                      <div class="form-group" [ngClass]="{ 'has-error': finstalacion4.submitted && !direccionInstalacion4.valid }">
                           <label for="perfil">Dirección</label>
-                          <input type="text" class="form-control" id="perfil" placeholder="">
+                          <input type="text" class="form-control" id="perfil" placeholder="" [(ngModel)]="direccionInstalacion4value" name="direccionInstalacion4value" #direccionInstalacion4="ngModel" required>
+                           <div *ngIf="finstalacion4.submitted && !direccionInstalacion4.valid" class="help-block">Debe ingresar una dirección</div>
                     </div>
                     <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> Acepto <a href="terminos-condiciones.html" style="color:#6b8bc0;">Términos y Condiciones</a>
-                        </label>
+                        <!--label>
+                          <input type="checkbox" [(ngModel)]="aceptaInstalacion4"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
+                           <div *ngIf="!aceptaInstalacion4Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
+                        </label-->
                     </div>
-                                      <button type="submit" class="btn btn-default ">GUARDAR DATOS</button>
+                                      <button type="submit" class="btn btn-default">GUARDAR DATOS</button>
 
                 </form>
                  </div>
@@ -346,15 +334,13 @@
       </div><!-- col-md-12-->
 		  </div>
 
-
-
-
-
-		</div>
+<div *ngIf="estado" [ngClass] = "'success'"> Tus datos fueron guardados temporalmnente, sigue al siguiente paso, para fanalizar tu compra. </div>
+<div *ngIf="errorMessage" [ngClass] = "'error'"> {{errorMessage}} </div>
 
 
 		</div>
 
+		</div>
 
               <br>
 

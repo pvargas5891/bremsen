@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductosService } from '../../services/productos.service';
 import { DetalleCatProductos } from '../categoria-no-filtrada/detalleCatProductos';
-
+import { CarroCompraService } from '../../services/carro-compra.service';
 import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-categoria-filtrada',
   templateUrl: './categoria-filtrada.component.html',
@@ -21,14 +22,15 @@ export class CategoriaFiltradaComponent {
     public param3: string;
     public origen: string;
     public parametros;
-
+    public estadoCarro:boolean = false;
     public resultProductos;
     public p: number = 1;
     public itemsPerPage = 10;
     public mostrarLoading = true;
 
   constructor(private route: ActivatedRoute,
-              private _productoService: ProductosService) {
+              private _productoService: ProductosService,
+              private _carroCompra: CarroCompraService) {
 
       route.params.subscribe( parametros =>{
           //console.debug(parametros);
@@ -121,5 +123,33 @@ export class CategoriaFiltradaComponent {
     this.getProductosFiltrado();
   }
 
+public agregarCarro = function (indice,cantidad,producto) {
 
+  //this.cantidadValido = false;
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if(typeof cantidad == 'undefined'){
+      this.cantidadValido=true;
+      return;
+    }
+
+    var usuario = currentUser.usuario.id;
+    this._carroCompra.agregarCarro(cantidad,producto, usuario)
+    .then(
+      data => {
+          if(data=='STOCK'){
+            this.errorMessage = 'No hay stock suficiente para tu pedido';
+            return;
+          }
+          if(data=='STOCKTEMP'){
+            this.errorMessage = 'No hay stock suficiente para tu pedido';
+            return;
+          }
+
+           this.estadoCarro = true;
+      },
+      error => {
+
+      }
+    );
+  }
 }
