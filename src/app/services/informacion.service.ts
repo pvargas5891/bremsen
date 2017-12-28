@@ -16,6 +16,14 @@ export class InformacionService {
   public ciudades: any[] = [];
   public comunas:any[] = [];
 
+  public regionesPersona: any[] = [];
+  public ciudadesPersona: any[] = [];
+  public comunasPersona:any[] = [];
+
+  public regionesEmpresa: any[] = [];
+  public ciudadesEmpresa: any[] = [];
+  public comunasEmpresa:any[] = [];
+
   public marcas:any[] = [];
   public modelos:any[] = [];
   public anos:any[] = [];
@@ -83,6 +91,8 @@ public getPerfilVehiculos(ancho): Promise<string>{
               //console.debug(data.json());
                this.cargada = true;
                this.ciudades = data.json();
+               this.ciudadesPersona = data.json();
+               this.ciudadesEmpresa = data.json();
 
              })
   }
@@ -94,6 +104,8 @@ public getPerfilVehiculos(ancho): Promise<string>{
         //console.debug(data.json());
         this.cargada = true;
         this.comunas = data.json();
+        this.comunasPersona = data.json();
+        this.comunasEmpresa = data.json();
         // console.debug(this.regiones[0][0]);
         //console.debug(this.regiones[0][1]);
       })
@@ -105,11 +117,45 @@ public getPerfilVehiculos(ancho): Promise<string>{
         //console.debug(data.json());
         this.cargada = true;
         this.regiones = data.json();
+        this.regionesPersona = data.json();
+        this.regionesEmpresa = data.json();
         // console.debug(this.regiones[0][0]);
         //console.debug(this.regiones[0][1]);
       })
   }
+public getCiudadesEmpresa(region:string ){
 
+    this.http.get(this.url+"location.php?region=" + region)
+             .subscribe( data =>{
+              //console.debug(data.json());
+               this.cargada = true;
+               this.ciudadesEmpresa = data.json();
+
+             })
+  }
+
+  public getComunasEmpresa(ciudad:string) {
+
+    this.http.get(this.url+"location.php?ciudad=" + ciudad)
+      .subscribe(data => {
+        //console.debug(data.json());
+        this.cargada = true;
+        this.comunasEmpresa = data.json();
+        // console.debug(this.regiones[0][0]);
+        //console.debug(this.regiones[0][1]);
+      })
+  }
+  public getRegionesEmpresa() {
+
+    this.http.get(this.url+"location.php")
+      .subscribe(data => {
+        //console.debug(data.json());
+        this.cargada = true;
+        this.regionesEmpresa = data.json();
+        // console.debug(this.regiones[0][0]);
+        //console.debug(this.regiones[0][1]);
+      })
+  }
 
   private extractData(res: Response) {
         //console.debug(res);

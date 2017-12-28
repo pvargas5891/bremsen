@@ -23,13 +23,7 @@ export class CheckoutOutComponent {
       public ciudadValidoEmpresa: boolean = true;
       public comunaValidoEmpresa: boolean = true;
 
-      public regionesPersona: any[] = [];
-      public ciudadesPersona: any[] = [];
-      public comunasPersona:any[] = [];
 
-      public regionesEmpresa: any[] = [];
-      public ciudadesEmpresa: any[] = [];
-      public comunasEmpresa:any[] = [];
       public error = '';
       public loading = false;
       public estado:boolean = false;
@@ -49,14 +43,6 @@ export class CheckoutOutComponent {
 
   ) {
 
-console.debug(this._is.regiones);
-this.regionesEmpresa=this._is.regiones;
-this.ciudadesEmpresa=this._is.ciudades;
-this.comunasEmpresa=this._is.comunas;
-
-this.regionesPersona=this._is.regiones;
-this.ciudadesPersona=this._is.ciudades;
-this.comunasPersona=this._is.comunas;
 
  var currentUser = JSON.parse(localStorage.getItem('currentUser'));
           //console.debug
@@ -73,21 +59,21 @@ this.comunasPersona=this._is.comunas;
 
      cambiaCiudad(selectedRegion: string): void{
       this._is.getCiudades(selectedRegion);
-      this.ciudadesPersona=this._is.ciudades;
+
   }
     cambiaComuna(selectedCiudad: string): void{
       this._is.getComunas(selectedCiudad);
-      this.comunasPersona=this._is.comunas;
+
     }
 
 
 cambiaCiudadEmpresa(selectedRegion: string): void{
-      this._is.getCiudades(selectedRegion);
-      this.ciudadesEmpresa=this._is.ciudades;
+      this._is.getCiudadesEmpresa(selectedRegion);
+
   }
     cambiaComunaEmpresa(selectedCiudad: string): void{
-      this._is.getComunas(selectedCiudad);
-      this.comunasEmpresa=this._is.comunas;
+      this._is.getComunasEmpresa(selectedCiudad);
+
     }
   public esFactura = function(data){
 

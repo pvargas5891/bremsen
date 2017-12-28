@@ -64,23 +64,23 @@
                   <div class="form-group" [ngClass]="{ 'has-error': !regionValido }">
                     <label for="region">Región </label>
                       <select class="form-control" #selectedRegion (change)="cambiaCiudad(selectedRegion.value)" name="region1" #region1="ngModel" [(ngModel)]="cliente.region" id="region1">
-                        <option *ngFor="let region of regionesPersona" [value]="region[0]">{{region[1]}}</option>
+                        <option *ngFor="let region of _is.regiones" [value]="region[0]">{{region[1]}}</option>
                     </select>
                       <div *ngIf="f.submitted && !regionValido" class="help-block">Debe seleccionar una region</div>
                   </div>
 
                   <div class="form-group" [ngClass]="{ 'has-error': !ciudadValido }">
                     <label for="ciudad">Ciudad </label>
-                    <select *ngIf="ciudadesPersona.length > 0" #selectedCiudad class="form-control" (change)="cambiaComuna(selectedCiudad.value)" #ciudad1="ngModel" name="ciudad1" id="ciudad1" [(ngModel)]="cliente.ciudad">
-                      <option  *ngFor="let ciudad of ciudadesPersona" [value]="ciudad[0]">{{ciudad[1]}}</option>
+                    <select *ngIf="_is.ciudades.length > 0" #selectedCiudad class="form-control" (change)="cambiaComuna(selectedCiudad.value)" #ciudad1="ngModel" name="ciudad1" id="ciudad1" [(ngModel)]="cliente.ciudad">
+                      <option  *ngFor="let ciudad of _is.ciudades" [value]="ciudad[0]">{{ciudad[1]}}</option>
                     </select>
                       <div *ngIf="f.submitted && !ciudadValido" class="help-block">Debe seleccionar una ciudad</div>
                   </div>
 
                    <div class="form-group" [ngClass]="{ 'has-error': !comunaValido }">
                     <label for="comuna">Comuna </label>
-                      <select *ngIf="comunasPersona.length > 0" #selectedComuna class="form-control" id="input-select" name="input-select" #comuna1="ngModel" name="comuna1" id="comuna1" [(ngModel)]="cliente.comuna">
-                        <option  *ngFor="let comuna of comunasPersona" [value]="comuna[0]">{{comuna[1]}}</option>
+                      <select *ngIf="_is.comunas.length > 0" #selectedComuna class="form-control" id="input-select" name="input-select" #comuna1="ngModel" name="comuna1" id="comuna1" [(ngModel)]="cliente.comuna">
+                        <option  *ngFor="let comuna of _is.comunas" [value]="comuna[0]">{{comuna[1]}}</option>
                     </select>
                        <div *ngIf="f.submitted && !comunaValido" class="help-block">Debe seleccionar una comuna</div>
                   </div>
@@ -137,23 +137,23 @@
                  <div class="form-group" [ngClass]="{ 'has-error': !regionValidoEmpresa }">
                     <label for="regionEmpresa">Región </label>
                       <select class="form-control" #selectedRegionEmpresa (change)="cambiaCiudadEmpresa(selectedRegionEmpresa.value)" name="region1Empresa" #region1Empresa="ngModel" [(ngModel)]="cliente.regionempresa" id="region1Empresa">
-                        <option *ngFor="let region of regionesEmpresa" [value]="region[0]">{{region[1]}}</option>
+                        <option *ngFor="let region of _is.regionesEmpresa" [value]="region[0]">{{region[1]}}</option>
                     </select>
                       <div *ngIf="f.submitted && !regionValidoEmpresa" class="help-block">Debe seleccionar una region</div>
                   </div>
 
                   <div class="form-group" [ngClass]="{ 'has-error': !ciudadValidoEmpresa }">
                     <label for="ciudadEmpresa">Ciudad </label>
-                    <select *ngIf="ciudadesEmpresa.length > 0" #selectedCiudadEmpresa class="form-control" (change)="cambiaComunaEmpresa(selectedCiudadEmpresa.value)" #ciudad1Empresa="ngModel" name="ciudad1Empresa" id="ciudad1Empresa" [(ngModel)]="cliente.ciudadempresa">
-                      <option  *ngFor="let ciudad of ciudadesEmpresa" [value]="ciudad[0]">{{ciudad[1]}}</option>
+                    <select *ngIf="_is.ciudadesEmpresa.length > 0" #selectedCiudadEmpresa class="form-control" (change)="cambiaComunaEmpresa(selectedCiudadEmpresa.value)" #ciudad1Empresa="ngModel" name="ciudad1Empresa" id="ciudad1Empresa" [(ngModel)]="cliente.ciudadempresa">
+                      <option  *ngFor="let ciudad of _is.ciudadesEmpresa" [value]="ciudad[0]">{{ciudad[1]}}</option>
                     </select>
                       <div *ngIf="f.submitted && !ciudadValidoEmpresa" class="help-block">Debe seleccionar una ciudad</div>
                   </div>
 
                    <div class="form-group" [ngClass]="{ 'has-error': !comunaValidoEmpresa }">
                     <label for="comunaEmpresa">Comuna </label>
-                      <select *ngIf="comunasEmpresa.length > 0" #selectedComunaEmpresa class="form-control" id="input-select" name="input-select" #comuna1Empresa="ngModel" name="comuna1Empresa" id="comuna1Empresa" [(ngModel)]="cliente.comunaempresa">
-                        <option  *ngFor="let comuna of comunasEmpresa" [value]="comuna[0]">{{comuna[1]}}</option>
+                      <select *ngIf="_is.comunasEmpresa.length > 0" #selectedComunaEmpresa class="form-control" id="input-select" name="input-select" #comuna1Empresa="ngModel" name="comuna1Empresa" id="comuna1Empresa" [(ngModel)]="cliente.comunaempresa">
+                        <option  *ngFor="let comuna of _is.comunasEmpresa" [value]="comuna[0]">{{comuna[1]}}</option>
                     </select>
                        <div *ngIf="f.submitted && !comunaValidoEmpresa" class="help-block">Debe seleccionar una comuna</div>
                   </div>
