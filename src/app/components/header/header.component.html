@@ -153,9 +153,14 @@
                     <table class="table  table-precio" style="font-size: 14px;">
                       <tbody>
                       <tr>
+                         
+
+
+
+
 
                         <td class="text-right">
-                          <button [disabled]="loading" class="btn btn-primary">Entrar</button>
+                          <button [disabled]="loading" class="btn btn-default btn-block">Log in</button>
                           <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                           <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 
@@ -244,10 +249,10 @@
                     <tbody>
 
                       <tr *ngFor="let producto of carroCompra">
-                        <td class="text-center"><a routerLink="/producto/{{producto.ID}}"><img class="img-thumbnail" title="" alt="" width="60px" src="assets/image/product/540x576.jpg"></a></td>
-                        <td class="text-left"><a routerLink="/producto/{{producto.ID}}">{{producto.MARCA}} {{producto.MODELO}}</a></td>
-                        <td class="text-right">x {{producto.cantidadCarro}}</td>
-                        <td class="text-right"><b>$ {{producto.totalParcial}}</b></td>
+                        <td class="text-center col-md-2"><a routerLink="/producto/{{producto.ID}}"><img class="img-thumbnail" title="" alt="" width="60px" src="assets/image/product/540x576.jpg"></a></td>
+                        <td class="text-left col-md-5"><a routerLink="/producto/{{producto.ID}}">{{producto.MARCA}} {{producto.MODELO}}</a></td>
+                        <td class="text-right col-md-2">x {{producto.cantidadCarro}}</td>
+                        <td class="text-right col-md-3"><b>$ {{producto.totalParcial}}</b></td>
                         <!--td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td-->
                       </tr>
 

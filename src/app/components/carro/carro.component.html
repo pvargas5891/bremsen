@@ -179,6 +179,7 @@
                   <div class="col-md-6" style="padding-left: 0px;">
 
                   <div class="form-group" [ngClass]="{ 'has-error': finstalacion1.submitted && !direccionInstalacion1.valid }">
+                    <br>
                     <label for="ancho">Dirección</label>
                     <input type="text" class="form-control" id="" placeholder="Calle y número" #direccionInstalacion1="ngModel" name="direccionInstalacion1value" [(ngModel)]="direccionInstalacion1value" required>
                     <div *ngIf="finstalacion1.submitted && !direccionInstalacion1.valid" class="help-block">Debe ingresar una dirección</div>
@@ -254,7 +255,7 @@
                 <form name="form" (ngSubmit)="finstalacion3.form.valid && guardaInstalacion3()" #finstalacion3="ngForm" novalidate>
                     <div class="col-md-6">
                 <div class="form-group" [ngClass]="{ 'has-error': finstalacion3.submitted && !tallerAsociado.valid }">
-                   <label>Elige un taller</label>
+                   <br><label>Elige un taller</label>
                   <select class="form-control" #tallerAsociado="ngModel" name="tallerAsociadovalue" [(ngModel)]="tallerAsociadovalue" required>
           					  <option>1</option>
           					  <option>2</option>

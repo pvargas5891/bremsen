@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { UserService } from "../../_services/user.service";
 @Component({
   selector: 'app-olvido',
   templateUrl: './olvido.component.html',
@@ -11,11 +11,11 @@ export class OlvidoComponent {
   returnUrl: string;
   error = '';
   email: string = "";
-  constructor() { }
+  constructor(public userService: UserService,) { }
 
 public recuperaPassword = function (){
     this.loading = true;
-    this.userService.update(this.email).then(
+    this.userService.recuperaPassword(this.email).then(
 
       data=>{
           this.loading = false;
