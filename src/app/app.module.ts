@@ -41,6 +41,7 @@ import { MisdatosComponent } from './components/misdatos/misdatos.component';
 import { CarroComponent } from './components/carro/carro.component';
 import { CheckoutInComponent } from './components/checkout-in/checkout-in.component';
 import { CheckoutOutComponent } from './components/checkout-out/checkout-out.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 
@@ -63,7 +64,8 @@ import { CheckoutOutComponent } from './components/checkout-out/checkout-out.com
     MisdatosComponent,
     CarroComponent,
     CheckoutInComponent,
-    CheckoutOutComponent
+    CheckoutOutComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

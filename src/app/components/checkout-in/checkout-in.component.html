@@ -26,16 +26,14 @@
         <div id="content" class="col-sm-8">
         <h1 class="title">Información cliente</h1>
 
-
-      <form>
                   <div class="form-group ">
-                    <label for="">Nombre completo</label>
-                    <input type="text" class="form-control" id="">
+                    <label for="">Nombre completo</label><br>
+                    {{cliente.nombreCompleto}}
                   </div>
 
                   <div class="form-group ">
-                    <label for="">Email</label>
-                    <input type="email" class="form-control" id="" >
+                    <label for="">Email</label><br>
+                   {{cliente.email}}
                   </div>
 
 
@@ -43,103 +41,88 @@
 
                    <div class="form-group ">
                     <label for="">Recibo </label>
-                      <select class="form-control" id="input-select" name="input-select">
-                        <option value="">. </option>
+                      <select class="form-control" #facturacion id="input-select" name="input-select" (change)="esFactura(facturacion.value)" #selectedFactura="ngModel" name="selectedFactura" id="selectedFactura" [(ngModel)]="cliente.facturacion">
                         <option value="1">Boleta </option>
                         <option value="2">Factura </option>
-
                     </select>
+
                   </div>
 
-                    <!--  ***********  Si apretas FACTURA sale  estos campos  *************
+                    <!--  ***********  Si apretas FACTURA sale  estos campos  *************-->
 
+<form name="form" (ngSubmit)="f.form.valid && saveCheckin()" #f="ngForm" novalidate>
 
+                <div *ngIf="isFactura">
 
-
-                  <div class="form-group ">
-                    <label for="">Razon Social</label>
-                    <input type="text" class="form-control" id="">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !razon.valid }">
+                    <label for="razon">Razon Social</label>
+                        <input type="text" class="form-control" id="razon" name="razon" #razon="ngModel" [(ngModel)]="cliente.razon" required>
+                     <div *ngIf="f.submitted && !razon.valid" class="help-block">Razon Social es requerido</div>
                   </div>
 
-                  <div class="form-group ">
+                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !rutempresa.valid }">
                     <label for="">R.U.T  de la empresa</label>
-                    <input type="text" class="form-control" id="">
+                    <input type="text" class="form-control"  id="rutempresa" name="rutempresa" #rutempresa="ngModel" [(ngModel)]="cliente.rutempresa" required>
+                    <div *ngIf="f.submitted && !razon.valid" class="help-block">Rut empresa es requerido</div>
                   </div>
 
-                  <div class="form-group ">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !giro.valid }">
                     <label for="">Giro</label>
-                    <input type="text" class="form-control" id="">
+                    <input type="text" class="form-control"  id="giro" name="giro" #giro="ngModel" [(ngModel)]="cliente.giro" required>
+                    <div *ngIf="f.submitted && !giro.valid" class="help-block">Giro es requerido</div>
                   </div>
-
-                   <div class="form-group ">
-                    <label for="">Dirección</label>
-                    <input type="text" class="form-control" id="">
-                  </div>
-
-                  <div class="form-group ">
-                    <label for="">Región </label>
-                      <select class="form-control" id="input-select" name="input-select">
-                        <option value="">. </option>
-                        <option value="1">1 </option>
-                        <option value="2">2 </option>
-                        <option value="3">3 </option>
-                        <option value="4">4 </option>
-                    </select>
-                  </div>
-
-                   <div class="form-group ">
-                    <label for="">Recibo </label>
-                      <select class="form-control" id="input-select" name="input-select">
-                        <option value="">. </option>
-                        <option value="1">Boleta </option>
-                        <option value="2">Factura </option>
-
-                    </select>
-                  </div>
-
-                  <div class="form-group ">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !telefonoempresa.valid }">
                     <label for="">Telefono</label>
-                    <input type="tel" class="form-control" id="" >
+                    <input type="tel" class="form-control" id="telefonoempresa" name="telefonoempresa" #telefonoempresa="ngModel" [(ngModel)]="cliente.telefonoempresa" required>
+                    <div *ngIf="f.submitted && !telefonoempresa.valid" class="help-block">Telefono Empresa es requerido</div>
+                  </div>
+                   <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !direccionempresa.valid }">
+                    <label for="">Dirección</label>
+                    <input type="text" class="form-control"  id="direccionempresa" name="direccionempresa" #direccionempresa="ngModel" [(ngModel)]="cliente.direccionempresa" required>
+                    <div *ngIf="f.submitted && !direccionempresa.valid" class="help-block">Dirección Empresa es requerido</div>
+                  </div>
+
+                 <div class="form-group" [ngClass]="{ 'has-error': !regionValido }">
+                    <label for="region">Región </label>
+                      <select class="form-control" #selectedRegion (change)="cambiaCiudad(selectedRegion.value)" name="region1" #region1="ngModel" [(ngModel)]="cliente.regionempresa" id="region1">
+                        <option *ngFor="let region of _is.regiones" [value]="region[0]">{{region[1]}}</option>
+                    </select>
+                      <div *ngIf="f.submitted && !regionValido" class="help-block">Debe seleccionar una region</div>
+                  </div>
+
+                  <div class="form-group" [ngClass]="{ 'has-error': !ciudadValido }">
+                    <label for="ciudad">Ciudad </label>
+                    <select *ngIf="_is.ciudades.length > 0" #selectedCiudad class="form-control" (change)="cambiaComuna(selectedCiudad.value)" #ciudad1="ngModel" name="ciudad1" id="ciudad1" [(ngModel)]="cliente.ciudadempresa">
+                      <option  *ngFor="let ciudad of _is.ciudades" [value]="ciudad[0]">{{ciudad[1]}}</option>
+                    </select>
+                      <div *ngIf="f.submitted && !ciudadValido" class="help-block">Debe seleccionar una ciudad</div>
+                  </div>
+
+                   <div class="form-group" [ngClass]="{ 'has-error': !comunaValido }">
+                    <label for="comuna">Comuna </label>
+                      <select *ngIf="_is.comunas.length > 0" #selectedComuna class="form-control" id="input-select" name="input-select" #comuna1="ngModel" name="comuna1" id="comuna1" [(ngModel)]="cliente.comunaempresa">
+                        <option  *ngFor="let comuna of _is.comunas" [value]="comuna[0]">{{comuna[1]}}</option>
+                    </select>
+                       <div *ngIf="f.submitted && !comunaValido" class="help-block">Debe seleccionar una comuna</div>
                   </div>
 
 
-                   ***********  cierre FACTURA   ************* -->
+              </div>
+
+                   <!--***********  cierre FACTURA   ************* -->
 
 
 
-
-
-
-                   <br>
-
-                  <label class="checkbox-inline">
-                    <input type="checkbox" value="" name="">
-                    ¿Quieres crear una cuenta? Agilizarás las proximas compras. </label>
-                <br><br>
-
-                 <!--  ***********  Si apretas CREAR CUENTA sale  estos campos  *************
-
-
-                  <div class="form-group required">
-                    <label for="">Contraseña</label>
-                    <input type="text" class="form-control" id="">
-                  </div>
-
-                  <div class="form-group required">
-                    <label for="">Confirmar contraseña</label>
-                    <input type="text" class="form-control" id="">
-                  </div>
-
-                **********  Si apretas CREAR CUENTA sale  estos campos  *************
-
-                -->
-
-
-
-        </form>
-
-        <div class="col-md-6" style="padding-top: 25px; padding-left: 0px;">
-              <button type="button" class="btn btn-primary btn-block">Pagar <b>Web</b> <b style="color:#ff9222;">Pay</b></button>
+        <div class="col-md-6" style="padding-top: 25px; padding-left: 0px;" *ngIf="isFactura">
+              <button [disabled]="loading" type="submit" class="btn btn-primary btn-block">Pagar <b>Web</b> <b style="color:#ff9222;">Pay</b></button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+         <p class="p-botnes" >Puedes pagar con Tarjeta de crédito o Redcompra.</p>
+        </div>
+         <div class="col-md-6" style="padding-top: 25px; padding-left: 0px;" *ngIf="!isFactura">
+              <button [disabled]="loading" type="button" (click)="pagarBoleta()" class="btn btn-primary btn-block">Pagar <b>Web</b> <b style="color:#ff9222;">Pay</b></button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
          <p class="p-botnes" >Puedes pagar con Tarjeta de crédito o Redcompra.</p>
 
         </div>
@@ -154,7 +137,7 @@
 
 
          </div>
-
+</form>
            <div class="col-md-12" style="padding-left: 0px; padding-right: 0px;">
                    <div class="collapse" id="transferencia" style="text-align: left !important;">
                       <div class="well">

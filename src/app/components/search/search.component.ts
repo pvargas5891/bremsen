@@ -5,11 +5,11 @@ import { CarroCompraService } from '../../services/carro-compra.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-categoria-filtrada',
-  templateUrl: './categoria-filtrada.component.html',
+  selector: 'app-search',
+  templateUrl: './search.component.html',
   styles: []
 })
-export class CategoriaFiltradaComponent {
+export class SearchComponent {
 
     public productos;
     errorMessage: String;
@@ -18,8 +18,6 @@ export class CategoriaFiltradaComponent {
     public opcionesRadio: string[]=['Ofertas'];
     public detallesCategoria = new DetalleCatProductos();
     public param1: string;
-    public param2: string;
-    public param3: string;
     public origen: string;
     public parametros;
     public estadoCarro:boolean = false;
@@ -35,25 +33,19 @@ export class CategoriaFiltradaComponent {
       route.params.subscribe( parametros =>{
           //console.debug(parametros);
           this.parametros = parametros;
-          this.param1=(parametros.param1!='undefined')?parametros.param1:'';
-          this.param2=(parametros.param2!='undefined')?parametros.param2:'';;
-          this.param3=(parametros.param3!='undefined')?parametros.param3:'';;
+          this.param1=parametros.data;
           this.origen=parametros.origen;
-
-          if(parametros.origen=='1'){
-             this.detallesCategoria.marca=parametros.param1;
-             this.detallesCategoria.modelo=parametros.param2;
-             this.detallesCategoria.ano=parametros.param3;
-
+          this.detallesCategoria.origen=this.origen;
+          if(parametros.origen=='marca'){
+             this.detallesCategoria.marcaFiltro=this.param1;
           }else{
-             this.detallesCategoria.ancho=parametros.param1;
-             this.detallesCategoria.perfil=parametros.param2;
-             this.detallesCategoria.aro=parametros.param3;
+             this.detallesCategoria.origen=this.param1;
           }
-          this.detallesCategoria.origen=parametros.origen;
+
       });
 
       this.detallesCategoria.inicio="1";
+
       this.detallesCategoria.fin="10";
       this.getProductosFiltrado();
 
@@ -65,7 +57,7 @@ export class CategoriaFiltradaComponent {
 	     .then( data => {
             console.debug(data);
             this.detallesCategoria.totalProductos = data[0].TOTALPRODUCTOS;
-             if(this.detallesCategoria.totalProductos<this.itemsPerPage){
+            if(this.detallesCategoria.totalProductos<this.itemsPerPage){
               this.detallesCategoria.fin=this.detallesCategoria.totalProductos;
             }
             this.detallesCategoria.todasMarcas=data[1];

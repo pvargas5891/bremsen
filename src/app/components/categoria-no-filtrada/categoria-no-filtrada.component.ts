@@ -66,6 +66,9 @@ export class CategoriaNoFiltradaComponent {
 	     .then( data => {
            // console.debug(data);
             this.detallesCategoria.totalProductos = data[0].TOTALPRODUCTOS;
+             if(this.detallesCategoria.totalProductos<this.itemsPerPage){
+              this.detallesCategoria.fin=this.detallesCategoria.totalProductos;
+            }
             this.detallesCategoria.todasMarcas=data[1];
 
 		    },
@@ -91,9 +94,19 @@ export class CategoriaNoFiltradaComponent {
   }
   public pageChanged = function (event){
       //this.p = event;
-      if(event>this.p){
-         this.detallesCategoria.inicio=parseInt(this.detallesCategoria.inicio)+parseInt(this.itemsPerPage);
+     // console.debug(event);
+     // console.debug(this.detallesCategoria.inicio +" - "+this.detallesCategoria.fin);
+      this.detallesCategoria.inicio=1;
+      this.detallesCategoria.fin=this.itemsPerPage;
+      for(let i=1;i < event; i++){
+        this.detallesCategoria.inicio=parseInt(this.detallesCategoria.inicio)+parseInt(this.itemsPerPage);
          this.detallesCategoria.fin=parseInt(this.detallesCategoria.fin)+parseInt(this.itemsPerPage);
+      }
+      if(this.detallesCategoria.fin>this.resultProductos.length){
+           this.detallesCategoria.fin=this.resultProductos.length;
+      }
+      /*if(event>this.p){
+
          if(this.detallesCategoria.fin>this.resultProductos.length){
            this.detallesCategoria.fin=this.resultProductos.length;
          }
@@ -101,8 +114,9 @@ export class CategoriaNoFiltradaComponent {
 
          this.detallesCategoria.inicio=parseInt(this.detallesCategoria.inicio)-parseInt(this.itemsPerPage);
          this.detallesCategoria.fin=parseInt(this.detallesCategoria.fin)-parseInt(this.itemsPerPage);
-      }
+      }*/
       this.p = event;
+      //console.debug(this.detallesCategoria.inicio +" - "+this.detallesCategoria.fin);
       this.productosAMostrar();
   }
   public ordenadorProductos = function(){

@@ -118,64 +118,29 @@ Múltiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
 
 <div class="container" style="padding: 70px 0px;">
           <!-- Product Tab Start -->
-          <div id="product-tab" class="product-tab">
+  <div id="product-tab" class="product-tab">
 
-  <ul id="tabs" class="tabs">
-    <li><a (click)="activaSugeridos()">Sugeridos</a></li>
-    <li><a (click)="activaOfertas()">Ofertas</a></li>
-  </ul>
-
-  <div id="tab-sugeridos" class="tab_content" *ngIf="sugeridosTab">
-
-    <div>
-
-     <owl-carousel #owlElement [options]="{items: 6, dots: false, navigation: false}" [items]="productos">
+    <ul id="tabs" class="tabs">
+      <li><a (click)="activaSugeridos()">Sugeridos</a></li>
+      <li><a (click)="activaOfertas()">Ofertas</a></li>
+    </ul>
+  </div>
+<owl-carousel #owlElement [options]="{dots: false, navigation: true}" [items]="productos" *ngIf="productos.length>0">
 
       <div class="product-thumb" *ngFor="let producto of productos">
-      <div class="image"><a routerLink="/producto/{{producto.ID}}"><img src="assets/image/product/540x576.jpg" class="img-responsive" /></a></div>
+      <div class="image" style="line-height: 40px;"><a routerLink="/producto/{{producto.ID}}"><img src="assets/image/product/540x576.jpg" class="img-responsive responsivo" /></a></div>
       <div class="caption">
           <h4><a routerLink="/producto/{{producto.ID}}">{{producto.MARCA}} {{producto.MODELO}}</a></h4>
-          <p class="price"> $12,000 </p>
+          <p class="price"> $ {{producto.PRECIO_FINAL}} </p>
       </div>
       <div>
-        <button class="btn btn-primary"><span>Ver producto</span></button>
+        <button class="btn btn-primary" routerLink="/producto/{{producto.ID}}"><span>Ver producto</span></button>
       </div>
     </div>
 
  </owl-carousel>
- </div>
-  </div>
-
-   <div id="tab-ofertas" class="tab_content" *ngIf="ofertasTab">
-
-      <div  class="owl-carousel product_carousel_tab">
- pico2
-
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.html"><img src="assets/image/product/540x576.jpg" alt="Xitefun Causal Wear Fancy Shoes" title="Xitefun Causal Wear Fancy Shoes" class="img-responsive" /></a></div>
-              <div class="caption">
-                 <h4><a href="producto.html">Marca - Modelo</a></h4>
-                     <p class="price"><span class="price-new">$20,000</span> <span class="price-old">$32,000</span></p>
-
-              </div>
-              <div >
-                <button class="btn btn-primary"><span>Ver producto</span></button>
-
-              </div>
-            </div>
-
-
-
-
-
-
-
-
-
-          </div>
-  </div>
 <br>
-</div>    <!-- Product Tab Start -->
+
 
 </div>
 
@@ -225,41 +190,41 @@ Múltiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
       </div>
 
       <div class="col-md-3" style="padding: 15px; padding-bottom: 30px; ">
-            <img class="img-responsive center-block" src="assets/image/yokohama.png">
+            <a routerLink="/search/marca/yokohama"><img class="img-responsive center-block" src="assets/image/yokohama.png"></a>
       </div>
 
       <div class="col-md-3" style="padding: 15px; padding-bottom: 30px; ">
-            <img class="img-responsive center-block" src="assets/image/michelin.png">
+           <a routerLink="/search/marca/michelin"> <img class="img-responsive center-block" src="assets/image/michelin.png"></a>
       </div>
       <div class="col-md-3" style="padding: 15px; padding-bottom: 30px;">
-            <img class="img-responsive center-block" src="assets/image/BFGoodrich.png">
+           <a routerLink="/search/marca/BFGoodrich"> <img class="img-responsive center-block" src="assets/image/BFGoodrich.png"></a>
       </div>
       <div class="col-md-3" style="padding: 15px; padding-bottom: 30px;">
-            <img class="img-responsive center-block" src="assets/image/falken.png">
+          <a routerLink="/search/marca/falken">  <img class="img-responsive center-block" src="assets/image/falken.png"></a>
       </div>
       <div class="col-md-3" style="padding: 15px; padding-bottom: 30px; ">
-            <img class="img-responsive center-block" src="assets/image/KumhoTire.png">
+           <a routerLink="/search/marca/Kumho"> <img class="img-responsive center-block" src="assets/image/KumhoTire.png"></a>
       </div>
       <div class="col-md-3" style="padding: 15px; padding-bottom: 30px; ">
-            <img class="img-responsive center-block" src="assets/image/hankook.png">
+           <a routerLink="/search/marca/hankook"> <img class="img-responsive center-block" src="assets/image/hankook.png"></a>
       </div>
       <div class="col-md-3" style="padding: 15px; padding-bottom: 30px; ">
-            <img class="img-responsive center-block" src="assets/image/Dunlop.png">
+           <a routerLink="/search/marca/Dunlop"> <img class="img-responsive center-block" src="assets/image/Dunlop.png"></a>
       </div>
       <div class="col-md-3" style="padding: 15px; padding-bottom: 30px; ">
-            <img class="img-responsive center-block" src="assets/image/pirelli.png">
+           <a routerLink="/search/marca/pirelli"> <img class="img-responsive center-block" src="assets/image/pirelli.png"></a>
       </div>
        <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/westLake.png">
+           <a routerLink="/search/marca/westLake"> <img class="img-responsive center-block" src="assets/image/westLake.png"></a>
       </div>
       <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/tigar.png">
+          <a routerLink="/search/marca/tigar">  <img class="img-responsive center-block" src="assets/image/tigar.png"></a>
       </div>
       <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/sumitomo.png">
+          <a routerLink="/search/marca/sumitomo">  <img class="img-responsive center-block" src="assets/image/sumitomo.png"></a>
       </div>
       <div class="col-md-3" style="padding: 15px ">
-            <img class="img-responsive center-block" src="assets/image/ohtsu.png">
+          <a routerLink="/search/marca/ohtsu">  <img class="img-responsive center-block" src="assets/image/ohtsu.png"></a>
       </div>
   </div>
 </div>

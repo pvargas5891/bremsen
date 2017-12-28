@@ -2,8 +2,8 @@
     <div class="container">
       <!-- Breadcrumb Start-->
       <ul class="breadcrumb">
-        <li><a routerLink="/home"><i class="fa fa-home"></i></a></li>
-        <li><a routerLink="/categoria">Pagina actual</a></li>
+       <li><a routerLink="/home"><i class="fa fa-home"></i></a></li>
+        <li>Pagina actual</li>
       </ul>
       <!-- Breadcrumb End-->
 
@@ -11,12 +11,13 @@
 
 
       <div class="row">
-        <div class="pad-10"></div>
         <!--Left Part Start -->
         <aside id="column-left" class="col-sm-3 hidden-xs">
-          <div class="pad"></div>
+          <div class="pad-5">&nbsp;</div>
+          <h3><b>FILTRAR POR</b></h3>
+          <br>
           <h3 class="subtitle">Marca</h3>
-          <div class="box-category">
+           <div class="box-category">
             <div class="radio">
                 <label>
                   <input type="radio" name="filtromarcamodel" (click)="filtroMarca('all')">&nbsp;&nbsp;
@@ -33,7 +34,6 @@
 
 
           </div>
-
 
           <div class="pad"></div>
           <h3 class="subtitle">Atributo</h3>
@@ -60,76 +60,20 @@
           </div>
 
 
-
-
         </aside>
         <!--Left Part End -->
 
 
 
 
+
+
+
+
+
         <!--Middle Part Start-->
-    <div id="content" class="col-sm-9">
-
-
-        <div class="pest-home" style="padding-top: 20px;">
-
-            <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" style="width: 50%" class="active text-center"><a href="#comprarAro" aria-controls="comprarAro" role="tab" data-toggle="tab"><b style="font-size: 16px; text-transform: uppercase; ">Comprar por Aro</b></a></li>
-              <li role="presentation" style="width: 50%" class="text-center"><a href="#comprarMedida" aria-controls="comprarMedida" role="tab" data-toggle="tab"><b style="font-size: 16px; text-transform: uppercase; ">Comprar por medida</b></a></li>
-            </ul>
-
-
-            <div class="tab-content" style="background: #c0bebf;">
-              <div role="tabpanel" class="buscador2 tab-pane active" id="comprarAro">
-                 <div class="form-group row">
-                    <div class="col-md-4 ">
-                     <label>Marca</label>
-                      <!--input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.marca"-->
-                      <ng-autocomplete (selected)="getModeloVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="marcaGroup"></ng-autocomplete>
-                    </div>
-                    <div class="col-md-4 ">
-                       <label>Modelo</label>
-                      <!--input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.modelo"-->
-                      <ng-autocomplete (selected)="getAnoVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="modeloGroup"></ng-autocomplete>
-                    </div>
-                    <div class="col-md-2 ">
-                       <label>Año</label>
-                      <!--input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.ano"-->
-                      <ng-autocomplete class="ng-autocomplete-input" (selected)="setAnoVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="anoGroup"></ng-autocomplete>
-                    </div>
-                    <div class="col-md-2 " style="padding-top: 22px;">
-                     <button type="button" (click)="buscador1()" class="btn btn-default bremsen2" style="padding: 10px;">Buscar </button>
-                   </div>
-                  </div>
-              </div>
-
-              <div role="tabpanel2" class="buscador2 tab-pane" id="comprarMedida">
-                   <div class="form-group row">
-                    <div class="col-md-4 ">
-                     <label>Ancho</label>
-                      <!--input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.ancho"-->
-                       <ng-autocomplete (selected)="getPerfilVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="anchoGroup"></ng-autocomplete>
-                    </div>
-                    <div class="col-md-4 ">
-                       <label>Perfil</label>
-                      <!--input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.perfil"-->
-                      <ng-autocomplete (selected)="getAroVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="perfilGroup"></ng-autocomplete>
-                    </div>
-                    <div class="col-md-2 ">
-                       <label>Aro</label>
-                      <!--input class="form-control" id="" type="text" [(ngModel)]="detallesCategoria.aro"-->
-                      <ng-autocomplete (selected)="setAroVehiculos($event)" [classes]="['ng-autocomplete-dropdown']" [group]="aroGroup"></ng-autocomplete>
-                    </div>
-                    <div class="col-md-2" style="padding-top: 22px;">
-                     <button type="submit" (click)="buscador2()" class="btn btn-default bremsen2" style="padding: 10px;">Buscar </button>
-                   </div>
-                  </div>
-              </div>
-            </div>
-
-        </div>
-
+        <div id="content" class="col-sm-9">
+          <h3><b>Para: {{param1}} </b></h3>
 
         <!-- 1 -->
 <div class="loader loader--style1" title="0" *ngIf="mostrarLoading">
@@ -152,9 +96,7 @@
 </div>
 
 
-
-
-          <div class="product-filter">
+          <div class="product-filter" *ngIf="detallesCategoria.totalProductos > 0">
             <div class="row">
               <div class="col-sm-6 text-left"> <label class="control-label" for="input-sort">Mostrando {{ detallesCategoria.inicio}} - {{ detallesCategoria.fin}} de {{detallesCategoria.totalProductos}} Productos</label></div>
               <div class="col-sm-3 text-right">
@@ -177,10 +119,33 @@
           <div *ngIf="errorMessage" class="help-block">{{errorMessage}}</div>
           <div class="row products-category">
 
-              <div *ngFor="let producto of productos" class=" product-list col-xs-12">
+
+            <div class="col-sm-12" style="padding: 0px;"  *ngIf="detallesCategoria.totalProductos == 0">
+            <h2>No se han encontrado neumáticos para tu búsqueda</h2>
+            <p>Dejanos tus datos y nosotros seguiremos buscando por ti. Te escribiremos con las mejores opciones.</p>
+                <form>
+                  <div class="form-group required">
+                    <label for="">Nombre completo</label>
+                    <input type="text" class="form-control" id="">
+                  </div>
+
+                  <div class="form-group required">
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" id="" >
+                  </div>
+              </form>
+                <button type="button" class="btn btn-default btn-lg">Enviar</button>
+                <br>
+          </div>
+
+
+
+<div  *ngIf="detallesCategoria.totalProductos > 0">
+            <div *ngFor="let producto of productos"  class=" product-list col-xs-12">
               <div class="product-thumb">
                 <div class="image">
-                      <a routerLink="/producto/{{producto.ID}}">
+
+                     <a routerLink="/producto/{{producto.ID}}">
                         <div class="logo-img">
                          <img  src="assets/image/{{producto.LOGO}}" width="200px" alt="" title="" class="img-responsive" />
                       </div>
@@ -195,7 +160,6 @@
                          <a href=# > <img src="#" class=""></a>
 
                         -->
-
                     </div>
                     <h4><a routerLink="/producto/{{producto.ID}}"> {{producto.MARCA}} {{producto.MODELO}} </a></h4>
                     <div>
@@ -223,11 +187,9 @@
             <tr>
               <td class="col-sm-6">
 
-                <select class="form-control" style="width: 75%;" #selectCantidad >
+                <select class="form-control" style="width: 75%;" #selectCantidad>
                 <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo">{{stock.nombre}}</option>
               </select>
-              <div *ngIf="cantidadValido" class="help-block">Debe seleccionar una cantidad</div>
-
               </td>
               <td class="col-sm-6">
                 <p style="text-align:right; margin-bottom: 3px;" class="precio"><b>$ {{producto.PRECIO_FINAL}}</b></p>
@@ -249,49 +211,23 @@
               </td>
             </tr>
             <tr style="text-align:right; ">
-              <td><button type="button" class="btn btn-default bremsen " routerLink="/producto/{{producto.ID}}">Comprar</button></td>
-              <td><button type="button" class="btn btn-primary bremsen3 " (click)="agregarCarro(2,selectCantidad.value,producto.ID)" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-plus" aria-hidden="true"></i> Carro</button></td>
+              <td><button type="submit" class="btn btn-default bremsen " routerLink="/producto/{{producto.ID}}">Comprar</button></td>
+              <td><button type="submit" class="btn btn-primary bremsen3 " (click)="agregarCarro(2,selectCantidad.value,producto.ID)" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-plus" aria-hidden="true"></i> Carro</button></td>
             </tr>
           </table>
 
       </div>
+
+
               </div>
-
-                <!--div #elem style="text-align: left !important;">
-                      <div class="well">
-                        <br>
-                        <div class="col-md-12 text-right">
-                          <h3>Sumado al carro</h3>
-                          <hr>
-                        </div>
-
-                         <div class="col-md-3 col-sm-12">
-                             <img src="assets/image/product/540x576.jpg" width="220px" alt=" Strategies for Acquiring Your Own Laptop " title="" class="img-responsive">
-                        </div>
-
-                        <div class="col-md-3 col-sm-12">
-                            {{producto.MARCA}} {{producto.MODELO}}
-                              <ul class="lista-producto">
-                                <li>Medida: {{producto.MEDIDA}}</li>
-                                <li>Instalación gratis: {{producto.INCLUYE_INSTALACION}}</li>
-                                <li>Despacho gratis: {{producto.DESPACHO}}</li>
-                                <li>Cantidad: {{selectCantidad.value}}</li>
-
-                            </ul>
-                        </div>
-
-
-                      </div>
-               </div-->
-
-
-
             </div>
+
+</div>
+
+
+
           </div>
-
-
-
-          <div class="row">
+          <div class="row"  *ngIf="detallesCategoria.totalProductos > 0">
             <div class="col-sm-6 text-left" style="margin-top: -18px;">
               <ul class="pagination">
                 <li *ngFor="let item of resultProductos | paginate: { itemsPerPage: itemsPerPage, currentPage: p }"></li>
@@ -313,7 +249,7 @@
       </div>
     </div>
   </div>
- <script>
+  <script>
                         $('#myModal').on('shown.bs.modal', function () {
                         $('#myInput').focus()
                       })

@@ -90,14 +90,20 @@ export class MisdatosComponent implements OnInit {
     if(typeof this.cliente.region == 'undefined'){
         this.regionValido = false;
         return;
+      }else{
+         this.regionValido = true;
       }
       if(typeof this.cliente.ciudad == 'undefined'){
         this.ciudadValido = false;
         return;
+      }else{
+        this.ciudadValido = true;
       }
       if(typeof this.cliente.comuna == 'undefined'){
         this.comunaValido = false;
         return;
+      }else{
+        this.comunaValido = true;
       }
 
     this.userService.update(this.cliente).then(

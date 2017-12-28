@@ -46,12 +46,12 @@ export class ProductosService {
 
   }
 
-   public getProductosHome(): Promise<any>{
+   public getProductosHome(tipo): Promise<any>{
 
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
       const params = new URLSearchParams();
-      params.append('accion','todos');
+      params.append('accion',tipo);
 
       return this.http.get(this.url+ 'productos.php?' + params.toString() , options).toPromise()
 	           .then(this.extractData)

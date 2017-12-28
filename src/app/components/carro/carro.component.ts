@@ -262,6 +262,19 @@ public eliminaProductoCarro(id){
   return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
 
+public checking = function(){
+  var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          //console.debug
+          if(currentUser != null){
+            if(currentUser.token === 'active'){
+                this.route.navigate(['/checkin']);
+            }else{
+                this.route.navigate(['/checkout']);
+            }
 
+          }else{
+            this.route.navigate(['/checkout']);
+          }
+}
   }
 

@@ -30,11 +30,6 @@ export class HomeComponent {
 
   public productos = [];
 
-  public sugeridosTab: boolean = true;
-  public ofertasTab:boolean = false;
-
-  public sugeridosCarrusel;
-
    @ViewChild(NgAutocompleteComponent) public completer: NgAutocompleteComponent;
 
 @ViewChild('owlElement') owlElement: OwlCarousel
@@ -44,18 +39,19 @@ export class HomeComponent {
     private router: Router,
     public _productoService: ProductosService
   ) {
-    this.getProductosFiltrado();
 
+    this.activaSugeridos();
     this.getMarcaVehiculos();
     this.getAnchoVehiculos();
   }
   public activaSugeridos = function (){
-    this.sugeridosTab=true;
-    this.ofertasTab=false;
+    console.debug('sugerido');
+    this.getProductosFiltrado('sugerido');
+
   }
   public activaOfertas = function(){
-    this.sugeridosTab=false;
-    this.ofertasTab=true;
+    console.debug('oferta');
+    this.getProductosFiltrado('oferta');
   }
   btnBuscarClick= function (origen:number) {
       //console.debug("ejecutado");
@@ -73,14 +69,14 @@ export class HomeComponent {
     this.router.navigateByUrl('/registro');
   }
 
-  public getProductosFiltrado = function (){
+  public getProductosFiltrado = function (tipo){
 
-   this._productoService.getProductosHome()
+   this._productoService.getProductosHome(tipo)
 	     .then( data => {
             //console.debug(data);
             this.productos = data;
 
-            //console.debug(this.productos);
+            console.debug(this.productos);
 		    },
         error => this.errorMessage = <any>error);
 

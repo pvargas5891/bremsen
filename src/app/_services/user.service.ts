@@ -97,6 +97,7 @@ export class UserService {
         params.append('genero', registro.genero);
         params.append('telefono', registro.telefono);
         params.append('email', registro.email);
+        params.append('password', registro.password);
         let body = params.toString();
         return this.http.post(this.url+ 'registro.php', body, options).toPromise()
 	           .then(this.extractData)

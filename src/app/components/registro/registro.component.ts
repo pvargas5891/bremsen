@@ -23,6 +23,11 @@ export class RegistroComponent {
    regionValido: boolean = true;
    ciudadValido: boolean = true;
    comunaValido: boolean = true;
+
+    public nueva1: string="";
+    public nueva2: string="";
+  public errorPass = false;
+  public errorMsg: string = "";
   constructor(
     public _is: InformacionService,
     public users: UserService,
@@ -51,21 +56,51 @@ export class RegistroComponent {
       if(typeof this.cliente.region == 'undefined'){
         this.regionValido = false;
         return;
+      }else{
+         this.regionValido = true;
       }
       if(typeof this.cliente.ciudad == 'undefined'){
         this.ciudadValido = false;
         return;
+      }else{
+        this.ciudadValido = true;
       }
       if(typeof this.cliente.comuna == 'undefined'){
         this.comunaValido = false;
         return;
+      }else{
+        this.comunaValido = true;
       }
+
+      if(this.nueva1 == 'undefined' || this.nueva1 == ''){
+       this.errorPass =true;
+        this.errorMsg="Debe ingresar la nueva password";
+        return;
+    }
+      if(this.nueva2 == 'undefined' || this.nueva2 == ''){
+        this.errorPass =true;
+        this.errorMsg="Debe ingresar repetir la password anterior";
+        return;
+    }
+
+    if(this.nueva1 != this.nueva2){
+      this.errorPass =true;
+      this.errorMsg="Las password no coinciden!";
+      return;
+    }
+    this.errorPass =false;
+    this.cliente.password=this.nueva2;
+
       this.loading = true;
      this.users.create(this.cliente)
 	     .then( data => {
-           this.reset();
+             this.errorMessage = "";
            if(data=='OK'){
               this.estado = true;
+              this.loading = false;
+           }
+           if(data=='EXISTE'){
+             this.errorMessage = "El email ingresado ya existe";
               this.loading = false;
            }
 		    },

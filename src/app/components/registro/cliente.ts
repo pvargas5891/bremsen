@@ -11,6 +11,15 @@ export class Cliente {
    public email: string;
    public username: string;
    public password: string;
+   public razon: string;
+   public rutempresa: string;
+   public giro: string;
+   public telefonoempresa: string;
+   public direccionempresa: string;
+   public comunaempresa: string;
+   public ciudadempresa: string;
+   public regionempresa: string;
+   public facturacion: string;
    constructor() {
    }
 }

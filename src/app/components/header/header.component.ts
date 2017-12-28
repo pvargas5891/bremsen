@@ -21,6 +21,7 @@ model: any = {};
     cantidadProductos = 0;
     totalCarro = 0;
     logueado = false;
+    searchValue: string;
     public carroCompra:any[] =  [];
 
      constructor(
@@ -44,8 +45,14 @@ model: any = {};
             }
           }
          }
-
-login() {
+      public inSearch = function(){
+        if(typeof this.searchValue === 'undefined' || this.searchValue == ''){
+          return;
+        }
+        //console.debug(this.searchValue);
+        this.route.navigate(['/search/'+'menu/'+this.searchValue]);
+      }
+      public login() {
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .then(result => {
@@ -64,8 +71,8 @@ login() {
                     this.loading = false;
                 }
             });
-    }
-     logout(): void {
+      }
+     public logout(): void {
             // clear token remove user from local storage to log user out
           //this.token = null;
           localStorage.removeItem('currentUser');
@@ -73,20 +80,20 @@ login() {
          this.route.navigate(['/home']);
         }
 
-      private getCarroAll = function (){
+    private getCarroAll = function (){
 
-    this.carro.getCarroAll(this.id).then(
+          this.carro.getCarroAll(this.id).then(
 
-      data => {
-       // console.debug(data);
-          for(var id in data){
-               this.carroCompra.push(this.getProductoById(data[id]));
-          }
-          //console.debug(this.carroCompra);
-      },
+            data => {
+             // console.debug(data);
+                for(var id in data){
+                     this.carroCompra.push(this.getProductoById(data[id]));
+                }
+                //console.debug(this.carroCompra);
+            },
 
 
-    );
+          );
 
     }
 
