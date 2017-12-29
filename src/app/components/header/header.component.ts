@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Input, OnInit, DoCheck } from '@angular/core';
 import { AuthenticationService } from '../../_services/index';
 import { CarroCompraService } from '../../services/carro-compra.service';
 import { Router } from '@angular/router';
@@ -10,8 +10,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
-export class HeaderComponent{
-model: any = {};
+export class HeaderComponent implements DoCheck{
+    model: any = {};
     loading = false;
     returnUrl: string;
     error = '';
@@ -24,6 +24,7 @@ model: any = {};
     searchValue: string;
     public carroCompra:any[] =  [];
 
+    @Input() carroChange: string;
      constructor(
         private authenticationService: AuthenticationService,
         private route: Router,
@@ -44,7 +45,26 @@ model: any = {};
                 this.getCarroAll();
             }
           }
+           localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'muerto' }));
          }
+      public ngDoCheck(){
+
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if(currentUser != null){
+             //console.debug(currentUser);
+            if(currentUser.token === 'active'){
+
+              var cambiaCarro = JSON.parse(localStorage.getItem('cambiaCarro'));
+              //console.debug(cambiaCarro.estado);
+              if(cambiaCarro.estado=='actualize'){
+                this.id = currentUser.usuario.id;
+                this.getCarroAll();
+               // console.debug("cambio carro");
+                localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'muerto' }));
+              }
+            }
+        }
+      }
       public inSearch = function(){
         if(typeof this.searchValue === 'undefined' || this.searchValue == ''){
           return;
@@ -62,6 +82,7 @@ model: any = {};
                     //this.router.navigate(['/']);
                   var currentUser = JSON.parse(localStorage.getItem('currentUser'));
                   //console.debug(currentUser);
+
                     this.nombreCliente = currentUser.usuario.nombre;
                     this.autenticado = true;
                     this.loading = false;
@@ -81,7 +102,9 @@ model: any = {};
         }
 
     private getCarroAll = function (){
-
+           this.carroCompra = [];
+           this.cantidadProductos = 0;
+           this.totalCarro = 0;
           this.carro.getCarroAll(this.id).then(
 
             data => {
@@ -143,7 +166,7 @@ model: any = {};
             producto.TBK_MONTO=carro.TBK_MONTO;
             producto.totalParcial = parseInt(carro.cantidad)*parseInt(producto.PRECIO_FINAL);
             this.cantidadProductos += parseInt(carro.cantidad);
-            this.totalCarro += parseInt(producto.PRECIO_FINAL);
+            this.totalCarro += producto.totalParcial;
 		    },
         error => this.errorMessage = <any>error);
 

@@ -29,6 +29,7 @@ export class CategoriaNoFiltradaComponent {
   public perfilGroup = [];
   public aroGroup = [];
   public cantidadValido = false;
+  public cambiaCarro = false;
   constructor(private _productoService: ProductosService,
               public _is:InformacionService,
               private _carroCompra: CarroCompraService) {
@@ -301,6 +302,7 @@ export class CategoriaNoFiltradaComponent {
     this._carroCompra.agregarCarro(cantidad,producto, usuario)
     .then(
       data => {
+        console.debug(data);
           if(data=='STOCK'){
             this.errorMessage = 'No hay stock suficiente para tu pedido';
             return;
@@ -311,9 +313,12 @@ export class CategoriaNoFiltradaComponent {
           }
 
           this.estadoCarro = true;
+          localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+          var cambiaCarro = JSON.parse(localStorage.getItem('cambiaCarro'));
+              console.debug("2:" + cambiaCarro.estado);
       },
       error => {
-
+          console.debug(error);
       }
     );
   }
