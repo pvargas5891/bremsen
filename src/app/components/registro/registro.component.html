@@ -12,7 +12,7 @@
         <h1 class="title">Formulario de registro</h1>
 
 
-       <form name="form" (ngSubmit)="f.form.valid && saveRegistro()" #f="ngForm" novalidate>
+       <form *ngIf="!registrado" name="form" (ngSubmit)="f.form.valid && saveRegistro()" #f="ngForm" novalidate>
                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !nombreCompleto.valid }">
                     <label for="nombreCompleto">Nombre completo</label>
                         <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto" #nombreCompleto="ngModel" [(ngModel)]="cliente.nombreCompleto" required>
@@ -88,6 +88,18 @@
         <div *ngIf="errorMessage" [ngClass] = "'error'"> {{errorMessage}} </div>
         <div *ngIf="errorPass" [ngClass] = "'error'">{{errorMsg}}</div>
          </form>
+      <div class="container" *ngIf="registrado">
+      <div class="row">
+            <div class="col-md-7">
+             <div class="pad-15">&nbsp;</div>
+                <h1>Bienvenido!</h1>
+                <p>Ya tienes una cuenta en <b>Bremsen</b>, ahora podras comprar tus neumáticos más facil.</p>
+                <br>
+                  <a href="index.html">  <button class="btn btn-default"><span>Ir a comprar</span></button></a>
+
+            </div>
+      </div>
+  </div>
         </div>
 
         <!--Middle Part End -->
@@ -130,3 +142,5 @@
       </div>
     </div>
   </div>
+
+

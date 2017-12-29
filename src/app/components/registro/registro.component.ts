@@ -23,7 +23,7 @@ export class RegistroComponent {
    regionValido: boolean = true;
    ciudadValido: boolean = true;
    comunaValido: boolean = true;
-
+    registrado: boolean = false;
     public nueva1: string="";
     public nueva2: string="";
   public errorPass = false;
@@ -98,6 +98,7 @@ export class RegistroComponent {
            if(data=='OK'){
               this.estado = true;
               this.loading = false;
+              this.registrado = true;
            }
            if(data=='EXISTE'){
              this.errorMessage = "El email ingresado ya existe";
