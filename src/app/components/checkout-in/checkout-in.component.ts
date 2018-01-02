@@ -58,7 +58,7 @@ error = '';
           this.descuentoAplicado=this.datosCarro[0].descuentoAplicado;
           this.totalTotales=this.datosCarro[0].totalTotales;
 
-          this.carro.setDetallesCarro(this.datosCarro).then();
+          this.carro.setDetallesCarro(this.datosCarro,this.id).then();
 
   }
 
