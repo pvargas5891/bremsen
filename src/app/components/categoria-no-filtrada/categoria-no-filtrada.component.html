@@ -14,7 +14,9 @@
         <div class="pad-10"></div>
         <!--Left Part Start -->
         <aside id="column-left" class="col-sm-3 hidden-xs">
-          <div class="pad"></div>
+            <div class="pad-5">&nbsp;</div>
+            <h3><b>FILTRAR POR</b></h3>
+            <br>
           <h3 class="subtitle">Marca</h3>
           <div class="box-category">
             <div class="radio">
@@ -72,7 +74,7 @@
     <div id="content" class="col-sm-9">
 
 
-        <div class="pest-home" style="padding-top: 20px;">
+        <div class="" style="padding-top: 20px;">
 
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" style="width: 50%" class="active text-center"><a href="#comprarAro" aria-controls="comprarAro" role="tab" data-toggle="tab"><b style="font-size: 16px; text-transform: uppercase; ">Comprar por Aro</b></a></li>
@@ -250,7 +252,13 @@
             </tr>
             <tr style="text-align:right; ">
               <td><button type="button" class="btn btn-default bremsen " routerLink="/producto/{{producto.ID}}">Comprar</button></td>
-              <td><button type="button" class="btn btn-primary bremsen3 " (click)="agregarCarro(2,selectCantidad.value,producto.ID)" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-plus" aria-hidden="true"></i> Carro</button></td>
+              <td>
+               
+                
+                <button type="button" class="btn btn-primary"  (click)="agregarCarro(2,selectCantidad.value,producto.ID)"  data-toggle="modal" data-target="#myModal">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Carro
+                </button>
+              </td>
             </tr>
           </table>
 
@@ -318,6 +326,7 @@
                         $('#myInput').focus()
                       })
                     </script>
+ <!--                   
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
                         <div class="modal-dialog modal-sm" role="document" >
                           <div class="modal-content" style="padding-left: 8px;">
@@ -326,4 +335,20 @@
                             <div class="pad-10">&nbsp;</div>
                              </div>
                         </div>
-                    </div>
+                    </div>-->
+
+
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title" id="myModalLabel">Sumando al carro</h4>
+                            </div>
+                            <div class="modal-body">
+                             <h1>Producto agregado</h1>
+                            </div>
+                           
+                          </div>
+                        </div>
+                      </div>

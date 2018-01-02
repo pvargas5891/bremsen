@@ -26,6 +26,7 @@ svg rect{
   fill: black;
 }
 
+.ngx-pagination .current {     background: #1e1e1e !important;}
 
 .ng-autocomplete-dropdown {
     position: relative;
