@@ -1048,8 +1048,10 @@ visibility:hidden;
 	@media (max-width: 460px) {
   		 .video { width: 360px; height:203px; }
   		h4.tabs-h4 { font-size: 11px !important; }
-
-  		.noView { display: none; }
+		  .pad-upDown { padding: 10px }
+		  .responsivo {padding: 30px; }
+		  .noView { display: none; }
+		 texto-tabs{ font-size:14px !important; }
 	}
 
 

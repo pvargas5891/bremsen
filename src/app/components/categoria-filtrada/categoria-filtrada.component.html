@@ -212,7 +212,9 @@
             </tr>
             <tr style="text-align:right; ">
               <td><button type="submit" class="btn btn-default bremsen " routerLink="/producto/{{producto.ID}}">Comprar</button></td>
-              <td><button type="submit" class="btn btn-primary bremsen3 " (click)="agregarCarro(2,selectCantidad.value,producto.ID)" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-plus" aria-hidden="true"></i> Carro</button></td>
+              <td> <button type="button" class="btn btn-primary"  (click)="agregarCarro(2,selectCantidad.value,producto.ID)"  data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Carro
+              </button></td>
             </tr>
           </table>
 
@@ -254,12 +256,20 @@
                         $('#myInput').focus()
                       })
                     </script>
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-                        <div class="modal-dialog modal-sm" role="document" >
-                          <div class="modal-content" style="padding-left: 8px;">
-                            <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="font-size: 33px; color: #fff !important;">×</span></button>  </div><br>
-                            <h3 style="color: #fff !important;">Producto agregado al carro</h3>
-                            <div class="pad-10">&nbsp;</div>
-                             </div>
-                        </div>
-                    </div>
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Sumando al carro</h4>
+        </div>
+        <div class="modal-body">
+         <h1>Producto agregado</h1>
+        </div>
+       
+      </div>
+    </div>
+  </div>
