@@ -72,7 +72,7 @@ export class HeaderComponent implements DoCheck{
             // console.debug("cambio carro");
             localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'muerto' }));
           }
-        
+
         }
       }
       public inSearch = function(){
@@ -94,12 +94,13 @@ export class HeaderComponent implements DoCheck{
                   //console.debug(currentUser);
 
                     this.nombreCliente = currentUser.usuario.nombre;
+                    this.logueado = true;
                     this.autenticado = true;
                     this.loading = false;
                     this.agregaCarrosinSesion(currentUser.usuario.id);
                     this.id = currentUser.usuario.id;
                     this.getCarroAll();
-                    
+
                 } else {
                     // login failed
                     this.error = 'Usuario y password son incorrectos';
@@ -111,7 +112,11 @@ export class HeaderComponent implements DoCheck{
             // clear token remove user from local storage to log user out
           //this.token = null;
           localStorage.removeItem('currentUser');
+         this.logueado = false;
          this.autenticado = false;
+         this.id = "";
+          this.getCarroAll();
+
          this.route.navigate(['/home']);
         }
 
@@ -120,7 +125,7 @@ export class HeaderComponent implements DoCheck{
            this.cantidadProductos = 0;
            this.totalCarro = 0;
 
-         
+
           this.carro.getCarroAll(this.id).then(
 
             data => {
@@ -133,7 +138,7 @@ export class HeaderComponent implements DoCheck{
 
 
           );
-           
+
 
     }
   private getCarroAllSinSesion = function () {
@@ -175,7 +180,7 @@ export class HeaderComponent implements DoCheck{
 
 
 
-    
+
   }
 
   public getProductoById = function (carro): Producto{

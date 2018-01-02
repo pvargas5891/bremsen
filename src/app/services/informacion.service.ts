@@ -31,6 +31,9 @@ export class InformacionService {
   public anchos:any[] = [];
   public perfiles:any[] = [];
   public aros:any[] = [];
+
+  public talleres: any[]=[];
+
   constructor( public http:Http ) {
 
     this.getRegiones();
@@ -119,6 +122,7 @@ public getPerfilVehiculos(ancho): Promise<string>{
         this.regiones = data.json();
         this.regionesPersona = data.json();
         this.regionesEmpresa = data.json();
+
         // console.debug(this.regiones[0][0]);
         //console.debug(this.regiones[0][1]);
       })
@@ -130,6 +134,17 @@ public getCiudadesEmpresa(region:string ){
               //console.debug(data.json());
                this.cargada = true;
                this.ciudadesEmpresa = data.json();
+
+             })
+  }
+
+  public getTalleresByRegion(region:string ){
+
+    this.http.get(this.url+"talleres.php?region=" + region)
+             .subscribe( data =>{
+              //console.debug(data.json());
+               this.cargada = true;
+               this.talleres = data.json();
 
              })
   }

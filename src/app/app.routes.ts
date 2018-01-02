@@ -16,7 +16,9 @@ import {
   CarroComponent,
   CheckoutInComponent,
   CheckoutOutComponent,
-  SearchComponent
+  SearchComponent,
+  ExitoComponent,
+  FracasoComponent
 } from "./components/index.paginas";
 
 const app_routes: Routes = [
@@ -36,6 +38,8 @@ const app_routes: Routes = [
     { path: 'checkout', component: CheckoutOutComponent},
     { path: 'producto/:id', component: ProductoComponent},
     { path: 'misdatos', component: MisdatosComponent},
+    { path: 'exito/:id', component: ExitoComponent},
+    { path: 'fracaso/:id', component: FracasoComponent},
     { path: 'search/:origen/:data', component: SearchComponent},
     { path: '**', pathMatch: 'full', redirectTo: 'home'}
 

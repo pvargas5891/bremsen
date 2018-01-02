@@ -56,6 +56,29 @@ export class UserService {
 
     }
 
+    saveFactura(registro: Cliente) {
+
+       let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+        let options = new RequestOptions({ headers: headers });
+        const params = new URLSearchParams();
+        params.append('id', registro.id);
+        params.append('razon', registro.razon);
+        params.append('rutempresa', registro.rutempresa);
+        params.append('giro', registro.giro);
+        params.append('telefonoempresa', registro.telefonoempresa);
+        params.append('direccionempresa', registro.direccionempresa);
+        params.append('regionempresa', registro.regionempresa);
+        params.append('ciudadempresa', registro.ciudadempresa);
+        params.append('comunaempresa', registro.comunaempresa);
+        params.append('accion', 'empresa');
+
+        let body = params.toString();
+        return this.http.post(this.url+ 'updateCliente.php', body, options).toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+
+    }
+
     public updatePassword(registro: Cliente): Promise<string>{
 
       let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
@@ -98,6 +121,7 @@ export class UserService {
         params.append('telefono', registro.telefono);
         params.append('email', registro.email);
         params.append('password', registro.password);
+
         let body = params.toString();
         return this.http.post(this.url+ 'registro.php', body, options).toPromise()
 	           .then(this.extractData)
@@ -105,7 +129,36 @@ export class UserService {
 
 
   }
+public createWithFactura(registro: Cliente): Promise<string>{
 
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+        let options = new RequestOptions({ headers: headers });
+        const params = new URLSearchParams();
+        params.append('nombreCompleto', registro.nombreCompleto);
+        params.append('comuna', registro.comuna);
+        params.append('ciudad', registro.ciudad);
+        params.append('region', registro.region);
+        params.append('direccion', registro.direccion);
+        params.append('genero', registro.genero);
+        params.append('telefono', registro.telefono);
+        params.append('email', registro.email);
+        params.append('password', registro.password);
+        params.append('razon', registro.razon);
+        params.append('rutempresa', registro.rutempresa);
+        params.append('giro', registro.giro);
+        params.append('telefonoempresa', registro.telefonoempresa);
+        params.append('direccionempresa', registro.direccionempresa);
+        params.append('regionempresa', registro.regionempresa);
+        params.append('ciudadempresa', registro.ciudadempresa);
+        params.append('comunaempresa', registro.comunaempresa);
+
+        let body = params.toString();
+        return this.http.post(this.url+ 'registro.php', body, options).toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+
+
+  }
   public loginUserService(registro: Cliente): Promise<string>{
 
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });

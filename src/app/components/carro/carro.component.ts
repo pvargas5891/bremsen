@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit } from '@angular/core';
 import { CarroCompraService } from '../../services/carro-compra.service';
 import { InformacionService } from '../../services/informacion.service';
 import { Router } from '@angular/router';
 import { ProductosService } from '../../services/productos.service';
 import { Producto} from "../producto/producto";
 import { DomSanitizer } from '@angular/platform-browser';
+
+declare var jQuery:any;
+declare var $:any;
+
 @Component({
   selector: 'app-carro',
   templateUrl: './carro.component.html',
@@ -18,13 +22,37 @@ export class CarroComponent implements OnInit {
   regionValido: boolean = true;
   ciudadValido: boolean = true;
   comunaValido: boolean = true;
-
+  public costoFinalInstalacion=0;
   estado: boolean = false;
-  regionInstalacion: string;
-  ciudadInstalacion: string;
-  comunaInstalacion: string;
+  public regionInstalacion: string;
+  public ciudadInstalacion: string;
+  public comunaInstalacion: string;
+  public aceptaInstalacion1value: string;
+  public nombresInstalacion1value: string;
+  public direccionInstalacion1value: string;
+  public aceptaInstalacion2value: string;
+  public nombresInstalacion2value: string;
+  public direccionInstalacion2value: string;
+  public rutInstalacion2value:string;
+  public aceptaInstalacion3value: string;
+  public tallerAsociadovalue: string;
+  public fechaInstalacionvalue: string;
+  public bloqueHorariovalue: string;
+  public direccionInstalacion4value: string;
+  public aceptaInstalacion4value: string;
+  public tipoInstalacion:number = 1;
+
+  public costoNeumaticos:number = 0;
+  public costoInstalacion:number = 0;
+  public descuentoAplicado:number = 0;
+  public totalTotales:number = 0;
+
   errorMessage: string;
-  tipoInstalacion:number = 1;
+
+
+
+
+
   constructor(private carro: CarroCompraService,
               private route: Router,
               private _productoService: ProductosService,
@@ -47,15 +75,26 @@ export class CarroComponent implements OnInit {
             this.getCarroAllSinSesion();
           }
 
+      localStorage.setItem('instalacionTemporal', null);
+
    }
 
   ngOnInit() {
+
+
   }
-  
+
 
   tipoInstalacionBoton(tipo: number):void{
-        this.validaRegion();
-
+        //this.validaRegion();
+        this.tipoInstalacion = tipo;
+        console.debug(this.tipoInstalacion);
+        if(tipo==3){
+          /*$('#date').datetimepicker({
+            pickTime: false
+          });*/
+        }
+        this.calculaTotales();
   }
 
  validaRegion = function(){
@@ -84,9 +123,7 @@ export class CarroComponent implements OnInit {
       return true;
  }
 
-  public aceptaInstalacion1value: string;
-  public nombresInstalacion1value: string;
-  public direccionInstalacion1value: string;
+
 
    public aceptaInstalacion1Valido: boolean = false;
 
@@ -97,12 +134,13 @@ export class CarroComponent implements OnInit {
 
      this.estado = true;
      this.errorMessage="";
+     //this.calculaTotales();
+     this.guardaTemportalData();
+
   }
 
-  public aceptaInstalacion2value: string;
-  public nombresInstalacion2value: string;
-  public direccionInstalacion2value: string;
-  public rutInstalacion2value:string;
+
+
 
   public aceptaInstalacion2Valido: boolean = false;
 
@@ -113,26 +151,32 @@ export class CarroComponent implements OnInit {
 
     this.estado = true;
     this.errorMessage="";
+     //this.calculaTotales();
+     this.guardaTemportalData();
   }
 
-  public aceptaInstalacion3value: string;
-  public tallerAsociadovalue: string;
-  public fechaInstalacionvalue: string;
-  public bloqueHorariovalue: string;
+
 
   public aceptaInstalacion3Valido: boolean = false;
-
+  public validaTalleres: boolean = false;
   guardaInstalacion3= function(){
      this.tipoInstalacion = 3;
     if(!this.validaRegion())
         return;
-
+    console.debug(this.tallerAsociadovalue);
+    if(typeof this.tallerAsociadovalue == 'undefined' || this.tallerAsociadovalue == ""){
+        this.validaTalleres = true;
+        return;
+    }
+    this.validaTalleres = false;
     this.estado = true;
+
     this.errorMessage="";
+     //this.calculaTotales();
+     this.guardaTemportalData();
   }
 
-  public direccionInstalacion4value: string;
-  public aceptaInstalacion4value: string;
+
 
   public direccionInstalacion4Valido: boolean = false;
   public aceptaInstalacion4Valido: boolean = false;
@@ -143,9 +187,48 @@ export class CarroComponent implements OnInit {
 
     this.estado = true;
     this.errorMessage="";
+    //
+      this.guardaTemportalData();
+
+  }
+
+
+
+  public guardaTemportalData = function (){
+
+    localStorage.setItem('instalacionTemporal', null);
+    var instalacionTemporal = new Array();
+     var datos = {
+        regionInstalacion: this.regionInstalacion,
+        ciudadInstalacion: this.ciudadInstalacion,
+        comunaInstalacion: this.comunaInstalacion,
+        aceptaInstalacion1value: this.aceptaInstalacion1value,
+        nombresInstalacion1value: this.nombresInstalacion1value,
+        direccionInstalacion1value: this.direccionInstalacion1value,
+        aceptaInstalacion2value: this.aceptaInstalacion2value,
+        nombresInstalacion2value: this.nombresInstalacion2value,
+        direccionInstalacion2value: this.direccionInstalacion2value,
+        rutInstalacion2value: this.rutInstalacion2value,
+        aceptaInstalacion3value: this.aceptaInstalacion3value,
+        tallerAsociadovalue: this.tallerAsociadovalue,
+        fechaInstalacionvalue: this.fechaInstalacionvalue,
+        bloqueHorariovalue: this.bloqueHorariovalue,
+        direccionInstalacion4value: this.direccionInstalacion4value,
+        aceptaInstalacion4value: this.aceptaInstalacion4value,
+        tipoInstalacion: this.tipoInstalacion,
+        costoNeumaticos: this.costoNeumaticos,
+        costoInstalacion:this.costoInstalacion,
+        descuentoAplicado:this.descuentoAplicado,
+        totalTotales:this.totalTotales
+      };
+        instalacionTemporal.push(datos);
+
+
+      localStorage.setItem('instalacionTemporal', JSON.stringify(instalacionTemporal));
   }
   cambiaCiudad(selectedRegion: string): void{
       this._is.getCiudades(selectedRegion);
+      this._is.getTalleresByRegion(selectedRegion);
   }
   cambiaComuna(selectedCiudad: string): void{
     this._is.getComunas(selectedCiudad);
@@ -156,10 +239,13 @@ export class CarroComponent implements OnInit {
 
       data => {
         this.carroCompra =  [];
+        this.costoNeumaticos = 0;
+        this.costoInstalacion = 0;
        // console.debug(data);
           for(var id in data){
                this.carroCompra.push(this.getProductoById(data[id]));
           }
+
         if (this.carroCompra.length==0){
           this.route.navigate(['/home']);
         }
@@ -168,7 +254,6 @@ export class CarroComponent implements OnInit {
 
 
     );
-
     }
 
   public getProductoById = function (carro): Producto{
@@ -193,6 +278,7 @@ export class CarroComponent implements OnInit {
             producto.NETO = data[0].NETO;
             producto.UNITARIO = data[0].UNITARIO;
             producto.VALOR_INSTALACION = data[0].VALOR_INSTALACION;
+            this.costoInstalacion += parseInt(producto.VALOR_INSTALACION) * carro.cantidad;
             producto.TOTAL = data[0].TOTAL;
             producto.MC = data[0].MC;
             producto.NETO2 = data[0].NETO2;
@@ -220,6 +306,8 @@ export class CarroComponent implements OnInit {
             producto.idPago=carro.pagosID;
             producto.TBK_MONTO=carro.TBK_MONTO;
             producto.totalParcial = parseInt(carro.cantidad)*parseInt(producto.PRECIO_FINAL);
+            this.costoNeumaticos+=producto.totalParcial;
+            this.calculaTotales();
 		    },
         error => this.errorMessage = <any>error);
 
@@ -230,20 +318,47 @@ public cambiaCantidad(id,cantidad){
   //actualizaCarro
  // console.debug(id);
  //console.debug(cantidad);
+var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  if (currentUser != null) {
+    if (currentUser.token === 'active') {
   this.carro.actualizaCarro(id,cantidad).then(
 
     data =>{
           this.carroCompra =  [];
+          this.costoNeumaticos = 0;
+          this.costoInstalacion = 0;
           for(var id in data){
                this.carroCompra.push(this.getProductoById(data[id]));
           }
+
+          localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
     },
     error=>{
 
     }
 
   );
+  }
+  }else{
+    var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
+    //console.debug(carroTemporal);
+    if (carroTemporal != null) {
+      this.carroCompra =  [];
+      this.costoNeumaticos = 0;
+      this.costoInstalacion = 0;
+      for (var i = 0; i < carroTemporal.length; i++) {
+        if (carroTemporal[i].id_producto==id){
+            carroTemporal[i].cantidad=cantidad;
+        }
+        this.carroCompra.push(this.getProductoById(carroTemporal[i]));
+      }
+
+      localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+    }
+  }
+
 }
+
 public eliminaProductoCarro(id){
   //actualizaCarro
   if(!confirm("Se eliminará el producto seleccionado, desea seguir?")){
@@ -256,6 +371,7 @@ public eliminaProductoCarro(id){
         data => {
           this.id = currentUser.usuario.id;
           this.getCarroAll();
+          localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
         },
         error => {
 
@@ -269,21 +385,23 @@ public eliminaProductoCarro(id){
     var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
     //console.debug(carroTemporal);
     if (carroTemporal != null) {
+      this.costoInstalacion = 0;
       for (var i = 0; i < carroTemporal.length; i++) {
         if (carroTemporal[i].id_producto!=id)
           this.carroCompra.push(this.getProductoById(carroTemporal[i]));
       }
 
+      localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
     }
-  }  
-  
+  }
+
 }
 
   private getCarroAllSinSesion = function () {
     this.carroCompra = [];
     this.cantidadProductos = 0;
-    this.totalCarro = 0;
-
+    this.costoNeumaticos = 0;
+    this.costoInstalacion = 0;
 
     var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
     //console.debug(carroTemporal);
@@ -304,6 +422,12 @@ public sanitizaUrlExtern(url){
 }
 
 public checking = function(){
+
+  if(!this.estado){
+    return;
+  }
+
+
   var currentUser = JSON.parse(localStorage.getItem('currentUser'));
           //console.debug
           if(currentUser != null){
@@ -316,6 +440,32 @@ public checking = function(){
           }else{
             this.route.navigate(['/checkout']);
           }
+}
+
+public calculaTotales = function (){
+
+  if(this.tipoInstalacion == 1){
+     this.costoFinalInstalacion = this.costoInstalacion;
+  }
+  if(this.tipoInstalacion == 2){
+     this.costoFinalInstalacion = 40000;
+  }
+    if(this.tipoInstalacion == 3){
+     this.costoFinalInstalacion = 0;
+  }
+    if(this.tipoInstalacion == 4){
+     this.costoFinalInstalacion = 40000;
+  }
+  this.totalTotales = this.costoNeumaticos + this.costoFinalInstalacion;
+  this.totalTotales -= this.descuentoAplicado;
+//public descuentoAplicado:number = 0;
+//public totalTotales:number = 0;
+}
+public voucher: string = "";
+public aplicaDescuento = function(){
+    // servicio que trae el descuento
+    this.descuentoAplicado = 10000;
+
 }
   }
 

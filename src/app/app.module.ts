@@ -42,6 +42,8 @@ import { CarroComponent } from './components/carro/carro.component';
 import { CheckoutInComponent } from './components/checkout-in/checkout-in.component';
 import { CheckoutOutComponent } from './components/checkout-out/checkout-out.component';
 import { SearchComponent } from './components/search/search.component';
+import { ExitoComponent } from './components/exito/exito.component';
+import { FracasoComponent } from './components/fracaso/fracaso.component';
 
 
 
@@ -65,7 +67,9 @@ import { SearchComponent } from './components/search/search.component';
     CarroComponent,
     CheckoutInComponent,
     CheckoutOutComponent,
-    SearchComponent
+    SearchComponent,
+    ExitoComponent,
+    FracasoComponent
   ],
   imports: [
     BrowserModule,

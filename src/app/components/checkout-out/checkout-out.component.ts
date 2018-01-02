@@ -34,6 +34,12 @@ export class CheckoutOutComponent {
       public nueva2: string="";
         public errorPass = false;
   public errorMsg: string = "";
+
+       public costoNeumaticos:number = 0;
+  public costoInstalacion:number = 0;
+  public descuentoAplicado:number = 0;
+  public totalTotales:number = 0;
+  public datosCarro;
   constructor(
       private carro: CarroCompraService,
       private route: Router,
@@ -55,6 +61,13 @@ export class CheckoutOutComponent {
             }
 
           }
+
+    this.datosCarro = JSON.parse(localStorage.getItem('instalacionTemporal'));
+          //console.debug(datosCarro);
+          this.costoNeumaticos=this.datosCarro[0].costoNeumaticos;
+          this.costoInstalacion=this.datosCarro[0].costoInstalacion;
+          this.descuentoAplicado=this.datosCarro[0].descuentoAplicado;
+          this.totalTotales=this.datosCarro[0].totalTotales;
 
 
    }
@@ -151,6 +164,32 @@ cambiaCiudadEmpresa(selectedRegion: string): void{
 
 
 
+           this.userService.createWithFactura(this.cliente)
+	     .then( data => {
+             this.errorMessage = "";
+           if(data=='OK'){
+              this.estado = true;
+              this.loading = false;
+
+            this.authenticationService.login(this.cliente.email, this.cliente.password)
+            .then(result => {
+
+                if (result === true) {
+                   var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                   this.agregaCarrosinSesion(currentUser.usuario.id);
+
+
+                }
+            });
+
+           }
+           if(data=='EXISTE'){
+             this.errorMessage = "El email ingresado ya existe";
+              this.loading = false;
+           }
+		    },
+        error => this.errorMessage = <any> error );
+
       return true;
 
 
@@ -214,7 +253,7 @@ cambiaCiudadEmpresa(selectedRegion: string): void{
 
             this.authenticationService.login(this.cliente.email, this.cliente.password)
             .then(result => {
-                 
+
                 if (result === true) {
                    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
                    this.agregaCarrosinSesion(currentUser.usuario.id);
@@ -243,15 +282,11 @@ cambiaCiudadEmpresa(selectedRegion: string): void{
     if (carroTemporal != null) {
       for (var i = 0; i < carroTemporal.length; i++) {
         this.carro.agregarCarro(carroTemporal[i].cantidad, carroTemporal[i].id_producto, usuario)
-          .then(
-          data => {
-          },
-          error => {
-
-          }
-          );
+          .then();
       }
-
+      this.carro.setDetallesCarro(this.datosCarro,usuario).then(data => {
+          window.location.href="http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario="+usuario;
+      });
     }
 
 

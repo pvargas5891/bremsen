@@ -17,6 +17,8 @@ public cantidad;
 public cantidadValido= false;
 public estadoCarro:boolean = false;
 public errorMessage: string;
+
+public totalAComprar:number = 0;
   constructor(private route: ActivatedRoute,
               private _productoService: ProductosService,
               private _carroCompra: CarroCompraService,
@@ -62,6 +64,7 @@ public getProductoById = function (){
             this.producto.MC = data[0].MC;
             this.producto.NETO2 = data[0].NETO2;
             this.producto.PRECIO_FINAL = data[0].PRECIO_FINAL;
+            this.totalAComprar = this.producto.PRECIO_FINAL;
             this.producto.PRECIO_OFERTA = data[0].PRECIO_OFERTA;
             this.producto.JPG = data[0].JPG;
             this.producto.TITULO = data[0].TITULO;
@@ -80,7 +83,9 @@ public getProductoById = function (){
         error => this.errorMessage = <any>error);
 
 }
-
+public cambiaCantidad= function (cantidad){
+      this.totalAComprar = parseInt(this.producto.PRECIO_FINAL) * parseInt(cantidad);
+}
 public agregarCarro = function (indice) {
   this.cantidadValido = false;
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));

@@ -121,10 +121,10 @@
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" style="width: 25%" class="active">
 
-              <a href="#intalacion-domicilio" aria-controls="intalacion-domicilio" role="tab" data-toggle="tab">
+              <a href="#intalacion-domicilio" (click)="tipoInstalacionBoton(1)" aria-controls="intalacion-domicilio" role="tab" data-toggle="tab">
                 <img class="img-responsive center-block noView" src="assets/image/Instalacion-a-domicilio-04.png">
                   <h4 class="tabs-h4"><b>Instalación a domicilio</b></h4>
-                  <button type="button" class="btn btn-sm btn-default bremsen" (click)="tipoInstalacionBoton(1)">$ 40,000</button>
+                  <button type="button" class="btn btn-sm btn-default bremsen" (click)="tipoInstalacionBoton(1)">$ {{costoInstalacion}}</button>
 
                 </a>
 
@@ -134,7 +134,7 @@
 
               <li role="presentation text-center" style="width: 25%;">
 
-               <a href="#retiramos-autos" aria-controls="retiramos-autos" role="tab" data-toggle="tab">
+               <a href="#retiramos-autos" (click)="tipoInstalacionBoton(2)" aria-controls="retiramos-autos" role="tab" data-toggle="tab">
                  <img class="img-responsive center-block noView" src="assets/image/retiro-a-domicilio-05.png">
                         <h4 class="tabs-h4"><b>Retiramos tu auto</b></h4>
                           <button type="button" class="btn btn-sm btn-default bremsen " (click)="tipoInstalacionBoton(2)">$ 40,000</button>
@@ -147,7 +147,7 @@
 
               <li role="presentation" style="width: 25%">
 
-               <a href="#talleres-asosiados" aria-controls="talleres-asosiados" role="tab" data-toggle="tab">
+               <a href="#talleres-asosiados" (click)="tipoInstalacionBoton(3)" aria-controls="talleres-asosiados" role="tab" data-toggle="tab">
                     <img class="img-responsive center-block noView" src="assets/image/talleres-asociados-06.png">
                     <h4 class="tabs-h4"><b>Talleres asociados</b></h4>
 
@@ -158,7 +158,7 @@
               </li>
 
               <li role="presentation" style="width: 25%">
-                 <a href="#despacho-adomicilio" aria-controls="despacho-adomicilio" role="tab" data-toggle="tab">
+                 <a href="#despacho-adomicilio" (click)="tipoInstalacionBoton(4)" aria-controls="despacho-adomicilio" role="tab" data-toggle="tab">
                               <img class="img-responsive center-block noView" src="assets/image/despacho-a-domicilio-07.png">
                               <h4 class="tabs-h4"><b>Despacho a domicilio</b></h4>
                                   <button type="button" class="btn btn-sm btn-default bremsen " (click)="tipoInstalacionBoton(4)">$ 40,000</button>
@@ -249,21 +249,18 @@
                  <div class="col-md-6"></div>
               </div>
 
-
-
               <div role="tabpanel" class="tab-pane" id="talleres-asosiados">
                 <form name="form" (ngSubmit)="finstalacion3.form.valid && guardaInstalacion3()" #finstalacion3="ngForm" novalidate>
                     <div class="col-md-6">
-                <div class="form-group" [ngClass]="{ 'has-error': finstalacion3.submitted && !tallerAsociado.valid }">
+                <div class="form-group" [ngClass]="{ 'has-error': validaTalleres }">
                    <br><label>Elige un taller</label>
-                  <select class="form-control" #tallerAsociado="ngModel" name="tallerAsociadovalue" [(ngModel)]="tallerAsociadovalue" required>
-          					  <option>1</option>
-          					  <option>2</option>
-          					  <option>3</option>
-          					  <option>4</option>
-          					  <option>5</option>
-                   </select>
-                    <div *ngIf="finstalacion3.submitted && !tallerAsociado.valid" class="help-block">Debe seleccionar un taller asociado</div>
+                  <!--select class="form-control" #tallerAsociado="ngModel" name="tallerAsociadovalue" [(ngModel)]="tallerAsociadovalue" required>
+
+                   </select-->
+                  <select *ngIf="_is.talleres.length > 0" class="form-control" #tallerAsociado="ngModel" name="tallerAsociadovalue" id="tallerAsociadovalue" [(ngModel)]="tallerAsociadovalue">
+                        <option  *ngFor="let taller of _is.talleres" [value]="taller[0]">{{taller[1]}}</option>
+                    </select>
+                    <div *ngIf="validaTalleres" class="help-block">Debe seleccionar un taller asociado</div>
                   </div>
            <br>
               		<div class="form-group" [ngClass]="{ 'has-error': finstalacion3.submitted && !fechaInstalacion.valid }">
@@ -295,8 +292,8 @@
 						</label-->
 					  </div>
 
-                  <button type="submit" class="btn btn-default">GUARDA DATOS</button>
-
+                  <button *ngIf="_is.talleres.length > 0" type="submit" class="btn btn-default">GUARDA DATOS</button>
+                  <div *ngIf="_is.talleres.length == 0" class="help-block">No podemos ofrecer este servicio a su región</div>
                   </div>
              </form>
 				  <div class="col-md-6"></div>
@@ -353,16 +350,14 @@
                   <div class="panel-body">
                     <label class="col-sm-2 control-label" for="input-voucher"> Ingresar código</label>
                     <div class="input-group">
-                      <input type="text" name="voucher" value="" placeholder="xdgez03" id="input-voucher" class="form-control" />
+                      <input type="text" name="voucher" value="" placeholder="xdgez03" id="input-voucher" class="form-control" [(ngModel)]="voucher"/>
                       <span class="input-group-btn">
-                      <input type="submit" value="Ver" id="button-voucher" style="padding: 10px;" data-loading-text="Loading..."  class="btn btn-primary" />
+                      <input type="button" value="Ver" id="button-voucher" style="padding: 10px;" data-loading-text="Loading..." (click)="aplicaDescuento()" class="btn btn-primary" />
                       </span> </div>
                   </div>
                 </div>
               </div>
             </div>
-
-
 
             <div class="col-sm-6" style="padding-right: 0px;">
                <h2 class="titulo-light subtile">Resumen</h2>
@@ -370,19 +365,19 @@
               <table class="table table-precio" style="font-size: 14px;">
                 <tr>
                   <td class="text-left">Neumáticos</td>
-                  <td class="text-right">$70.00</td>
+                  <td class="text-right">$ {{costoNeumaticos}}</td>
                 </tr>
                 <tr>
                   <td class="text-left">Instalación / despacho</td>
-                  <td class="text-right">$0</td>
+                  <td class="text-right">$ {{costoFinalInstalacion}}</td>
                 </tr>
                 <tr>
                   <td class="text-left">Descuento</td>
-                  <td class="text-right">$0</td>
+                  <td class="text-right">$ {{descuentoAplicado}}</td>
                 </tr>
                 <tr style="border-top: 1px solid #f2f2f2;">
                   <td class="text-left"><strong>TOTAL</strong></td>
-                  <td class="text-right"><h4><b>$70.000</b></h4></td>
+                  <td class="text-right"><h4><b>$ {{totalTotales}}</b></h4></td>
                 </tr>
                 <tr>
                  <td></td>
@@ -399,5 +394,3 @@
         <!--Middle Part End -->
       </div>
     </div>
-
-

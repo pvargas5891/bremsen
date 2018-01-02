@@ -54,6 +54,43 @@ export class CarroCompraService {
 	           .then(this.extractData)
              .catch(this.handleErrorPromise);
   }
+  public setDetallesCarro= function(carro,usuario):Promise<any>{
+
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      const params = new URLSearchParams();
+
+      params.append('regionInstalacion',carro.regionInstalacion);
+      params.append('ciudadInstalacion',carro.ciudadInstalacion);
+      params.append('comunaInstalacion',carro.comunaInstalacion);
+      params.append('aceptaInstalacion1value',carro.aceptaInstalacion1value);
+      params.append('nombresInstalacion1value',carro.nombresInstalacion1value);
+      params.append('direccionInstalacion1value',carro.direccionInstalacion1value);
+      params.append('aceptaInstalacion2value',carro.aceptaInstalacion2value);
+      params.append('nombresInstalacion2value',carro.nombresInstalacion2value);
+      params.append('direccionInstalacion2value',carro.direccionInstalacion2value);
+      params.append('rutInstalacion2value',carro.rutInstalacion2value);
+      params.append('aceptaInstalacion3value',carro.aceptaInstalacion3value);
+      params.append('tallerAsociadovalue',carro.tallerAsociadovalue);
+      params.append('fechaInstalacionvalue',carro.fechaInstalacionvalue);
+      params.append('bloqueHorariovalue',carro.bloqueHorariovalue);
+      params.append('direccionInstalacion4value',carro.direccionInstalacion4value);
+      params.append('aceptaInstalacion4value',carro.aceptaInstalacion4value);
+      params.append('tipoInstalacion',carro.tipoInstalacion);
+      params.append('costoNeumaticos',carro.costoNeumaticos);
+      params.append('costoInstalacion',carro.costoInstalacion);
+      params.append('descuentoAplicado',carro.descuentoAplicado);
+      params.append('totalTotales',carro.totalTotales);
+      params.append('usuario',usuario);
+      params.append('accion','actualizadetalles');
+
+      return this.http.get(this.url+ 'updatecarro.php?'+ params.toString(), options).toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+
+
+
+  }
   public eliminaCarro = function(idCarro): Promise<any>{
 let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });

@@ -21,6 +21,12 @@ export class CheckoutInComponent {
    comunaValido: boolean = true;
 error = '';
    loading = false;
+
+     public costoNeumaticos:number = 0;
+  public costoInstalacion:number = 0;
+  public descuentoAplicado:number = 0;
+  public totalTotales:number = 0;
+  public datosCarro;
   constructor(
 
       private carro: CarroCompraService,
@@ -45,6 +51,14 @@ error = '';
 
           this.id = currentUser.usuario.id;
           this.getDatosPersonales();
+          this.datosCarro = JSON.parse(localStorage.getItem('instalacionTemporal'));
+          //console.debug(datosCarro);
+          this.costoNeumaticos=this.datosCarro[0].costoNeumaticos;
+          this.costoInstalacion=this.datosCarro[0].costoInstalacion;
+          this.descuentoAplicado=this.datosCarro[0].descuentoAplicado;
+          this.totalTotales=this.datosCarro[0].totalTotales;
+
+          this.carro.setDetallesCarro(this.datosCarro).then();
 
   }
 
@@ -109,11 +123,20 @@ private getDatosPersonales = function (){
         this.comunaValido = true;
       }
       this.loading=true;
-      
+      this.userService.saveFactura(this.cliente).then(
+        data => {
+
+             window.location.href="http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario="+this.id;
+
+        });
       }
     public pagarBoleta = function (){
           console.debug("pago boleta");
           this.loading=true;
+
+          //guardar todo y redirect a webpay
+
+          window.location.href="http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario="+this.id;
     }
 
 }
