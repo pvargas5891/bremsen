@@ -109,6 +109,7 @@ private getDatosPersonales = function (){
         this.comunaValido = true;
       }
       this.loading=true;
+      
       }
     public pagarBoleta = function (){
           console.debug("pago boleta");

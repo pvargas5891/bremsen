@@ -43,13 +43,15 @@ export class CarroComponent implements OnInit {
             }
 
           }else{
-            this.route.navigate(['/home']);
+            //this.route.navigate(['/home']);
+            this.getCarroAllSinSesion();
           }
 
    }
 
   ngOnInit() {
   }
+  
 
   tipoInstalacionBoton(tipo: number):void{
         this.validaRegion();
@@ -158,6 +160,9 @@ export class CarroComponent implements OnInit {
           for(var id in data){
                this.carroCompra.push(this.getProductoById(data[id]));
           }
+        if (this.carroCompra.length==0){
+          this.route.navigate(['/home']);
+        }
           //console.debug(this.carroCompra);
       },
 
@@ -244,21 +249,57 @@ public eliminaProductoCarro(id){
   if(!confirm("Se eliminará el producto seleccionado, desea seguir?")){
     return;
   }
+  var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  if (currentUser != null) {
+    if (currentUser.token === 'active') {
+      this.carro.eliminaCarro(id).then(
+        data => {
+          this.id = currentUser.usuario.id;
+          this.getCarroAll();
+        },
+        error => {
 
-  this.carro.eliminaCarro(id).then(
-      data=>{
-        this.carroCompra =  [];
-        for(var id in data){
-          this.carroCompra.push(this.getProductoById(data[id]));
         }
-      },
-      error => {
 
+      );
+    } else {
+      this.route.navigate(['/home']);
+    }
+  }else{
+    var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
+    //console.debug(carroTemporal);
+    if (carroTemporal != null) {
+      for (var i = 0; i < carroTemporal.length; i++) {
+        if (carroTemporal[i].id_producto!=id)
+          this.carroCompra.push(this.getProductoById(carroTemporal[i]));
       }
 
-  );
+    }
+  }  
+  
 }
-      public sanitizaUrlExtern(url){
+
+  private getCarroAllSinSesion = function () {
+    this.carroCompra = [];
+    this.cantidadProductos = 0;
+    this.totalCarro = 0;
+
+
+    var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
+    //console.debug(carroTemporal);
+    if (carroTemporal != null) {
+      for (var i = 0; i < carroTemporal.length; i++) {
+        this.carroCompra.push(this.getProductoById(carroTemporal[i]));
+      }
+
+    } else {
+      this.route.navigate(['/home']);
+    }
+
+
+  }
+
+public sanitizaUrlExtern(url){
   return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
 

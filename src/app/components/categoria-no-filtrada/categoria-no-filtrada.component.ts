@@ -298,6 +298,47 @@ export class CategoriaNoFiltradaComponent {
       return;
     }
 
+    
+
+      if (currentUser == null) {
+
+          var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
+          console.debug(carroTemporal);
+          if (carroTemporal == null) {
+              var object = new Array();
+              var carro = {
+                  id_producto: producto,
+                  cantidad: cantidad,
+                  id_carro: producto
+              };
+              object.push(carro);
+              localStorage.setItem('carroUserTemporal', JSON.stringify(object));
+          } else {
+              var existe = false;
+
+              for (var i = 0; i < carroTemporal.length; i++) {
+                  if (carroTemporal[i].id_producto == producto) {
+                      carroTemporal[i].cantidad = parseInt(carroTemporal[i].cantidad) + parseInt(cantidad);
+                      existe = true;
+                  }
+              }
+              if (!existe) {
+                  var carro = {
+                      id_producto: producto,
+                      cantidad: cantidad,
+                      id_carro: producto
+                  };
+                  carroTemporal.push(carro);
+              }
+
+              localStorage.setItem('carroUserTemporal', JSON.stringify(carroTemporal));
+          }
+          var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
+          console.debug(carroTemporal);
+          localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+          return;
+      }
+      
     var usuario = currentUser.usuario.id;
     this._carroCompra.agregarCarro(cantidad,producto, usuario)
     .then(

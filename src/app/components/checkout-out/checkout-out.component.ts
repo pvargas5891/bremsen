@@ -3,6 +3,7 @@ import { CarroCompraService } from '../../services/carro-compra.service';
 import { InformacionService } from '../../services/informacion.service';
 import { UserService } from '../../_services/user.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../_services/index';
 import { ProductosService } from '../../services/productos.service';
 import { Producto} from "../producto/producto";
 import { DomSanitizer } from '@angular/platform-browser';
@@ -36,6 +37,7 @@ export class CheckoutOutComponent {
   constructor(
       private carro: CarroCompraService,
       private route: Router,
+      private authenticationService: AuthenticationService,
       private _productoService: ProductosService,
       private userService: UserService,
       private sanitizer: DomSanitizer,
@@ -209,6 +211,16 @@ cambiaCiudadEmpresa(selectedRegion: string): void{
            if(data=='OK'){
               this.estado = true;
               this.loading = false;
+
+            this.authenticationService.login(this.cliente.email, this.cliente.password)
+            .then(result => {
+                 
+                if (result === true) {
+                   var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                   this.agregaCarrosinSesion(currentUser.usuario.id);
+                }
+            });
+
            }
            if(data=='EXISTE'){
              this.errorMessage = "El email ingresado ya existe";
@@ -222,4 +234,28 @@ cambiaCiudadEmpresa(selectedRegion: string): void{
           console.debug("pago boleta");
           this.loading=true;
     }
+
+  private agregaCarrosinSesion(usuario) {
+
+
+    var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
+    //console.debug(carroTemporal);
+    if (carroTemporal != null) {
+      for (var i = 0; i < carroTemporal.length; i++) {
+        this.carro.agregarCarro(carroTemporal[i].cantidad, carroTemporal[i].id_producto, usuario)
+          .then(
+          data => {
+          },
+          error => {
+
+          }
+          );
+      }
+
+    }
+
+
+
+
+  }
 }

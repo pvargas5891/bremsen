@@ -46,6 +46,7 @@ export class HeaderComponent implements DoCheck{
             }
           }
            localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'muerto' }));
+           localStorage.setItem('carroUserTemporal', null);
          }
       public ngDoCheck(){
 
@@ -63,6 +64,15 @@ export class HeaderComponent implements DoCheck{
                 localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'muerto' }));
               }
             }
+        }else{
+          var cambiaCarro = JSON.parse(localStorage.getItem('cambiaCarro'));
+          //console.debug(cambiaCarro.estado);
+          if (cambiaCarro.estado == 'actualize') {
+            this.getCarroAllSinSesion();
+            // console.debug("cambio carro");
+            localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'muerto' }));
+          }
+        
         }
       }
       public inSearch = function(){
@@ -86,6 +96,10 @@ export class HeaderComponent implements DoCheck{
                     this.nombreCliente = currentUser.usuario.nombre;
                     this.autenticado = true;
                     this.loading = false;
+                    this.agregaCarrosinSesion(currentUser.usuario.id);
+                    this.id = currentUser.usuario.id;
+                    this.getCarroAll();
+                    
                 } else {
                     // login failed
                     this.error = 'Usuario y password son incorrectos';
@@ -105,6 +119,8 @@ export class HeaderComponent implements DoCheck{
            this.carroCompra = [];
            this.cantidadProductos = 0;
            this.totalCarro = 0;
+
+         
           this.carro.getCarroAll(this.id).then(
 
             data => {
@@ -117,8 +133,50 @@ export class HeaderComponent implements DoCheck{
 
 
           );
+           
 
     }
+  private getCarroAllSinSesion = function () {
+    this.carroCompra = [];
+    this.cantidadProductos = 0;
+    this.totalCarro = 0;
+
+
+      var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
+      //console.debug(carroTemporal);
+      if (carroTemporal != null) {
+        for (var i = 0; i < carroTemporal.length; i++) {
+          this.carroCompra.push(this.getProductoById(carroTemporal[i]));
+        }
+
+      }
+
+
+  }
+
+  private agregaCarrosinSesion(usuario){
+
+
+    var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
+    //console.debug(carroTemporal);
+    if (carroTemporal != null) {
+      for (var i = 0; i < carroTemporal.length; i++) {
+        this.carro.agregarCarro(carroTemporal[i].cantidad, carroTemporal[i].id_producto, usuario)
+          .then(
+          data => {
+          },
+          error => {
+
+          }
+          );
+      }
+
+    }
+
+
+
+    
+  }
 
   public getProductoById = function (carro): Producto{
     var producto = new Producto();
