@@ -49,7 +49,31 @@ export class RegistroComponent {
     cambiaComuna(selectedCiudad: string): void{
       this._is.getComunas(selectedCiudad);
     }
+    segundaValidacion(): void{
 
+       if(typeof this.cliente.region == 'undefined'){
+        this.regionValido = false;
+         this.ciudadValido = false;
+         this.comunaValido = false;
+        return;
+      }else{
+         this.regionValido = true;
+      }
+      if(typeof this.cliente.ciudad == 'undefined'){
+        this.ciudadValido = false;
+        this.comunaValido = false;
+        return;
+      }else{
+        this.ciudadValido = true;
+      }
+      if(typeof this.cliente.comuna == 'undefined'){
+        this.comunaValido = false;
+        return;
+      }else{
+        this.comunaValido = true;
+      }
+
+    }
     saveRegistro(): void {
 
 

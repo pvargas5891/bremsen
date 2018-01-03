@@ -35,7 +35,7 @@ export class HeaderComponent implements DoCheck{
       ) {
 
           var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
+          this.muestraLogin=false;
           if(currentUser != null){
              //console.debug(currentUser);
             if(currentUser.token === 'active'){
@@ -108,7 +108,7 @@ export class HeaderComponent implements DoCheck{
                     this.agregaCarrosinSesion(currentUser.usuario.id);
                     this.id = currentUser.usuario.id;
                     this.getCarroAll();
-
+                    this.muestraLogin=false;
                 } else {
                     // login failed
                     this.error = 'Usuario y password son incorrectos';

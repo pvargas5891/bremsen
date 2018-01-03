@@ -383,8 +383,10 @@ public eliminaProductoCarro(id){
     }
   }else{
     var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
-    console.debug(carroTemporal);
+
     if (carroTemporal != null) {
+      this.carroCompra =  [];
+      this.costoNeumaticos = 0;
       this.costoInstalacion = 0;
       for (var i = 0; i < carroTemporal.length; i++) {
         if (carroTemporal[i].id_producto!=id)
