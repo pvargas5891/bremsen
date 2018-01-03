@@ -228,7 +228,7 @@
               <td class="col-sm-6">
 
                 <select class="form-control" style="width: 75%;" #selectCantidad >
-                <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo">{{stock.nombre}}</option>
+                <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo" [selected]="stock.codigo == 4">{{stock.nombre}}</option>
               </select>
               <div *ngIf="cantidadValido" class="help-block">Debe seleccionar una cantidad</div>
 

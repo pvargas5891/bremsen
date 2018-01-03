@@ -86,11 +86,11 @@
           <table class="table2 table table-precio">
                 <tr>
               <td>
-                <button type="submit" class="btn btn-primary bremsen3" (click)="agregarCarro(1)" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-plus"></i> Carro</button>
+                <button type="submit" class="btn btn-primary bremsen3" (click)="agregarCarro(1)" ><i class="fa fa-plus"></i> Carro</button>
 
               </td>
               <td  style="text-align: right;">
-                   <button class="btn btn-default " type="button" data-target="" aria-expanded="false" (click)="agregarCarro(2)"  data-toggle="modal" data-target=".bs-example-modal-sm">
+                   <button class="btn btn-default " type="button" aria-expanded="false" (click)="agregarCarro(2)" >
                       COMPRAR
                     </button>
 
@@ -176,7 +176,9 @@
                         $('#myModal').on('shown.bs.modal', function () {
                         $('#myInput').focus()
                       })
-                    </script>
+</script>
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
                         <div class="modal-dialog modal-sm" role="document" >
                           <div class="modal-content" style="padding-left: 8px;">
