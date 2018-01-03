@@ -44,6 +44,7 @@ import { CheckoutOutComponent } from './components/checkout-out/checkout-out.com
 import { SearchComponent } from './components/search/search.component';
 import { ExitoComponent } from './components/exito/exito.component';
 import { FracasoComponent } from './components/fracaso/fracaso.component';
+import { CurrencyFormatPipe } from './filter/currency-format.pipe';
 
 
 
@@ -69,7 +70,8 @@ import { FracasoComponent } from './components/fracaso/fracaso.component';
     CheckoutOutComponent,
     SearchComponent,
     ExitoComponent,
-    FracasoComponent
+    FracasoComponent,
+    CurrencyFormatPipe
   ],
   imports: [
     BrowserModule,

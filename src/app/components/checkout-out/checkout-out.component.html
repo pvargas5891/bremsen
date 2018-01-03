@@ -254,20 +254,20 @@
                  <table class="table" >
                    <tr>
                      <td style="border-top: 1px solid #fff !important;">Neumáticos</td>
-                     <td style="border-top: 1px solid #fff !important;">$ {{costoNeumaticos}}</td>
+                     <td style="border-top: 1px solid #fff !important;">{{costoNeumaticos  | number | currencyFormat}}</td>
                    </tr>
                    <tr>
                      <td style="border-top: 1px solid #fff !important;">Instalación</td>
-                     <td style="border-top: 1px solid #fff !important;">$ {{costoInstalacion}}</td>
+                     <td style="border-top: 1px solid #fff !important;">{{costoInstalacion  | number | currencyFormat}}</td>
                    </tr>
                    <tr>
                      <td style="border-top: 1px solid #fff !important;">Descuento</td>
-                     <td style="border-top: 1px solid #fff !important;">$ {{descuentoAplicado}}</td>
+                     <td style="border-top: 1px solid #fff !important;">{{descuentoAplicado  | number | currencyFormat}}</td>
                    </tr>
 
                    <tr>
                      <td><p style="font-size: 16px">TOTAL</p></td>
-                     <td><p style="font-size: 16px">$ {{totalTotales}}</p></td>
+                     <td><p style="font-size: 16px">{{totalTotales  | number | currencyFormat}}</p></td>
                    </tr>
                  </table>
             </div>

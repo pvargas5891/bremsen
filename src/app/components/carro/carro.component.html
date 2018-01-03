@@ -51,7 +51,7 @@
                            Medida: <span>{{producto.MEDIDA}}</span>
                          </a>
                     </td>
-						<td class="text-left"><h4><b>$ {{producto.PRECIO_FINAL}}</b></h4></td>
+						<td class="text-left"><h4><b>{{producto.PRECIO_FINAL | number | currencyFormat}}</b></h4></td>
                     <td class="text-left" style="padding-top: 24px;">
                         <select class="form-control" style="width: 75%;" #cantidadSeleccionada (change)="cambiaCantidad(producto.idCarro,cantidadSeleccionada.value)">
                         <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo" [selected]="stock.codigo == producto.cantidadCarro">{{stock.nombre}}</option>
@@ -60,7 +60,7 @@
 					  <td class="text-left">
                			<table>
                				<tr>
-								        <td><h4><b>$ {{producto.totalParcial}}</b></h4></td>
+								        <td><h4><b>{{producto.totalParcial  | number | currencyFormat}}</b></h4></td>
                					<td>&nbsp; &nbsp;<i style="color: red; font-size: 18px" class="fa fa-times-circle" (click)="eliminaProductoCarro(producto.idCarro)"></i></td>
                				</tr>
 
@@ -124,7 +124,7 @@
               <a href="#intalacion-domicilio" (click)="tipoInstalacionBoton(1)" aria-controls="intalacion-domicilio" role="tab" data-toggle="tab">
                 <img class="img-responsive center-block noView" src="assets/image/Instalacion-a-domicilio-04.png">
                   <h4 class="tabs-h4"><b>Instalación a domicilio</b></h4>
-                  <button type="button" class="btn btn-sm btn-default bremsen" (click)="tipoInstalacionBoton(1)">$ {{costoInstalacion}}</button>
+                  <button type="button" class="btn btn-sm btn-default bremsen" (click)="tipoInstalacionBoton(1)">{{costoInstalacion  | number | currencyFormat}}</button>
 
                 </a>
 
@@ -137,7 +137,7 @@
                <a href="#retiramos-autos" (click)="tipoInstalacionBoton(2)" aria-controls="retiramos-autos" role="tab" data-toggle="tab">
                  <img class="img-responsive center-block noView" src="assets/image/retiro-a-domicilio-05.png">
                         <h4 class="tabs-h4"><b>Retiramos tu auto</b></h4>
-                          <button type="button" class="btn btn-sm btn-default bremsen " (click)="tipoInstalacionBoton(2)">$ 40,000</button>
+                          <button type="button" class="btn btn-sm btn-default bremsen " (click)="tipoInstalacionBoton(2)">$ 40.000</button>
                       </a>
 
 
@@ -161,7 +161,7 @@
                  <a href="#despacho-adomicilio" (click)="tipoInstalacionBoton(4)" aria-controls="despacho-adomicilio" role="tab" data-toggle="tab">
                               <img class="img-responsive center-block noView" src="assets/image/despacho-a-domicilio-07.png">
                               <h4 class="tabs-h4"><b>Despacho a domicilio</b></h4>
-                                  <button type="button" class="btn btn-sm btn-default bremsen " (click)="tipoInstalacionBoton(4)">$ 40,000</button>
+                                  <button type="button" class="btn btn-sm btn-default bremsen " (click)="tipoInstalacionBoton(4)">$ 40.000</button>
 
 
               </a>
@@ -365,19 +365,19 @@
               <table class="table table-precio" style="font-size: 14px;">
                 <tr>
                   <td class="text-left">Neumáticos</td>
-                  <td class="text-right">$ {{costoNeumaticos}}</td>
+                  <td class="text-right">{{costoNeumaticos  | number | currencyFormat}}</td>
                 </tr>
                 <tr>
                   <td class="text-left">Instalación / despacho</td>
-                  <td class="text-right">$ {{costoFinalInstalacion}}</td>
+                  <td class="text-right">{{costoFinalInstalacion  | number | currencyFormat}}</td>
                 </tr>
                 <tr>
                   <td class="text-left">Descuento</td>
-                  <td class="text-right">$ {{descuentoAplicado}}</td>
+                  <td class="text-right">{{descuentoAplicado  | number | currencyFormat}}</td>
                 </tr>
                 <tr style="border-top: 1px solid #f2f2f2;">
                   <td class="text-left"><strong>TOTAL</strong></td>
-                  <td class="text-right"><h4><b>$ {{totalTotales}}</b></h4></td>
+                  <td class="text-right"><h4><b>{{totalTotales  | number | currencyFormat}}</b></h4></td>
                 </tr>
                 <tr>
                  <td></td>
