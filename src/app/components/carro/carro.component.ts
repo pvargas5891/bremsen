@@ -383,7 +383,7 @@ public eliminaProductoCarro(id){
     }
   }else{
     var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
-    //console.debug(carroTemporal);
+    console.debug(carroTemporal);
     if (carroTemporal != null) {
       this.costoInstalacion = 0;
       for (var i = 0; i < carroTemporal.length; i++) {

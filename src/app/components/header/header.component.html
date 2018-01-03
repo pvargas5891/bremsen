@@ -90,7 +90,7 @@
         	<div class="col-md-5">
         			<div id="cart">
               <button type="button" class="heading " style="  padding-right: 15px;">
-              <span id="cart-total"><small><a routerLink="/misdatos" style="color: #fff;">Hola {{nombreCliente}}  / Cambiar mis datos </a><a (click)="logout()" style="color: #fff;"> / Cerrar sesión</a></small></span></button>
+              <span id="cart-total"><small><a routerLink="/misdatos" style="color: #fff;">Hola, {{nombreCliente}}  / Cambiar mis datos </a><a (click)="logout()" style="color: #fff;"> / Cerrar sesión</a></small></span></button>
 
             </div>
         	</div>
@@ -120,9 +120,23 @@
 			<div class="col-md-3">&nbsp;</div>
         	<div class="col-md-3">
         			<div id="cart">
-              <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle" style="  padding-right: 15px;">
+              <button type="button" (click)="activaLogin()" data-loading-text="Loading..." class="heading dropdown-toggle" style="  padding-right: 15px;">
               <span id="cart-total">Ingresa / Registrate</span></button>
-             <ul class="dropdown-menu">
+              <span *ngIf="muestraLogin" style="
+              clear: both;
+    content: ' ';
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+ border-color: transparent transparent #ccc;
+    position: absolute;
+    border-width: 0px 7px 6px 7px;
+    bottom: 0px;
+    left: 50%;
+    margin: 0 0 0 -5px;
+    z-index: 1012;"></span>
+             <ul class="dropdown-menu" style="display:inline" *ngIf="muestraLogin">
                 <li>
                   <div>
            <br>

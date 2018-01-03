@@ -22,6 +22,7 @@ export class HeaderComponent implements DoCheck{
     totalCarro = 0;
     logueado = false;
     searchValue: string;
+    muestraLogin=false;
     public carroCompra:any[] =  [];
 
     @Input() carroChange: string;
@@ -48,6 +49,13 @@ export class HeaderComponent implements DoCheck{
            localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'muerto' }));
            localStorage.setItem('carroUserTemporal', null);
          }
+          public activaLogin(){
+            if(this.muestraLogin){
+              this.muestraLogin=false;
+            }else{
+              this.muestraLogin=true;
+            }
+          }
       public ngDoCheck(){
 
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
