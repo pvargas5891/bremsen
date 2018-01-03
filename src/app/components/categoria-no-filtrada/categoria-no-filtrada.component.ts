@@ -4,6 +4,7 @@ import { ProductosService } from '../../services/productos.service';
 import { DetalleCatProductos } from './detalleCatProductos';
 import {CreateNewAutocompleteGroup, SelectedAutocompleteItem, NgAutocompleteComponent} from "ng-auto-complete";
 import { CarroCompraService } from '../../services/carro-compra.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-categoria-no-filtrada',
   templateUrl: './categoria-no-filtrada.component.html',
@@ -32,6 +33,7 @@ export class CategoriaNoFiltradaComponent {
   public cambiaCarro = false;
   constructor(private _productoService: ProductosService,
               public _is:InformacionService,
+              private routeLink: Router,
               private _carroCompra: CarroCompraService) {
 
      this.detallesCategoria.inicio="1";
@@ -298,12 +300,12 @@ export class CategoriaNoFiltradaComponent {
       return;
     }
 
-    
+
 
       if (currentUser == null) {
 
           var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
-          console.debug(carroTemporal);
+
           if (carroTemporal == null) {
               var object = new Array();
               var carro = {
@@ -334,11 +336,16 @@ export class CategoriaNoFiltradaComponent {
               localStorage.setItem('carroUserTemporal', JSON.stringify(carroTemporal));
           }
           var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
-          console.debug(carroTemporal);
           localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+          if(indice == 1){
+               this.routeLink.navigate(['/carro']);
+               document.getElementById("openModalButton").click();
+          }else{
+             document.getElementById("openModalButton").click();
+          }
           return;
       }
-      
+
     var usuario = currentUser.usuario.id;
     this._carroCompra.agregarCarro(cantidad,producto, usuario)
     .then(
@@ -356,7 +363,13 @@ export class CategoriaNoFiltradaComponent {
           this.estadoCarro = true;
           localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
           var cambiaCarro = JSON.parse(localStorage.getItem('cambiaCarro'));
-              console.debug("2:" + cambiaCarro.estado);
+          if(indice == 1){
+              this.routeLink.navigate(['/carro']);
+              document.getElementById("openModalButton").click();
+          }else{
+             document.getElementById("openModalButton").click();
+          }
+
       },
       error => {
           console.debug(error);

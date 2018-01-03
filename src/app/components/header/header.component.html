@@ -256,7 +256,7 @@
             <div id="cart">
               <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle">
               <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;
-              <span id="cart-total">{{cantidadProductos}} item(s) - ${{totalCarro}}</span></button>
+              <span id="cart-total">{{cantidadProductos}} item(s) - {{totalCarro  | number | currencyFormat}}</span></button>
              <ul class="dropdown-menu">
                 <li>
                   <table class="table">
@@ -266,7 +266,7 @@
                         <td class="text-center col-md-2"><a routerLink="/producto/{{producto.ID}}"><img class="img-thumbnail" title="" alt="" width="60px" src="assets/image/product/540x576.jpg"></a></td>
                         <td class="text-left col-md-5"><a routerLink="/producto/{{producto.ID}}">{{producto.MARCA}} {{producto.MODELO}}</a></td>
                         <td class="text-right col-md-2">x {{producto.cantidadCarro}}</td>
-                        <td class="text-right col-md-3"><b>$ {{producto.totalParcial}}</b></td>
+                        <td class="text-right col-md-3"><b>{{producto.totalParcial  | number | currencyFormat}}</b></td>
                         <!--td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td-->
                       </tr>
 

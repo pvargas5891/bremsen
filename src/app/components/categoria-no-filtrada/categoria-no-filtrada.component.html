@@ -248,16 +248,16 @@
                 <p class="total">Total</p>
               </td>
               <td style="text-align:right;" class="col-sm-6">
-                <h3 class="precio"><b> {{producto.PRECIO_FINAL | number | currencyFormat }}</b></h3>
+                <h3 class="precio"><b> {{producto.PRECIO_FINAL * selectCantidad.value | number | currencyFormat }}</b></h3>
 
               </td>
             </tr>
             <tr style="text-align:right; ">
-              <td><button type="button" class="btn btn-default bremsen " routerLink="/producto/{{producto.ID}}">Comprar</button></td>
+              <td><button type="button" class="btn btn-default bremsen "  (click)="agregarCarro(1,selectCantidad.value,producto.ID)">Comprar</button></td>
               <td>
 
 
-                <button type="button" class="btn btn-primary"  (click)="agregarCarro(2,selectCantidad.value,producto.ID)"  data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-primary"  (click)="agregarCarro(2,selectCantidad.value,producto.ID)">
                     <i class="fa fa-plus" aria-hidden="true"></i> Carro
                 </button>
               </td>
@@ -338,7 +338,7 @@
                              </div>
                         </div>
                     </div>-->
-
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">

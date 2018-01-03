@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductosService } from '../../services/productos.service';
 import { DetalleCatProductos } from '../categoria-no-filtrada/detalleCatProductos';
 import { CarroCompraService } from '../../services/carro-compra.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 
 @Component({
   selector: 'app-categoria-filtrada',
@@ -29,6 +29,7 @@ export class CategoriaFiltradaComponent {
     public mostrarLoading = true;
 
   constructor(private route: ActivatedRoute,
+              private routeLink: Router,
               private _productoService: ProductosService,
               private _carroCompra: CarroCompraService) {
 
@@ -180,8 +181,10 @@ public agregarCarro = function (indice,cantidad,producto) {
       localStorage.setItem('carroUserTemporal', JSON.stringify(carroTemporal));
     }
     var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
-    console.debug(carroTemporal);
     localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+     if(indice == 1){
+        this.routeLink.navigate(['/carro']);
+      }
     return;
   }
 
@@ -199,6 +202,9 @@ public agregarCarro = function (indice,cantidad,producto) {
           }
 
            this.estadoCarro = true;
+           if(indice == 1){
+             this.routeLink.navigate(['/carro']);
+           }
       },
       error => {
 

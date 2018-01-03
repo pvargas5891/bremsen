@@ -11,7 +11,7 @@ export class CurrencyFormatPipe implements PipeTransform {
         chunkDelimiter: string = '.',
         decimalDelimiter:string = '.',
         chunkLength: number = 2): string {
-        console.debug(value);
+        //console.debug(value);
         //value /= 100;
         return currencySign+' '+value.replace(',','.');
        // let result = '\\d(?=(\\d{' + chunkLength + '})+' + (decimalLength > 0 ? '\\D' : '$') + ')'

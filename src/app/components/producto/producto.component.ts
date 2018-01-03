@@ -13,7 +13,7 @@ export class ProductoComponent implements OnInit{
 
 public producto = new Producto();
 public parametros;
-public cantidad;
+public cantidad=4;
 public cantidadValido= false;
 public estadoCarro:boolean = false;
 public errorMessage: string;
@@ -64,7 +64,7 @@ public getProductoById = function (){
             this.producto.MC = data[0].MC;
             this.producto.NETO2 = data[0].NETO2;
             this.producto.PRECIO_FINAL = data[0].PRECIO_FINAL;
-            this.totalAComprar = this.producto.PRECIO_FINAL;
+            this.totalAComprar = this.producto.PRECIO_FINAL * this.cantidad;
             this.producto.PRECIO_OFERTA = data[0].PRECIO_OFERTA;
             this.producto.JPG = data[0].JPG;
             this.producto.TITULO = data[0].TITULO;
@@ -132,8 +132,14 @@ public agregarCarro = function (indice) {
           localStorage.setItem('carroUserTemporal', JSON.stringify(carroTemporal));
         }
         var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
-        console.debug(carroTemporal);
+
         localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+        if(indice == 1){
+              this.routeLink.navigate(['/carro']);
+              document.getElementById("openModalButton").click();
+          }else{
+             document.getElementById("openModalButton").click();
+          }
         return;
       }
 
@@ -154,8 +160,11 @@ public agregarCarro = function (indice) {
           }
           this.estadoCarro = true;
         localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
-          if(indice == 2){
-             this.route.navigate(['/checkin']);
+         if(indice == 1){
+              this.routeLink.navigate(['/carro']);
+              document.getElementById("openModalButton").click();
+          }else{
+             document.getElementById("openModalButton").click();
           }
       },
       error => {
