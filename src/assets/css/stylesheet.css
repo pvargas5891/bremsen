@@ -1050,12 +1050,14 @@ visibility:hidden;
   		h4.tabs-h4 { font-size: 11px !important; }
 		  .pad-upDown { padding: 10px }
 		  .responsivo {padding: 30px; }
-		  .noView { display: none; }
+		 .pad-responsivo { padding-top: 20px;}
 		 texto-tabs{ font-size:14px !important; }
 	}
 
 
-
+	@media (max-width: 990px) {
+		.noView { display: none; }
+	}
 
 
 
@@ -1065,7 +1067,7 @@ visibility:hidden;
 	h3.precio { margin-top:12px; font-size: 29px;}
 	p.total  { text-transform: uppercase; margin-top: 14px !important; font-size: 12px;}
 	hr.hr1 { margin-top:0px !important; margin-bottom:0px !important ; border-top: 2px solid #eee;}
-	.logo-img { position: absolute; left: 10px; top: 10px; z-index: 1; }
+	.logo-img { position: absolute; left: 10px; top: -5px; z-index: 1; }
 
 
 /**======= 7.6. Rating Star =======**/
