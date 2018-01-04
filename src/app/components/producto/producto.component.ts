@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { ProductosService } from '../../services/productos.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { CarroCompraService } from '../../services/carro-compra.service';
 import { Producto} from "./producto";
 import { DomSanitizer } from '@angular/platform-browser';
@@ -20,14 +20,10 @@ public errorMessage: string;
 
 public totalAComprar:number = 0;
   constructor(private route: ActivatedRoute,
+              private routeLink: Router,
               private _productoService: ProductosService,
               private _carroCompra: CarroCompraService,
               private sanitizer: DomSanitizer) {
-
-
-
-
-
 }
     ngOnInit() {
        this.route.params.subscribe( parametros =>{
@@ -134,9 +130,9 @@ public agregarCarro = function (indice) {
         var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
 
         localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
-        if(indice == 1){
+         if(indice == 1){
               this.routeLink.navigate(['/carro']);
-              document.getElementById("openModalButton").click();
+              //document.getElementById("openModalButton").click();
           }else{
              document.getElementById("openModalButton").click();
           }
@@ -160,6 +156,7 @@ public agregarCarro = function (indice) {
           }
           this.estadoCarro = true;
         localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+        console.debug(indice);
          if(indice == 1){
               this.routeLink.navigate(['/carro']);
               document.getElementById("openModalButton").click();
