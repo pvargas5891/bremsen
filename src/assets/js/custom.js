@@ -17,11 +17,11 @@ $('.slideshow').owlCarousel({
     Banner Slider (with Fade in Fade Out effect)
 ----------------------------------------------------- */
 $('.banner').owlCarousel({
-	items: 6,
+	items: 3,
 	autoPlay: 3000,
 	singleItem: true,
-	navigation: false,
-	pagination: false,
+	navigation: true,
+	pagination: true,
 	transitionStyle: 'fade'
 });
 

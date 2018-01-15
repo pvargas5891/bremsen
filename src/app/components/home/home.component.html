@@ -124,7 +124,9 @@ Múltiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
      <h1 class="text-center">Sugeridos</h1>
     
   </div>
-<owl-carousel #owlElement [options]="{dots: true, navigation: true}" [items]="productos" *ngIf="productos.length>0">
+
+<owl-carousel #owlElement [options]="{items: 3, autoPlay: 5000, stopOnHover: true,  
+slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos" *ngIf="productos.length>0">
 
       <div class="product-thumb" *ngFor="let producto of productos">
       <div class="image" style="line-height: 40px;"><a routerLink="/producto/{{producto.ID}}"><img src="assets/image/product/540x576.jpg" class="img-responsive responsivo" /></a></div>
@@ -137,10 +139,16 @@ Múltiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
       </div>
     </div>
 
+
+
  </owl-carousel>
+
+
+<style>
+    .owl-carousel .owl-nav { display: block !important;}
+</style>
+
 <br>
-
-
 </div>
 
 <div class="container">

@@ -499,7 +499,7 @@ if (typeof Object.create !== "function") {
                 if ($(this).data("owl-roundPages") === $(base.$owlItems[base.currentItem]).data("owl-roundPages")) {
                     base.paginationWrapper
                         .find(".owl-page")
-                        .removeClass("active");
+                        .removeClass("disabled");
                     $(this).addClass("active");
                 }
             });
@@ -513,17 +513,17 @@ if (typeof Object.create !== "function") {
             }
             if (base.options.rewindNav === false) {
                 if (base.currentItem === 0 && base.maximumItem === 0) {
-                    base.buttonPrev.addClass("disabled");
-                    base.buttonNext.addClass("disabled");
+                    base.buttonPrev.addClass("active");
+                    base.buttonNext.addClass("active");
                 } else if (base.currentItem === 0 && base.maximumItem !== 0) {
-                    base.buttonPrev.addClass("disabled");
-                    base.buttonNext.removeClass("disabled");
+                    base.buttonPrev.addClass("active");
+                    base.buttonNext.removeClass("active");
                 } else if (base.currentItem === base.maximumItem) {
-                    base.buttonPrev.removeClass("disabled");
-                    base.buttonNext.addClass("disabled");
+                    base.buttonPrev.removeClass("active");
+                    base.buttonNext.addClass("active");
                 } else if (base.currentItem !== 0 && base.currentItem !== base.maximumItem) {
-                    base.buttonPrev.removeClass("disabled");
-                    base.buttonNext.removeClass("disabled");
+                    base.buttonPrev.removeClass("active");
+                    base.buttonNext.removeClass("active");
                 }
             }
         },
@@ -1465,10 +1465,10 @@ if (typeof Object.create !== "function") {
         paginationSpeed : 800,
         rewindSpeed : 1000,
 
-        autoPlay : false,
+        autoPlay : true,
         stopOnHover : false,
 
-        navigation : false,
+        navigation : true,
         navigationText : ["prev", "next"],
         rewindNav : true,
         scrollPerPage : false,

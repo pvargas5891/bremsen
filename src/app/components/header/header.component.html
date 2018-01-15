@@ -90,14 +90,14 @@
         	<div class="col-md-5">
         			<div id="cart">
               <button type="button" class="heading " style="  padding-right: 15px;">
-              <span id="cart-total"><small><a routerLink="/misdatos" style="color: #fff;">Hola, {{nombreCliente}}  / Cambiar mis datos </a><a (click)="logout()" style="color: #fff;"> / Cerrar sesión</a></small></span></button>
+              <span id="cart-total"><small><a routerLink="/misdatos" style="color: #fff;">Mi cuenta, {{nombreCliente}}</a><a (click)="logout()" style="color: #fff;">&nbsp; / Cerrar sesión</a></small></span></button>
 
             </div>
         	</div>
 
         	<div class="col-md-3 center-block text-center" style="padding-top: 7px;">
         		 <div class="links">
-					<span><a href="#" style="color: #fff;">Live Chat</a></span>
+			
 
 						<span> &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;<i style="color:#1bd744;" class="fa fa-whatsapp" aria-hidden="true"></i>
 						  &nbsp; <i style="color: #fff;" class="fa fa-phone"></i></span>
@@ -122,20 +122,20 @@
         			<div id="cart">
               <button type="button" (click)="activaLogin()" data-loading-text="Loading..." class="heading dropdown-toggle" style="  padding-right: 15px;">
               <span id="cart-total">Ingresa / Registrate</span></button>
-              <span *ngIf="muestraLogin" style="
-              clear: both;
-    content: ' ';
-    display: block;
-    width: 0;
-    height: 0;
-    border-style: solid;
- border-color: transparent transparent #ccc;
-    position: absolute;
-    border-width: 0px 7px 6px 7px;
-    bottom: 0px;
-    left: 50%;
-    margin: 0 0 0 -5px;
-    z-index: 1012;"></span>
+              <span *ngIf="muestraLogin" 
+              style=" clear: both;
+              content: ' ';
+              display: block;
+              width: 0;
+              height: 0;
+              border-style: solid;
+              border-color: transparent transparent #ccc;
+              position: absolute;
+              border-width: 0px 7px 6px 7px;
+              bottom: 0px;
+              left: 50%;
+              margin: 0 0 0 -5px;
+              z-index: 1012;"></span>
              <ul class="dropdown-menu" style="display:inline" *ngIf="muestraLogin">
                 <li>
                   <div>
@@ -194,7 +194,7 @@
 
         	<div class="col-md-3 center-block text-center" style="padding-top: 7px;">
         		 <div class="links">
-					<span><a href="#"  style="color: #fff;">Live Chat</a></span>
+				
 
 						<span> &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;<i style="color:#1bd744;" class="fa fa-whatsapp" aria-hidden="true"></i>
 						  &nbsp; <i style="color: #fff;" class="fa fa-phone"></i></span>
@@ -254,7 +254,9 @@
                   -->
 
 
-      <nav id="menu" class="navbar custom-link-center">
+
+
+      <nav id="menu" class="navbar noView">
 
         <div class="navbar-header">  <span class="drop-icon visible-sm visible-xs"><i class="fa fa-align-justify" style="font-size: 30px;"></i></span></div>
 
@@ -270,8 +272,25 @@
 
       </nav>
 
+<!--  boton nabvar -->
+<br>
+      <a class="btn btn-default View"  role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <i class="fa fa-align-justify" style="font-size: 30px;"></i>
+      </a>
+      <div class="collapse" id="collapseExample">
+        <div class="well">
+          <ul class="nav navbar-nav">
+            <li><a style="color: #fff; text-transform: uppercase; text-align: left; font-size:16px;" class="home_link" title="Neumaticos" routerLink="/categoria">Neumáticos &nbsp; &nbsp;</a></li>
+            <li><a style="color: #fff; text-transform: uppercase; text-align: left; font-size:16px;" class="home_link" title="Instalacion" routerLink="/instalacion">Instalación &nbsp; &nbsp;</a></li>
+            <li><a style="color: #fff; text-transform: uppercase; text-align: left; font-size:16px;" class="home_link" title="Bremsen" routerLink="/bremsen">Bremsen &nbsp; &nbsp;</a></li>
+            <li><a style="color: #fff; text-transform: uppercase; text-align: left; font-size:16px;" class="home_link" title="Blog" routerLink="/blog">Blog &nbsp; &nbsp;</a></li>
+
+          </ul>
+        </div>
+      </div>
 
 
+<!-- cierre boton nabvar -->
 
          </div>
           <!-- Search End-->
