@@ -103,7 +103,7 @@
 
                    <div class="form-group" [ngClass]="{ 'has-error': !comunaValido }">
                     <label for="comuna">Comuna </label>
-                      <select *ngIf="_is.comunas.length > 0" #selectedComuna class="form-control" id="input-select" name="input-select" #comuna1="ngModel" name="comuna1" id="comuna1" [(ngModel)]="comunaInstalacion">
+                      <select *ngIf="_is.comunas.length > 0" #selectedComuna class="form-control" id="input-select" (change)="seleccionaInstalacion(selectedComuna.value)" name="input-select" #comuna1="ngModel" name="comuna1" id="comuna1" [(ngModel)]="comunaInstalacion">
                         <option  *ngFor="let comuna of _is.comunas" [value]="comuna[0]">{{comuna[1]}}</option>
                     </select>
                        <div *ngIf="!comunaValido" class="help-block">Debe seleccionar una comuna</div>
@@ -114,12 +114,12 @@
 
     <div class="col-md-6">&nbsp;</div>
 
-    <div class="col-md-12">
+    <div class="col-md-12" *ngIf="activaInstalacion">
 
             <div class="pest-home">
 
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" style="width: 25%" class="active">
+              <li role="presentation" style="width: 25%" class="active" *ngIf="instalacionUno">
 
               <a href="#intalacion-domicilio" (click)="tipoInstalacionBoton(1)" aria-controls="intalacion-domicilio" role="tab" data-toggle="tab">
                 <img class="img-responsive center-block noView" src="assets/image/Instalacion-a-domicilio-04.png">
@@ -132,7 +132,7 @@
 
               </li>
 
-              <li role="presentation text-center" style="width: 25%;">
+              <li role="presentation text-center" style="width: 25%;" *ngIf="instalacionDos">
 
                <a href="#retiramos-autos" (click)="tipoInstalacionBoton(2)" aria-controls="retiramos-autos" role="tab" data-toggle="tab">
                  <img class="img-responsive center-block noView" src="assets/image/retiro-a-domicilio-05.png">
@@ -145,7 +145,7 @@
 
               </li>
 
-              <li role="presentation" style="width: 25%">
+              <li role="presentation" style="width: 25%" *ngIf="instalacionTres">
 
                <a href="#talleres-asosiados" (click)="tipoInstalacionBoton(3)" aria-controls="talleres-asosiados" role="tab" data-toggle="tab">
                     <img class="img-responsive center-block noView" src="assets/image/talleres-asociados-06.png">
@@ -157,7 +157,7 @@
 
               </li>
 
-              <li role="presentation" style="width: 25%">
+              <li role="presentation" style="width: 25%" *ngIf="instalacionCuatro">
                  <a href="#despacho-adomicilio" (click)="tipoInstalacionBoton(4)" aria-controls="despacho-adomicilio" role="tab" data-toggle="tab">
                               <img class="img-responsive center-block noView" src="assets/image/despacho-a-domicilio-07.png">
                               <h4 class="tabs-h4"><b>Despacho a domicilio</b></h4>

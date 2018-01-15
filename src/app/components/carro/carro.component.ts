@@ -46,7 +46,7 @@ export class CarroComponent implements OnInit {
   public costoInstalacion:number = 0;
   public descuentoAplicado:number = 0;
   public totalTotales:number = 0;
-
+  public activaInstalacion: boolean = false;
   errorMessage: string;
 
 
@@ -139,8 +139,34 @@ export class CarroComponent implements OnInit {
 
   }
 
+public instalacionUno: boolean = false;
+public instalacionDos: boolean = false;
+public instalacionTres: boolean = false;
+public instalacionCuatro: boolean = false;
+ public seleccionaInstalacion = function(comuna){
+    this._is.getInstalacionByComuna(comuna).then(data => {
+          console.debug(data);
 
-
+          for(var i=0; i<data.length;i++){
+              if(data[i]=='1'){
+                this.activaInstalacion=true;
+                this.instalacionUno=true;
+              }
+              if(data[i]=='2'){
+                this.activaInstalacion=true;
+                this.instalacionDos=true;
+              }
+              if(data[i]=='3'){
+                this.activaInstalacion=true;
+                this.instalacionTres=true;
+              }
+              if(data[i]=='4'){
+                this.activaInstalacion=true;
+                this.instalacionCuatro=true;
+              }
+          }
+    });
+ }
 
   public aceptaInstalacion2Valido: boolean = false;
 

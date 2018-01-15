@@ -113,6 +113,14 @@ public getPerfilVehiculos(ancho): Promise<string>{
         //console.debug(this.regiones[0][1]);
       })
   }
+
+  public getInstalacionByComuna(comuna): Promise<string>{
+
+   return this.http.get(this.url+"instalacion.php?comuna=" + comuna)
+             .toPromise()
+	           .then(this.extractData)
+             .catch(this.handleErrorPromise);
+  }
   public getRegiones() {
 
     this.http.get(this.url+"location.php")
