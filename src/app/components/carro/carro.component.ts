@@ -43,7 +43,7 @@ export class CarroComponent implements OnInit {
   public tipoInstalacion:number = 1;
 
   public costoNeumaticos:number = 0;
-  public costoInstalacion:number = 0;
+  //public costoInstalacion:number = 0;
   public descuentoAplicado:number = 0;
   public totalTotales:number = 0;
   public activaInstalacion: boolean = false;
@@ -142,27 +142,35 @@ export class CarroComponent implements OnInit {
 public instalacionUno: boolean = false;
 public instalacionDos: boolean = false;
 public instalacionTres: boolean = false;
-public instalacionCuatro: boolean = false;
+  public instalacionCuatro: boolean = false;
+  public valorinstalacionUno: number = 0;
+  public valorinstalacionDos: number = 0;
+  public valorinstalacionTres: number = 0;
+  public valorinstalacionCuatro: number=0;
  public seleccionaInstalacion = function(comuna){
-    this._is.getInstalacionByComuna(comuna).then(data => {
+   this._is.getInstalacionByComuna(comuna, this.id).then(data => {
           console.debug(data);
 
           for(var i=0; i<data.length;i++){
-              if(data[i]=='1'){
+              if(data[i].tipo=='1'){
                 this.activaInstalacion=true;
                 this.instalacionUno=true;
+                this.valorinstalacionUno = data[i].valor;
               }
-              if(data[i]=='2'){
+            if (data[i].tipo=='2'){
                 this.activaInstalacion=true;
                 this.instalacionDos=true;
+              this.valorinstalacionDos = data[i].valor;
               }
-              if(data[i]=='3'){
+            if (data[i].tipo=='3'){
                 this.activaInstalacion=true;
                 this.instalacionTres=true;
+              this.valorinstalacionTres = data[i].valor;
               }
-              if(data[i]=='4'){
+            if (data[i].tipo=='4'){
                 this.activaInstalacion=true;
                 this.instalacionCuatro=true;
+              this.valorinstalacionCuatro = data[i].valor;
               }
           }
     });
@@ -243,7 +251,7 @@ public instalacionCuatro: boolean = false;
         aceptaInstalacion4value: this.aceptaInstalacion4value,
         tipoInstalacion: this.tipoInstalacion,
         costoNeumaticos: this.costoNeumaticos,
-        costoInstalacion:this.costoInstalacion,
+        //costoInstalacion:this.costoInstalacion,
         descuentoAplicado:this.descuentoAplicado,
         totalTotales:this.totalTotales
       };
@@ -266,7 +274,7 @@ public instalacionCuatro: boolean = false;
       data => {
         this.carroCompra =  [];
         this.costoNeumaticos = 0;
-        this.costoInstalacion = 0;
+
        // console.debug(data);
           for(var id in data){
                this.carroCompra.push(this.getProductoById(data[id]));
@@ -304,7 +312,7 @@ public instalacionCuatro: boolean = false;
             producto.NETO = data[0].NETO;
             producto.UNITARIO = data[0].UNITARIO;
             producto.VALOR_INSTALACION = data[0].VALOR_INSTALACION;
-            this.costoInstalacion += parseInt(producto.VALOR_INSTALACION) * carro.cantidad;
+            //this.costoInstalacion += parseInt(producto.VALOR_INSTALACION) * carro.cantidad;
             producto.TOTAL = data[0].TOTAL;
             producto.MC = data[0].MC;
             producto.NETO2 = data[0].NETO2;
@@ -352,7 +360,7 @@ var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     data =>{
           this.carroCompra =  [];
           this.costoNeumaticos = 0;
-          this.costoInstalacion = 0;
+
           for(var id in data){
                this.carroCompra.push(this.getProductoById(data[id]));
           }
@@ -371,7 +379,7 @@ var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (carroTemporal != null) {
       this.carroCompra =  [];
       this.costoNeumaticos = 0;
-      this.costoInstalacion = 0;
+
       for (var i = 0; i < carroTemporal.length; i++) {
         if (carroTemporal[i].id_producto==id){
             carroTemporal[i].cantidad=cantidad;
@@ -413,7 +421,7 @@ public eliminaProductoCarro(id){
     if (carroTemporal != null) {
       this.carroCompra =  [];
       this.costoNeumaticos = 0;
-      this.costoInstalacion = 0;
+
       for (var i = 0; i < carroTemporal.length; i++) {
         if (carroTemporal[i].id_producto!=id)
           this.carroCompra.push(this.getProductoById(carroTemporal[i]));
@@ -429,7 +437,6 @@ public eliminaProductoCarro(id){
     this.carroCompra = [];
     this.cantidadProductos = 0;
     this.costoNeumaticos = 0;
-    this.costoInstalacion = 0;
 
     var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
     //console.debug(carroTemporal);
@@ -473,16 +480,16 @@ public checking = function(){
 public calculaTotales = function (){
 
   if(this.tipoInstalacion == 1){
-     this.costoFinalInstalacion = this.costoInstalacion;
+     this.costoFinalInstalacion = this.valorinstalacionUno;
   }
   if(this.tipoInstalacion == 2){
-     this.costoFinalInstalacion = 40000;
+    this.costoFinalInstalacion = this.valorinstalacionDos;
   }
     if(this.tipoInstalacion == 3){
-     this.costoFinalInstalacion = 0;
+      this.costoFinalInstalacion = this.valorinstalacionTres;
   }
     if(this.tipoInstalacion == 4){
-     this.costoFinalInstalacion = 40000;
+      this.costoFinalInstalacion = this.valorinstalacionTres;
   }
   this.totalTotales = this.costoNeumaticos + this.costoFinalInstalacion;
   this.totalTotales -= this.descuentoAplicado;

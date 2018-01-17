@@ -114,9 +114,9 @@ public getPerfilVehiculos(ancho): Promise<string>{
       })
   }
 
-  public getInstalacionByComuna(comuna): Promise<string>{
+  public getInstalacionByComuna(comuna,cliente): Promise<string>{
 
-   return this.http.get(this.url+"instalacion.php?comuna=" + comuna)
+   return this.http.get(this.url+"instalacion.php?cliente="+cliente+"&comuna=" + comuna)
              .toPromise()
 	           .then(this.extractData)
              .catch(this.handleErrorPromise);
