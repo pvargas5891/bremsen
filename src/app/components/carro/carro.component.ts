@@ -150,6 +150,14 @@ public instalacionTres: boolean = false;
  public seleccionaInstalacion = function(comuna){
    this._is.getInstalacionByComuna(comuna, this.id).then(data => {
           console.debug(data);
+          this.instalacionUno = false;
+          this.instalacionDos = false;
+          this.instalacionTres = false;
+          this.instalacionCuatro = false;
+          this.valorinstalacionUno = 0;
+          this.valorinstalacionDos = 0;
+          this.valorinstalacionTres = 0;
+          this.valorinstalacionCuatro = 0;
 
           for(var i=0; i<data.length;i++){
               if(data[i].tipo=='1'){
@@ -251,7 +259,7 @@ public instalacionTres: boolean = false;
         aceptaInstalacion4value: this.aceptaInstalacion4value,
         tipoInstalacion: this.tipoInstalacion,
         costoNeumaticos: this.costoNeumaticos,
-        //costoInstalacion:this.costoInstalacion,
+        costoInstalacion:this.costoFinalInstalacion,
         descuentoAplicado:this.descuentoAplicado,
         totalTotales:this.totalTotales
       };
@@ -364,8 +372,9 @@ var currentUser = JSON.parse(localStorage.getItem('currentUser'));
           for(var id in data){
                this.carroCompra.push(this.getProductoById(data[id]));
           }
-
+          this.seleccionaInstalacion(this.comunaInstalacion);
           localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+          this.calculaTotales();
     },
     error=>{
 
@@ -386,8 +395,9 @@ var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         }
         this.carroCompra.push(this.getProductoById(carroTemporal[i]));
       }
-
+      this.seleccionaInstalacion(this.comunaInstalacion);
       localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+      this.calculaTotales();
     }
   }
 
@@ -405,7 +415,9 @@ public eliminaProductoCarro(id){
         data => {
           this.id = currentUser.usuario.id;
           this.getCarroAll();
+          this.seleccionaInstalacion(this.comunaInstalacion);
           localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+          this.calculaTotales();
         },
         error => {
 
@@ -426,8 +438,9 @@ public eliminaProductoCarro(id){
         if (carroTemporal[i].id_producto!=id)
           this.carroCompra.push(this.getProductoById(carroTemporal[i]));
       }
-
+      this.seleccionaInstalacion(this.comunaInstalacion);
       localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+      this.calculaTotales();
     }
   }
 
@@ -480,16 +493,16 @@ public checking = function(){
 public calculaTotales = function (){
 
   if(this.tipoInstalacion == 1){
-     this.costoFinalInstalacion = this.valorinstalacionUno;
+     this.costoFinalInstalacion = parseInt(this.valorinstalacionUno);
   }
   if(this.tipoInstalacion == 2){
-    this.costoFinalInstalacion = this.valorinstalacionDos;
+    this.costoFinalInstalacion = parseInt(this.valorinstalacionDos);
   }
     if(this.tipoInstalacion == 3){
-      this.costoFinalInstalacion = this.valorinstalacionTres;
+      this.costoFinalInstalacion = parseInt(this.valorinstalacionTres);
   }
     if(this.tipoInstalacion == 4){
-      this.costoFinalInstalacion = this.valorinstalacionTres;
+      this.costoFinalInstalacion = parseInt(this.valorinstalacionCuatro);
   }
   this.totalTotales = this.costoNeumaticos + this.costoFinalInstalacion;
   this.totalTotales -= this.descuentoAplicado;

@@ -339,7 +339,7 @@ export class CategoriaNoFiltradaComponent {
           localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
           if(indice == 1){
                this.routeLink.navigate(['/carro']);
-               document.getElementById("openModalButton").click();
+               //document.getElementById("openModalButton").click();
           }else{
              document.getElementById("openModalButton").click();
           }
@@ -365,7 +365,7 @@ export class CategoriaNoFiltradaComponent {
           var cambiaCarro = JSON.parse(localStorage.getItem('cambiaCarro'));
           if(indice == 1){
               this.routeLink.navigate(['/carro']);
-              document.getElementById("openModalButton").click();
+              //document.getElementById("openModalButton").click();
           }else{
              document.getElementById("openModalButton").click();
           }

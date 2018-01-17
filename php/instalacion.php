@@ -8,6 +8,10 @@ if($_GET['debug']==true)
     //exit;
 //}
 
+ $rsCarro=$model->getCarroPorCliente($_GET['cliente']);
+ if(!$rsCarro->EOF){
+    $model->actualizaMontos($rsCarro->fields['pagosID']);
+ }
 
 $rs=$model->getTipoInstalacionByComuna($_GET['comuna']);
     $general=array();

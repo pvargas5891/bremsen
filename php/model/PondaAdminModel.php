@@ -706,7 +706,7 @@ public function actualizaMontos($id_pago,$adicional=0){
     while(!$rs->EOF){
         $producto=$rs->fields['id_producto'];
         $cantidad=$rs->fields['cantidad'];
-        $sql="SELECT unitario as precio FROM productos WHERE id = ".$producto;
+        $sql="SELECT PRECIO_FINAL as precio FROM productos WHERE id = ".$producto;
         $rsT=$this->db->Execute($sql);
 
         $totalTmp=$rsT->fields['precio']*$cantidad;
