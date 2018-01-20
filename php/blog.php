@@ -8,8 +8,11 @@ if(isset($_GET['debug']))
   //  echo $profile_uid;
     //exit;
 //}
-
-$rs=$model->getBlogs();
+$id="";
+if(isset($_GET['id'])){
+	$id=$_GET['id'];
+}
+$rs=$model->getBlogs($id);
 
 $general2=array();
 while(!$rs->EOF){
