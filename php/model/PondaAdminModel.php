@@ -26,7 +26,13 @@ class PondaAdminModel
 
     }
    
-
+    function getBlogs($id=""){
+        $sql="";
+        if($id!=""){
+            $sql=" where id=".$id;
+        }
+        return $this->db->Execute("select * from blog".$sql);
+    }
     function getRegiones()
     {
         $this->db->execute("SET NAMES 'utf8'");
