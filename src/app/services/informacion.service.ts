@@ -113,7 +113,20 @@ public getPerfilVehiculos(ancho): Promise<string>{
         //console.debug(this.regiones[0][1]);
       })
   }
+  public getBlog(): Promise<any> {
 
+    return this.http.get(this.url + "blog.php")
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+  public getBlogUnico(parametro): Promise<any> {
+
+    return this.http.get(this.url + "blog.php?id="+parametro)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
   public getInstalacionByComuna(comuna,cliente): Promise<string>{
 
    return this.http.get(this.url+"instalacion.php?cliente="+cliente+"&comuna=" + comuna)

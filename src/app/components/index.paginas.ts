@@ -16,3 +16,4 @@ export { CheckoutOutComponent } from "./checkout-out/checkout-out.component";
 export { ExitoComponent } from "./exito/exito.component";
 export { FracasoComponent } from "./fracaso/fracaso.component";
 export { SearchComponent } from "./search/search.component";
+export { ContenidoComponent } from "./blog/contenido/contenido.component";

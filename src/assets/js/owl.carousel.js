@@ -499,7 +499,7 @@ if (typeof Object.create !== "function") {
                 if ($(this).data("owl-roundPages") === $(base.$owlItems[base.currentItem]).data("owl-roundPages")) {
                     base.paginationWrapper
                         .find(".owl-page")
-                        .removeClass("disabled");
+                        .removeClass("active");
                     $(this).addClass("active");
                 }
             });

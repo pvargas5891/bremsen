@@ -45,6 +45,7 @@ import { SearchComponent } from './components/search/search.component';
 import { ExitoComponent } from './components/exito/exito.component';
 import { FracasoComponent } from './components/fracaso/fracaso.component';
 import { CurrencyFormatPipe } from './filter/currency-format.pipe';
+import { ContenidoComponent } from './components/blog/contenido/contenido.component';
 
 
 
@@ -71,7 +72,8 @@ import { CurrencyFormatPipe } from './filter/currency-format.pipe';
     SearchComponent,
     ExitoComponent,
     FracasoComponent,
-    CurrencyFormatPipe
+    CurrencyFormatPipe,
+    ContenidoComponent
   ],
   imports: [
     BrowserModule,
