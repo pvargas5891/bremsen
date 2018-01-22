@@ -15,6 +15,7 @@ if($_GET['debug']==true)
 
 $rs=$model->getTipoInstalacionByComuna($_GET['comuna']);
     $general=array();
+    $entro=0;
     while(!$rs->EOF){
         $general2=array();
         
@@ -55,6 +56,7 @@ $rs=$model->getTipoInstalacionByComuna($_GET['comuna']);
              }
         }
         if($rs->fields['tipo']==4){
+            $entro=1;
             $general2['valor']=$rs->fields['precio'];
             $rsCarro=$model->getCarroPorCliente($_GET['cliente']);
             while(!$rsCarro->EOF){	
@@ -76,7 +78,7 @@ $rs=$model->getTipoInstalacionByComuna($_GET['comuna']);
         $rs->movenext();
     }
 
-    if($model->getRegionByComuna($_GET['comuna'])==13){
+    if($model->getRegionByComuna($_GET['comuna'])==13 and $entro==0){
             $general2=array();
             $rs=$model->getTipoInstalacionByComuna(277,4);
             $general2['tipo']=$rs->fields['tipo'];

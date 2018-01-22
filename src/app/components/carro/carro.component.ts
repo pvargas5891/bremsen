@@ -47,6 +47,8 @@ export class CarroComponent implements OnInit {
   public descuentoAplicado:number = 0;
   public totalTotales:number = 0;
   public activaInstalacion: boolean = false;
+  public activaErrorNoDisponible: boolean = false;
+  
   errorMessage: string;
 
 
@@ -90,9 +92,7 @@ export class CarroComponent implements OnInit {
         this.tipoInstalacion = tipo;
         console.debug(this.tipoInstalacion);
         if(tipo==3){
-          /*$('#date').datetimepicker({
-            pickTime: false
-          });*/
+         
         }
         this.calculaTotales();
   }
@@ -158,7 +158,10 @@ public instalacionTres: boolean = false;
           this.valorinstalacionDos = 0;
           this.valorinstalacionTres = 0;
           this.valorinstalacionCuatro = 0;
-
+          if(data.length==0){
+             this.activaInstalacion=true;
+             this.activaErrorNoDisponible = true;
+          }
           for(var i=0; i<data.length;i++){
               if(data[i].tipo=='1'){
                 this.activaInstalacion=true;
