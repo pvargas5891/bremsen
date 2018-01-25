@@ -85,7 +85,7 @@ function getURL($query = false, $components = false)
             $url_params[] = $gqk . "=" . $gqv;
         }
 
-        if (!empty($url_params))
+        /*if (!empty($url_params))
         {
             if (isset($query[0])) {
                 if (DEV) $url .= '&amp;';
@@ -93,7 +93,7 @@ function getURL($query = false, $components = false)
             }
             else $url .= '?';
             $url .= implode("&amp;", $url_params);
-        }
+        }*/
     }
     return $url;
 }

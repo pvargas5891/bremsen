@@ -160,7 +160,7 @@ echo '</table><hr>';
 echo '</div><br><br><br><br><br><br>
 
 <script type="text/javascript">
-                Calendar.setup({
+                /*Calendar.setup({
                     inputField : "fechainicio", // id del campo de texto
                     ifFormat : "%Y-%m-%d", // formato de la fecha que se escriba en el campo de texto
                     button : "lanzadorFecha1" // el id del botón que lanzará el calendario
@@ -170,7 +170,7 @@ echo '</div><br><br><br><br><br><br>
                     inputField : "fechatermino", // id del campo de texto
                     ifFormat : "%Y-%m-%d", // formato de la fecha que se escriba en el campo de texto
                     button : "lanzadorFecha2" // el id del botón que lanzará el calendario
-                });
+                });*/
                 </script>';
 
 echo '<script src="'.$base_url.'/assets/library/bootstrap/js/bootstrap.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2"></script>

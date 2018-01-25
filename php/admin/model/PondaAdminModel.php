@@ -25,29 +25,89 @@ class PondaAdminModel
         $this->db->debug = $state;
 
     }
-   
-    function getBlogs($id=""){
-        $sql="";
-        if($id!=""){
-            $sql=" where id=".$id;
-        }
-        return $this->db->Execute("select * from blog".$sql);
+    function registroUsuario($post){
+
+      /*
+      Array ( [rut] => 15794539-4
+      [nombre] => Pablo
+      [apellido] => Vargas
+      [email] => pvargafi@gmail.com
+      [region] => 13
+      [ciudad] => 44
+      [comuna] => 308
+      [direccion] => estadio sanchez rumoroso 187
+      [codigopostal] => 8721509
+      [password] => admin
+
+      */
+      $sql="insert into clientes values ('',";
+      $sql.="'".$post['email']."'";
+      $sql.=",'".$post['password']."'";
+      $sql.=",'".$post['nombre']."'";
+      $sql.=",'".$post['apellido']."'";
+      $sql.=",'".$post['email']."'";
+      $sql.=",'".$post['region']."'";
+      $sql.=",'".$post['ciudad']."'";
+      $sql.=",'".$post['comuna']."'";
+      $sql.=",'".$post['direccion']."'";
+      $sql.=",'".$post['codigopostal']."'";
+      $sql.=",'".$post['telefono']."'";
+      $sql.=",'".$post['rut']."')";
+      $this->db->execute($sql);
     }
+    function getPasswordByEmail($email){
+        $sql="select password from clientes where email = '".$email."'";
+        $rs=$this->db->execute($sql);
+        return $rs->fields['password'];
+    }
+    function updateCliente($post){
+      $sql="update clientes set ";
+      $sql.="username='".$post['email']."'";
+      if($post['password']!="")
+        $sql.=",password='".$post['password']."'";
+      $sql.=",nombres='".$post['nombre']."'";
+      $sql.=",apellido='".$post['apellido']."'";
+      $sql.=",email='".$post['email']."'";
+      $sql.=",region='".$post['region']."'";
+      $sql.=",ciudad='".$post['ciudad']."'";
+      $sql.=",comuna='".$post['comuna']."'";
+      $sql.=",direccion='".$post['direccion']."'";
+      $sql.=",codigopostal='".$post['codigopostal']."'";
+      $sql.=",rut='".$post['rut']."' where id=".$post['id'];
+      $this->db->execute($sql);
+    }
+    function getSucursalByComuna($comuna){
+      $sql="select * from sucursales_chileexpress where region = ".$comuna;
+      return   $this->db->execute($sql);
+    }
+    function saveSucursal($sucursal,$pago){
+      $sql="delete from pago_sucursal where pago = ".$pago;
+      $this->db->execute($sql);
+      $sql="insert into pago_sucursal values('','".$pago."','".$sucursal."')";
+      $this->db->execute($sql);
+    }
+    function getSucursalByPago($pago){
+      $sql="select * from pago_sucursal where pago = ".$pago;
+      return   $this->db->execute($sql);
+    }
+    function extraeNombreSuc($suc){
+      $sql="select * from sucursales_chileexpress where id = ".$suc;
+      $rs=$this->db->execute($sql);
+      return $rs->fields['nombre'];
+    }
+
     function getRegiones()
     {
         $this->db->execute("SET NAMES 'utf8'");
         return $this->db->Execute("select * from REGION");
     }
-	function getTalleresByRegion($codigo){
-		$this->db->execute("SET NAMES 'utf8'");
-        return $this->db->Execute("select * from talleres where region = " . $codigo);
-	}
+
     function getCiudadesByRegion($codigo)
     {
         $this->db->execute("SET NAMES 'utf8'");
         return $this->db->Execute("select * from CIUDADES where CIU_REG_CODIGO = " . $codigo);
     }
-	
+
     function getComunasByCiudad($dato = "")
     {
         $this->db->execute("SET NAMES 'utf8'");
@@ -58,11 +118,7 @@ class PondaAdminModel
         $sql .= " ORDER BY COM_NOMBRE ASC";
         return $this->db->execute($sql);
     }
-    function getRegionByComuna($comuna){
-        $sql = "select CIU_REG_CODIGO from COMUNA,CIUDADES where COM_CODIGO =".$comuna." and CIU_CODIGO = COM_CIU_CODIGO";
-        $rs=$this->db->execute($sql);
-        return $rs->fields['CIU_REG_CODIGO'];
-    }
+
     function extraeNombreCiudad($codigo)
     {
         $this->db->execute("SET NAMES 'utf8'");
@@ -86,12 +142,47 @@ class PondaAdminModel
         $rs = $this->db->Execute("select REG_NOMBRE from REGION where REG_CODIGO = " . $codigo);
         return $rs->fields['REG_NOMBRE'];
     }
+    function getBannerHome($id="",$tipo){
+      $sql="select * from bannerhome where tipo = '".$tipo."'";
+      if($id!=""){
+        $sql.=" and id=".$id;
+      }
+      return $this->db->execute($sql);
+    }
+    function getBanner($destino,$tipo){
+      $sql="select * from bannerhome where tipo = '".$tipo."'";
 
-    
-	
-	
-	
-	
+        $sql.=" and destino='".$destino."'";
+
+      return $this->db->execute($sql);
+    }
+    function deleteBanner($id){
+      $sql="delete from bannerhome where id=".$id;
+      $this->db->execute($sql);
+    }
+    function insertBanner($post,$imagen,$tipo){
+      $sql="insert into bannerhome values('',";
+      $sql.="'".$imagen."',";
+      $sql.="'".$post['pagina']."',";
+      $sql.="'".$post['destino']."',";
+      $sql.="'".$tipo."'";
+      $sql.=")";
+      $this->db->execute($sql);
+    }
+    function actualizaBanner($post,$imagen){
+      $sql="update bannerhome set ";
+      if($imagen!="")
+        $sql.="imagen='".$imagen."',";
+      $sql.="pagina='".$post['pagina']."',";
+      $sql.="destino='".$post['destino']."'";
+      $sql.=" where id=".$post['id'];
+      $this->db->execute($sql);
+    }
+    function getProductosFilterTotal($origen,$artista){
+      $sql="select count(*) TOTAL from productos where lower(titulo) like lower('%".$artista."%')";
+      $rs=$this->db->execute($sql);
+      return $rs->fields['TOTAL'];
+    }
     function deleteProducto($id){
       $sql="delete from productos where id=".$id;
       $this->db->execute($sql);
@@ -100,163 +191,91 @@ class PondaAdminModel
       $sql="delete from pistas where productos=".$id;
       return $this->db->execute($sql);
     }
-	function getProductosById($id){
-        $sql="select * from productos where id =".$id;        
-        return $this->db->execute($sql);
-    }
     function getProductosAllTotal(){
       $sql="select count(*) TOTAL from productos";
+
+       // $sql.=" where origen='".$origen."'";
+
       $rs=$this->db->execute($sql);
       return $rs->fields['TOTAL'];
     }
-	
-	
-	function getTodasLasMarcas(){
-		$sql="select Marca from productos group by Marca";
-        return $this->db->execute($sql);
-	}
-	
-	function getMedidasByVehiculos($marca,$modelo,$ano){
-		$sql="SELECT * FROM `VEHICULOS` WHERE MARCA = '$marca' AND MODELO = '$modelo' and ANO = '$ano'";
-		return $this->db->execute($sql);
-	}
-	 
-    function getProductosFilter($get,$tipo="*"){
-	  	
-      $sql="select ".$tipo." from productos where 1=1 ";
-		//if($get['marca']!='undefined')
-			//$sql.=" and lower(Marca) like lower('%".$get['marca']."%')";
-		if($get['marcaFiltro']!='undefined')
-			$sql.=" and lower(Marca) like lower('%".$get['marcaFiltro']."%')";
-		if($get['atributo']!='undefined'){
-			if($get['atributo']=='4x4')
-				$sql.=" and lower(ultimos_dias) = 'si'";
-			if($get['atributo']=='Runflat')
-				$sql.=" and lower(RUNFLAT) = 'si'";
-			if($get['atributo']=='Oferta')
-				$sql.=" and lower(OFERTA) = 'si'";
-			if($get['atributo']=='Carretera')
-				$sql.=" and lower(alto_desempeno) = 'si'";
-		}
-		
-		//if($get['modelo']!='undefined')
-		//	$sql.=" and lower(MODELO) like lower('%".$get['modelo']."%')";
-		
-		//if($get['ano']!='undefined')
-		//	$sql.=" and lower(MODELO) like lower('%".$get['modelo']."%')";
-		if($get['origen']==1){
-			$rs=$this->getMedidasByVehiculos($get['marca'],$get['modelo'],$get['ano']);
-			$ancho=str_replace('.00','',$rs->fields['ANCHO']);
-			$perfil=str_replace('.00','',$rs->fields['PERFIL']);
-			$aro=$rs->fields['ARO'];
-		}else{
-			if($get['origen']==2){
-				$ancho=$get['ancho'];
-				$perfil=$get['perfil'];
-				$aro=$get['aro'];
-			}else{
-				if($get['origen'] != 'undefined' && $get['origen'] != 'marca')
-				$sql.=" and lower(MODELO) like lower('%".$get['origen']."%') or lower(Marca) like lower('%".$get['origen']."%')";
-			}
-		}
-		if($ancho!='undefined')
-			$sql.=" and lower(ANCHO) like lower('%".$ancho."%')";
-		
-		if($perfil!='undefined')
-			$sql.=" and lower(PERFIL) like lower('%".$perfil."%')";
-		
-		if($aro!='undefined')
-			$sql.=" and lower(ARO) like lower('%".$aro."%')";
-		
-		$order="Marca ASC";
-		if($get['order']!='undefined'){
-			if($get['order']=='marca1')
-				$order="Marca ASC";
-			if($get['order']=='marca2')
-				$order="Marca DESC";
-			
-			if($get['order']=='precio1')
-				$order="precio_final ASC";
-			if($get['order']=='precio2')
-				$order="precio_final DESC";
-			
-			if($get['order']=='modelo2')
-				$order="MODELO ASC";
-			
-			if($get['order']=='modelo2')
-				$order="MODELO DESC";
-		}
-			
-		$start=$get['inicio'];
-		$end=$get['fin'];	
-		$sql.=" order by ".$order."";
-		//if($tipo=='*')	
-			//$sql.=" limit $start,$end";
+    function getProductosFilter($origen,$artista,$start,$end){
+      $sql="select * from productos where lower(titulo) like lower('%".$artista."%')";
+
+        $sql.=" and origen='".$origen."'";
+        $sql.=" order by id DESC limit $start,$end";
       return $this->db->execute($sql);
     }
-    function getProductosAll($start=0,$end=10,$order="Marca"){
+    function insertaProducto($todalainfo){
+
+      $sql="select * from productos where CODIGO = ".$todalainfo[0];
+      $rs=$this->db->execute($sql);
+      $id="";
+      if(!$rs->EOF){
+        $id=$rs->fields['id'];
+        $sql="delete from productos where id = ".$id;
+        $this->db->execute($sql);
+
+      }
+
+       $sql="insert into productos values ('".$id."',";
+              $sql.=$todalainfo[0].",";
+              $sql.=$todalainfo[1].",";
+              $sql.=$todalainfo[2].",";
+              $sql.=$todalainfo[3].",";
+              $sql.=$todalainfo[4].",";
+              $sql.=$todalainfo[5].",";
+              $sql.=$todalainfo[6].",";
+              $sql.=$todalainfo[7].",";
+              $sql.=$todalainfo[8].",";
+              $sql.=$todalainfo[9].",";
+              $sql.=$todalainfo[10].",";
+              $sql.=$todalainfo[11].",";
+              $sql.=$todalainfo[12].",";
+              $sql.=$todalainfo[13].",";
+              $sql.=$todalainfo[14].",";
+              $sql.=$todalainfo[15].",";
+              $sql.=$todalainfo[16].",";
+              $sql.=$todalainfo[17].",";
+              $sql.=$todalainfo[18].",";
+              $sql.=$todalainfo[19].",";
+              $sql.=$todalainfo[20].",";
+              $sql.=$todalainfo[21].",";
+              $sql.=$todalainfo[22].",";
+              $sql.=$todalainfo[23].",";
+              $sql.=$todalainfo[24].",";
+              $sql.=$todalainfo[25].",";
+              $sql.=$todalainfo[26].",";
+              $sql.=$todalainfo[27].",";
+              $sql.=$todalainfo[28].",";
+              $sql.=$todalainfo[29].",";
+              $sql.=$todalainfo[30].",";
+              $sql.=$todalainfo[31].")";
+              $this->db->execute($sql);
+    }
+
+    function getProductosAll($start,$end){
         $sql="select * from productos ";
-        $sql.=" order by ".$order." ASC limit $start,$end";
+
+         // $sql.=" where origen='".$origen."'";
+
+        $sql.=" order by id DESC limit $start,$end";
         return $this->db->execute($sql);
     }
-	function getVehiculosSegunCampo($tipo,$campo1,$campo2="",$campo3=""){
-		$sql="SELECT * FROM VEHICULOS WHERE 1 = 1";
-		if($tipo==1){
-			if($campo1!="")
-				$sql.=" and lower(MARCA) like lower('%".$campo1."%')";
-				if($campo2!="")
-					$sql.=" and lower(MODELO) like lower('%".$campo2."%')";
-					if($campo3!="")
-						$sql.=" and lower(ANO) like lower('%".$campo3."%')";
-			$sql.=" group by MARCA, MODELO, ANO";
-		}else{
-			if($campo1!="")
-				$sql.=" and lower(ANCHO) like lower('%".$campo1."%')";
-				if($campo2!="")
-					$sql.=" and lower(PERFIL) like lower('%".$campo2."%')";
-					if($campo3!="")
-						$sql.=" and lower(ARO) like lower('%".$campo3."%')";			
-			$sql.=" group by ANCHO, PERFIL, ARO";
-		}
-		
-		return $this->db->execute($sql);
-	}
-	function getMarcasVehiculos(){
-		$sql="SELECT MARCA FROM VEHICULOS ";
-		$sql.=" group by MARCA";
-		return $this->db->execute($sql);
-	}
-	function getModeloVehiculos($marca){
-		$sql="SELECT MODELO FROM VEHICULOS WHERE MARCA = '$marca'";
-		$sql.=" group by MODELO";
-		return $this->db->execute($sql);
-	}
-	function getAnoVehiculos($modelo){
-		$sql="SELECT ANO FROM VEHICULOS WHERE MODELO = '$modelo'";
-		$sql.=" group by ANO";
-		return $this->db->execute($sql);
-	}
-	function getAnchoVehiculos(){
-		$sql="SELECT ANCHO FROM VEHICULOS ";
-		$sql.=" group by ANCHO";
-		return $this->db->execute($sql);
-	}
-	function getPerfilVehiculos($ancho){
-		$sql="SELECT PERFIL FROM VEHICULOS WHERE ANCHO = '$ancho'";
-		$sql.=" group by PERFIL";
-		return $this->db->execute($sql);
-	}
-	function getAroVehiculos($perfil){
-		$sql="SELECT ARO FROM VEHICULOS WHERE PERFIL = '$perfil'";
-		$sql.=" group by ARO";
-		return $this->db->execute($sql);
-	}
-	
+    function getProductosFilterTotalAdmin($dato){
+    $sql="SELECT count(*) as TOTAL FROM `productos` WHERE lower(Marca) like lower('%".$dato."%') or lower(MODELO) like lower('%".$dato."%')";
+    $rs=$this->db->execute($sql);
+    return $rs->fields['TOTAL'];
+   }
+   function getProductosFilterAdmin($dato, $start,$end){
+    $sql="SELECT * FROM `productos` WHERE lower(Marca) like lower('%".$dato."%') or lower(MODELO) like lower('%".$dato."%') limit ".$start.",".$end;
+
+    return $this->db->execute($sql);    
+   }
     function getProductoById($id){
         $sql="select * from productos where id=".$id;
         return $this->db->execute($sql);
     }
-	
     function ingresoProducto($post,$foto,$origen){
 
       $sql=" insert into productos values('',";
@@ -377,65 +396,226 @@ class PondaAdminModel
       }
       return $post['idproducto'];
     }
+    function getPistasByProducto($id,$disco,$lado){
+      $sql="select * from pistas where disco='".$disco."' and productos=".$id." and lado='".$lado."'";
+      return $this->db->execute($sql);
+    }
 
 
-    
-    /*FUNCIONES DE USER*/
-	
-	
+    function insertTagsProductos($tags,$noticias){
+
+  		for($i=0;$i<count($tags);$i++){
+  			$sql="insert into tags_productos values (''";
+  			$sql.=",'".$noticias."'";
+  			$sql.=",'".$tags[$i]."')";
+  			$this->db->execute($sql);
+  		}
+  	}
+  	function insertTagsProductosSep($tag,$producto){
+
+
+  			$sql="insert into tags_productos values (''";
+  			$sql.=",'".$tag."'";
+  			$sql.=",'".$producto."')";
+  			$this->db->execute($sql);
+
+  	}
+  	function actualizaTagsProductos($tags,$noticias){
+
+  		$sql="delete from tags_productos where producto=".$noticias;
+  		$this->db->execute($sql);
+
+  		for($i=0;$i<count($tags);$i++){
+  			$sql="insert into tags_productos values (''";
+  			$sql.=",'".$tags[$i]."'";
+  			$sql.=",'".$noticias."')";
+  			$this->db->execute($sql);
+  		}
+  	}
+
+    function getCategorias($id=""){
+
+      $sql="select * from categoria";
+      if($id!="")
+        $sql.=" where id=".$id;
+      $sql.=" order by id ASC";
+      return $this->db->execute($sql);
+    }
+    function getSubCategorias($id="",$cat=""){
+
+      $sql="select * from subcategoria where 1=1";
+      if($id!=""){
+        $sql.=" and id=".$id;
+      }
+      if($cat!=""){
+        $sql.=" and categoria=".$cat;
+      }
+
+      return $this->db->execute($sql);
+    }
+    function getTagByProducto($id){
+  		$sql="select * from tags_productos where producto=".$id;
+  		return $this->db->execute($sql);
+  	}
+	function getProductosByTag($id){
+  		$sql="select * from tags_productos where tag=".$id;
+  		return $this->db->execute($sql);
+  	}
+    function productoCategoria($cat,$producto){
+      $sql="select * from categorias_productos where producto=".$producto." and categoria=".$cat;
+      $rs=$this->db->execute($sql);
+      if(!$rs->EOF)
+        return true;
+      return false;
+    }
+
+    function getTags($id=""){
+      $sql="select * from tags where 1=1";
+      if($id!=""){
+        $sql.=" and id=".$id;
+      }
+      return $this->db->execute($sql);
+    }
+    function getTagsActivos($id=""){
+      $sql="select * from tags where estado=1";
+      if($id!=""){
+        $sql.=" and id=".$id;
+      }
+      $sql.=" order by rand() limit 0,15";
+      return $this->db->execute($sql);
+    }
+    function getTagsActivosAll($id=""){
+      $sql="select * from tags where estado=1";
+      if($id!=""){
+        $sql.=" and id=".$id;
+      }
+      $sql.=" order by rand()";
+      return $this->db->execute($sql);
+    }
+    function deleteTags($id){
+
+      $sql="delete from tags where id = ".$id;
+      $this->db->execute($sql);
+
+      $sql="delete from tags_noticias where tag=".$id;
+      $this->db->execute($sql);
+    }
+    function insertTag($post){
+
+        $sql="insert into tags values (''";
+        $sql.=",'".$post['nombre']."'";
+        $sql.=",'".$post['estado']."')";
+        $this->db->execute($sql);
+
+    }
+    function insertTagSep($nombre,$estado){
+
+        $sql="insert into tags values (''";
+        $sql.=",'".$nombre."'";
+        $sql.=",'".$estado."')";
+        $this->db->execute($sql);
+        $rs = $this->db->Execute("select last_insert_id() as ID");
+        return $rs->fields['ID'];
+    }
+    function actualizaTag($post){
+
+        $sql="update tags set ";
+        $sql.="tag='".$post['nombre']."'";
+        $sql.=",estado='".$post['estado']."'";
+        $sql.=" where id=".$post['id'];
+        $this->db->execute($sql);
+
+    }
+
+    function insertCategoriasProductos($categorias,$noticias){
+
+      for($i=0;$i<count($categorias);$i++){
+        $sql="insert into categorias_productos values (''";
+        $sql.=",'".$categorias[$i]."'";
+        $sql.=",'".$noticias."')";
+        $this->db->execute($sql);
+      }
+    }
+    function actualizaCategoriasProductos($categorias,$noticias){
+        $this->db->execute("delete from categorias_productos where producto=".$noticias);
+      for($i=0;$i<count($categorias);$i++){
+        $sql="insert into categorias_productos values (''";
+        $sql.=",'".$categorias[$i]."'";
+        $sql.=",'".$noticias."')";
+        $this->db->execute($sql);
+      }
+    }
+
+
+    function User_Login($username,$password){
+      $sql="select * from clientes where username='".$username."' and password='".$password."'";
+      $rs=$this->db->execute($sql);
+      if(!$rs->EOF){
+        return $rs->fields['id'];
+      }else {
+        return 0;
+      }
+    }
+    /*FUNCIONES DE HOME*/
     function User_Data($id){
       $sql="select * from clientes where id=".$id;
       return $this->db->execute($sql);
     }
-	function existeEmail($correo){
-      $sql="select * from clientes where email='".$correo."'";
+    function getNovedades($limit=4){
+      $sql="select * from productos where novedad=1 and estado=1 order by rand() limit 0,".$limit;
       return $this->db->execute($sql);
     }
-	function User_Login($username,$password){
-      $sql="select * from clientes where email='".$username."' and password='".$password."'";
-      $rs=$this->db->execute($sql);
-      return $rs;
-    }
-	 function registroUsuario($post){
 
-      $sql="insert into clientes values ('',";
-      $sql.="'".$post['email']."'";
-      $sql.=",'".$post['password']."'";
-      $sql.=",'".$post['nombreCompleto']."'";
-      $sql.=",'".$post['email']."'";
-      $sql.=",'".$post['region']."'";
-      $sql.=",'".$post['ciudad']."'";
-      $sql.=",'".$post['comuna']."'";
-      $sql.=",'".$post['direccion']."'";
-      $sql.=",'11111'";
-      $sql.=",'".$post['telefono']."'";
-      $sql.=",'".$post['genero']."')";
-      $this->db->execute($sql);
+    function getProductosByCategoriaTotal($cat){
+      $sql="select count(*) as total from productos,categorias_productos
+            where productos.id = producto
+            and estado=1
+            and categorias_productos.categoria in (
+            select id from subcategoria where subcategoria.categoria =".$cat."
+            ) ";
+      $rs=$this->db->execute($sql);
+      return $rs->fields['total'];
     }
-    function getPasswordByEmail($email){
-        $sql="select password from clientes where email = '".$email."'";
+    function getProductosByCategoria($cat,$inicio,$fin){
+      $sql="select * from productos where id in (select productos.id from productos,categorias_productos
+            where productos.id = producto
+            and estado=1
+            and categorias_productos.categoria in (
+            select id from subcategoria where subcategoria.categoria =".$cat."
+            )) order by productos.id desc ";
+      return $this->db->execute($sql);
+    }
+    function getProductosOfertas(){
+      $sql="select * from productos where oferta=1 and estado = 1";
+      return $this->db->execute($sql);
+    }
+    function getProductosBuscar($artista){
+      $sql="select * from productos where lower(titulo) like lower('%".$artista."%') and estado = 1";
+      return $this->db->execute($sql);
+    }
+    function getProductosBySubCategoriaTotal($subcat){
+      $sql="select count(*) as total from productos
+      where id in (
+        select DISTINCT producto
+        from categorias_productos
+        where categorias_productos.categoria = ".$subcat.") and estado=1";
         $rs=$this->db->execute($sql);
-        return $rs->fields['password'];
+      return $rs->fields['total'];
     }
-    function updateCliente($post){
-      $sql="update clientes set ";
-      $sql.="username='".$post['email']."'";
-      $sql.=",nombres='".$post['nombreCompleto']."'";
-      $sql.=",email='".$post['email']."'";
-      $sql.=",region='".$post['region']."'";
-      $sql.=",ciudad='".$post['ciudad']."'";
-      $sql.=",comuna='".$post['comuna']."'";
-      $sql.=",direccion='".$post['direccion']."'";
-      $sql.=",telefono='".$post['telefono']."'";
-      $sql.=",genero='".$post['genero']."' where id=".$post['id'];
-      $this->db->execute($sql);
+
+    function getProductosBySubCategoria($subcat,$inicio,$fin){
+      $sql="select * from productos
+      where id in (
+      select DISTINCT producto
+      from categorias_productos
+      where categorias_productos.categoria = ".$subcat.") and estado=1
+        order by id desc ";
+      return $this->db->execute($sql);
     }
-	function updatePassword($post){
-	  $sql="update clientes set password='".$post['password']."' where id=".$post['id'];
-      $this->db->execute($sql);
-	}
-	
-	    function getPagosByCliente($cliente)
+    /*
+      FUNCIONES CARRO
+    */
+    function getPagosByCliente($cliente)
       {
           $sql="select * from pagos,webpay where estado  = 'finalizada' and webpay.Tbk_respuesta='0' and webpay.Tbk_orden_compra=pagosID and id_usuario=".$cliente;
 
@@ -446,17 +626,6 @@ class PondaAdminModel
         //  $rs= $this->db->Execute("select * from pagos where id_usuario = ".$id." and pagosID = 185");
           return $rs;
       }
-	  
-    /*
-      FUNCIONES CARRO
-    */
-	function getTipoInstalacionByComuna($comuna, $tipo=0){
-		$sql="select * from instalacion where comuna =".$comuna;
-    if($tipo!=0){
-      $sql.=" and tipo =".$tipo;
-    }
-		return $this->db->Execute($sql);
-	}
     function enCarro($producto,$usuario){
         $sql="select * from carro, pagos where carro.id_usuario=".$usuario." AND pagoID = pagosID AND estado = 'pendiente' and id_producto=".$producto;
         $rs = $this->db->Execute($sql);
@@ -472,7 +641,7 @@ class PondaAdminModel
     }
 
 /*   METODOS PARA CARRO DE COMPRA*/
-public function agregaCarro($producto, $id_usuario,$color=0,$talla=0,$cantidad,$regalo=0,$imagen="ninguna")
+public function agregaCarro($producto, $id_usuario,$color,$talla,$cantidad,$regalo,$imagen)
 {
 
     $query = sprintf
@@ -562,17 +731,17 @@ public  function comillas_inteligentes($valor)
 
     // Colocar comillas si no es entero
     if (!is_numeric($valor)) {
-        $valor = "'" . $valor . "'";
+        $valor = "'" . mysql_real_escape_string($valor) . "'";
     }
     return $valor;
 }
 public function quitarCarro($carro){
 
-    $insertSQL = "SELECT pagoID,id_usuario
+    $insertSQL = "SELECT pagoID
                     FROM carro
                     WHERE id_carro =".$carro;
     $rs=$this->db->Execute($insertSQL);
-	$usuario=$rs->fields['pagoID'];
+
     $insertSQL = "DELETE FROM carro WHERE id_carro = ".$carro;
     $this->db->Execute($insertSQL);
 
@@ -584,12 +753,7 @@ public function quitarCarro($carro){
     }else{
         $this->actualizaMontos($rs->fields['pagoID']);
     }
-	
-	//$insertSQL = "SELECT id_usuario FROM carro WHERE id_carro =".$carro;
-//$rs=$this->db->Execute($insertSQL);
-	
-    return $usuario;	
-	
+
 }
 
 function calcularPrecioIVA($precio, $iva = 19, $redondear=2)
@@ -660,19 +824,9 @@ public function vaciarCarro($user){
   $sql="delete from pagos where estado = 'pendiente' and id_usuario=".$user;
   $rs=$this->db->Execute($sql);
 }
-public function updateCantidadCarro($carro,$cant){
-	
-	$insertSQL = "UPDATE carro SET cantidad=".$cant." WHERE id_carro = ".$carro;
-    $this->db->Execute($insertSQL);
-	
-	$insertSQL = "SELECT * FROM carro WHERE id_carro =".$carro;
-    $rs=$this->db->Execute($insertSQL);
-	
-    $cant=$rs->fields['id_usuario'];
-    $pago=$rs->fields['pagoID'];
-	
-    $this->actualizaMontos($pago);
-	return $cant;
+function eliminaDelCarro($carro){
+  $sql="delete from carro where id_carro= ".$carro;
+  $this->db->Execute($sql);
 }
 public function getCarroPorCliente($user)
 {
@@ -699,106 +853,7 @@ public function getCarroPorPago($pago)
 
     return $rs;
 }
-
-public function actualizaMontos($id_pago,$adicional=0){
-
-    $insertSQL = "select *
-                    from carro, pagos
-                    where carro.pagoID ='".$id_pago."'
-                    and pagoID = pagosID
-                    and estado =  'pendiente'";
-    $rs=$this->db->Execute($insertSQL);
-    $total=0;
-    while(!$rs->EOF){
-        $producto=$rs->fields['id_producto'];
-        $cantidad=$rs->fields['cantidad'];
-        $sql="SELECT PRECIO_FINAL as precio FROM productos WHERE id = ".$producto;
-        $rsT=$this->db->Execute($sql);
-
-        $totalTmp=$rsT->fields['precio']*$cantidad;
-        $total+=$totalTmp;
-        $rs->movenext();
-    }
-    $sql="update pagos set TBK_MONTO = ".$total." where pagosID = ".$id_pago;
-    $this->db->Execute($sql);
-}
-function porcentaje($cantidad,$porciento,$decimales){
-  return $cantidad*$porciento/100;
-}
-/*public function actualizaCarro($post){
-
-  print_r($post);
-  //Array ( [form_key] => Vwww7itR3zQFe86m [cantidad1] => 1 [producto1] => 203 [total] => 2 [accion] => actualiza [usuario] => 2 )
-  for($i=1;$i<=$post['total'];$i++){
-    $total=$this->getTotalStockPorProducto($post['producto'.$i]);
-    echo $total;
-    if($total>0){
-      if($post['cantidad'.$i]<$total){
-        $sql="update carro set cantidad = ".$post['cantidad'.$i]." where id_carro=".$post['carro'.$i];
-        $this->db->Execute($sql);
-      }
-    }
-
-  }
-  $rs=$this->getCarroPorCliente($post['usuario']);
-  $this->actualizaMontos($rs->fields['pagoID']);
-}*/
-public function getCarroPorId($id)
-{
-
-    $insertSQL = "select *
-                    from carro
-                    where carro.id_carro =".$id;
-    $rs=$this->db->Execute($insertSQL);
-    return $rs;
-}
-
-public function getTotalStockPorProducto($code){
-    $this->db->execute("SET NAMES 'utf8'");
-    $sql = "select *
-                from productos where id = " . $code;
-    $rs=$this->db->execute($sql);
-    return $rs->fields['STOCK'];
-}
-
-public function descuentaStock($code,$cantidad){
-    $this->db->execute("SET NAMES 'utf8'");
-    $sql = "update productos set STOCK=(STOCK-".$cantidad.") where id = " . $code;
-    $this->db->execute($sql);
-}
-public function descuentaStockByPago($pago){
-  $insertSQL = "select *
-                  from carro
-                  where carro.pagoID ='".$pago."'";
-                  $rs=$this->db->Execute($insertSQL);
-    while (!$rs->EOF) {
-      $this->descuentaStock($rs->fields['id_producto'],$rs->fields['cantidad']);
-      $rs->movenext();
-    }
-}
-function getPagosFinalizados($post)
-{
-    $sql = "select * from pagos,webpay where estado  = 'finalizada' and webpay.Tbk_orden_compra=pagosID";
-    if ($post['orden'] != "")
-        $sql .= " and pagosID = " . $post['orden'];
-    if ($post['fechainicio'] != "") {
-        $sql .= " and Tbk_fecha_contable >=  '" . $post['fechainicio'] . "'";
-    }
-    if ($post['fechatermino'] != "") {
-        $sql .= " and Tbk_fecha_contable <=  '" . $post['fechatermino'] . "'";
-    }
-    $sql.=" order by Tbk_fecha_contable desc";
-    return $this->db->Execute($sql);
-}
-	function close(){
-		$this->db->close();
-	}
-	
-	
-	
-	
-	
-	public function eliminaDespacho($pago){
+public function eliminaDespacho($pago){
     $this->db->Execute("delete from pagos_shipping where pago=".$pago);
 }
 public function getDespachoByPago($pago){
@@ -838,6 +893,99 @@ if($_POST['tipodespacho']=="3"){
     $this->db->Execute($insertSQL);
 
 }
+public function actualizaMontos($id_pago,$adicional=0){
+
+    $insertSQL = "select *
+                    from carro, pagos
+                    where carro.pagoID ='".$id_pago."'
+                    and pagoID = pagosID
+                    and estado =  'pendiente'";
+    $rs=$this->db->Execute($insertSQL);
+    $total=0;
+    while(!$rs->EOF){
+        $producto=$rs->fields['id_producto'];
+        $cantidad=$rs->fields['cantidad'];
+        $sql="SELECT precio FROM productos WHERE id = ".$producto;
+        $rsT=$this->db->Execute($sql);
+
+        $totalTmp=$rsT->fields['precio']*$cantidad;
+        $total+=$totalTmp;
+        $rs->movenext();
+    }
+    $sql="update pagos set TBK_MONTO = ".$total." where pagosID = ".$id_pago;
+    $this->db->Execute($sql);
+}
+function porcentaje($cantidad,$porciento,$decimales){
+  return $cantidad*$porciento/100;
+}
+public function actualizaCarro($post){
+
+  print_r($post);
+  //Array ( [form_key] => Vwww7itR3zQFe86m [cantidad1] => 1 [producto1] => 203 [total] => 2 [accion] => actualiza [usuario] => 2 )
+  for($i=1;$i<=$post['total'];$i++){
+    $total=$this->getTotalStockPorProducto($post['producto'.$i]);
+    echo $total;
+    if($total>0){
+      if($post['cantidad'.$i]<$total){
+        $sql="update carro set cantidad = ".$post['cantidad'.$i]." where id_carro=".$post['carro'.$i];
+        $this->db->Execute($sql);
+      }
+    }
+
+  }
+  $rs=$this->getCarroPorCliente($post['usuario']);
+  $this->actualizaMontos($rs->fields['pagoID']);
+}
+public function getCarroPorId($id)
+{
+
+    $insertSQL = "select *
+                    from carro
+                    where carro.id_carro =".$id;
+    $rs=$this->db->Execute($insertSQL);
+    return $rs;
+}
+
+public function getTotalStockPorProducto($code){
+    $this->db->execute("SET NAMES 'utf8'");
+    $sql = "select *
+                from productos where id = " . $code;
+    $rs=$this->db->execute($sql);
+    return $rs->fields['stock'];
+}
+
+public function descuentaStock($code,$cantidad){
+    $this->db->execute("SET NAMES 'utf8'");
+    $sql = "update productos set stock=(stock-".$cantidad.") where id = " . $code;
+    $this->db->execute($sql);
+}
+public function descuentaStockByPago($pago){
+  $insertSQL = "select *
+                  from carro
+                  where carro.pagoID ='".$pago."'";
+                  $rs=$this->db->Execute($insertSQL);
+    while (!$rs->EOF) {
+      $this->descuentaStock($rs->fields['id_producto'],$rs->fields['cantidad']);
+      $rs->movenext();
+    }
+}
+function getPagosFinalizados($post)
+{
+    $sql = "select * from pagos,webpay where estado  = 'finalizada' and webpay.Tbk_orden_compra=pagosID";
+    if ($post['orden'] != "")
+        $sql .= " and pagosID = " . $post['orden'];
+    if ($post['fechainicio'] != "") {
+        $sql .= " and Tbk_fecha_contable >=  '" . $post['fechainicio'] . "'";
+    }
+    if ($post['fechatermino'] != "") {
+        $sql .= " and Tbk_fecha_contable <=  '" . $post['fechatermino'] . "'";
+    }
+    $sql.=" order by Tbk_fecha_contable desc";
+    return $this->db->Execute($sql);
+}
+	function close(){
+		$this->db->close();
+	}
 
 }
 
