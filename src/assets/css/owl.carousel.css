@@ -88,7 +88,8 @@
     -moz-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out;
     -ms-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out
+    transition: all .3s ease-in-out;
+   
 }
 .owl-theme .owl-controls .owl-buttons div.owl-prev {
     right: 32px;

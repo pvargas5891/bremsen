@@ -1091,6 +1091,21 @@ visibility:hidden;
 		cursor:default
 		}
 	
+
+		.owl-carousel .owl-nav .owl-prev { 
+			font-size: 46px;
+			color:#bfbfbf;
+		
+		}
+
+		.owl-carousel .owl-nav .owl-next { 
+			
+			font-size: 46px;
+			color:#bfbfbf;
+			padding-left:89% 	
+		}
+
+		
 	.links { font-size: 16px;}
 
 	.volver { float: left; }
@@ -1526,6 +1541,11 @@ visibility:hidden;
 	background-color: #222222;
 	color: #ffffff;
 }
+
+
+.owl-carousel .owl-nav.disabled, .owl-carousel .owl-dots.disabled { display: flex !important;}
+
+
 /*===================================================================================*/
 /*  12. Tabs
 /*===================================================================================*/
