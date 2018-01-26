@@ -191,8 +191,9 @@ echo '<script src="'.$base_url.'/assets/library/jquery/jquery.min.js?v=v2.0.0-rc
 					 									<form name="formaularioFile" method="post" action="index.php?page=producto-manual" enctype="multipart/form-data" >
 						 									<div class="col-md-12" id="cargaMasiva" style="display: none">
 						 										<div class="widget widget-heading-simple widget-body-gray">
-						 											Seleccione el archivo que desea cargar masivamente<br>
-						 											Recuerde que cada producto nuevo será insertado y si ya existe será actualizado
+						 											- Seleccione el archivo que desea cargar masivamente<br>
+						 											- Recuerde que cada producto nuevo será insertado y si ya existe será actualizado<br>
+						 											- Solo se permiten archivos en formato CSV guardados con separador punto y comma!!
 						 											<input type="file" name="archivo" id="archivo" class="form-control">
 						 											<div style="text-align: center"><br><br>
 						 												<a href="javascript:void(0);" onclick="document.formaularioFile.submit();" class="btn btn-primary"><i class="fa fa-fw fa-download"></i> Cargar Archivo</a>						 												

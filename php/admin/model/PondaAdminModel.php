@@ -142,8 +142,8 @@ class PondaAdminModel
         $rs = $this->db->Execute("select REG_NOMBRE from REGION where REG_CODIGO = " . $codigo);
         return $rs->fields['REG_NOMBRE'];
     }
-    function getBannerHome($id="",$tipo){
-      $sql="select * from bannerhome where tipo = '".$tipo."'";
+    function getBannerHome($id=""){
+      $sql="select * from blog where 1=1";
       if($id!=""){
         $sql.=" and id=".$id;
       }
@@ -156,25 +156,23 @@ class PondaAdminModel
 
       return $this->db->execute($sql);
     }
-    function deleteBanner($id){
-      $sql="delete from bannerhome where id=".$id;
-      $this->db->execute($sql);
+    function deleteBlog($id){
+        $this->db->Execute("delete from blog where id=".$id);
     }
-    function insertBanner($post,$imagen,$tipo){
-      $sql="insert into bannerhome values('',";
+    function insertBanner($post,$imagen){
+      $sql="insert into blog values('',";
+      $sql.="'".$post['titulo']."',";
       $sql.="'".$imagen."',";
-      $sql.="'".$post['pagina']."',";
-      $sql.="'".$post['destino']."',";
-      $sql.="'".$tipo."'";
+      $sql.="'".$post['contenido']."'";
       $sql.=")";
       $this->db->execute($sql);
     }
     function actualizaBanner($post,$imagen){
-      $sql="update bannerhome set ";
+      $sql="update blog set ";
       if($imagen!="")
-        $sql.="imagen='".$imagen."',";
-      $sql.="pagina='".$post['pagina']."',";
-      $sql.="destino='".$post['destino']."'";
+        $sql.="fotoprincipal='".$imagen."',";
+      $sql.="titulo='".$post['titulo']."',";
+      $sql.="contenido='".$post['contenido']."'";
       $sql.=" where id=".$post['id'];
       $this->db->execute($sql);
     }

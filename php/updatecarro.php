@@ -12,6 +12,13 @@ if(isset($_GET['debug']))
 
 switch($accion){
 
+
+      
+    case 'actualizadetalles':
+    	
+    	$model->actualizaDetalleCompra($_GET);
+
+    break;  
 	case 'actualiza':
 		
 		$rs=$model->updateCantidadCarro($_GET['idcarro'],$_GET['cantidad']);

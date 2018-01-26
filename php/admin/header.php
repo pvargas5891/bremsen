@@ -5,7 +5,7 @@
 <!--[if gt IE 8]> <html class="ie paceSimple sidebar sidebar-fusion sidebar-kis footer-sticky navbar-sticky"> <![endif]-->
 <!--[if !IE]><!--><html class="paceSimple sidebar sidebar-fusion sidebar-kis footer-sticky navbar-sticky"><!-- <![endif]-->
 <head>
-    <title>Administrador Vinilos Por Mayor</title>
+    <title>Administrador Bremsen</title>
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">

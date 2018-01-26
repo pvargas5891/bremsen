@@ -686,7 +686,72 @@ public function getCarroPorCliente($user)
 
     return $rs;
 }
+public actualizaDetallesComrpa($get){
 
+    /*params.append('regionInstalacion',carro.regionInstalacion);
+      params.append('ciudadInstalacion',carro.ciudadInstalacion);
+      params.append('comunaInstalacion',carro.comunaInstalacion);
+      params.append('aceptaInstalacion1value',carro.aceptaInstalacion1value);
+      params.append('nombresInstalacion1value',carro.nombresInstalacion1value);
+      params.append('direccionInstalacion1value',carro.direccionInstalacion1value);
+      params.append('aceptaInstalacion2value',carro.aceptaInstalacion2value);
+      params.append('nombresInstalacion2value',carro.nombresInstalacion2value);
+      params.append('direccionInstalacion2value',carro.direccionInstalacion2value);
+      params.append('rutInstalacion2value',carro.rutInstalacion2value);
+      params.append('aceptaInstalacion3value',carro.aceptaInstalacion3value);
+      params.append('tallerAsociadovalue',carro.tallerAsociadovalue);
+      params.append('fechaInstalacionvalue',carro.fechaInstalacionvalue);
+      params.append('bloqueHorariovalue',carro.bloqueHorariovalue);
+      params.append('direccionInstalacion4value',carro.direccionInstalacion4value);
+      params.append('aceptaInstalacion4value',carro.aceptaInstalacion4value);
+      params.append('tipoInstalacion',carro.tipoInstalacion);
+      params.append('costoNeumaticos',carro.costoNeumaticos);
+      params.append('costoInstalacion',carro.costoInstalacion);
+      params.append('descuentoAplicado',carro.descuentoAplicado);
+      params.append('totalTotales',carro.totalTotales);
+      params.append('usuario',usuario);
+      params.append('accion','actualizadetalles');*/
+
+      $insertSQL = "select *
+                    from carro, pagos
+                    where carro.id_usuario ='".$get['usuario']."'
+                    and pagoID = pagosID
+                    and estado =  'pendiente'";
+      $rs=$this->db->Execute($insertSQL);
+      if($rs->EOF)
+        return;
+
+     $insertSQL = "delete from detalles_compra where usuario = ".$get['usuario']." and pagoId = ".$rs->fields['pagoID'];   
+     $this->db->Execute($insertSQL);
+
+     $insertSQL = "insert into detalles_compra values ('',";
+     $insertSQL .= "usuario = ".$get['usuario'].","; 
+     $insertSQL .= "pagoId = ".$rs->fields['pagoID'];
+     $insertSQL .= "usuario = '".$get['usuario']."',";
+     $insertSQL .= "regionInstalacion = '".$get['regionInstalacion']."',";
+     $insertSQL .= "ciudadInstalacion = '".$get['ciudadInstalacion']."',";
+     $insertSQL .= "comunaInstalacion = '".$get['comunaInstalacion']."',";
+     $insertSQL .= "aceptaInstalacion1value = '".$get['aceptaInstalacion1value']."',";
+     $insertSQL .= "nombresInstalacion1value = '".$get['nombresInstalacion1value']."',";
+     $insertSQL .= "direccionInstalacion1value = '".$get['direccionInstalacion1value']."',";
+     $insertSQL .= "rutInstalacion2value = '".$get['rutInstalacion2value']."',";
+     $insertSQL .= "aceptaInstalacion3value = '".$get['aceptaInstalacion3value']."',";
+     $insertSQL .= "tallerAsociadovalue = '".$get['tallerAsociadovalue']."',";
+     $insertSQL .= "fechaInstalacionvalue = '".$get['fechaInstalacionvalue']."',";
+     $insertSQL .= "bloqueHorariovalue = '".$get['bloqueHorariovalue']."',";
+     $insertSQL .= "direccionInstalacion4value = '".$get['direccionInstalacion4value']."',";
+     $insertSQL .= "aceptaInstalacion4value = '".$get['aceptaInstalacion4value']."',";
+     $insertSQL .= "tipoInstalacion = '".$get['tipoInstalacion']."',";
+     $insertSQL .= "costoNeumaticos = '".$get['costoNeumaticos']."',";
+     $insertSQL .= "costoInstalacion = '".$get['costoInstalacion']."',";
+     $insertSQL .= "descuentoAplicado = '".$get['descuentoAplicado']."',";
+     $insertSQL .= "totalTotales = '".$get['totalTotales']."')";
+
+     $this->db->Execute($insertSQL);     
+
+
+
+}
 public function getCarroPorPago($pago)
 {
 
