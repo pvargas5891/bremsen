@@ -981,6 +981,11 @@ function getPagosFinalizados($post)
     $sql.=" order by Tbk_fecha_contable desc";
     return $this->db->Execute($sql);
 }
+
+function getDetalleCompra($pago){
+  $sql="select * from detalles_compra where pagoId = ".$pago;
+  return $this->db->Execute($sql);
+}
 	function close(){
 		$this->db->close();
 	}

@@ -53,7 +53,8 @@ $rsVentas = $model->getPagosFinalizados($_POST);
 while(!$rsVentas->EOF){
 $rsClientes=$model->User_Data($rsVentas->fields['id_usuario']);
 $rsWebpay=$model->getWebPayByPago($rsVentas->fields['pagosID']);
-$rsSuc=$model->getSucursalByPago($rsVentas->fields['pagosID']);
+$rsDetalle=$model->getDetalleCompra($rsVentas->fields['pagosID']);
+//$rsSuc=$model->getSucursalByPago($rsVentas->fields['pagosID']);
 //$codigodescuento=$model->getCodigoDescuentoByPago($rsVentas->fields['pagosID']);
   //$descuento=$model->getDescuento2($codigodescuento);
   //$porciento = $model->porcentaje($rsVentas->fields['TBK_MONTO'],$descuento,2);
@@ -67,16 +68,16 @@ echo '
            <th><strong>Orden de compra</strong></th>
            <th><strong>Monto Pagado</strong></th>
            <th><strong>Fecha Compra</strong></th>
-           <th><strong>Codigo Descuento</strong></th>
-           <th><strong>Descontado</strong></th>
+           <th><strong>Descuento Aplicado</strong></th>
+           <!--th><strong>Descontado</strong></th-->
         </tr>
 		</thead>
         <tr>
                <td class="center">'.$rsVentas->fields['pagosID'].'</td>
-               <td class="center">$'.$rsVentas->fields['TBK_MONTO'].'.-</td>
+               <td class="center">$'.$rsDetalle->fields['totalTotales'].'.-</td>
                <td class="text-primary" >'.$rsWebpay->fields['Tbk_fecha_transaccion'].'</td>
-               <td>'.$codigodescuento.'('.$descuento.'%)</td>
-               <td>'.$porciento.'</td>
+               <td>'.$rsDetalle->fields['descuentoAplicado'].'('.$descuento.'%)</td>
+               <!--td>'.$porciento.'</td-->
             </tr>
 
 		<tr>
@@ -84,7 +85,7 @@ echo '
 		<table class="fixedHeaderColReorder table-striped table-responsive swipe-horizontal table table-primary">
        <thead>
 	   <tr>
-           <th style="color: #000 !important;"><strong>Rut</strong></th>
+           <!--th style="color: #000 !important;"><strong>Rut</strong></th-->
            <th style="color: #000 !important;"><strong>Nombre</strong></th>
            <th style="color: #000 !important;"><strong>Email</strong></th>
            <th style="color: #000 !important;"><strong>Direccion</strong></th>
@@ -94,40 +95,18 @@ echo '
         </tr>
 		</thead>';
     echo '<tr>
-           <td>'.$rsClientes->fields['rut'].'</td>
+           <!--td>'.$rsClientes->fields['rut'].'</td-->
            <td>'.$rsClientes->fields['nombres'].' '.$rsClientes->fields['apellido'].'</td>
            <td>'.$rsClientes->fields['email'].'</td>
            <td>'.$rsClientes->fields['direccion'].'</td>
            <td>'.$rsClientes->fields['telefono'].'</td>
            <td>'.$model->extraeNombreRegion($rsClientes->fields['region']).'/'.$model->extraeNombreCiudad($rsClientes->fields['ciudad']).'/'.$model->extraeNombreComuna($rsClientes->fields['comuna']).'</td>
-           <td>'.$rsClientes->fields['postal'].'</td>
+           <td>'.$rsClientes->fields['codigopostal'].'</td>
         </tr>
 		</table>
 		</td>
 		</tr>
-        ';
-    
-    echo '<tr>
-           <td align="center" colspan="9"><strong>Dirección De Despacho</strong></td>
-        </tr>';
-
-    $rsDespacho=$model->getDespachoByPago($rsVentas->fields['pagosID']);
-    if(!$rsDespacho->EOF){
-    echo '<tr>
-           <td align="center" colspan="9">Dirección: '.$rsDespacho->fields['direccion'].', '.$model->extraeNombreRegion($rsDespacho->fields['region']).'/'.$model->extraeNombreCiudad($rsDespacho->fields['ciudad']).'/'.$model->extraeNombreComuna($rsDespacho->fields['comuna']).'
-           (Codigo Postal: '.$rsDespacho->fields['postal'].') <br> A nombre de: '.$rsDespacho->fields['nombre'].' ('.$rsDespacho->fields['email'].')</td>
-        </tr>';
-    }else{
-      echo '<tr>
-             <td align="center" colspan="9">Dirección: '.$rsClientes->fields['direccion'].', '.$model->extraeNombreRegion($rsClientes->fields['region']).'/'.$model->extraeNombreCiudad($rsClientes->fields['ciudad']).'/'.$model->extraeNombreComuna($rsClientes->fields['comuna']).'
-             (Codigo Postal: '.$rsClientes->fields['postal'].') <br> A nombre de: '.$rsClientes->fields['nombres'].' '.$rsClientes->fields['apellido'].' ('.$rsClientes->fields['email'].')</td>
-          </tr>';
-    }
-
-		echo '<tr>
-					 <td align="center" colspan="9"><strong>Sucursal de despacho Chilexpress:</strong><br>'.$model->extraeNombreSuc($rsSuc->fields['sucursal']).'</td>
-				</tr>';
-    echo '<tr>
+        <tr>
            <td align="center" colspan="9"><strong>Productos comprados</strong></td>
         </tr>
         <tr>
@@ -141,17 +120,59 @@ echo '
         $rsCarro=$model->getCarroPorPago($rsVentas->fields['pagosID']);
     while(!$rsCarro->EOF){
       $rsProducto=$model->getProductoById($rsCarro->fields['id_producto']);
-      if($rsProducto->fields['titulo']){
+
       echo '  <tr>
-           <td style="width: 70%"><strong>TITULO</strong>: '.$rsProducto->fields['titulo'].' - <strong>ALBUM:</strong> '.$rsProducto->fields['album'].' - <strong>SKU:</strong> '.$rsProducto->fields['sku'].' <strong>SELLO:</strong> '.$rsProducto->fields['sello'].' <br><strong>FORMATO:</strong> '.$rsProducto->fields['formato'].'</strong> - <strong>GENERO:</strong> '.$rsProducto->fields['genero'].' - <strong>AÑO:</strong> '.$rsProducto->fields['ano'].'<br><strong>PRECIO:</strong> $ '.number_format($rsProducto->fields['precio'], 0, ",", ".").'</td>
+           <td style="width: 70%">'.$rsProducto->fields['CODIGO'].' - '.$rsProducto->fields['Marca'].'- '.$rsProducto->fields['MODELO'].' - '.$rsProducto->fields['MEDIDA'].'</td>
            <td class="center" ><strong>'.$rsCarro->fields['cantidad'].'</strong></td>
         </tr>';
-      }
+
         $rsCarro->movenext();
     }
 
     echo '</table></td>
         </tr>';
+    $tipoInstalacion="No Aplica";
+    $detalleCompra="";
+    if($rsDetalle->fields['tipoInstalacion']==1){
+      $tipoInstalacion="Instalación en talleres";
+      $detalleCompra="<br><strong>Dirección</strong>:".$rsDetalle->fields['direccionInstalacion1value'];
+      $detalleCompra.="<br><strong>Nombre</strong>:".$rsDetalle->fields['nombresInstalacion1value'];
+      $detalleCompra.="<br><strong>Region</strong>:".$model->extraeNombreRegion($rsDetalle->fields['regionInstalacion']);
+      $detalleCompra.="<br><strong>Ciudad</strong>:".$model->extraeNombreCiudad($rsDetalle->fields['ciudadInstalacion']);
+      $detalleCompra.="<br><strong>Comuna:</strong>".$model->extraeNombreComuna($rsDetalle->fields['comunaInstalacion']);
+
+    }  
+    if($rsDetalle->fields['tipoInstalacion']==2){
+      $tipoInstalacion="Instalación a domicilio";
+      $detalleCompra="<br><strong>Dirección</strong>:".$rsDetalle->fields['direccionInstalacion2value'];
+      $detalleCompra.="<br><strong>Nombre</strong>:".$rsDetalle->fields['nombresInstalacion2value'];
+      $detalleCompra.="<br><strong>Rut</strong>:".$rsDetalle->fields['rutInstalacion2value'];
+      $detalleCompra.="<br><strong>Region</strong>:".$model->extraeNombreRegion($rsDetalle->fields['regionInstalacion']);
+      $detalleCompra.="<br><strong>Ciudad</strong>:".$model->extraeNombreCiudad($rsDetalle->fields['ciudadInstalacion']);
+      $detalleCompra.="<br><strong>Comuna</strong>:".$model->extraeNombreComuna($rsDetalle->fields['comunaInstalacion']);
+    }  
+    if($rsDetalle->fields['tipoInstalacion']==3){
+      $tipoInstalacion="Retiramos tu auto";
+      $detalleCompra="<br><strong>Taller</strong>:".$rsDetalle->fields['tallerAsociadovalue'];
+      $detalleCompra.="<br><strong>Fecha instalación</strong>:".$rsDetalle->fields['fechaInstalacionvalue'];
+      $detalleCompra.="<br><strong>Bloque horario</strong>:".$rsDetalle->fields['bloqueHorariovalue'];
+      $detalleCompra.="<br><strong>Region</strong>:".$model->extraeNombreRegion($rsDetalle->fields['regionInstalacion']);
+      $detalleCompra.="<br><strong>Ciudad</strong>:".$model->extraeNombreCiudad($rsDetalle->fields['ciudadInstalacion']);
+      $detalleCompra.="<br><strong>Comuna</strong>:".$model->extraeNombreComuna($rsDetalle->fields['comunaInstalacion']);
+    }  
+    if($rsDetalle->fields['tipoInstalacion']==4){
+      $tipoInstalacion="Despacho a domicilio"; 
+      $detalleCompra="<br><strong>Dirección</strong>:".$rsDetalle->fields['direccionInstalacion4value'];
+    }
+      
+    echo '<tr>
+           <td align="center" colspan="9"><strong>Detalle Instalación</strong></td>
+        </tr><tr>
+             <td align="center" colspan="9">
+             <strong>Tipo Instalación</strong>: '.$tipoInstalacion.'
+             '.$detalleCompra.'</td>
+          </tr>';
+
     $rsVentas->movenext();
 
 echo '</table><hr>';

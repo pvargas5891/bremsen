@@ -52,13 +52,20 @@ error = '';
           this.id = currentUser.usuario.id;
           this.getDatosPersonales();
           this.datosCarro = JSON.parse(localStorage.getItem('instalacionTemporal'));
-          //console.debug(datosCarro);
+          console.debug(this.datosCarro);
           this.costoNeumaticos=this.datosCarro[0].costoNeumaticos;
           this.costoInstalacion=this.datosCarro[0].costoInstalacion;
           this.descuentoAplicado=this.datosCarro[0].descuentoAplicado;
           this.totalTotales=this.datosCarro[0].totalTotales;
 
-          this.carro.setDetallesCarro(this.datosCarro,this.id).then();
+          this.carro.setDetallesCarro(this.datosCarro[0],this.id).then(
+          data => {
+            console.debug(data);
+          },
+          error => {
+              console.debug(error);
+          })
+          ;
 
   }
 
