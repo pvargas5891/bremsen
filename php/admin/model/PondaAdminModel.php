@@ -678,6 +678,36 @@ function getBannerHome($id=""){
       }
       return $this->db->execute($sql);
     }
+function getCodigosDescuento($id=""){
+    $sql="select * from descuentos";
+    if($id!=''){
+      $sql.=" where id = ".$id;
+    } 
+    return $this->db->execute($sql);
+}    
+function insertDescuento($post){
+    
+    $sql="insert into descuentos values ('',";
+    $sql.="'".$post['nombre']."',";
+    $sql.="'".$post['codigo']."',";
+    $sql.="'".$post['porcentaje']."')";
+ 
+    $this->db->execute($sql);
+
+}
+function actualizaDescuento($post){
+    $sql="update descuentos set ";
+    $sql.="nombre='".$post['nombre']."',";
+    $sql.="codigo='".$post['codigo']."',";
+    $sql.="porcentaje='".$post['porcentaje']."'";
+    $sql.=" where id = ".$post['id'];
+     
+    return $this->db->execute($sql);
+}
+function deleteDescuento($id){
+    $sql="delete from descuentos where id = ".$id;
+    return $this->db->execute($sql);
+}
 function getPagosFinalizados($post)
 {
     $sql = "select * from pagos,webpay where estado != 'pendiente'  and webpay.Tbk_orden_compra=pagosID";

@@ -25,9 +25,9 @@ echo '
 
 
            //$model->changeDebugState(true);
-					 	if(isset($_GET['accion']) and $_GET['accion']=='elimina'){
+					 if(isset($_GET['accion']) and $_GET['accion']=='elimina'){
 
-					 		$model->deleteBlog($_GET['id']);
+					 		$model->deleteDescuento($_GET['id']);
 					 	}
 					 ?>
 					 <!-- row-app -->
@@ -80,44 +80,18 @@ echo '
 
                         <?php
 
-                        $storeFolder = $base_fisica.'/admin/galerias/';   //2
+
                         if($_POST['accion']=="ingresa"){
 
-                        	$tempFile = $_FILES['imagen']['tmp_name'];
-                        	if($tempFile != ""){
-                        		$imagen = getimagesize($_FILES['imagen']['tmp_name']); //obtenemos el tipo
-                        		$extencion = image_type_to_extension($imagen[2], false); //aqui obtenemos la extencion de la imagen
-                        		$codigo=md5(microtime());
-                        		$codigo=strtoupper(substr($codigo, 0, 8));
-                        		$nombreArchivo=$codigo.".".$extencion;
-                        		$targetFile =  $storeFolder. $nombreArchivo;
-
-
-                        		move_uploaded_file($tempFile,$targetFile); //6
-
-                        	}
-                          $model->insertBanner($_POST,$base_url_admin."/galerias/".$nombreArchivo);
+                        	
+                          $model->insertDescuento($_POST);
                         }
-                        if($_POST['accion']=="actualizafrm"){
-
-                        	$tempFile = $_FILES['imagen']['tmp_name'];
-                        	if($tempFile != ""){
-                        		$imagen = getimagesize($_FILES['imagen']['tmp_name']); //obtenemos el tipo
-                        		$extencion = image_type_to_extension($imagen[2], false); //aqui obtenemos la extencion de la imagen
-                        		$codigo=md5(microtime());
-                        		$codigo=strtoupper(substr($codigo, 0, 8));
-                        		$nombreArchivo=$codigo.".".$extencion;
-                        		$targetFile =  $storeFolder. $nombreArchivo;
-
-
-                        		move_uploaded_file($tempFile,$targetFile); //6
-
-                        	}
-                          $model->actualizaBanner($_POST,$base_url_admin."/galerias/".$nombreArchivo);
+                        if($_POST['accion']=="actualizafrm"){                        	
+                          $model->actualizaDescuento($_POST);
                         }
                          ?>
 
-                        <form name="frmPagina" method="post" action="index.php?page=ingreso-banners" enctype="multipart/form-data">
+                        <form name="frmPagina" method="post" action="index.php?page=descuento" enctype="multipart/form-data">
                          <div class="innerLR heading-buttons border-bottom">
                         
                         <div class="clearfix"></div>
@@ -130,40 +104,40 @@ echo '
 
 
                           if($_GET['accion']=="actualiza"){
-                            $rsProductos=$model->getBannerHome($_GET['id']);
+                            $rsProductos=$model->getCodigosDescuento($_GET['id']);
                             echo '  <input type="hidden" name="accion" value="actualizafrm">';
-                            echo '  <input type="hidden" name="id" value="'.$rsProductos->fields['id'].'">';
-                            echo '<img src="'.$rsProductos->fields['fotoprincipal'].'" width="400" height="200">';
+                            echo '  <input type="hidden" name="id" value="'.$rsProductos->fields['id'].'">';                           
                           }else{
                             echo '<input type="hidden" name="accion" value="ingresa">';
                           }
                           ?>
-                             <div class="form-group">
-															 <label for="exampleInputFile">Subir Imagen</label> <input type="file" name="imagen" id="exampleInputFile"> 															 
-														 </div>
-
-
+                     
                         </div>
 
 
                         <div class="col-md-12">
                           <?php
 
-						  $pagina="";
-						  $contenido="";
+						  $nombre="";
+						  $codigo="";
+						  $porcentaje="";
 						  $boton="Inserta";
                           if($_GET['accion']=="actualiza"){
-							$pagina=$rsProductos->fields['titulo'];
-							$contenido=$rsProductos->fields['contenido'];
+							$nombre=$rsProductos->fields['nombre'];
+							$codigo=$rsProductos->fields['codigo'];
+							$porcentaje=$rsProductos->fields['porcentaje'];
 							$boton="Actualiza";
                           }
                           ?>
-                              <div class="form-group"> <label for="exampleInputEmail1">Titulo</label> 
-							  <input type="text" class="form-control" name="titulo" value="<?php echo $pagina; ?>" placeholder="titulo del blog"> </div>
-
-  														<div class="form-group"> <label for="exampleInputEmail1">Contenido</label>
-															<textarea name="contenido" class="form-control"><?php echo $contenido; ?></textarea>	
-															</div>
+                            <div class="form-group"> <label for="exampleInputEmail1">Nombre Descuento</label> 
+							  <input type="text" class="form-control" name="nombre" value="<?php echo $nombre; ?>" placeholder="Nombre Descuento"> 
+							</div>
+							<div class="form-group"> <label for="exampleInputEmail1">Codigo Descuento</label> 
+							  <input type="text" class="form-control" name="codigo" value="<?php echo $codigo; ?>" placeholder="Codigo Descuento"> 
+							</div>
+							<div class="form-group"> <label for="exampleInputEmail1">Porcentaje</label> 
+							  <input type="text" class="form-control" name="porcentaje" value="<?php echo $porcentaje; ?>" placeholder="Porcentaje"> 
+							</div>
                               <div class="col-sm-offset-9 col-sm-3">
                                     <a href="javascript:void(0);" onclick="javascript:document.frmPagina.submit();" class="btn btn-primary"><i class="fa fa-download"></i> <?php echo $boton ?></a>
                              </div>
@@ -192,7 +166,7 @@ echo '
                         <!-- // END col-app.box -->
                         </div>
 
-					 							<h3 class="innerTB">Lista de blog ingresados</h3>
+					 							<h3 class="innerTB">Codigos de descuento ingresados</h3>
 
 					 							<!-- Widget -->
 					 							<div class="widget">
@@ -209,9 +183,9 @@ echo '
 					 	<!-- Table heading -->
 					 	<thead class="bg-gray">
 					 		<tr>
-					 			<th style="width:15%;">Imagen</th>
-								<th class="center">Titulo</th>
-								<th class="center" style="width:30%;">Contenido</th>
+					 			<th >Nombre</th>
+								<th class="center">Codigo</th>
+								<th class="center" style="width:30%;">Descuento</th>
 					 			<th class="text-right">Acción</th>
 					 		</tr>
 					 	</thead>
@@ -221,17 +195,17 @@ echo '
 					 	<tbody>
 
 					 	<?php
-					 	  $rsProductos=$model->getBannerHome('');
+					 	  $rsProductos=$model->getCodigosDescuento();
 					 		while(!$rsProductos->EOF){
 
 					 		echo '<!-- Table row --><tr class="gradeX">
-					 			<td><img src="'.$rsProductos->fields['fotoprincipal'].'" width="100" height="100"></td>
-								<td>'.$rsProductos->fields['titulo'].'</td>
-								<td>'.$rsProductos->fields['contenido'].'</td>
+					 			<td >'.$rsProductos->fields['nombre'].'</td>
+								<td class="center">'.$rsProductos->fields['codigo'].'</td>
+								<td class="center">'.$rsProductos->fields['porcentaje'].'</td>
 					 			<td class="text-right">
 					                 <div class="btn-group btn-group-md ">
-					                     <a href="index.php?page=ingreso-banners&accion=actualiza&id='.$rsProductos->fields['id'].'" class="btn btn-inverse"><i class="fa fa-pencil"></i></a>
-					                     <a href="javascript:void(0)" onclick="eliminaNoticia(\'index.php?page=ingreso-banners&accion=elimina&id='.$rsProductos->fields['id'].'\')" class="btn btn-default text-danger"><i class="fa fa-times"></i></a>
+					                     <a href="index.php?page=descuento&accion=actualiza&id='.$rsProductos->fields['id'].'" class="btn btn-inverse"><i class="fa fa-pencil"></i></a>
+					                     <a href="javascript:void(0)" onclick="eliminaNoticia(\'index.php?page=descuento&accion=elimina&id='.$rsProductos->fields['id'].'\')" class="btn btn-default text-danger"><i class="fa fa-times"></i></a>
 
 					                 </div>
 					             </td>
