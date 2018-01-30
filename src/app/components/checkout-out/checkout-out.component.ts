@@ -69,7 +69,14 @@ export class CheckoutOutComponent {
           this.descuentoAplicado=this.datosCarro[0].descuentoAplicado;
           this.totalTotales=this.datosCarro[0].totalTotales;
 
-
+    this.carro.setDetallesCarro(this.datosCarro[0], this.id).then(
+      data => {
+        console.debug(data);
+      },
+      error => {
+        console.debug(error);
+      })
+      ;
    }
 
      cambiaCiudad(selectedRegion: string): void{

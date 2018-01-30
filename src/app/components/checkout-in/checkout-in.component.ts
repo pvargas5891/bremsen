@@ -133,9 +133,12 @@ private getDatosPersonales = function (){
       this.userService.saveFactura(this.cliente).then(
         data => {
 
-             window.location.href="http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario="+this.id;
+             //window.location.href="http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario="+this.id;
 
-        });
+        },
+      error => {
+        console.debug(error);
+      });
       }
     public pagarBoleta = function (){
           console.debug("pago boleta");

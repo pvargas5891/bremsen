@@ -24,6 +24,11 @@ switch($accion){
 			$general2[]='NOK';
 		}		
 	break;
+	case 'empresa':
+
+		$model->setEmpresa($_POST);
+		$general2[]='OK';
+	break;
 	default:
 		$model->updateCliente($_POST);
 		$general2[]='OK';

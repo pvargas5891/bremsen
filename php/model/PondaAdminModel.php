@@ -430,6 +430,36 @@ class PondaAdminModel
       $sql.=",genero='".$post['genero']."' where id=".$post['id'];
       $this->db->execute($sql);
     }
+    function setEmpresa($post){
+	/*params.append('id', registro.id);
+        params.append('razon', registro.razon);
+        params.append('rutempresa', registro.rutempresa);
+        params.append('giro', registro.giro);
+        params.append('telefonoempresa', registro.telefonoempresa);
+        params.append('direccionempresa', registro.direccionempresa);
+        params.append('regionempresa', registro.regionempresa);
+        params.append('ciudadempresa', registro.ciudadempresa);
+        params.append('comunaempresa', registro.comunaempresa);
+        params.append('accion', 'empresa');*/
+        
+        $rsPago=$this->getPagoByUsuario($post['id']);
+        $this->db->execute("delete from cliente_factura where cliente=".$post['id']." and pago=".$rspago->fields['pagosID']);
+
+        $sql="insert into cliente_factura values ('',";
+        $sql.="'".$post['id']."'";
+        $sql.="'".$post['razon']."'";
+        $sql.="'".$post['rutempresa']."'";
+        $sql.="'".$post['giro']."'";
+        $sql.="'".$post['telefonoempresa']."'";
+        $sql.="'".$post['direccionempresa']."'";
+        $sql.="'".$post['regionempresa']."'";
+        $sql.="'".$post['ciudadempresa']."'";
+        $sql.="'".$post['comunaempresa']."'";
+        $sql.="'".$rspago->fields['pagosID']."'";
+        $sql.=")";
+      $this->db->execute($sql);
+
+    }
 	function updatePassword($post){
 	  $sql="update clientes set password='".$post['password']."' where id=".$post['id'];
       $this->db->execute($sql);
@@ -686,6 +716,10 @@ public function getCarroPorCliente($user)
 
     return $rs;
 }
+function getDetalleCompra($pago){
+  $sql="select * from detalles_compra where pagoId = ".$pago;
+  return $this->db->Execute($sql);
+}
 public function actualizaDetallesCompra($get){
 
     /*params.append('regionInstalacion',carro.regionInstalacion);
@@ -747,10 +781,11 @@ public function actualizaDetallesCompra($get){
      $insertSQL .= "'".$get['costoInstalacion']."',";
      $insertSQL .= "'".$get['descuentoAplicado']."',";
      $insertSQL .= "'".$get['totalTotales']."')";
-
+     
      $this->db->Execute($insertSQL);     
 
-
+    $sql="update pagos set TBK_MONTO = ".$get['totalTotales']." where pagosID = ".$rs->fields['pagoID'];
+    $this->db->Execute($sql);
 
 }
 public function getCarroPorPago($pago)
@@ -864,7 +899,7 @@ function getPagosFinalizados($post)
 	
 	
 	
-	public function eliminaDespacho($pago){
+public function eliminaDespacho($pago){
     $this->db->Execute("delete from pagos_shipping where pago=".$pago);
 }
 public function getDespachoByPago($pago){

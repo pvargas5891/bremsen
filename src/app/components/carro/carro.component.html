@@ -176,7 +176,7 @@
 
             <div class="tab-content" style="background: #fff; padding-left: 0px;">
 
-              <div role="tabpanel" class="tab-pane active" id="intalacion-domicilio" *ngIf="!activaErrorNoDisponible">
+              <div role="tabpanel" class="{{classCaso1}}" id="intalacion-domicilio" *ngIf="!activaErrorNoDisponible">
                 <form name="form" (ngSubmit)="finstalacion1.form.valid && guardaInstalacion1()" #finstalacion1="ngForm" novalidate>
                   <div class="col-md-6" style="padding-left: 0px;">
 
@@ -211,7 +211,7 @@
               </div>
 
 
-               <div role="tabpanel" class="tab-pane" id="retiramos-autos">
+               <div role="tabpanel" class="{{classCaso2}}" id="retiramos-autos">
 
                  <div class="col-md-6" style="padding-left: 0px;">
                   <br>
@@ -251,7 +251,7 @@
                  <div class="col-md-6"></div>
               </div>
 
-              <div role="tabpanel" class="tab-pane" id="talleres-asosiados">
+              <div role="tabpanel" class="{{classCaso3}}" id="talleres-asosiados">
                 <form name="form" (ngSubmit)="finstalacion3.form.valid && guardaInstalacion3()" #finstalacion3="ngForm" novalidate>
                     <div class="col-md-6">
                 <div class="form-group" [ngClass]="{ 'has-error': validaTalleres }">
@@ -307,7 +307,7 @@
 
               </div>
 
-               <div role="tabpanel" class="tab-pane" id="despacho-adomicilio">
+               <div role="tabpanel" class="{{classCaso4}}" id="despacho-adomicilio">
                  <div class="col-md-6">
                     <form name="form" (ngSubmit)="finstalacion4.form.valid && guardaInstalacion4()" #finstalacion4="ngForm" novalidate>
                       <div class="pad-10">&nbsp;</div>
