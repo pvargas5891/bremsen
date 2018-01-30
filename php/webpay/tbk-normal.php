@@ -12,6 +12,20 @@ $urlfracaso="http://localhost:4200/index.html#/fracaso";
 $urlexito="http://localhost:4200/index.html#/exito";
 $urlfracaso="http://bremsen.kodamas.cl/maqueta/fracaso.php";
 $urlexito="http://bremsen.kodamas.cl/maqueta/exito.php";
+
+if(isset($_GET['transferencia'])){
+	$rsPago=$model->getPagoByUsuario($_GET['usuario']);
+	$query="UPDATE `pagos` SET estado ='transferencia' where pagosID ='".$rsPago->fields['pagosID']."'";
+	$model->executeCommand($query);
+	echo '<form action="'.$urlexito.'" name="pago" method="post">
+	<input type="hidden" name="token_ws" value="noaplica">
+	<input type="hidden" name="TBK_ORDEN_COMPRA" value="'.$rsPago->fields['pagosID'].'">
+</form>
+<script>
+	document.pago.submit();
+</script>';
+exit;
+}
 /**
  * @author     Allware Ltda. (http://www.allware.cl)
  * @copyright  2015 Transbank S.A. (http://www.tranbank.cl)

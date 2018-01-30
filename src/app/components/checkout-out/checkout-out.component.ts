@@ -40,6 +40,7 @@ export class CheckoutOutComponent {
   public descuentoAplicado:number = 0;
   public totalTotales:number = 0;
   public datosCarro;
+  public codigoCompra = 0;
   constructor(
       private carro: CarroCompraService,
       private route: Router,
@@ -72,6 +73,7 @@ export class CheckoutOutComponent {
     this.carro.setDetallesCarro(this.datosCarro[0], this.id).then(
       data => {
         console.debug(data);
+        this.codigoCompra = data[0].pagosID;
       },
       error => {
         console.debug(error);
@@ -299,5 +301,9 @@ cambiaCiudadEmpresa(selectedRegion: string): void{
 
 
 
+  }
+
+  public realizaTransferencia = function () {
+    window.location.href = "http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?transferencia=true&usuario=" + this.id;
   }
 }

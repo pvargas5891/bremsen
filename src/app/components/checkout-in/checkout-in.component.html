@@ -167,13 +167,13 @@
                                 <p>ventas@bremsen.cl</p><br>
 
                                 <label><b>Código de compra:</b></label>
-                                <p>cd1234</p>
+                                <p>{{codigoCompra}}</p>
                            </div>
 
                            <div class="col-md-12">
                             <div class="pad-10">&nbsp;</div>
 
-                             <button type="button" class="btn btn-default ">CONFIRMAR transferencia </button>
+                             <button type="button" (click)="realizaTransferencia()" class="btn btn-default ">CONFIRMAR transferencia </button>
                            </div>
 
                       </div>

@@ -442,19 +442,19 @@ class PondaAdminModel
         params.append('comunaempresa', registro.comunaempresa);
         params.append('accion', 'empresa');*/
         
-        $rsPago=$this->getPagoByUsuario($post['id']);
+        $rspago=$this->getPagoByUsuario($post['id']);
         $this->db->execute("delete from cliente_factura where cliente=".$post['id']." and pago=".$rspago->fields['pagosID']);
 
         $sql="insert into cliente_factura values ('',";
-        $sql.="'".$post['id']."'";
-        $sql.="'".$post['razon']."'";
-        $sql.="'".$post['rutempresa']."'";
-        $sql.="'".$post['giro']."'";
-        $sql.="'".$post['telefonoempresa']."'";
-        $sql.="'".$post['direccionempresa']."'";
-        $sql.="'".$post['regionempresa']."'";
-        $sql.="'".$post['ciudadempresa']."'";
-        $sql.="'".$post['comunaempresa']."'";
+        $sql.="'".$post['id']."',";
+        $sql.="'".$post['razon']."',";
+        $sql.="'".$post['rutempresa']."',";
+        $sql.="'".$post['giro']."',";
+        $sql.="'".$post['telefonoempresa']."',";
+        $sql.="'".$post['direccionempresa']."',";
+        $sql.="'".$post['regionempresa']."',";
+        $sql.="'".$post['ciudadempresa']."',";
+        $sql.="'".$post['comunaempresa']."',";
         $sql.="'".$rspago->fields['pagosID']."'";
         $sql.=")";
       $this->db->execute($sql);

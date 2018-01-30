@@ -27,6 +27,7 @@ error = '';
   public descuentoAplicado:number = 0;
   public totalTotales:number = 0;
   public datosCarro;
+  public codigoCompra=0;
   constructor(
 
       private carro: CarroCompraService,
@@ -61,6 +62,7 @@ error = '';
           this.carro.setDetallesCarro(this.datosCarro[0],this.id).then(
           data => {
             console.debug(data);
+            this.codigoCompra = data[0].pagosID;
           },
           error => {
               console.debug(error);
@@ -133,7 +135,7 @@ private getDatosPersonales = function (){
       this.userService.saveFactura(this.cliente).then(
         data => {
 
-             //window.location.href="http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario="+this.id;
+             window.location.href="http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario="+this.id;
 
         },
       error => {
@@ -148,5 +150,9 @@ private getDatosPersonales = function (){
 
           window.location.href="http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario="+this.id;
     }
+
+  public realizaTransferencia = function(){
+    window.location.href = "http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?transferencia=true&usuario=" + this.id;
+  }
 
 }
