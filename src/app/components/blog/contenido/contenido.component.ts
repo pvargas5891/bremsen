@@ -14,8 +14,8 @@ export class ContenidoComponent{
     public _is: InformacionService) { 
    
     this.route.params.subscribe(parametros => {
-      //console.debug(parametros);
-      _is.getBlogUnico(parametros).then(
+      console.debug(parametros);
+      _is.getBlogUnico(parametros.id).then(
         data => {
 
           this.blogs = data;

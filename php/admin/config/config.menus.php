@@ -29,7 +29,7 @@ $config['menu'] = [
              array(
                 'label' => 'Descuentos',
                 'icon' => 'fa fa-circle-o',
-                'page' => 'ingreso-banners'
+                'page' => 'descuento'
             )
                 ],
             ),

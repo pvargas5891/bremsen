@@ -285,7 +285,7 @@ echo '<script src="'.$base_url.'/assets/library/jquery/jquery.min.js?v=v2.0.0-rc
 					 		echo '<!-- Table row --><tr class="gradeX">
 					 		<td class="text-right">
 					                 <div class="btn-group btn-group-md ">					                    
-					                     <a href="javascript:void(0)" onclick="eliminaNoticia(\'index.php?page=producto-manual&accion=elimina&id='.$rsProductos->fields['id'].'\')" class="btn btn-default text-danger"><i class="fa fa-times"></i></a>
+					                     <!--a href="javascript:void(0)" onclick="eliminaNoticia(\'index.php?page=producto-manual&accion=elimina&id='.$rsProductos->fields['id'].'\')" class="btn btn-default text-danger"><i class="fa fa-times"></i></a-->
 					                 </div>
 					             </td>
 					 			<td>'.$rsProductos->fields['CODIGO'].'</td>

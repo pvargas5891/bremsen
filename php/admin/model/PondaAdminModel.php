@@ -142,40 +142,12 @@ class PondaAdminModel
         $rs = $this->db->Execute("select REG_NOMBRE from REGION where REG_CODIGO = " . $codigo);
         return $rs->fields['REG_NOMBRE'];
     }
-    function getBannerHome($id=""){
-      $sql="select * from blog where 1=1";
-      if($id!=""){
-        $sql.=" and id=".$id;
-      }
-      return $this->db->execute($sql);
-    }
-    function getBanner($destino,$tipo){
-      $sql="select * from bannerhome where tipo = '".$tipo."'";
 
-        $sql.=" and destino='".$destino."'";
 
-      return $this->db->execute($sql);
-    }
     function deleteBlog($id){
         $this->db->Execute("delete from blog where id=".$id);
     }
-    function insertBanner($post,$imagen){
-      $sql="insert into blog values('',";
-      $sql.="'".$post['titulo']."',";
-      $sql.="'".$imagen."',";
-      $sql.="'".$post['contenido']."'";
-      $sql.=")";
-      $this->db->execute($sql);
-    }
-    function actualizaBanner($post,$imagen){
-      $sql="update blog set ";
-      if($imagen!="")
-        $sql.="fotoprincipal='".$imagen."',";
-      $sql.="titulo='".$post['titulo']."',";
-      $sql.="contenido='".$post['contenido']."'";
-      $sql.=" where id=".$post['id'];
-      $this->db->execute($sql);
-    }
+
     function getProductosFilterTotal($origen,$artista){
       $sql="select count(*) TOTAL from productos where lower(titulo) like lower('%".$artista."%')";
       $rs=$this->db->execute($sql);
@@ -274,275 +246,7 @@ class PondaAdminModel
         $sql="select * from productos where id=".$id;
         return $this->db->execute($sql);
     }
-    function ingresoProducto($post,$foto,$origen){
-
-      $sql=" insert into productos values('',";
-      $sql.=" '".addslashes($post['sku'])."',";
-      $sql.=" '".addslashes($post['titulo'])."',";
-      $sql.=" '".addslashes($post['album'])."',";
-      $sql.=" '".addslashes($post['sello'])."',";
-      $sql.=" '".addslashes($post['formato'])."',";
-      $sql.=" '".addslashes($post['genero'])."',";
-      $sql.=" '".$post['ano']."',";
-      $sql.=" '".$post['stock']."',";
-      $sql.=" '".$foto."',";
-      $sql.=" '".$post['video']."',";
-      $sql.=" '".$post['novedad']."',";
-      $sql.=" '".$post['oferta']."',";
-      $precio1=$post['precio'];
-      $precio2=0;
-      if($post['oferta']==1){
-        $precio1=$post['preciooferta'];
-        $precio2=$post['precio'];
-      }
-      $sql.=" '".$post['estado']."','".$origen."',sysdate(),'".$precio1."','".$precio2."','".$post['qty']."')";
-
-      $this->db->execute($sql);
-
-      $rs = $this->db->Execute("select last_insert_id() as ID");
-      $id=$rs->fields['ID'];
-
-
-      $discos=array();
-      $discos[]=array('primero','A','B');
-      $discos[]=array('segundo','C','D');
-      $discos[]=array('tercero','E','F');
-      $discos[]=array('cuarto','G','H');
-      $discos[]=array('quinto','I','J');
-      $discos[]=array('sexto','K','L');
-      $discos[]=array('septimo','M','N');
-      $discos[]=array('octavo','O','P');
-      $discos[]=array('noveno','Q','R');
-      $discos[]=array('decimo','S','T');
-      $e=1;
-
-      for($i=0;$i<count($discos);$i++){
-        if($post[$discos[$i][0].$discos[$i][1].'totalpistas']>0){
-          for($e=1;$e<=$post[$discos[$i][0].$discos[$i][1].'totalpistas'];$e++){
-            $sql="insert into pistas values('','".addslashes($post[$discos[$i][0].$discos[$i][1].'pista'.$e])."',".$id.",'".$discos[$i][0]."','".$discos[$i][1]."')";
-            $this->db->execute($sql);
-          }
-        }
-        if($post[$discos[$i][0].$discos[$i][2].'totalpistas']>0){
-          for($e=1;$e<=$post[$discos[$i][0].$discos[$i][2].'totalpistas'];$e++){
-            $sql="insert into pistas values('','".addslashes($post[$discos[$i][0].$discos[$i][2].'pista'.$e])."',".$id.",'".$discos[$i][0]."','".$discos[$i][2]."')";
-            $this->db->execute($sql);
-          }
-        }
-      }
-
-      return $id;
-    }
-    function actualizaProducto($post,$foto){
-
-      $sql=" update productos set ";
-      $sql.="sku='".addslashes($post['sku'])."',";
-      $sql.="titulo='".addslashes($post['titulo'])."',";
-      $sql.="album='".addslashes($post['album'])."',";
-      $sql.="sello='".addslashes($post['sello'])."',";
-      $sql.="formato='".addslashes($post['formato'])."',";
-      $sql.="genero='".addslashes($post['genero'])."',";
-      $sql.="ano='".$post['ano']."',";
-      $sql.="stock='".$post['stock']."',";
-      $precio1=$post['precio'];
-      $precio2=0;
-      if($post['oferta']==1){
-        $precio1=$post['preciooferta'];
-        $precio2=$post['precio'];
-      }
-      $sql.="precio='".$precio1."',";
-      $sql.="preciooferta='".$precio2."',";
-      if($foto!="")
-        $sql.="imagen='".$foto."',";
-      $sql.="video='".$post['video']."',";
-      $sql.="novedad='".$post['novedad']."',";
-      $sql.="oferta='".$post['oferta']."',";
-      $sql.="qty='".$post['qty']."',";
-      $sql.="estado='".$post['estado']."'";
-      $sql.=" where id = ".$post['idproducto'];
-
-      $this->db->execute($sql);
-
-
-      $this->db->execute("delete from pistas where productos = ".$post['idproducto']);
-      $discos=array();
-      $discos[]=array('primero','A','B');
-      $discos[]=array('segundo','C','D');
-      $discos[]=array('tercero','E','F');
-      $discos[]=array('cuarto','G','H');
-      $discos[]=array('quinto','I','J');
-      $discos[]=array('sexto','K','L');
-      $discos[]=array('septimo','M','N');
-      $discos[]=array('octavo','O','P');
-      $discos[]=array('noveno','Q','R');
-      $discos[]=array('decimo','S','T');
-      $e=1;
-
-      for($i=0;$i<count($discos);$i++){
-        if($post[$discos[$i][0].$discos[$i][1].'totalpistas']>0){
-          for($e=1;$e<=$post[$discos[$i][0].$discos[$i][1].'totalpistas'];$e++){
-            $sql="insert into pistas values('','".addslashes($post[$discos[$i][0].$discos[$i][1].'pista'.$e])."',".$post['idproducto'].",'".$discos[$i][0]."','".$discos[$i][1]."')";
-            $this->db->execute($sql);
-          }
-        }
-        if($post[$discos[$i][0].$discos[$i][2].'totalpistas']>0){
-          for($e=1;$e<=$post[$discos[$i][0].$discos[$i][2].'totalpistas'];$e++){
-            $sql="insert into pistas values('','".addslashes($post[$discos[$i][0].$discos[$i][2].'pista'.$e])."',".$post['idproducto'].",'".$discos[$i][0]."','".$discos[$i][2]."')";
-            $this->db->execute($sql);
-          }
-        }
-      }
-      return $post['idproducto'];
-    }
-    function getPistasByProducto($id,$disco,$lado){
-      $sql="select * from pistas where disco='".$disco."' and productos=".$id." and lado='".$lado."'";
-      return $this->db->execute($sql);
-    }
-
-
-    function insertTagsProductos($tags,$noticias){
-
-  		for($i=0;$i<count($tags);$i++){
-  			$sql="insert into tags_productos values (''";
-  			$sql.=",'".$noticias."'";
-  			$sql.=",'".$tags[$i]."')";
-  			$this->db->execute($sql);
-  		}
-  	}
-  	function insertTagsProductosSep($tag,$producto){
-
-
-  			$sql="insert into tags_productos values (''";
-  			$sql.=",'".$tag."'";
-  			$sql.=",'".$producto."')";
-  			$this->db->execute($sql);
-
-  	}
-  	function actualizaTagsProductos($tags,$noticias){
-
-  		$sql="delete from tags_productos where producto=".$noticias;
-  		$this->db->execute($sql);
-
-  		for($i=0;$i<count($tags);$i++){
-  			$sql="insert into tags_productos values (''";
-  			$sql.=",'".$tags[$i]."'";
-  			$sql.=",'".$noticias."')";
-  			$this->db->execute($sql);
-  		}
-  	}
-
-    function getCategorias($id=""){
-
-      $sql="select * from categoria";
-      if($id!="")
-        $sql.=" where id=".$id;
-      $sql.=" order by id ASC";
-      return $this->db->execute($sql);
-    }
-    function getSubCategorias($id="",$cat=""){
-
-      $sql="select * from subcategoria where 1=1";
-      if($id!=""){
-        $sql.=" and id=".$id;
-      }
-      if($cat!=""){
-        $sql.=" and categoria=".$cat;
-      }
-
-      return $this->db->execute($sql);
-    }
-    function getTagByProducto($id){
-  		$sql="select * from tags_productos where producto=".$id;
-  		return $this->db->execute($sql);
-  	}
-	function getProductosByTag($id){
-  		$sql="select * from tags_productos where tag=".$id;
-  		return $this->db->execute($sql);
-  	}
-    function productoCategoria($cat,$producto){
-      $sql="select * from categorias_productos where producto=".$producto." and categoria=".$cat;
-      $rs=$this->db->execute($sql);
-      if(!$rs->EOF)
-        return true;
-      return false;
-    }
-
-    function getTags($id=""){
-      $sql="select * from tags where 1=1";
-      if($id!=""){
-        $sql.=" and id=".$id;
-      }
-      return $this->db->execute($sql);
-    }
-    function getTagsActivos($id=""){
-      $sql="select * from tags where estado=1";
-      if($id!=""){
-        $sql.=" and id=".$id;
-      }
-      $sql.=" order by rand() limit 0,15";
-      return $this->db->execute($sql);
-    }
-    function getTagsActivosAll($id=""){
-      $sql="select * from tags where estado=1";
-      if($id!=""){
-        $sql.=" and id=".$id;
-      }
-      $sql.=" order by rand()";
-      return $this->db->execute($sql);
-    }
-    function deleteTags($id){
-
-      $sql="delete from tags where id = ".$id;
-      $this->db->execute($sql);
-
-      $sql="delete from tags_noticias where tag=".$id;
-      $this->db->execute($sql);
-    }
-    function insertTag($post){
-
-        $sql="insert into tags values (''";
-        $sql.=",'".$post['nombre']."'";
-        $sql.=",'".$post['estado']."')";
-        $this->db->execute($sql);
-
-    }
-    function insertTagSep($nombre,$estado){
-
-        $sql="insert into tags values (''";
-        $sql.=",'".$nombre."'";
-        $sql.=",'".$estado."')";
-        $this->db->execute($sql);
-        $rs = $this->db->Execute("select last_insert_id() as ID");
-        return $rs->fields['ID'];
-    }
-    function actualizaTag($post){
-
-        $sql="update tags set ";
-        $sql.="tag='".$post['nombre']."'";
-        $sql.=",estado='".$post['estado']."'";
-        $sql.=" where id=".$post['id'];
-        $this->db->execute($sql);
-
-    }
-
-    function insertCategoriasProductos($categorias,$noticias){
-
-      for($i=0;$i<count($categorias);$i++){
-        $sql="insert into categorias_productos values (''";
-        $sql.=",'".$categorias[$i]."'";
-        $sql.=",'".$noticias."')";
-        $this->db->execute($sql);
-      }
-    }
-    function actualizaCategoriasProductos($categorias,$noticias){
-        $this->db->execute("delete from categorias_productos where producto=".$noticias);
-      for($i=0;$i<count($categorias);$i++){
-        $sql="insert into categorias_productos values (''";
-        $sql.=",'".$categorias[$i]."'";
-        $sql.=",'".$noticias."')";
-        $this->db->execute($sql);
-      }
-    }
+  
 
 
     function User_Login($username,$password){
@@ -967,6 +671,13 @@ public function descuentaStockByPago($pago){
       $rs->movenext();
     }
 }
+function getBannerHome($id=""){
+      $sql="select * from blog where 1=1";
+      if($id!=""){
+        $sql.=" and id=".$id;
+      }
+      return $this->db->execute($sql);
+    }
 function getPagosFinalizados($post)
 {
     $sql = "select * from pagos,webpay where estado != 'pendiente'  and webpay.Tbk_orden_compra=pagosID";
@@ -982,6 +693,10 @@ function getPagosFinalizados($post)
     return $this->db->Execute($sql);
 }
 
+function getFacturacionCliente($cliente,$pago){
+    $sql="select * from cliente_factura where cliente=".$cliente. " and pago=".$pago;
+    return $this->db->Execute($sql);
+}
 function getDetalleCompra($pago){
   $sql="select * from detalles_compra where pagoId = ".$pago;
   return $this->db->Execute($sql);

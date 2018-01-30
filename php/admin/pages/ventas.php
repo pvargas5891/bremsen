@@ -54,6 +54,7 @@ while(!$rsVentas->EOF){
 $rsClientes=$model->User_Data($rsVentas->fields['id_usuario']);
 $rsWebpay=$model->getWebPayByPago($rsVentas->fields['pagosID']);
 $rsDetalle=$model->getDetalleCompra($rsVentas->fields['pagosID']);
+$rsFactura=$model->getFacturacionCliente($rsVentas->fields['id_usuario'],$rsVentas->fields['pagosID']);
 //$rsSuc=$model->getSucursalByPago($rsVentas->fields['pagosID']);
 //$codigodescuento=$model->getCodigoDescuentoByPago($rsVentas->fields['pagosID']);
   //$descuento=$model->getDescuento2($codigodescuento);
@@ -71,17 +72,21 @@ echo '
 		<tr>
 
            <th><strong>Orden de compra</strong></th>
+           <th><strong>Costo Total</strong></th>
+           <th><strong>Instalación</strong></th>
+            <th><strong>Descuento Aplicado</strong></th>
            <th><strong>Monto Pagado</strong></th>
-           <th><strong>Fecha Compra</strong></th>
-           <th><strong>Descuento Aplicado</strong></th>
+           <th><strong>Fecha Compra</strong></th>          
            <th><strong>Tipo pago</strong></th>
         </tr>
 		</thead>
         <tr>
                <td class="center">'.$rsVentas->fields['pagosID'].'</td>
+               <td class="center">$'.$rsDetalle->fields['costoNeumaticos'].'.-</td>
+               <td class="center">$'.$rsDetalle->fields['costoInstalacion'].'.-</td>
+               <td>'.$rsDetalle->fields['descuentoAplicado'].'</td>
                <td class="center">$'.$rsDetalle->fields['totalTotales'].'.-</td>
-               <td class="text-primary" >'.$rsWebpay->fields['Tbk_fecha_transaccion'].'</td>
-               <td>'.$rsDetalle->fields['descuentoAplicado'].'('.$descuento.'%)</td>
+               <td class="text-primary" >'.$rsWebpay->fields['Tbk_fecha_transaccion'].'</td>               
                <td>'.$tipopago.'</td>
             </tr>
 
@@ -111,7 +116,40 @@ echo '
 		</table>
 		</td>
 		</tr>
-        <tr>
+    ';
+        if(!$rsFactura->EOF){
+          echo '
+<tr>
+           <td align="center" colspan="9"><strong>Compra con facturación</strong></td>
+        </tr>
+          <tr>
+            <td colspan="9">
+                <table class="fixedHeaderColReorder table-striped table-responsive swipe-horizontal table table-primary">
+                <thead>
+                 <tr>
+                       <th style="color: #000 !important;"><strong>Razon</strong></th>
+                       <th style="color: #000 !important;"><strong>Rut Empresa</strong></th>
+                       <th style="color: #000 !important;"><strong>Giro</strong></th>
+                       <th style="color: #000 !important;"><strong>Telefono</strong></th>
+                       <th style="color: #000 !important;"><strong>Direccion</strong></th>
+                       <th style="color: #000 !important;"><strong>Region/Ciudad/Comuna</strong></th>
+                       
+                    </tr>
+                </thead>';
+                echo '<tr>
+                       <td>'.$rsFactura->fields['razon'].'</td>
+                       <td>'.$rsFactura->fields['rutempresa'].'</td>
+                       <td>'.$rsFactura->fields['giro'].'</td>
+                       <td>'.$rsFactura->fields['telefonoempresa'].'</td>
+                       <td>'.$rsFactura->fields['direccionempresa'].'</td>
+                       <td>'.$model->extraeNombreRegion($rsFactura->fields['regionempresa']).'/'.$model->extraeNombreCiudad($rsFactura->fields['ciudadempresa']).'/'.$model->extraeNombreComuna($rsFactura->fields['comunaempresa']).'</td>
+                      
+                    </tr>
+                </table>
+            </td>
+          </tr>';
+        }
+        echo '<tr>
            <td align="center" colspan="9"><strong>Productos comprados</strong></td>
         </tr>
         <tr>
