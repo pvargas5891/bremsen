@@ -846,7 +846,7 @@ public function getCarroPorPago($pago)
                     from carro, pagos
                     where carro.pagoID ='".$pago."'
                     and pagoID = pagosID
-                    and estado =  'finalizada'";
+                    and estado !=  'pendiente'";
     $rs=$this->db->Execute($insertSQL);
 
     return $rs;
@@ -969,7 +969,7 @@ public function descuentaStockByPago($pago){
 }
 function getPagosFinalizados($post)
 {
-    $sql = "select * from pagos,webpay where estado  = 'finalizada' and webpay.Tbk_orden_compra=pagosID";
+    $sql = "select * from pagos,webpay where estado != 'pendiente'  and webpay.Tbk_orden_compra=pagosID";
     if ($post['orden'] != "")
         $sql .= " and pagosID = " . $post['orden'];
     if ($post['fechainicio'] != "") {

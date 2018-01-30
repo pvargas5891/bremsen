@@ -15,6 +15,14 @@ $urlexito="http://bremsen.kodamas.cl/maqueta/exito.php";
 
 if(isset($_GET['transferencia'])){
 	$rsPago=$model->getPagoByUsuario($_GET['usuario']);
+	$fecha=date('Y')."-".date('m')."-".date('d');
+	$sql="insert into webpay (Tbk_tipo_transaccion, Tbk_respuesta, Tbk_orden_compra, Tbk_id_sesion, Tbk_codigo_autorizacion, Tbk_monto, Tbk_numero_tarjeta, Tbk_numero_final_tarjeta, Tbk_fecha_expiracion, Tbk_fecha_contable, Tbk_fecha_transaccion, Tbk_hora_transaccion, Tbk_id_transaccion, Tbk_tipo_pago, Tbk_numero_cuotas, Tbk_mac, Tbk_monto_cuota, Tbk_tasa_interes_max,Tbk_ip,token)
+		Values ('',
+		'0','".$rsPago->fields['pagosID']."','".$rsPago->fields['pagosID']."','003521','".$rsPago->fields['TBK_MONTO']."','6789',
+		'6789','0000-00-00','".$fecha."','".$fecha."','',
+		'".$rsPago->fields['pagosID']."','TR','0','577565663','0','0',
+		'".$_SERVER['REMOTE_ADDR']."','noplica')";
+		$model->executeCommand($sql);
 	$query="UPDATE `pagos` SET estado ='transferencia' where pagosID ='".$rsPago->fields['pagosID']."'";
 	$model->executeCommand($query);
 	echo '<form action="'.$urlexito.'" name="pago" method="post">

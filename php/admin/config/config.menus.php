@@ -25,6 +25,11 @@ $config['menu'] = [
                 'label' => 'Admin blog',
                 'icon' => 'fa fa-circle-o',
                 'page' => 'ingreso-banners'
+             ),
+             array(
+                'label' => 'Descuentos',
+                'icon' => 'fa fa-circle-o',
+                'page' => 'ingreso-banners'
             )
                 ],
             ),

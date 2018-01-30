@@ -58,6 +58,11 @@ $rsDetalle=$model->getDetalleCompra($rsVentas->fields['pagosID']);
 //$codigodescuento=$model->getCodigoDescuentoByPago($rsVentas->fields['pagosID']);
   //$descuento=$model->getDescuento2($codigodescuento);
   //$porciento = $model->porcentaje($rsVentas->fields['TBK_MONTO'],$descuento,2);
+  if($rsVentas->fields['estado']=='finalizada')
+     $tipopago='Webpay';
+  else   
+     $tipopago='Transferencia';
+
 echo '
 
 <br>
@@ -69,7 +74,7 @@ echo '
            <th><strong>Monto Pagado</strong></th>
            <th><strong>Fecha Compra</strong></th>
            <th><strong>Descuento Aplicado</strong></th>
-           <!--th><strong>Descontado</strong></th-->
+           <th><strong>Tipo pago</strong></th>
         </tr>
 		</thead>
         <tr>
@@ -77,7 +82,7 @@ echo '
                <td class="center">$'.$rsDetalle->fields['totalTotales'].'.-</td>
                <td class="text-primary" >'.$rsWebpay->fields['Tbk_fecha_transaccion'].'</td>
                <td>'.$rsDetalle->fields['descuentoAplicado'].'('.$descuento.'%)</td>
-               <!--td>'.$porciento.'</td-->
+               <td>'.$tipopago.'</td>
             </tr>
 
 		<tr>
