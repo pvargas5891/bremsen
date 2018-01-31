@@ -896,7 +896,10 @@ function getPagosFinalizados($post)
 	}
 	
 	
-	
+public function getDescuento($codigo){
+    $sql="select * from descuentos where codigo = '".$codigo."'";
+    return $this->db->Execute($sql);
+}	
 	
 	
 public function eliminaDespacho($pago){

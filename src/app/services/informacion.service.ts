@@ -42,7 +42,11 @@ export class InformacionService {
 
     //this.getVehiculos(1);
   }
-
+  public getDescuento(codigo): Promise<any>{
+    return this.http.get(this.url + "getdescuento.php?codigo="+codigo).toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
   public getMarcaVehiculos(): Promise<string> {
 
     return this.http.get(this.url+"vehiculos.php?accion=marca").toPromise()

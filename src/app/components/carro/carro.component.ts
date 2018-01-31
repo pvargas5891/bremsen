@@ -556,7 +556,24 @@ public calculaTotales = function (){
 public voucher: string = "";
 public aplicaDescuento = function(){
     // servicio que trae el descuento
-    this.descuentoAplicado = 10000;
+  if (this.voucher == "" && this.descuentoAplicado>0){
+    this.totalTotales += this.descuentoAplicado;
+    this.descuentoAplicado=0;
+  }  
+  if(this.voucher == "")
+    return;
+
+  this._is.getDescuento(this.voucher).then(
+    data=>{
+      console.debug(data[0].valor);
+      if (data[0].valor != 0 && this.descuentoAplicado==0){
+        var valorporcentaje = parseInt(data[0].valor)/100;
+        valorporcentaje = parseInt(this.totalTotales) * valorporcentaje;
+        this.descuentoAplicado = Math.round(valorporcentaje);
+        this.calculaTotales();
+        }
+    });
+    //this.descuentoAplicado = 10000;
 
 }
   }
