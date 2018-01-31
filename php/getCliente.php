@@ -10,6 +10,7 @@ if(isset($_GET['debug']))
 //}
 
 $rs=$model->User_Data($_POST['id']);
+
 $datos=array();
 $general2=array();
 if(!$rs->EOF){
@@ -26,7 +27,18 @@ if(!$rs->EOF){
 	$datos['codigopostal']=$rs->fields['codigopostal'];	
 	$datos['telefono']=$rs->fields['telefono'];	
 	$datos['genero']=$rs->fields['genero'];	
-	
+	$rsFactura=$model->getUltimaFacturacion($rs->fields['id']);
+	if(!$rsFactuta->EOF){
+		$datos['razon']=$rsFactura->fields['razon'];	
+		$datos['rutempresa']=$rsFactura->fields['rutempresa'];	
+		$datos['giro']=$rsFactura->fields['giro'];	
+		$datos['telefonoempresa']=$rsFactura->fields['telefonoempresa'];	
+		$datos['direccionempresa']=$rsFactura->fields['direccionempresa'];	
+		$datos['regionempresa']=$rsFactura->fields['regionempresa'];	
+		$datos['ciudadempresa']=$rsFactura->fields['ciudadempresa'];	
+		$datos['comunaempresa']=$rsFactura->fields['comunaempresa'];	
+	}
+
 }
 
 $general2[]=$datos;

@@ -125,6 +125,12 @@ class PondaAdminModel
         $rs = $this->db->Execute("select CIU_NOMBRE from CIUDADES where CIU_CODIGO = " . $codigo);
         return $rs->fields['CIU_NOMBRE'];
     }
+    function extraeNombreTalleres($codigo)
+    {
+        $this->db->execute("SET NAMES 'utf8'");
+        $rs = $this->db->Execute("select direccion from talleres where id = " . $codigo);
+        return $rs->fields['direccion'];
+    }
     function getWebPayByPago($pago)
     {
         return $this->db->Execute("select * from webpay where Tbk_orden_compra = " . $pago);

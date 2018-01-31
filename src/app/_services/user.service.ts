@@ -23,17 +23,17 @@ export class UserService {
              .catch(this.handleErrorPromise);
     }
 
-    /*getHistorialById(id: string) {
+    getHistorialById(id: string) {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
         let options = new RequestOptions({ headers: headers });
         const params = new URLSearchParams();
         params.append('id', id);
 
         let body = params.toString();
-        return this.http.post(this.url+ 'getClienteHistorial.php', body, options).toPromise()
+        return this.http.post(this.url + 'getHistorialCliente.php', body, options).toPromise()
 	           .then(this.extractData)
              .catch(this.handleErrorPromise);
-    }*/
+    }
 
     update(registro: Cliente) {
 

@@ -31,7 +31,7 @@ export class MisdatosComponent implements OnInit {
    regionValido: boolean = true;
    ciudadValido: boolean = true;
    comunaValido: boolean = true;
-
+  public historialCompra: any[] = [];;
  constructor(private userService: UserService,
               private route: Router,
               public _is: InformacionService
@@ -43,6 +43,7 @@ export class MisdatosComponent implements OnInit {
             if(currentUser.token === 'active'){
                 this.id = currentUser.usuario.id;
                 this.getDatosPersonales();
+              this.getHistorialCliente();
             }else{
                 this.route.navigate(['/home']);
             }
@@ -54,6 +55,18 @@ export class MisdatosComponent implements OnInit {
 
   ngOnInit() {
   }
+  getHistorialCliente = function () {
+
+    this.userService.getHistorialById(this.id).then(
+      data => {
+        console.debug(data);
+        this.historialCompra=data;
+        
+      }
+    );
+
+  }
+
  cambiaCiudad(selectedRegion: string): void{
       this._is.getCiudades(selectedRegion);
   }
@@ -76,7 +89,17 @@ export class MisdatosComponent implements OnInit {
               this.cliente.telefono=data[0].telefono;
               this.cliente.email=data[0].email;
               this.cliente.username=data[0].username;
-              this.cliente.password=data[0].password;
+            this.cliente.password = data[0].password;
+            this.cliente.razon = data[0].razon;
+            this.cliente.rutempresa = data[0].rutempresa;
+            this.cliente.giro = data[0].giro;
+            this.cliente.telefonoempresa = data[0].telefonoempresa;
+            this.cliente.direccionempresa = data[0].direccionempresa;
+            this.cliente.regionempresa = data[0].regionempresa;
+            this.cliente.ciudadempresa = data[0].ciudadempresa;
+            this.cliente.comunaempresa = data[0].comunaempresa;
+
+
               this._is.getCiudades(this.cliente.region);
               this._is.getComunas(this.cliente.ciudad);
 
@@ -156,16 +179,16 @@ export class MisdatosComponent implements OnInit {
 
     );
   }
+public saveFactura = function () {
+  this.userService.saveFactura(this.cliente).then(
+    data => {
 
-    /*  private getHistorialCliente = function (){
+      //window.location.href = "http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario=" + this.id;
 
-        this.userService.getHistorialById(this.id).then(
-          data => {
-
-
-
-          }
-        );
-
-      }*/
+    },
+    error => {
+      console.debug(error);
+    });
+}
+     
 }

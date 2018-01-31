@@ -73,6 +73,7 @@ class PondaAdminModel
     {
         return $this->db->Execute("select * from webpay where Tbk_orden_compra = " . $pago);
     }
+
     function extraeNombreComuna($codigo)
     {
         $this->db->execute("SET NAMES 'utf8'");
@@ -460,6 +461,10 @@ class PondaAdminModel
       $this->db->execute($sql);
 
     }
+    function getUltimaFacturacion($cliente){
+        $sql="select * from cliente_factura where cliente =".$cliente." order by pago desc";
+        return $this->db->execute($sql);
+    }
 	function updatePassword($post){
 	  $sql="update clientes set password='".$post['password']."' where id=".$post['id'];
       $this->db->execute($sql);
@@ -476,8 +481,23 @@ class PondaAdminModel
         //  $rs= $this->db->Execute("select * from pagos where id_usuario = ".$id." and pagosID = 185");
           return $rs;
       }
-	  
+    
+      function getPagosFinalizados($post)
+{
+    $sql = "select * from pagos,webpay where estado != 'pendiente'  and webpay.Tbk_orden_compra=pagosID";
+    if ($post['orden'] != "")
+        $sql .= " and pagosID = " . $post['orden'];
+    if ($post['fechainicio'] != "") {
+        $sql .= " and Tbk_fecha_contable >=  '" . $post['fechainicio'] . "'";
+    }
+    if ($post['fechatermino'] != "") {
+        $sql .= " and Tbk_fecha_contable <=  '" . $post['fechatermino'] . "'";
+    }
+    $sql.=" order by Tbk_fecha_contable desc";
+    return $this->db->Execute($sql);
+}
     /*
+
       FUNCIONES CARRO
     */
 	function getTipoInstalacionByComuna($comuna, $tipo=0){
@@ -795,7 +815,7 @@ public function getCarroPorPago($pago)
                     from carro, pagos
                     where carro.pagoID ='".$pago."'
                     and pagoID = pagosID
-                    and estado =  'finalizada'";
+                    and estado !=  'pendiente'";
     $rs=$this->db->Execute($insertSQL);
 
     return $rs;
@@ -877,20 +897,7 @@ public function descuentaStockByPago($pago){
       $rs->movenext();
     }
 }
-function getPagosFinalizados($post)
-{
-    $sql = "select * from pagos,webpay where estado  = 'finalizada' and webpay.Tbk_orden_compra=pagosID";
-    if ($post['orden'] != "")
-        $sql .= " and pagosID = " . $post['orden'];
-    if ($post['fechainicio'] != "") {
-        $sql .= " and Tbk_fecha_contable >=  '" . $post['fechainicio'] . "'";
-    }
-    if ($post['fechatermino'] != "") {
-        $sql .= " and Tbk_fecha_contable <=  '" . $post['fechatermino'] . "'";
-    }
-    $sql.=" order by Tbk_fecha_contable desc";
-    return $this->db->Execute($sql);
-}
+
 	function close(){
 		$this->db->close();
 	}

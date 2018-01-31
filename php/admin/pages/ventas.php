@@ -177,7 +177,7 @@ echo '
     $tipoInstalacion="No Aplica";
     $detalleCompra="";
     if($rsDetalle->fields['tipoInstalacion']==1){
-      $tipoInstalacion="Instalación en talleres";
+      $tipoInstalacion="Instalación a domicilio";
       $detalleCompra="<br><strong>Dirección</strong>:".$rsDetalle->fields['direccionInstalacion1value'];
       $detalleCompra.="<br><strong>Nombre</strong>:".$rsDetalle->fields['nombresInstalacion1value'];
       $detalleCompra.="<br><strong>Region</strong>:".$model->extraeNombreRegion($rsDetalle->fields['regionInstalacion']);
@@ -186,7 +186,7 @@ echo '
 
     }  
     if($rsDetalle->fields['tipoInstalacion']==2){
-      $tipoInstalacion="Instalación a domicilio";
+      $tipoInstalacion="Retiramos tu auto";
       $detalleCompra="<br><strong>Dirección</strong>:".$rsDetalle->fields['direccionInstalacion2value'];
       $detalleCompra.="<br><strong>Nombre</strong>:".$rsDetalle->fields['nombresInstalacion2value'];
       $detalleCompra.="<br><strong>Rut</strong>:".$rsDetalle->fields['rutInstalacion2value'];
@@ -195,8 +195,8 @@ echo '
       $detalleCompra.="<br><strong>Comuna</strong>:".$model->extraeNombreComuna($rsDetalle->fields['comunaInstalacion']);
     }  
     if($rsDetalle->fields['tipoInstalacion']==3){
-      $tipoInstalacion="Retiramos tu auto";
-      $detalleCompra="<br><strong>Taller</strong>:".$rsDetalle->fields['tallerAsociadovalue'];
+      $tipoInstalacion="Instalación en talleres";
+      $detalleCompra="<br><strong>Taller</strong>:".$model->extraeNombreTalleres($rsDetalle->fields['tallerAsociadovalue']);
       $detalleCompra.="<br><strong>Fecha instalación</strong>:".$rsDetalle->fields['fechaInstalacionvalue'];
       $detalleCompra.="<br><strong>Bloque horario</strong>:".$rsDetalle->fields['bloqueHorariovalue'];
       $detalleCompra.="<br><strong>Region</strong>:".$model->extraeNombreRegion($rsDetalle->fields['regionInstalacion']);

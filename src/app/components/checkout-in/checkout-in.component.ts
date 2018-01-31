@@ -95,6 +95,14 @@ private getDatosPersonales = function (){
               this.cliente.email=data[0].email;
               this.cliente.username=data[0].username;
               this.cliente.password=data[0].password;
+            this.cliente.razon = data[0].razon;
+            this.cliente.rutempresa = data[0].rutempresa;
+            this.cliente.giro = data[0].giro;
+            this.cliente.telefonoempresa = data[0].telefonoempresa;
+            this.cliente.direccionempresa = data[0].direccionempresa;
+            this.cliente.regionempresa = data[0].regionempresa;
+            this.cliente.ciudadempresa = data[0].ciudadempresa;
+            this.cliente.comunaempresa = data[0].comunaempresa;
               this._is.getCiudades(this.cliente.region);
               this._is.getComunas(this.cliente.ciudad);
 
