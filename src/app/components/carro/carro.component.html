@@ -267,16 +267,8 @@
            <br>
               		<div class="form-group" [ngClass]="{ 'has-error': finstalacion3.submitted && !fechaInstalacion.valid }">
                 		<label for="date" class="control-label">Elige tu fecha de instalación</label>
-							<div class="input-group date">
-							  <input type="text" class="form-control" id="date" data-date-format="YYYY-MM-DD" value="2018-02-20" name="fechaInstalacionvalue" #fechaInstalacion="ngModel" [(ngModel)]="fechaInstalacionvalue" required>
-                <script>
-                     $('#date').datetimepicker({
-                          pickTime: false
-                      });
-                </script>
-							  <span class="input-group-btn">
-							  <button style="padding: 10.1px;" type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-							  </span>
+							<div class="input-group date" style="width: 100%;">
+                  <my-date-picker [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event)" [selDate]="fechaInstalacionvalue"></my-date-picker>
               </div>
                <div *ngIf="finstalacion3.submitted && !fechaInstalacion.valid" class="help-block">Debe seleccionar una fecha de instalacion</div>
              		 </div>

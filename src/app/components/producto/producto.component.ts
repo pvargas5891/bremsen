@@ -83,7 +83,9 @@ public cambiaCantidad= function (cantidad){
       this.totalAComprar = parseInt(this.producto.PRECIO_FINAL) * parseInt(cantidad);
 }
 public agregarCarro = function (indice) {
-  this.cantidadValido = false;
+  //this.cantidadValido = false;
+  var producto = this.producto.ID;
+  
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if(typeof this.cantidad == 'undefined'){
       this.cantidadValido = true;
@@ -97,7 +99,7 @@ public agregarCarro = function (indice) {
       if (currentUser == null) {
 
         var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
-        console.debug(carroTemporal);
+
         if (carroTemporal == null) {
           var object = new Array();
           var carro = {
@@ -142,7 +144,7 @@ public agregarCarro = function (indice) {
 
 
     var usuario = currentUser.usuario.id;
-    var producto = this.producto.ID;
+    
     this._carroCompra.agregarCarro(cantidad,producto, usuario)
     .then(
       data => {

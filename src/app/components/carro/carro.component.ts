@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ProductosService } from '../../services/productos.service';
 import { Producto} from "../producto/producto";
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
 declare var jQuery:any;
 declare var $:any;
 
@@ -52,7 +52,21 @@ export class CarroComponent implements OnInit {
   errorMessage: string;
 
 
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'dd/mm/yyyy',
+    dayLabels: { su: 'Dom', mo: 'Lun', tu: 'Mar', we: 'Mie', th: 'Jue', fr: 'Vie', sa: 'Sab' },
+    monthLabels:
+    { 1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic' },
+    todayBtnTxt:'Hoy',
+    width:'100%',
+firstDayOfWeek:'mo',
 
+disableUntil:{ year: 2018, month: 2, day: 3 },
+
+disableWeekends:
+false
+  };
 
 
   constructor(private carro: CarroCompraService,

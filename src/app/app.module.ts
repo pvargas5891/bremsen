@@ -9,6 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { app_routing }  from "./app.routes";
 
 import {OwlModule } from 'ngx-owl-carousel';
+import {MyDatePickerModule} from 'mydatepicker';
 
 //servicios
 import { InformacionService } from "./services/informacion.service";
@@ -83,7 +84,8 @@ import { ContenidoComponent } from './components/blog/contenido/contenido.compon
     FormsModule,
     app_routing,
     NgxPaginationModule,
-    NgAutoCompleteModule
+    NgAutoCompleteModule,
+    MyDatePickerModule
   ],
   providers: [
     InformacionService,

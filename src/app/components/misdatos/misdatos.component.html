@@ -70,6 +70,7 @@
                       <select class="form-control" id="genero" name="input-select" name="genero" #genero="ngModel" [(ngModel)]="cliente.genero" required>
                         <option value="1" selected="selected">Masculino </option>
                         <option value="2">Femenino </option>
+                        <option value="3">No especificar </option>
                     </select>
                       <div *ngIf="f.submitted && !genero.valid" class="help-block">Debe seleccionar su sexo</div>
                   </div>
