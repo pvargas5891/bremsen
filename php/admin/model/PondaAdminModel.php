@@ -184,7 +184,7 @@ class PondaAdminModel
     }
     function insertaProducto($todalainfo){
 
-      $sql="select * from productos where CODIGO = ".$todalainfo[0];
+      $sql="select * from productos where CODIGO = '".$todalainfo[0]."'";
       $rs=$this->db->execute($sql);
       $id="";
       if(!$rs->EOF){
@@ -193,40 +193,46 @@ class PondaAdminModel
         $this->db->execute($sql);
 
       }
-
+      if($todalainfo[33]=='NA')
+            $todalainfo[33]=20001;
+      if(!isset($todalainfo[34]))
+        $todalainfo[34]="";      
        $sql="insert into productos values ('".$id."',";
-              $sql.=$todalainfo[0].",";
-              $sql.=$todalainfo[1].",";
-              $sql.=$todalainfo[2].",";
-              $sql.=$todalainfo[3].",";
-              $sql.=$todalainfo[4].",";
-              $sql.=$todalainfo[5].",";
-              $sql.=$todalainfo[6].",";
-              $sql.=$todalainfo[7].",";
-              $sql.=$todalainfo[8].",";
-              $sql.=$todalainfo[9].",";
-              $sql.=$todalainfo[10].",";
-              $sql.=$todalainfo[11].",";
-              $sql.=$todalainfo[12].",";
-              $sql.=$todalainfo[13].",";
-              $sql.=$todalainfo[14].",";
-              $sql.=$todalainfo[15].",";
-              $sql.=$todalainfo[16].",";
-              $sql.=$todalainfo[17].",";
-              $sql.=$todalainfo[18].",";
-              $sql.=$todalainfo[19].",";
-              $sql.=$todalainfo[20].",";
-              $sql.=$todalainfo[21].",";
-              $sql.=$todalainfo[22].",";
-              $sql.=$todalainfo[23].",";
-              $sql.=$todalainfo[24].",";
-              $sql.=$todalainfo[25].",";
-              $sql.=$todalainfo[26].",";
-              $sql.=$todalainfo[27].",";
-              $sql.=$todalainfo[28].",";
-              $sql.=$todalainfo[29].",";
-              $sql.=$todalainfo[30].",";
-              $sql.=$todalainfo[31].")";
+              $sql.="'".$todalainfo[0]."',";//codigo
+              $sql.="'".$todalainfo[1]."',";//marca
+              $sql.="'".$todalainfo[2]."',";//modelo
+              $sql.="'".$todalainfo[3]."',";//medida
+              $sql.="'".$todalainfo[4]."',";//cateroia
+              $sql.=$todalainfo[5].",";//ancho
+              $sql.="'".$todalainfo[6]."',";//perfil
+              $sql.=$todalainfo[7].",";//aro
+              $sql.="'".$todalainfo[8]."',";//carga
+              $sql.="'".$todalainfo[9]."',";//largo
+              $sql.=$todalainfo[10].",";//ancho2
+              $sql.="'".$todalainfo[11]."',";//alto
+              $sql.=$todalainfo[12].",";//peso
+              $sql.=$todalainfo[13].",";//neto
+              $sql.=$todalainfo[14].",";//unitario
+              $sql.=$todalainfo[15].",";//valor_instalacion
+              $sql.=$todalainfo[16].",";//total
+              $sql.="'".$todalainfo[17]."',";//MC
+              $sql.=$todalainfo[18].",";//neto2
+              $sql.=$todalainfo[19].",";//`recio final
+              $sql.="'".$todalainfo[20]."',";//precio oferta
+              $sql.="'".$todalainfo[21]."',";//modelo rueda
+              $sql.="'".$todalainfo[22]."',";//jpg
+              $sql.="'".$todalainfo[23]."',";//titulño
+              $sql.="'".$todalainfo[24]."',";//atri
+              $sql.="'".$todalainfo[25]."',";//descrip
+              $sql.="'".$todalainfo[26]."',";//logo
+              $sql.="'".$todalainfo[27]."',";//incluye
+              $sql.="'".$todalainfo[28]."',";//despacho
+              $sql.="'".$todalainfo[29]."',";//4x4
+              $sql.="'".$todalainfo[30]."',";//runflat
+              $sql.="'".$todalainfo[31]."',";//oferta
+              $sql.="'".$todalainfo[32]."',";//carretera
+              $sql.=$todalainfo[33].",";//stock
+              $sql.="'".$todalainfo[34]."')";//video
               $this->db->execute($sql);
     }
 

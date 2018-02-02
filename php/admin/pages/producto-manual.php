@@ -7,16 +7,16 @@ if(isset($_FILES['archivo'])){
     if ($_FILES['archivo']['error']) {
         switch ($_FILES['archivo']['error']) {
             case 1: // UPLOAD_ERR_INI_SIZE
-                $leyenda = "El archivo sobrepasa el limite autorizado por el servidor(archivo php.ini) !";
+                echo "El archivo sobrepasa el limite autorizado por el servidor(archivo php.ini) !";
                 break;
             case 2: // UPLOAD_ERR_FORM_SIZE
-                $leyenda = "El archivo sobrepasa el limite autorizado en el formulario HTML !";
+                 echo "El archivo sobrepasa el limite autorizado en el formulario HTML !";
                 break;
             case 3: // UPLOAD_ERR_PARTIAL
-                $leyenda = "El envio del archivo ha sido suspendido durante la transferencia!";
+                 echo "El envio del archivo ha sido suspendido durante la transferencia!";
                 break;
             case 4: // UPLOAD_ERR_NO_FILE
-                $leyenda = "El archivo que ha enviado tiene un tamaño nulo !";
+                 echo "El archivo que ha enviado tiene un tamaño nulo !";
                 break;
         }
     }else{
@@ -32,7 +32,7 @@ if(isset($_FILES['archivo'])){
 		    $nombres_campos = fgetcsv($fichero, 0, ";", "\"", "\"");
 		    $num_campos = count($nombres_campos);
 		    // Lee los registros
-		    while (($datos = fgetcsv($fichero, 0, ";", "\"", "\"")) !== FALSE) {
+		    while (($datos = fgetcsv($fichero, 1000, ";", "\"", "\"")) !== FALSE) {
 		        // Crea un array asociativo con los nombres y valores de los campos
 		        /*for ($icampo = 0; $icampo < $num_campos; $icampo++) {
 		            $registro[$nombres_campos[$icampo]] = $datos[$icampo];
@@ -50,15 +50,16 @@ if(isset($_FILES['archivo'])){
 		    for ($i = 0; $i < count($registros); $i++) {
 		        echo "Nombre: " . $registros[$i]["nombre"] . "\n";
 		    }*/
-
+			//$model->changeDebugState(true);
 		    for ($i = 0; $i < count($todalainfo); $i++) {
 		      
 			   $model->insertaProducto($todalainfo[$i]);
 
-		    }
-		    echo '<pre>';
+			}
+			$model->changeDebugState(false);
+		    /*echo '<pre>';
 		    print_r($todalainfo);
-		    echo '<pre>';
+		    echo '<pre>';*/
 		}
 	}
   }
@@ -193,7 +194,7 @@ echo '<script src="'.$base_url.'/assets/library/jquery/jquery.min.js?v=v2.0.0-rc
 						 										<div class="widget widget-heading-simple widget-body-gray">
 						 											- Seleccione el archivo que desea cargar masivamente<br>
 						 											- Recuerde que cada producto nuevo será insertado y si ya existe será actualizado<br>
-						 											- Solo se permiten archivos en formato CSV guardados con separador punto y comma!!
+						 											- Solo se permiten archivos en formato CSV con campos separados con punto y comma!!
 						 											<input type="file" name="archivo" id="archivo" class="form-control">
 						 											<div style="text-align: center"><br><br>
 						 												<a href="javascript:void(0);" onclick="document.formaularioFile.submit();" class="btn btn-primary"><i class="fa fa-fw fa-download"></i> Cargar Archivo</a>						 												

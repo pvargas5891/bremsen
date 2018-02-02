@@ -16,12 +16,12 @@ export class CategoriaNoFiltradaComponent {
   public p: number = 1;
   public itemsPerPage = 10;
   public mostrarLoading = true;
-  errorMessage: String;
+  public errorMessage: String;
   public totalStock: number = 10;
-  public atributoRadio: string[]=['4x4','Runflat','Oferta','Carretera'];
-  public opcionesRadio: string[]=['Ofertas'];
+  public atributoRadio: string[] = ['Alta Seguridad (Runflat)', 'Alto Desempeño (Zr)', '4x4 (M/T)','Carretera (H/T)'];
+    //ncho| perfil | aro | indice - de - carga | marca | instalacion - gratis | despacho - gratis
+  public opcionesRadio: string[]=['Ultimos Dias','Oferta','Packs','Instalación Gratis'];
   public detallesCategoria = new DetalleCatProductos();
-
   public marcaGroup = [];
   public modeloGroup = [];
   public anoGroup = [];

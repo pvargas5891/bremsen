@@ -129,15 +129,24 @@ class PondaAdminModel
 			//$sql.=" and lower(Marca) like lower('%".$get['marca']."%')";
 		if($get['marcaFiltro']!='undefined')
 			$sql.=" and lower(Marca) like lower('%".$get['marcaFiltro']."%')";
-		if($get['atributo']!='undefined'){
-			if($get['atributo']=='4x4')
-				$sql.=" and lower(ultimos_dias) = 'si'";
-			if($get['atributo']=='Runflat')
-				$sql.=" and lower(RUNFLAT) = 'si'";
-			if($get['atributo']=='Oferta')
-				$sql.=" and lower(OFERTA) = 'si'";
-			if($get['atributo']=='Carretera')
-				$sql.=" and lower(alto_desempeno) = 'si'";
+		if($get['atributo']!='undefined'){			
+			if($get['atributo']=='Alta Seguridad (Runflat)')
+                $sql.=" and lower(RUNFLAT) = 'si'";
+            if($get['atributo']=='Alto Desempeño (Zr)')
+                $sql.=" and lower(RUNFLAT) = 'si'";       
+            if($get['atributo']=='4x4 (M/T)')
+				$sql.=" and lower(4x4) = 'si'";			
+			if($get['atributo']=='Carretera (H/T)')
+                $sql.=" and lower(carretera) = 'si'";
+            
+            if($get['atributo']=='Ultimos Dias')
+				$sql.=" and lower(OFERTA) = 'si'";      
+            if($get['atributo']=='Oferta')
+                $sql.=" and lower(OFERTA) = 'si'";  
+            if($get['atributo']=='Packs')
+                $sql.=" and lower(OFERTA) = 'si'";  
+            if($get['atributo']=='Instalación Gratis')
+				$sql.=" and lower(OFERTA) = 'si'";            
 		}
 		
 		//if($get['modelo']!='undefined')
