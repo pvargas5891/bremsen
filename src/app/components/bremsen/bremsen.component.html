@@ -1,4 +1,4 @@
-<div id="container" style="background:#000;">
+<div id="container">
 <div class=" bg-bremsen container-fluid">
     <!-- pasar el css-->
     <div class="container">
@@ -34,36 +34,74 @@
         <div class="pad-10">&nbsp;</div>
         <div class="pad-10">&nbsp;</div>
     </div>
+</div>
 
-    <owl-carousel #owlElement [options]="{items: 3, autoPlay: 5000, stopOnHover: true,  
-    slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos" *ngIf="productos.length>0">
+
+    <div class="container center-block">
+        <div class="row">
+            <br><br><br>
+    <owl-carousel #owlElement [options]="{items: 3}" [items]="" *ngIf="productos.length>0">
     
-        <div class="product-thumb" *ngFor="let producto of productos">
-            <div class="image" style="line-height: 40px;">
-                <a routerLink="/producto/{{producto.ID}}">
-                    <img src="assets/image/product/540x576.jpg" class="img-responsive responsivo" />
-                </a>
+        <!--<div class="product-thumb" *ngFor="let producto of productos" style="height:180px;">
+            <div class="item text-center">
+                <img  style="width:300px;" src="assets/image/testimonio-01.jpg" alt="" class="img-responsive" />
             </div>
-            <div class="caption">
-                <h4>
-                    <a routerLink="/producto/{{producto.ID}}">{{producto.MARCA}} {{producto.MODELO}}</a>
-                </h4>
-                <p class="price">{{producto.PRECIO_FINAL | number | currencyFormat}} </p>
+            <div class="item text-center">
+                <img style="width:300px;" src="assets/image/testimonio-02.jpg" alt="" class="img-responsive" />
             </div>
-            <div>
-                <button class="btn btn-primary btn-sm" routerLink="/producto/{{producto.ID}}">
-                    <span>Ver producto</span>
-                </button>
+            <div class="item text-center">
+                <img style="width:300px;" src="assets/image/testimonio-03.jpg" alt="" class="img-responsive" />
             </div>
-        </div>
+            <div class="item text-center">
+                <img style="width:300px;" src="assets/image/testimonio-03.jpg" alt="" class="img-responsive" />
+            </div>
+    
+            <div class="item text-center">
+                <img style="width:300px;" src="assets/image/testimonio-04.jpg" alt="" class="img-responsive" />
+            </div>
+            <div class="item text-center">
+                <img style="width:300px;" src="assets/image/testimonio-05.jpg" alt="" class="img-responsive" />
+            </div>
+            <div class="item text-center">
+                <img style="width:300px;" src="assets/image/testimonio-06.jpg" alt="" class="img-responsive" />
+            </div>
+            <div class="item text-center">
+                <img style="width:300px;" src="assets/image/testimonio-07.jpg" alt="" class="img-responsive" />
+                </div>
+           
+        </div>-->
+
+        <div class="" *ngFor="let producto of productos">
+              <!--  <div class="image" style="line-height: 40px;">
+                  <a routerLink="/producto/{{producto.ID}}"><img src="assets/image/product/540x576.jpg" class="img-responsive responsivo" /></a></div>-->
+              <div class="image" style="line-height: 40px;">
+                    <img   src="assets/image/testimonio-01.jpg" alt="" class="img-responsive responsivo" />
+                 
+                    
+                </div>
+ 
+                
+         </div>
+          
     
     
     
     </owl-carousel>
 </div>
+</div>
 
 
+<style>
+owl-carousel .product-thumb {
+    padding: 7px;
+    margin: 0px 3px 0px 0px;
+    position: relative;
+    text-align: center;
+    border: none !important;
+}
+</style>
 
+<!--
 <div class="container">
 
     <div id="carousel" class="owl-carousel nxt">
@@ -95,6 +133,8 @@
     </div>
 
 </div>
+
+-->
 
 <div class="container-fluid" id="contacto" style=" background: #1e1e1e; padding:40px 0px; margin-bottom:-100px;">
     <div class="container">
