@@ -223,6 +223,7 @@ echo '<script src="'.$base_url.'/assets/library/jquery/jquery.min.js?v=v2.0.0-rc
 					 			<th class="center">ARO</th>
 					 			<th class="center">CARGA</th>
 					 			<th class="center">LARGO</th>
+								<th class="center">ANCHO</th>
 					 			<th class="center">ALTO</th>
 					 			<th class="center">PESO</th>
 					 			<th class="center">NETO</th>
@@ -241,10 +242,10 @@ echo '<script src="'.$base_url.'/assets/library/jquery/jquery.min.js?v=v2.0.0-rc
 					 			<th class="center">LOGO</th>
 					 			<th class="center">INCLUYE INSTA</th>
 					 			<th class="center">DESPACHO</th>
-					 			<th class="center">ULTIMOS DIAS</th>
+					 			<th class="center">4X4</th>
 					 			<th class="center">RUNFLAT</th>
 					 			<th class="center">OFERTA</th>
-					 			<th class="center">ALTO DESEM</th>
+					 			<th class="center">CARRETERA</th>
 					 			<th class="center">STOCK</th>
 					 			<th class="center">VIDEO</th>
 					 			
@@ -299,6 +300,7 @@ echo '<script src="'.$base_url.'/assets/library/jquery/jquery.min.js?v=v2.0.0-rc
 								<td>'.$rsProductos->fields['ARO'].'</td>					 			
 								<td>'.$rsProductos->fields['Carga'].'</td>					 			
 								<td>'.$rsProductos->fields['LARGO'].'</td>					 			
+								<td>'.$rsProductos->fields['ANCHO2'].'</td>					 			
 								<td>'.$rsProductos->fields['ALTO'].'</td>					 			
 								<td>'.$rsProductos->fields['Peso'].'</td>					 			
 								<td>'.$rsProductos->fields['neto'].'</td>					 			
@@ -317,10 +319,10 @@ echo '<script src="'.$base_url.'/assets/library/jquery/jquery.min.js?v=v2.0.0-rc
 								<td>'.$rsProductos->fields['Logo'].'</td>					 			
 								<td>'.$rsProductos->fields['INCLUYE_INSTALACION'].'</td>					 			
 								<td>'.$rsProductos->fields['DESPACHO'].'</td>					 			
-								<td>'.$rsProductos->fields['ultimos_dias'].'</td>					 			
+								<td>'.$rsProductos->fields['4x4'].'</td>					 			
 								<td>'.$rsProductos->fields['RUNFLAT'].'</td>					 			
 								<td>'.$rsProductos->fields['OFERTA'].'</td>					 			
-								<td>'.$rsProductos->fields['alto_desempeno'].'</td>					 			
+								<td>'.$rsProductos->fields['carretera'].'</td>					 			
 								<td>'.$rsProductos->fields['STOCK'].'</td>					 			
 								<td>'.$rsProductos->fields['VIDEO'].'</td>		 			
 					 			

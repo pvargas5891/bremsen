@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DetalleCatProductos } from '../components/categoria-no-filtrada/detalleCatProductos';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import { promise } from 'selenium-webdriver';
 @Injectable()
 export class ProductosService {
 
@@ -107,7 +108,20 @@ export class ProductosService {
 
   }
 
+    public enviaConfirmacion(nombre:string,email:string): Promise<any> {
 
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        const params = new URLSearchParams();
+        params.append('nombre', nombre); 
+        params.append('email', email);
+        params.append('accion', 'enviaconfirmacion');
+
+        return this.http.get(this.url + 'productos.php?' + params.toString(), options).toPromise()
+            .then(this.extractData)
+            .catch(this.handleErrorPromise);
+
+    }
 
    private extractData(res: Response) {
         //console.debug(res);

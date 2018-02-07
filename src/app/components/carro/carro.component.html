@@ -118,7 +118,7 @@
             <div *ngIf="activaErrorNoDisponible" style="font-size: 20px;  text-align: center; padding-top: 39px; padding-bottom: 18px; color: #4a4a4a;">
                   No tenemos opciones disponibles para el destino de despacho o instalación seleccionado
             </div>  
-            <div class="pest-home">
+            <div class="pest-home" *ngIf="!activaErrorNoDisponible">
 
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" style="width: 25%" class="active" *ngIf="instalacionUno">

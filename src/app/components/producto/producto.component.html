@@ -57,6 +57,7 @@
                     <select class="form-control" name="cantidad" #cantidadSelected id="cantidad" [(ngModel)]="cantidad" (change)="cambiaCantidad(cantidadSelected.value)">
                     <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo">{{stock.nombre}}</option>
                     </select>
+                    <div *ngIf="producto.STOCK[0].codigo==0" class="help-block">Sin Stock</div>
                      <div *ngIf="cantidadValido" class="help-block">Debe seleccionar una cantidad</div>
                      </div>
               </td>
@@ -69,28 +70,28 @@
           </table>
     <hr class="hr1">
 
-          <table class="table2 table table-precio">
+          <table class="table2 table table-precio" *ngIf="producto.STOCK[0].codigo>0">
 
             <tr  >
               <td class="col-sm-6">
-                <p class="total">Total</p>
+                <p class="total" >Total</p>
               </td>
               <td style="text-align:right;" class="col-sm-6">
-                <h3 class="precio"><b>{{totalAComprar  | number | currencyFormat}}</b></h3>
+                <h3 class="precio" ><b>{{totalAComprar  | number | currencyFormat}}</b></h3>
 
               </td>
             </tr>
 
           </table>
 
-          <table class="table2 table table-precio">
+          <table class="table2 table table-precio" *ngIf="producto.STOCK[0].codigo>0">
                 <tr>
               <td>
-                <button type="submit" class="btn btn-primary bremsen3" (click)="agregarCarro(2)" ><i class="fa fa-plus"></i> Carro</button>
+                <button  type="submit" class="btn btn-primary bremsen3" (click)="agregarCarro(2)" ><i class="fa fa-plus"></i> Carro</button>
 
               </td>
               <td  style="text-align: right;">
-                   <button class="btn btn-default " type="button" aria-expanded="false" (click)="agregarCarro(1)" >
+                   <button class="btn btn-default"  type="button" aria-expanded="false" (click)="agregarCarro(1)" >
                       COMPRAR
                     </button>
 
@@ -98,6 +99,41 @@
               </td>
             </tr>
               </table>
+              <table class="table2 table table-precio" *ngIf="producto.STOCK[0].codigo==0">
+                <tbody>
+                  <tr>
+              
+                    <td class="col-md-12" style="text-align: right;">
+                      
+                      <div class="collapse in" id="collapseExample" style="text-align: left !important;" aria-expanded="true">
+                        <div class="well">
+                          <br> Deja tus datos y te contactaremos con la confirmación.
+                          <br>
+                          <form name="form" (ngSubmit)="f.form.valid && enviaCorreoConfirmacion()" #f="ngForm" novalidate>
+                            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !nombreCompleto.valid }">
+                              <label for="">Nombre completo</label>
+                            <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto" #nombreCompleto="ngModel" [(ngModel)]="nombreCompletoValue"
+                              required>
+                            <div *ngIf="f.submitted && !nombreCompleto.valid" class="help-block">Nombre completo es requerido</div>
+                            </div>
+              
+                            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !emailcliente.valid }">
+                              <label for="">Email</label>
+                              <input type="text" class="form-control" id="emailcliente" name="emailcliente" #emailcliente="ngModel" [(ngModel)]="emailclienteValue"
+                                required>
+                              <div *ngIf="f.submitted && !emailcliente.valid" class="help-block">Email es requerido</div>
+                            </div>
+                          
+                          <button type="submit" class="btn btn-default bremsen">Enviar</button>
+                          </form>
+                        </div>
+                      </div>
+                      <div *ngIf="estadoEnvio" [ngClass]="'success'"> Hemos recibido tus datos, te confirmaremos la llegada. </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
 <div *ngIf="estadoCarro" [ngClass] = "'success'"> Producto fue agregado correctamente. </div>
                 <div *ngIf="errorMessage" [ngClass] = "'error'"> {{errorMessage}} </div>
 

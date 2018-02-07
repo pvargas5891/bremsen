@@ -228,9 +228,11 @@
             <tr>
               <td class="col-sm-6">
 
-                <select class="form-control" style="width: 75%;" #selectCantidad >
+                <select class="form-control" style="width: 75%;" #selectCantidad>
                 <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo" [selected]="stock.codigo == 4">{{stock.nombre}}</option>
               </select>
+              
+              <div *ngIf="producto.STOCK[0].codigo==0" class="help-block">Sin Stock</div>
               <div *ngIf="cantidadValido" class="help-block">Debe seleccionar una cantidad</div>
 
               </td>
@@ -246,19 +248,19 @@
 
             <tr  >
               <td class="col-sm-6">
-                <p class="total">Total</p>
+                <p class="total" *ngIf="producto.STOCK[0].codigo>0">Total</p>
               </td>
               <td style="text-align:right;" class="col-sm-6">
-                <h3 class="precio"><b> {{producto.PRECIO_FINAL * selectCantidad.value | number | currencyFormat }}</b></h3>
+                <h3 class="precio" *ngIf="producto.STOCK[0].codigo>0"><b> {{producto.PRECIO_FINAL * selectCantidad.value | number | currencyFormat }}</b></h3>
 
               </td>
             </tr>
             <tr style="text-align:right; ">
-              <td><button type="button" class="btn btn-default bremsen "  (click)="agregarCarro(1,selectCantidad.value,producto.ID)">Comprar</button></td>
+              <td><button *ngIf="producto.STOCK[0].codigo>0" type="button" class="btn btn-default bremsen " (click)="agregarCarro(1,selectCantidad.value,producto.ID)">Comprar</button></td>
               <td>
 
-
-                <button type="button" class="btn btn-primary"  (click)="agregarCarro(2,selectCantidad.value,producto.ID)">
+                <button *ngIf="producto.STOCK[0].codigo==0" type="button" class="btn btn-default bremsen " routerLink="/producto/{{producto.ID}}">Ver producto</button>
+                <button *ngIf="producto.STOCK[0].codigo>0" type="button" class="btn btn-primary"  (click)="agregarCarro(2,selectCantidad.value,producto.ID)">
                     <i class="fa fa-plus" aria-hidden="true"></i> Carro
                 </button>
               </td>

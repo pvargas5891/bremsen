@@ -172,7 +172,17 @@ public agregarCarro = function (indice) {
     );
 
 }
-
+public nombreCompletoValue:string = "";
+public emailclineteValue:string = "";
+public estadoEnvio:boolean = false;
+  public enviaCorreoConfirmacion = function(){
+      
+    this._productoService.enviaConfirmacion(this.nombreCompletoValue, this.emailclineteValue).then(
+      data=>{
+        this.estadoEnvio = true;
+      }
+    );
+  }
 /*
 
 

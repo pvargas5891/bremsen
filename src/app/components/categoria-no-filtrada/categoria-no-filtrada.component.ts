@@ -18,9 +18,9 @@ export class CategoriaNoFiltradaComponent {
   public mostrarLoading = true;
   public errorMessage: String;
   public totalStock: number = 10;
-  public atributoRadio: string[] = ['Alta Seguridad (Runflat)', 'Alto Desempeño (Zr)', '4x4 (M/T)','Carretera (H/T)'];
+  public atributoRadio: string[] = ['Alta Seguridad (Runflat)', '4x4 (M/T)','Carretera (H/T)'];
     //ncho| perfil | aro | indice - de - carga | marca | instalacion - gratis | despacho - gratis
-  public opcionesRadio: string[]=['Ultimos Dias','Oferta','Packs','Instalación Gratis'];
+  public opcionesRadio: string[]=['Oferta'];
   public detallesCategoria = new DetalleCatProductos();
   public marcaGroup = [];
   public modeloGroup = [];
@@ -93,7 +93,7 @@ export class CategoriaNoFiltradaComponent {
         for(let i = this.detallesCategoria.inicio; i <= this.detallesCategoria.fin;i++){
             this.productos.push(this.resultProductos[i-1]);
         }
-       // console.debug(this.productos);
+       console.debug(this.productos);
   }
   public pageChanged = function (event){
       //this.p = event;

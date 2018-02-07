@@ -38,7 +38,7 @@ switch($accion){
 	break;
 	case 'sugerido':
 		
-		$rs=$model->getProductosAll();
+		$rs=$model->getProductosAll(1,10);
 		$general=parseador($rs);
 		echo html_entity_decode(json_encode($general, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));
 
@@ -102,6 +102,7 @@ function parseador($rs){
 			$general2['ARO']=$rs->fields['ARO'];
 			$general2['CARGA']=$rs->fields['Carga'];
 			$general2['LARGO']=$rs->fields['LARGO'];
+			$general2['ANCHO2']=$rs->fields['ANCHO2'];
 			$general2['ALTO']=$rs->fields['ALTO'];
 			$general2['PESO']=$rs->fields['Peso'];
 			$general2['NETO']=$rs->fields['neto'];
@@ -112,7 +113,7 @@ function parseador($rs){
 			$general2['NETO2']=$rs->fields['neto2'];
 			$general2['PRECIO_FINAL']=$rs->fields['precio_final'];
 			$general2['PRECIO_OFERTA']=$rs->fields['precio_oferta'];
-			//$general2['MODELO']=$rs->fields['MODELO'];
+			$general2['MODELO_RUEDA']=$rs->fields['modelo_rueda'];
 			$general2['JPG']=$rs->fields['JPG'];
 			$general2['TITULO']=$rs->fields['TITULO'];
 			$general2['ATRIBUTOS']=$rs->fields['ATRIBUTOS'];
@@ -120,19 +121,27 @@ function parseador($rs){
 			$general2['LOGO']=$rs->fields['Logo'];
 			$general2['INCLUYE_INSTALACION']=$rs->fields['INCLUYE_INSTALACION'];
 			$general2['DESPACHO']=$rs->fields['DESPACHO'];
-			$general2['ULTIMOS_DIAS']=$rs->fields['ultimos_dias'];
+			$general2['4x4']=$rs->fields['4x4'];
 			$general2['RUNFLAT']=$rs->fields['RUNFLAT'];
+			$general2['OFERTA']=$rs->fields['OFERTA'];
 			$stock=array();
-			for($i=1;$i<=$rs->fields['STOCK'];$i++){
+			$contador=0;
+			if($rs->fields['STOCK']!=20001)
+				$contador=$rs->fields['STOCK'];
+			for($i=1;$i<=$contador;$i++){
 				$stock2=array();
 				$stock2['codigo']=$i;
 				$stock2['nombre']=$i;
 				$stock[]=$stock2;
 			}
+			if($contador==0){
+				$stock2=array();
+				$stock2['codigo']=0;
+				$stock2['nombre']=0;
+				$stock[]=$stock2;
+			}
 			$general2['STOCK']=$stock;
 			$general2['VIDEO']=$rs->fields['VIDEO'];
-			$general2['OFERTA']=$rs->fields['OFERTA'];
-			$general2['ALTO_DESEMPENO']=$rs->fields['alto_desempeno'];
 			$general[]=$general2;
 			$rs->movenext();
 		}

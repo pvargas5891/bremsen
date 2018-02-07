@@ -175,46 +175,60 @@
                 </div>
         <div class="col-md-4">
           <table class="table2 table table-precio" style="padding-right: 0px;">
-            <tr >
+            <tr>
               <td>Cantidad</td>
               <td style="text-align:right;"> Valor unitario</td>
-
+        
             </tr>
             <tr>
               <td class="col-sm-6">
-
+        
                 <select class="form-control" style="width: 75%;" #selectCantidad>
-                <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo">{{stock.nombre}}</option>
-              </select>
+                  <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo" [selected]="stock.codigo == 4">{{stock.nombre}}</option>
+                </select>
+        
+                <div *ngIf="producto.STOCK[0].codigo==0" class="help-block">Sin Stock</div>
+                <div *ngIf="cantidadValido" class="help-block">Debe seleccionar una cantidad</div>
+        
               </td>
               <td class="col-sm-6">
-                <p style="text-align:right; margin-bottom: 3px;" class="precio"><b>{{producto.PRECIO_FINAL  | number | currencyFormat}}</b></p>
+                <p style="text-align:right; margin-bottom: 3px;" class="precio">
+                  <b>{{producto.PRECIO_FINAL | number | currencyFormat}}</b>
+                </p>
                 <!--p style="text-align:right; font-size: 12px;">Ahorro $60,000</p-->
               </td>
             </tr>
           </table>
-    <hr class="hr1">
-
+          <hr class="hr1">
+        
           <table class="table2 table table-precio">
-
-            <tr  >
+        
+            <tr>
               <td class="col-sm-6">
-                <p class="total">Total</p>
+                <p class="total" *ngIf="producto.STOCK[0].codigo>0">Total</p>
               </td>
               <td style="text-align:right;" class="col-sm-6">
-                <h3 class="precio"><b>{{producto.PRECIO_FINAL  | number | currencyFormat}}</b></h3>
-
+                <h3 class="precio" *ngIf="producto.STOCK[0].codigo>0">
+                  <b> {{producto.PRECIO_FINAL * selectCantidad.value | number | currencyFormat }}</b>
+                </h3>
+        
               </td>
             </tr>
             <tr style="text-align:right; ">
-              <td><button type="submit" class="btn btn-default bremsen " (click)="agregarCarro(1,selectCantidad.value,producto.ID)">Comprar</button></td>
-              <td> <button type="button" class="btn btn-primary"  (click)="agregarCarro(2,selectCantidad.value,producto.ID)"  data-toggle="modal" data-target="#myModal">
+              <td>
+                <button *ngIf="producto.STOCK[0].codigo>0" type="button" class="btn btn-default bremsen " (click)="agregarCarro(1,selectCantidad.value,producto.ID)">Comprar</button>
+              </td>
+              <td>
+        
+                <button *ngIf="producto.STOCK[0].codigo==0" type="button" class="btn btn-default bremsen " routerLink="/producto/{{producto.ID}}">Ver producto</button>
+                <button *ngIf="producto.STOCK[0].codigo>0" type="button" class="btn btn-primary" (click)="agregarCarro(2,selectCantidad.value,producto.ID)">
                   <i class="fa fa-plus" aria-hidden="true"></i> Carro
-              </button></td>
+                </button>
+              </td>
             </tr>
           </table>
-
-      </div>
+        
+        </div>
 
 
               </div>

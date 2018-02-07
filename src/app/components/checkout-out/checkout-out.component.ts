@@ -24,6 +24,8 @@ export class CheckoutOutComponent {
       public ciudadValidoEmpresa: boolean = true;
       public comunaValidoEmpresa: boolean = true;
 
+      public username="";
+      public password="";
 
       public error = '';
       public loading = false;
@@ -41,6 +43,7 @@ export class CheckoutOutComponent {
   public totalTotales:number = 0;
   public datosCarro;
   public codigoCompra = 0;
+  public tipoLoginCompra = 0;
   constructor(
       private carro: CarroCompraService,
       private route: Router,
@@ -62,6 +65,8 @@ export class CheckoutOutComponent {
             }
 
           }
+    this.tipoLoginCompra = JSON.parse(localStorage.getItem('tipoLoginCompra'));
+    console.debug(this.tipoLoginCompra);      
 
     this.datosCarro = JSON.parse(localStorage.getItem('instalacionTemporal'));
           //console.debug(datosCarro);
@@ -70,15 +75,14 @@ export class CheckoutOutComponent {
           this.descuentoAplicado=this.datosCarro[0].descuentoAplicado;
           this.totalTotales=this.datosCarro[0].totalTotales;
 
-    this.carro.setDetallesCarro(this.datosCarro[0], this.id).then(
+    /*this.carro.setDetallesCarro(this.datosCarro[0], this.id).then(
       data => {
         console.debug(data);
         this.codigoCompra = data[0].pagosID;
       },
       error => {
         console.debug(error);
-      })
-      ;
+      });*/
    }
 
      cambiaCiudad(selectedRegion: string): void{
@@ -293,9 +297,19 @@ cambiaCiudadEmpresa(selectedRegion: string): void{
         this.carro.agregarCarro(carroTemporal[i].cantidad, carroTemporal[i].id_producto, usuario)
           .then();
       }
-      this.carro.setDetallesCarro(this.datosCarro,usuario).then(data => {
-          window.location.href="http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario="+usuario;
-      });
+      this.carro.setDetallesCarro(this.datosCarro, usuario).then(
+        data => {
+          console.debug(data);
+          this.codigoCompra = data[0].pagosID;
+          window.location.href = "http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario=" + usuario;
+        },
+        error => {
+          console.debug(error);
+        });
+          
+        
+        
+      //});
     }
 
 
@@ -306,4 +320,27 @@ cambiaCiudadEmpresa(selectedRegion: string): void{
   public realizaTransferencia = function () {
     window.location.href = "http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?transferencia=true&usuario=" + this.id;
   }
+  public loading2=false;
+  public error2="";
+  login() {
+            this.loading2 = true;
+            this.authenticationService.login(this.username, this.password)
+                  .then(result => {
+        //console.debug(result);
+                        if (result === true) {
+                              // login successful
+                              //this.router.navigate(['/']);
+          var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          //console.debug(currentUser);
+          //this.nombreCliente = currentUser.usuario.nombre;
+          //this.autenticado = true;
+          this.loading2 = false;
+          this.route.navigate(['/checkin']);
+                        } else {
+                              // login failed
+                              this.error2 = 'Usuario y password son incorrectos';
+                              this.loading2 = false;
+                        }
+                  });
+      }
 }

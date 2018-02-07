@@ -83,6 +83,10 @@ export class HeaderComponent implements DoCheck{
 
         }
       }
+  public insertaFlagPago = function(tipo){
+    localStorage.setItem('tipoLoginCompra', JSON.stringify({ estado: tipo }));
+    this.route.navigate(['/carro']);
+  }
       public inSearch = function(){
         if(typeof this.searchValue === 'undefined' || this.searchValue == ''){
           return;

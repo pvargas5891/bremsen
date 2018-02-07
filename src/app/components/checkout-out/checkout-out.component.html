@@ -26,8 +26,52 @@
         <div id="content" class="col-sm-8">
         <h1 class="title">Información cliente</h1>
 
+<div *ngIf="tipoLoginCompra.estado==1">
+  <form name="formLogin" (ngSubmit)="f2.form.valid && login()" #f2="ngForm" novalidate>
+    <div class="form-group" [ngClass]="{ 'has-error': f2.submitted && !username2.valid }">
+      <label for="username">Email</label>
+      <input type="text" class="form-control" name="username2" [(ngModel)]="username" #username2="ngModel" required />
+      <div *ngIf="f2.submitted && !username2.valid" class="help-block">Usuario es requerido</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f2.submitted && !password2.valid }">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" name="password2" [(ngModel)]="password" #password2="ngModel" required />
+      <div *ngIf="f2.submitted && !password2.valid" class="help-block">Password es requerido</div>
+    </div>
 
+    <!--  <div class="checkbox">
+                      <label>
+                        <input type="checkbox"><small>Recordarme</small>
+                      </label>
+                    </div>-->
+    <table class="table" style="margin-bottom: 0px !important;">
+      <tr>
+        <td style="padding: 0px;">
+          <div class="checkbox" style="margin-top: 0px;">
+            <label>
+              <input type="checkbox">
+              <span style="color:#1e1e1e; ">Recordarme</span>
+            </label>
+          </div>
+        </td>
+        <td style="text-align: right; padding: 0px;">
+          <span>
+            <a style="color:#6b8bc0;" routerLink="/olvido">¿Olvidaste tu clave?</a>
+          </span>
+        </td>
+      </tr>
+    </table>
+
+    <button [disabled]="loading2" class="btn btn-default btn-block">Entrar</button>
+    <img *ngIf="loading2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+    />
+    <div *ngIf="error2" class="alert alert-danger">{{error2}}</div>
+  </form>
+</div>
+<div *ngIf="tipoLoginCompra.estado==2">
       <form name="form" (ngSubmit)="f.form.valid && saveRegistro()" #f="ngForm" novalidate>
+
+        
                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !nombreCompleto.valid }">
                     <label for="nombreCompleto">Nombre completo</label>
                         <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto" #nombreCompleto="ngModel" [(ngModel)]="cliente.nombreCompleto" required>
@@ -183,7 +227,9 @@
                <p class="p-botnes">Tranfiere directamente a nuestra cuenta y envia el comprobante a ventas@bremsen.cl</p>
 
          </div>
-</form>
+        </form>
+      </div>
+
                <div class="col-md-12" style="padding-left: 0px; padding-right: 0px;">
                    <div class="collapse" id="transferencia" style="text-align: left !important;">
                       <div class="well">
