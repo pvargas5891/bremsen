@@ -209,29 +209,32 @@
 
 
 
-
+<div *ngIf="desactivaBotones">
         <div class="col-md-6" style="padding-top: 25px; padding-left: 0px;">
-              <button [disabled]="loading" type="submit" class="btn btn-primary btn-block">Pagar <b>Web</b> <b style="color:#ff9222;">Pay</b></button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-             <div *ngIf="estado" [ngClass] = "'success'"> Cliente fue agregado correctamente. </div>
-              <div *ngIf="errorMessage" [ngClass] = "'error'"> {{errorMessage}} </div>
+              <button [disabled]="loading" type="submit" (click)="insertaClave(1)" class="btn btn-primary btn-block">Pagar <b>Web</b> <b style="color:#ff9222;">Pay</b></button>
+           
 
          <p class="p-botnes" >Puedes pagar con Tarjeta de crédito o Redcompra.</p>
         </div>
 
          <div class="col-md-6"  style="padding-top: 25px; padding-right: 0px;">
-                <button class="btn btn-default  btn-block" type="button" data-toggle="collapse" data-target="#transferencia" aria-expanded="false" aria-controls="transferencia">
+                <button class="btn btn-default  btn-block" (click)="insertaClave(2)"type="submit">
                       Transferencia Bancaria
               </button>
                <p class="p-botnes">Tranfiere directamente a nuestra cuenta y envia el comprobante a ventas@bremsen.cl</p>
 
          </div>
+</div>
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+          />
+          <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+          <div *ngIf="estado" [ngClass]="'success'"> Cliente fue agregado correctamente. </div>
+          <div *ngIf="errorMessage" [ngClass]="'error'"> {{errorMessage}} </div>
         </form>
       </div>
 
-               <div class="col-md-12" style="padding-left: 0px; padding-right: 0px;">
-                   <div class="collapse" id="transferencia" style="text-align: left !important;">
+               <div class="col-md-12" style="padding-left: 0px; padding-right: 0px;" *ngIf="activaTransferencia">
+                   <div  id="transferencia" style="text-align: left !important;">
                       <div class="well">
                         <br>
                           <div class="col-md-12 col-sm-12">
