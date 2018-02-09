@@ -136,25 +136,34 @@ false
   }
 
  validaRegion = function(){
-   console.debug(this.regionInstalacion);
+  // console.debug(this.regionInstalacion);
+  var estado=true;
     if(typeof this.regionInstalacion == 'undefined'){
         this.regionValido = false;
         this.errorMessage="Falta que seleccione la región de instalación";
-        return false;
+        estado = false;
+      }else{
+      this.regionValido = true;
       }
       if(typeof this.ciudadInstalacion == 'undefined'){
-        this.regionValido = true;
+       // this.regionValido = true;
         this.ciudadValido = false;
         this.errorMessage="Falta que seleccione la ciudad de instalación";
-        return false;
+        estado = false;
+      }else{
+        this.ciudadValido = true;
       }
       if(typeof this.comunaInstalacion == 'undefined'){
-        this.regionValido = true;
-        this.ciudadValido = true;
+        //this.regionValido = true;
+        //this.ciudadValido = true;
         this.comunaValido = false;
         this.errorMessage="Falta que seleccione la comuna de instalación";
-        return false;
+        estado = false;
+      }else{
+        this.comunaValido = true;
       }
+   if (!estado)
+      return;
         this.regionValido = true;
         this.ciudadValido = true;
         this.comunaValido = true;
@@ -186,6 +195,7 @@ public instalacionTres: boolean = false;
   public valorinstalacionTres: number = 0;
   public valorinstalacionCuatro: number=0;
  public seleccionaInstalacion = function(comuna){
+   this.validaRegion();
    this._is.getInstalacionByComuna(comuna, this.id).then(data => {
           console.debug(data);
           this.instalacionUno = false;
@@ -327,10 +337,12 @@ public instalacionTres: boolean = false;
       localStorage.setItem('instalacionTemporal', JSON.stringify(instalacionTemporal));
   }
   cambiaCiudad(selectedRegion: string): void{
+    this.validaRegion();
       this._is.getCiudades(selectedRegion);
       this._is.getTalleresByRegion(selectedRegion);
   }
   cambiaComuna(selectedCiudad: string): void{
+    this.validaRegion();
     this._is.getComunas(selectedCiudad);
   }
   private getCarroAll = function (){
@@ -526,11 +538,15 @@ public eliminaProductoCarro(id){
 public sanitizaUrlExtern(url){
   return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
-
+  public nopuedecontinuar = false;
 public checking = function(){
 
   if(!this.estado){
+    this.validaRegion();
+    this.nopuedecontinuar=true;
     return;
+  }else{
+    this.nopuedecontinuar = false;
   }
 
 

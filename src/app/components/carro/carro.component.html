@@ -382,8 +382,12 @@
                  <td></td>
                   <td  class="text-right">
                   	<button *ngIf="!activaErrorNoDisponible" type="button" class="btn btn-default btn-block" (click)="checking()">Continuar con tu pedido</button><br>
-                   <!--a href="#"><small>¿Aun no tienes cuenta?</small></a><br>
-                   <button type="button" class="btn btn-primary btn-block">Comprar como visita</button-->
+                   <a href="javascript:void(0);" routerlink="/registro"><small>¿Aun no tienes cuenta?</small></a><br>
+                   <button type="button" class="btn btn-primary btn-block" (click)="checking()">Comprar como visita</button>
+                    <div class="form-group" [ngClass]="{ 'has-error': nopuedecontinuar }">
+                      
+                      <div *ngIf="nopuedecontinuar" class="help-block">Faltan datos en su carro</div>
+                    </div>
                   </td>
                 </tr>
               </table>
