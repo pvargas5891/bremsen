@@ -57,7 +57,7 @@
                  <!--   <select class="form-control" name="cantidad" #cantidadSelected id="cantidad" [(ngModel)]="cantidad" (change)="cambiaCantidad(cantidadSelected.value)">
                     <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo">{{stock.nombre}}</option>
                     </select>-->
-                    <div *ngIf="producto.STOCK[0].codigo==0" class="help-block">Preguntar Stock</div>
+                    <div *ngIf="producto.STOCK[0].codigo==0" class="help-block">Verificar Stock</div>
                      <div *ngIf="cantidadValido" class="help-block">Debe seleccionar una cantidad</div>
                      </div>
               </td>
