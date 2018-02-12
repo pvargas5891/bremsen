@@ -51,7 +51,7 @@ export class CarroComponent implements OnInit {
   
   errorMessage: string;
 
-
+  public consesion:boolean = false;
   public myDatePickerOptions: IMyDpOptions = {
     // other options...
     dateFormat: 'dd/mm/yyyy',
@@ -82,13 +82,18 @@ false
             if(currentUser.token === 'active'){
                 this.id = currentUser.usuario.id;
                 this.getCarroAll();
+                this.consesion=true;
+
             }else{
                 this.route.navigate(['/home']);
             }
 
           }else{
             //this.route.navigate(['/home']);
+            this.consesion = false;
             this.getCarroAllSinSesion();
+
+
           }
 
       localStorage.setItem('instalacionTemporal', null);

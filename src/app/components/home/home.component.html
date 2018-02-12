@@ -129,7 +129,7 @@ Múltiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
 slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos" *ngIf="productos.length>0">
 
       <div class="product-thumb" *ngFor="let producto of productos">
-      <div class="image" style="line-height: 40px;"><a routerLink="/producto/{{producto.ID}}"><img src="assets/image/product/540x576.jpg" class="img-responsive responsivo" /></a></div>
+      <div class="image" style="line-height: 40px;"><a routerLink="/producto/{{producto.ID}}"><img src="assets/galerias/{{producto.JPG}}" class="img-responsive responsivo" /></a></div>
       <div class="caption">
           <h4><a routerLink="/producto/{{producto.ID}}">{{producto.MARCA}} {{producto.MODELO}}</a></h4>
           <p class="price">{{producto.PRECIO_FINAL | number | currencyFormat}} </p>

@@ -42,7 +42,7 @@
                   <tr class="borderTop" *ngFor="let producto of carroCompra">
                     <td class="text-center">
                       <a routerLink="/producto/{{producto.ID}}">
-                      <img src="assets/image/product/540x576.jpg" width="50px" alt="Xitefun Causal Wear Fancy Shoes" title="">
+                      <img src="assets/galerias/{{producto.JPG}}" width="50px" alt="Xitefun Causal Wear Fancy Shoes" title="">
                     </a>
                     </td>
                     <td class="text-left">
@@ -381,10 +381,17 @@
                 <tr>
                  <td></td>
                   <td  class="text-right">
-                  	<button *ngIf="!activaErrorNoDisponible" type="button" class="btn btn-default btn-block" (click)="checking()">Continuar con tu pedido</button><br>
-                   <a href="javascript:void(0);" routerlink="/registro"><small>¿Aun no tienes cuenta?</small></a><br>
-                   <button type="button" class="btn btn-primary btn-block" (click)="checking()">Comprar como visita</button>
-                    <div class="form-group" [ngClass]="{ 'has-error': nopuedecontinuar }">
+                  <div *ngIf="consesion">
+                    <button *ngIf="!activaErrorNoDisponible" type="button" class="btn btn-default btn-block" (click)="checking()">Continuar con tu pedido</button><br>
+                  </div> 
+                    <div *ngIf="!consesion">
+                    <button *ngIf="!activaErrorNoDisponible" type="button" class="btn btn-default btn-block" (click)="checking()">Comprar con mi cuenta</button>
+                    <br>
+                     <a href="javascript:void(0);" routerlink="/registro"><small>¿Aun no tienes cuenta?</small></a><br>
+                     <button type="button" class="btn btn-primary btn-block" (click)="checking()">Comprar como visita</button>
+                   </div> 
+                   
+                   <div class="form-group" [ngClass]="{ 'has-error': nopuedecontinuar }">
                       
                       <div *ngIf="nopuedecontinuar" class="help-block">Faltan datos en su carro</div>
                     </div>
