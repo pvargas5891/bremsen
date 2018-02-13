@@ -207,8 +207,10 @@
         	<div class="col-md-1">&nbsp;</div>
 			<div class="col-md-2" >
 					 <div id="search" class="input-group">
-					  <input id="filter_name" type="text" name="search" value="" placeholder="Search" class="form-control input-lg" />
-					  <button type="button" class="button-search"><i class="fa fa-search"></i></button>
+            <input id="filter_name" type="text" name="search" value="" placeholder="Search" class="form-control input-lg" [(ngModel)]="searchValue">
+            <button type="button" class="button-search" (click)="inSearch()">
+              <i class="fa fa-search"></i>
+            </button>
 					</div>
             </div>
 		</div>

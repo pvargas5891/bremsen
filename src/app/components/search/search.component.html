@@ -142,85 +142,134 @@
 
 
 <div  *ngIf="detallesCategoria.totalProductos > 0">
-            <div *ngFor="let producto of productos"  class=" product-list col-xs-12">
+            <div *ngFor="let producto of productos" class=" product-list col-xs-12">
               <div class="product-thumb">
                 <div class="image">
-
-                     <a routerLink="/producto/{{producto.ID}}">
-                        <div class="logo-img">
-                         <img  src="assets/image/{{producto.LOGO}}" width="200px" alt="" title="" class="img-responsive" />
-                      </div>
-                        <img src="assets/image/product/540x576.jpg" width="220px" alt=" Strategies for Acquiring Your Own Laptop " title="" class="img-responsive" />
-                      </a>
-                </div>
-                <div class="col-md-4">
-                  <div class="caption">
-                    <div class="oferta-inst" style="background: #fff;">
-                        <!-- va a variar 2 fotos 1."oferta instantania" ó 2."Instatania rapida"
-
-                         <a href=# > <img src="#" class=""></a>
-
-                        -->
+                  <a routerLink="/producto/{{producto.ID}}">
+                    <div class="logo-img">
+                      <img src="assets/image/{{producto.LOGO}}" width="200px" alt="" title="" class="img-responsive" />
                     </div>
-                    <h4><a routerLink="/producto/{{producto.ID}}"> {{producto.MARCA}} {{producto.MODELO}} </a></h4>
+                    <img src="assets/galerias/{{producto.JPG}}" width="220px" alt=" Strategies for Acquiring Your Own Laptop " title="" class="img-responsive"
+                    />
+                  </a>
+                </div>
+                <div class="col-md-4 pad-responsivo">
+                  <div class="caption">
+                    <div *ngIf="producto.OFERTA == 'Si'" class="oferta-inst" style="padding-left:0px;">
+            
+                      <img src="assets/image/oferta.png" class="">
+                      <!-- va a variar 2 fotos 1."oferta instantania" ó 2."Instatania rapida"
+            
+            
+            
+                                    -->
+            
+                    </div>
+                    <h4>
+                      <a routerLink="/producto/{{producto.ID}}"> {{producto.MARCA}} {{producto.MODELO}} </a>
+                    </h4>
                     <div>
                       <ul class="lista-producto">
-                          <li>Ancho: {{producto.ANCHO}}</li>
-                          <li>Pefil: {{producto.PERFIL}}</li>
-                          <li>Aro: {{producto.ARO}}</li>
-                          <li>Indice de carga: {{producto.CARGA}}</li>
-                          <li>Marca: {{producto.MARCA}}</li>
-                          <li>Instalación gratis: {{producto.INCLUYE_INSTALACION}}</li>
-                          <li>Despacho gratis: {{producto.DESPACHO}}</li>
+                        <li>Ancho: {{producto.ANCHO}}</li>
+                        <li>Pefil: {{producto.PERFIL}}</li>
+                        <li>Aro: {{producto.ARO}}</li>
+                        <li>Indice de carga: {{producto.CARGA}}</li>
+                        <li>Marca: {{producto.MARCA}}</li>
+                        <li>Instalación gratis: {{producto.INCLUYE_INSTALACION}}</li>
+                        <li>Despacho gratis: {{producto.DESPACHO}}</li>
                       </ul>
                     </div>
-
+            
                   </div>
-
+            
                 </div>
-        <div class="col-md-4">
-          <table class="table2 table table-precio" style="padding-right: 0px;">
-            <tr >
-              <td>Cantidad</td>
-              <td style="text-align:right;"> Valor unitario</td>
-
-            </tr>
-            <tr>
-              <td class="col-sm-6">
-
-                <select class="form-control" style="width: 75%;" #selectCantidad>
-                <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo">{{stock.nombre}}</option>
-              </select>
-              </td>
-              <td class="col-sm-6">
-                <p style="text-align:right; margin-bottom: 3px;" class="precio"><b>$ {{producto.PRECIO_FINAL}}</b></p>
-                <!--p style="text-align:right; font-size: 12px;">Ahorro $60,000</p-->
-              </td>
-            </tr>
-          </table>
-    <hr class="hr1">
-
-          <table class="table2 table table-precio">
-
-            <tr  >
-              <td class="col-sm-6">
-                <p class="total">Total</p>
-              </td>
-              <td style="text-align:right;" class="col-sm-6">
-                <h3 class="precio"><b>$ {{producto.PRECIO_FINAL}}</b></h3>
-
-              </td>
-            </tr>
-            <tr style="text-align:right; ">
-              <td><button type="submit" class="btn btn-default bremsen " routerLink="/producto/{{producto.ID}}">Comprar</button></td>
-              <td><button type="submit" class="btn btn-primary bremsen3 " (click)="agregarCarro(2,selectCantidad.value,producto.ID)" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-plus" aria-hidden="true"></i> Carro</button></td>
-            </tr>
-          </table>
-
-      </div>
-
-
+                <div class="col-md-4">
+                  <table class="table2 table table-precio" style="padding-right: 0px;">
+                    <tr>
+                      <td>Cantidad</td>
+                      <td style="text-align:right;"> Valor unitario</td>
+            
+                    </tr>
+                    <tr>
+                      <td class="col-sm-6">
+            
+                        <select class="form-control" style="width: 75%;" #selectCantidad>
+                          <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo" [selected]="stock.codigo == 4">{{stock.nombre}}</option>
+                        </select>
+            
+                        <div *ngIf="producto.STOCK[0].codigo==0" class="help-block">Sin Stock</div>
+                        <div *ngIf="cantidadValido" class="help-block">Debe seleccionar una cantidad</div>
+            
+                      </td>
+                      <td class="col-sm-6">
+                        <p style="text-align:right; margin-bottom: 3px;" class="precio">
+                          <b>{{producto.PRECIO_FINAL | number | currencyFormat}}</b>
+                        </p>
+                        <!--p style="text-align:right; font-size: 12px;">Ahorro $60,000</p-->
+                      </td>
+                    </tr>
+                  </table>
+                  <hr class="hr1">
+            
+                  <table class="table2 table table-precio">
+            
+                    <tr>
+                      <td class="col-sm-6">
+                        <p class="total" *ngIf="producto.STOCK[0].codigo>0">Total</p>
+                      </td>
+                      <td style="text-align:right;" class="col-sm-6">
+                        <h3 class="precio" *ngIf="producto.STOCK[0].codigo>0">
+                          <b> {{producto.PRECIO_FINAL * selectCantidad.value | number | currencyFormat }}</b>
+                        </h3>
+            
+                      </td>
+                    </tr>
+                    <tr style="text-align:right; ">
+                      <td>
+                        <button *ngIf="producto.STOCK[0].codigo>0" type="button" class="btn btn-default bremsen " (click)="agregarCarro(1,selectCantidad.value,producto.ID)">Comprar</button>
+                      </td>
+                      <td>
+            
+                        <button *ngIf="producto.STOCK[0].codigo==0" type="button" class="btn btn-default bremsen " routerLink="/producto/{{producto.ID}}">Ver producto</button>
+                        <button *ngIf="producto.STOCK[0].codigo>0" type="button" class="btn btn-primary" (click)="agregarCarro(2,selectCantidad.value,producto.ID)">
+                          <i class="fa fa-plus" aria-hidden="true"></i> Carro
+                        </button>
+                      </td>
+                    </tr>
+                  </table>
+            
+                </div>
               </div>
+            
+              <!--div #elem style="text-align: left !important;">
+                                  <div class="well">
+                                    <br>
+                                    <div class="col-md-12 text-right">
+                                      <h3>Sumado al carro</h3>
+                                      <hr>
+                                    </div>
+            
+                                     <div class="col-md-3 col-sm-12">
+                                         <img src="assets/image/product/540x576.jpg" width="220px" alt=" Strategies for Acquiring Your Own Laptop " title="" class="img-responsive">
+                                    </div>
+            
+                                    <div class="col-md-3 col-sm-12">
+                                        {{producto.MARCA}} {{producto.MODELO}}
+                                          <ul class="lista-producto">
+                                            <li>Medida: {{producto.MEDIDA}}</li>
+                                            <li>Instalación gratis: {{producto.INCLUYE_INSTALACION}}</li>
+                                            <li>Despacho gratis: {{producto.DESPACHO}}</li>
+                                            <li>Cantidad: {{selectCantidad.value}}</li>
+            
+                                        </ul>
+                                    </div>
+            
+            
+                                  </div>
+                           </div-->
+            
+            
+            
             </div>
 
 </div>
