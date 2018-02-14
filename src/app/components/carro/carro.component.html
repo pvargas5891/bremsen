@@ -196,10 +196,10 @@
 
 
                		<div class="checkbox">
-						<!--label>
+						<label>
               <input type="checkbox" [(ngModel)]="aceptaInstalacion1"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
-                <div *ngIf="!aceptaInstalacion1Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
-						</label-->
+                <div *ngIf="finstalacion1.submitted && !aceptaInstalacion1Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
+						</label>
 					  </div>
 
                   <button type="submit" class="btn btn-default">GUARDAR DATOS</button>
@@ -238,10 +238,10 @@
                   </div>
 
                		<div class="checkbox">
-						<!--label>
+						<label>
               <input type="checkbox"  [(ngModel)]="aceptaInstalacion2" > Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
-                 <div *ngIf="!aceptaInstalacion2Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
-						</label-->
+                 <div *ngIf="finstalacion2.submitted && !aceptaInstalacion2Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
+						</label>
 					  </div>
 
                   <button type="submit" class="btn btn-default">GUARDAR DATOS</button>
@@ -285,13 +285,13 @@
 
 
                		<div class="checkbox">
-						<!--label>
+						<label>
               <input type="checkbox" [(ngModel)]="aceptaInstalacion3"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
                  <div *ngIf="!aceptaInstalacion3Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
-						</label-->
+						</label>
 					  </div>
 
-                  <button *ngIf="_is.talleres.length > 0" type="submit" class="btn btn-default">GUARDA DATOS</button>
+                  <button *ngIf="_is.talleres.length > 0" type="submit" class="btn btn-default">GUARDAR DATOS</button>
                   <div *ngIf="_is.talleres.length == 0" class="help-block">No podemos ofrecer este servicio a su región</div>
                   </div>
              </form>
@@ -309,10 +309,10 @@
                            <div *ngIf="finstalacion4.submitted && !direccionInstalacion4.valid" class="help-block">Debe ingresar una dirección</div>
                     </div>
                     <div class="checkbox">
-                        <!--label>
+                        <label>
                           <input type="checkbox" [(ngModel)]="aceptaInstalacion4"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
-                           <div *ngIf="!aceptaInstalacion4Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
-                        </label-->
+                           <div *ngIf="finstalacion4.submitted && !aceptaInstalacion4Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
+                        </label>
                     </div>
                                       <button type="submit" class="btn btn-default">GUARDAR DATOS</button>
 
