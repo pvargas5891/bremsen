@@ -28,6 +28,7 @@ export class RegistroComponent {
     public nueva2: string="";
   public errorPass = false;
   public errorMsg: string = "";
+  public checkacepto:boolean=false;
   constructor(
     public _is: InformacionService,
     public users: UserService,
@@ -112,6 +113,11 @@ export class RegistroComponent {
       this.errorMsg="Las password no coinciden!";
       return;
     }
+      if (!this.checkacepto){
+        this.errorPass = true;
+        this.errorMsg = "Debe aceptar los terminos y condiciones!";
+        return;
+      }
     this.errorPass =false;
     this.cliente.password=this.nueva2;
 
