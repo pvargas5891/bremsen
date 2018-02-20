@@ -253,13 +253,17 @@ public instalacionTres: boolean = false;
      if(!this.validaRegion())
         return;
 
-     this.estado = true;
-     this.errorMessage="";
+    
      //this.calculaTotales();
-    console.debug(this.aceptaInstalacion1value);
     if(!this.aceptaInstalacion1value){
-      this.aceptaInstalacion1Valido=false;
+      this.aceptaInstalacion1Valido=true;
+      return;
+    }else{
+      this.aceptaInstalacion1Valido = false;
     }
+
+    this.estado = true;
+    this.errorMessage = "";
      this.guardaTemportalData();
 
   }
@@ -271,8 +275,15 @@ public instalacionTres: boolean = false;
     if(!this.validaRegion())
         return;
 
+    
+    if (!this.aceptaInstalacion2value) {
+      this.aceptaInstalacion2Valido = true;
+      return;
+    } else {
+      this.aceptaInstalacion2Valido = false;
+    }
     this.estado = true;
-    this.errorMessage="";
+    this.errorMessage = "";
      //this.calculaTotales();
      this.guardaTemportalData();
   }
@@ -291,9 +302,15 @@ public instalacionTres: boolean = false;
         return;
     }
     this.validaTalleres = false;
+    
+    if (!this.aceptaInstalacion3value) {
+      this.aceptaInstalacion3Valido = true;
+      return;
+    } else {
+      this.aceptaInstalacion3Valido = false;
+    }
     this.estado = true;
-
-    this.errorMessage="";
+    this.errorMessage = "";
      //this.calculaTotales();
      this.guardaTemportalData();
   }
@@ -307,9 +324,16 @@ public instalacionTres: boolean = false;
     if(!this.validaRegion())
         return;
 
-    this.estado = true;
-    this.errorMessage="";
+
     //
+    if (!this.aceptaInstalacion4value) {
+      this.aceptaInstalacion4Valido = true;
+      return;
+    } else {
+      this.aceptaInstalacion4Valido = false;
+    }
+    this.estado = true;
+    this.errorMessage = "";
       this.guardaTemportalData();
 
   }
