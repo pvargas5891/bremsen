@@ -67,7 +67,7 @@ export class CategoriaNoFiltradaComponent {
       this.mostrarLoading = true;
        this._productoService.getDetalleProductosFiltrado(this.detallesCategoria)
 	     .then( data => {
-           // console.debug(data);
+           //console.debug(data);
             this.detallesCategoria.totalProductos = data[0].TOTALPRODUCTOS;
              if(this.detallesCategoria.totalProductos<this.itemsPerPage){
               this.detallesCategoria.fin=this.detallesCategoria.totalProductos;
@@ -290,7 +290,33 @@ export class CategoriaNoFiltradaComponent {
   setAnoVehiculos = function (event: SelectedAutocompleteItem){
     this.detallesCategoria.ano = event.item.title;
   }
+    public validaNombreRequerido= false;
+    public validaEmailRequerido = false;
+    public nombreEnviar = "";
+    public emailEnviar = "";
+    public mensajeDeEnviado = "";
+  enviarDatosValida = function (){
+      if (this.nombreEnviar==""){
+        this.validaNombreRequerido=true;  
+        return;
+      }else{
+        this.validaNombreRequerido = false; 
+      }
 
+      if (this.emailEnviar == "") {
+          this.validaEmailRequerido = true;
+          return;
+      } else {
+          this.validaEmailRequerido = false;
+      }
+
+      this._productoService.solicitaProductos(this.nombreEnviar, this.emailEnviar)
+          .then(data => {
+             
+              this.mensajeDeEnviado="Se ha enviado tus datos, te contactaremos a la brevedad";
+          },
+              error => this.errorMessage = <any>error);
+  }
   public agregarCarro = function (indice,cantidad,producto) {
 
   //this.cantidadValido = false;

@@ -211,7 +211,34 @@ public agregarCarroAnterior = function (indice,cantidad,producto) {
       }
     );
   }
+  public validaNombreRequerido = false;
+  public validaEmailRequerido = false;
+  public nombreEnviar = "";
+  public emailEnviar = "";
+  public mensajeDeEnviado = "";
+  enviarDatosValida = function () {
+    if (this.nombreEnviar == "") {
+      this.validaNombreRequerido = true;
+      return;
+    } else {
+      this.validaNombreRequerido = false;
+    }
 
+    if (this.emailEnviar == "") {
+      this.validaEmailRequerido = true;
+      return;
+    } else {
+      this.validaEmailRequerido = false;
+    }
+
+    this._productoService.solicitaProductos(this.nombreEnviar, this.emailEnviar)
+      .then(data => {
+
+        this.mensajeDeEnviado = "Se ha enviado tus datos, te contactaremos a la brevedad";
+      },
+        error => this.errorMessage = <any>error);
+  }
+  
   public agregarCarro = function (indice,cantidad,producto) {
 
   //this.cantidadValido = false;

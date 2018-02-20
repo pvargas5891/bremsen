@@ -59,7 +59,20 @@ export class ProductosService {
              .catch(this.handleErrorPromise);
 
   }
+    public solicitaProductos(nombreEnviar, emailEnviar): Promise<any> {
 
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        const params = new URLSearchParams();
+        params.append('accion', 'enviarDatos');
+        params.append('nombre', nombreEnviar);
+        params.append('email', emailEnviar);
+
+        return this.http.get(this.url + 'productos.php?' + params.toString(), options).toPromise()
+            .then(this.extractData)
+            .catch(this.handleErrorPromise);
+
+    }
   public getDetalleProductosFiltrado(detalleCatProductos: DetalleCatProductos): Promise<any>{
 
       let headers = new Headers({ 'Content-Type': 'application/json' });

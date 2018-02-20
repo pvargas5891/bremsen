@@ -27,19 +27,19 @@ export class CarroComponent implements OnInit {
   public regionInstalacion: string;
   public ciudadInstalacion: string;
   public comunaInstalacion: string;
-  public aceptaInstalacion1value: string;
+  public aceptaInstalacion1value: boolean = false
   public nombresInstalacion1value: string;
   public direccionInstalacion1value: string;
-  public aceptaInstalacion2value: string;
+  public aceptaInstalacion2value: boolean = false
   public nombresInstalacion2value: string;
   public direccionInstalacion2value: string;
   public rutInstalacion2value:string;
-  public aceptaInstalacion3value: string;
+  public aceptaInstalacion3value: boolean = false
   public tallerAsociadovalue: string;
   public fechaInstalacionvalue: string;
   public bloqueHorariovalue: string;
   public direccionInstalacion4value: string;
-  public aceptaInstalacion4value: string;
+  public aceptaInstalacion4value: boolean = false
   public tipoInstalacion:number = 1;
 
   public costoNeumaticos:number = 0;
@@ -145,7 +145,7 @@ false
   var estado=true;
     if(typeof this.regionInstalacion == 'undefined'){
         this.regionValido = false;
-        this.errorMessage="Falta que seleccione la región de instalación";
+       // this.errorMessage="Falta que seleccione la región de instalación";
         estado = false;
       }else{
       this.regionValido = true;
@@ -153,7 +153,7 @@ false
       if(typeof this.ciudadInstalacion == 'undefined'){
        // this.regionValido = true;
         this.ciudadValido = false;
-        this.errorMessage="Falta que seleccione la ciudad de instalación";
+        //this.errorMessage="Falta que seleccione la ciudad de instalación";
         estado = false;
       }else{
         this.ciudadValido = true;
@@ -162,7 +162,7 @@ false
         //this.regionValido = true;
         //this.ciudadValido = true;
         this.comunaValido = false;
-        this.errorMessage="Falta que seleccione la comuna de instalación";
+        //this.errorMessage="Falta que seleccione la comuna de instalación";
         estado = false;
       }else{
         this.comunaValido = true;
@@ -177,19 +177,7 @@ false
 
 
 
-   public aceptaInstalacion1Valido: boolean = false;
-
-  guardaInstalacion1= function(){
-     this.tipoInstalacion = 1;
-     if(!this.validaRegion())
-        return;
-
-     this.estado = true;
-     this.errorMessage="";
-     //this.calculaTotales();
-     this.guardaTemportalData();
-
-  }
+   
 
 public instalacionUno: boolean = false;
 public instalacionDos: boolean = false;
@@ -257,6 +245,25 @@ public instalacionTres: boolean = false;
     });
  }
 
+
+ public aceptaInstalacion1Valido: boolean = false;
+
+  guardaInstalacion1= function(){
+     this.tipoInstalacion = 1;
+     if(!this.validaRegion())
+        return;
+
+     this.estado = true;
+     this.errorMessage="";
+     //this.calculaTotales();
+    console.debug(this.aceptaInstalacion1value);
+    if(!this.aceptaInstalacion1value){
+      this.aceptaInstalacion1Valido=false;
+    }
+     this.guardaTemportalData();
+
+  }
+  
   public aceptaInstalacion2Valido: boolean = false;
 
   guardaInstalacion2= function(){

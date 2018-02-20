@@ -197,7 +197,7 @@
 
                		<div class="checkbox">
 						<label>
-              <input type="checkbox" [(ngModel)]="aceptaInstalacion1"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
+              <input type="checkbox" [(ngModel)]="aceptaInstalacion1value"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
                 <div *ngIf="finstalacion1.submitted && !aceptaInstalacion1Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
 						</label>
 					  </div>
@@ -219,7 +219,7 @@
                  <form name="form" (ngSubmit)="finstalacion2.form.valid && guardaInstalacion2()" #finstalacion2="ngForm" novalidate>
                   <div class="form-group" [ngClass]="{ 'has-error': finstalacion2.submitted && !direccionInstalacion2.valid }">
                     <label for="ancho">Dirección</label>
-                    <input type="text" class="form-control" id="" placeholder="Calle y número"  #direccionInstalacion2="ngModel" name="direccionInstalacion2value" [(ngModel)]="direccionInstalacion2value" required>
+                    <input type="text" class="form-control" id="" placeholder="Calle y número"  #direccionInstalacion2="ngModel" name="direccionInstalacion2" [(ngModel)]="direccionInstalacion2value" required>
                      <div *ngIf="finstalacion2.submitted && !direccionInstalacion2.valid" class="help-block">Debe ingresar una dirección</div>
                   </div>
 
@@ -227,19 +227,19 @@
 
                   <div class="form-group" [ngClass]="{ 'has-error': finstalacion2.submitted && !nombresInstalacion2.valid }">
                     <label for="perfil">Nombre y apellido</label>
-                    <input type="text" class="form-control" id="perfil" placeholder="Nombre y apellido"  #nombresInstalacion2="ngModel" name="nombresInstalacion2value" [(ngModel)]="nombresInstalacion2value" required>
+                    <input type="text" class="form-control" id="perfil" placeholder="Nombre y apellido"  #nombresInstalacion2="ngModel" name="nombresInstalacion2" [(ngModel)]="nombresInstalacion2value" required>
                      <div *ngIf="finstalacion2.submitted && !nombresInstalacion2.valid" class="help-block">Debe ingresar nombre y apellido</div>
                   </div>
 
                   <div class="form-group" [ngClass]="{ 'has-error': finstalacion2.submitted && !rutInstalacion2.valid }">
                     <label for="perfil">R.U.T</label>
-                    <input type="text" class="form-control" id="perfil" placeholder="" [(ngModel)]="rutInstalacion2value" #rutInstalacion2="ngModel" name="rutInstalacion2value" required>
+                    <input type="text" class="form-control" [(ngModel)]="rutInstalacion2value"  #rutInstalacion2="ngModel" name="rutInstalacion2" required>
                      <div *ngIf="finstalacion2.submitted && !rutInstalacion2.valid" class="help-block">Debe ingresar un rut</div>
                   </div>
 
                		<div class="checkbox">
 						<label>
-              <input type="checkbox"  [(ngModel)]="aceptaInstalacion2" > Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
+              <input type="checkbox"  [(ngModel)]="aceptaInstalacion2value" > Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
                  <div *ngIf="finstalacion2.submitted && !aceptaInstalacion2Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
 						</label>
 					  </div>
@@ -259,7 +259,7 @@
                   <!--select class="form-control" #tallerAsociado="ngModel" name="tallerAsociadovalue" [(ngModel)]="tallerAsociadovalue" required>
 
                    </select-->
-                  <select *ngIf="_is.talleres.length > 0" class="form-control" #tallerAsociado="ngModel" name="tallerAsociadovalue" id="tallerAsociadovalue" [(ngModel)]="tallerAsociadovalue">
+                  <select *ngIf="_is.talleres.length > 0" class="form-control" #tallerAsociado="ngModel" name="tallerAsociado"  [(ngModel)]="tallerAsociadovalue">
                         <option  *ngFor="let taller of _is.talleres" [value]="taller[0]">{{taller[1]}}</option>
                     </select>
                     <div *ngIf="validaTalleres" class="help-block">Debe seleccionar un taller asociado</div>
@@ -275,7 +275,7 @@
 
              	  <div class="form-group" [ngClass]="{ 'has-error': finstalacion3.submitted && !bloqueHorario.valid }">
 						      	<label for="time" class="control-label">Bloque horario</label>
-							         <select class="form-control" [(ngModel)]="bloqueHorariovalue" name="bloqueHorariovalue" #bloqueHorario="ngModel" required>
+							         <select class="form-control" [(ngModel)]="bloqueHorariovalue" name="bloqueHorario" #bloqueHorario="ngModel" required>
                       <option>AM</option>
                       <option>PM</option>
 
@@ -286,8 +286,8 @@
 
                		<div class="checkbox">
 						<label>
-              <input type="checkbox" [(ngModel)]="aceptaInstalacion3"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
-                 <div *ngIf="!aceptaInstalacion3Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
+              <input type="checkbox" [(ngModel)]="aceptaInstalacion3value"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
+                 <div *ngIf="finstalacion3.submitted && !aceptaInstalacion3Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
 						</label>
 					  </div>
 
@@ -310,7 +310,7 @@
                     </div>
                     <div class="checkbox">
                         <label>
-                          <input type="checkbox" [(ngModel)]="aceptaInstalacion4"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
+                          <input type="checkbox" [(ngModel)]="aceptaInstalacion4value"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
                            <div *ngIf="finstalacion4.submitted && !aceptaInstalacion4Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
                         </label>
                     </div>

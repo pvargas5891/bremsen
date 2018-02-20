@@ -121,23 +121,25 @@
           <div class="row products-category">
 
 
-            <div class="col-sm-12" style="padding: 0px;"  *ngIf="detallesCategoria.totalProductos == 0">
-            <h2>No se han encontrado neumáticos para tu búsqueda</h2>
-            <p>Dejanos tus datos y nosotros seguiremos buscando por ti. Te escribiremos con las mejores opciones.</p>
-                <form>
-                  <div class="form-group required">
-                    <label for="">Nombre completo</label>
-                    <input type="text" class="form-control" id="">
-                  </div>
-
-                  <div class="form-group required">
-                    <label for="">Email</label>
-                    <input type="email" class="form-control" id="" >
-                  </div>
-              </form>
-                <button type="button" class="btn btn-default btn-lg">Enviar</button>
-                <br>
-          </div>
+            <div class="col-sm-12" style="padding: 0px;" *ngIf="detallesCategoria.totalProductos == '0'">
+              <h2>No se han encontrado neumáticos para tu búsqueda</h2>
+              <p>Dejanos tus datos y nosotros seguiremos buscando por ti. Te escribiremos con las mejores opciones.</p>
+            
+              <div class="form-group" [ngClass]="{ 'has-error': validaNombreRequerido }">
+                <label for="email">Nombre completo</label>
+                <input type="email" class="form-control" [(ngModel)]="nombreEnviar">
+                <div *ngIf="validaNombreRequerido" class="help-block">Nombre es requerido</div>
+              </div>
+            
+              <div class="form-group" [ngClass]="{ 'has-error': validaEmailRequerido }">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" [(ngModel)]="emailEnviar">
+                <div *ngIf="validaEmailRequerido" class="help-block">Email es requerido</div>
+              </div>
+              <div class="help-block">{{mensajeDeEnviado}}</div>
+              <button type="button" class="btn btn-default btn-lg" (click)="enviarDatosValida();">Enviar</button>
+              <br>
+            </div>
 
 
 

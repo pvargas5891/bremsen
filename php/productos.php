@@ -80,6 +80,12 @@ switch($accion){
 		echo html_entity_decode(json_encode($general, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));
 
 	break;
+	case 'enviarDatos':
+		$rs=$model->getProductosAll();
+		$general=parseador($rs);
+		echo html_entity_decode(json_encode($general, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));
+
+	break;
 	default:
 	echo "no pesca";
 	break;
