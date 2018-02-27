@@ -4,12 +4,12 @@ import { ProductosService } from '../../services/productos.service';
 import { DetalleCatProductos } from './detalleCatProductos';
 import {CreateNewAutocompleteGroup, SelectedAutocompleteItem, NgAutocompleteComponent} from "ng-auto-complete";
 import { CarroCompraService } from '../../services/carro-compra.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-categoria-no-filtrada',
   templateUrl: './categoria-no-filtrada.component.html',
 })
-export class CategoriaNoFiltradaComponent {
+export class CategoriaNoFiltradaComponent implements OnInit {
 
   public productos;
   public resultProductos;
@@ -41,7 +41,18 @@ export class CategoriaNoFiltradaComponent {
      this.getProductosFiltrado();
      this.getMarcaVehiculos();
      this.getAnchoVehiculos();
+      window.scrollTo(0, 0);
   }
+
+    ngOnInit() {
+        window.scrollTo(0, 0);
+        this.routeLink.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
+        });
+    }
   /*public getProductos = function (){
 
        this._productoService.getDetalleProductos()

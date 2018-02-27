@@ -48,7 +48,7 @@ export class SearchComponent {
 
       this.detallesCategoria.fin="10";
       this.getProductosFiltrado();
-
+    window.scrollTo(0, 0);
   }
 
   public getProductosFiltrado = function (){

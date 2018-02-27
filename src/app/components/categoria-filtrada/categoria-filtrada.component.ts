@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ProductosService } from '../../services/productos.service';
 import { DetalleCatProductos } from '../categoria-no-filtrada/detalleCatProductos';
 import { CarroCompraService } from '../../services/carro-compra.service';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-categoria-filtrada',
   templateUrl: './categoria-filtrada.component.html',
   styles: []
 })
-export class CategoriaFiltradaComponent {
+export class CategoriaFiltradaComponent implements OnInit {
 
     public productos;
     errorMessage: String;
@@ -57,9 +57,17 @@ export class CategoriaFiltradaComponent {
       this.detallesCategoria.inicio="1";
       this.detallesCategoria.fin="10";
       this.getProductosFiltrado();
+    window.scrollTo(0, 0);
 
   }
-
+  ngOnInit() {
+    this.routeLink.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0)
+    });
+  }
   public getProductosFiltrado = function (){
       this.mostrarLoading = true;
        this._productoService.getDetalleProductosFiltrado(this.detallesCategoria)

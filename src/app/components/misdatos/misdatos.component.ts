@@ -51,6 +51,8 @@ export class MisdatosComponent implements OnInit {
           }else{
             this.route.navigate(['/home']);
           }
+
+   window.scrollTo(0, 0);
     }
 
   ngOnInit() {

@@ -68,7 +68,7 @@ error = '';
               console.debug(error);
           })
           ;
-
+    window.scrollTo(0, 0);
   }
 
      cambiaCiudad(selectedRegion: string): void{

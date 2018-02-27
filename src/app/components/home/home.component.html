@@ -155,11 +155,10 @@ slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos"
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <img class="img-responsive center-block" src="assets/image/baner-chico.jpg">
-            <h3>Lorem ipsum dolor sit amet. </h3>
-            <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
-            <button type="submit" class="btn btn-primary  ">Leer</button>
-
+            <img class="img-responsive center-block" src="{{blogs[0].fotoprincipal}}">
+            <h3>{{blogs[0].titulo}} </h3>
+            <p>{{blogs[0].contenido | slice:0:100}}</p>
+            <button type="button" class="btn btn-primary " routerLink="/contenido/{{blogs[0].id}}">Leer</button>
 
         </div>
 
@@ -205,7 +204,7 @@ slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos"
            <a routerLink="/search/marca/michelin"> <img class="img-responsive center-block" src="assets/image/michelin.png"></a>
       </div>
       <div class="col-md-3" style="padding: 15px; padding-bottom: 30px;">
-           <a routerLink="/search/marca/BFGoodrich"> <img class="img-responsive center-block" src="assets/image/BFGoodrich.png"></a>
+           <a routerLink="/search/marca/BF Goodrich"> <img class="img-responsive center-block" src="assets/image/BFGoodrich.png"></a>
       </div>
       <div class="col-md-3" style="padding: 15px; padding-bottom: 30px;">
           <a routerLink="/search/marca/falken">  <img class="img-responsive center-block" src="assets/image/falken.png"></a>

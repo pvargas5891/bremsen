@@ -97,11 +97,11 @@ false
           }
 
       localStorage.setItem('instalacionTemporal', null);
-
+    window.scrollTo(0, 0);
    }
 
   ngOnInit() {
-
+    window.scrollTo(0, 0);
 
   }
 

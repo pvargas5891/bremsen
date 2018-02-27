@@ -19,6 +19,7 @@ export class BremsenComponent implements OnInit {
         console.debug(this.productos);
       },
       error => this.errorMessage = <any>error);
+    window.scrollTo(0, 0);
    }
 
   ngOnInit() {

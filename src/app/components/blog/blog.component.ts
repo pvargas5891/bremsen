@@ -12,7 +12,7 @@ export class BlogComponent{
   constructor(public _is: InformacionService, 
     private route: ActivatedRoute,
     private routeLink: Router) { 
-
+    window.scrollTo(0, 0);
     _is.getBlog().then(
       data => {
        

@@ -27,7 +27,7 @@ export class HomeComponent {
   public anchoGroup = [];
   public perfilGroup = [];
   public aroGroup = [];
-
+  public blogs: any[] = [];
   public productos = [];
 
    @ViewChild(NgAutocompleteComponent) public completer: NgAutocompleteComponent;
@@ -43,6 +43,14 @@ export class HomeComponent {
     this.activaSugeridos();
     this.getMarcaVehiculos();
     this.getAnchoVehiculos();
+
+      _is.getBlog().then(
+          data => {
+
+              this.blogs = data;
+
+          });
+
   }
   public activaSugeridos = function (){
     console.debug('sugerido');

@@ -14,8 +14,8 @@
           <div class="blog">
 
           <div class="blog-entry" *ngFor="let blog of blogs"> 
-  <div class="image"> <a href="#"><img class="img-responsive" src="{{blog.fotoprincipal}}" alt=""></a> </div>
-  <h3 class="post_title_blog"><a href="#">{{blog.titulo}}</a></h3>
+  <div class="image"> <a href="javascript:void(0)" routerLink="/contenido/{{blog.id}}"><img class="img-responsive" src="{{blog.fotoprincipal}}" alt=""></a> </div>
+  <h3 class="post_title_blog"><a href="javascript:void(0)" routerLink="/contenido/{{blog.id}}">{{blog.titulo}}</a></h3>
   <p class="description">{{blog.contenido | slice:0:100}}</p>
   <a routerLink="/contenido/{{blog.id}}" class="btn btn-primary">Leer más</a> </div>
 

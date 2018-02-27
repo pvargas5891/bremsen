@@ -24,6 +24,7 @@ public totalAComprar:number = 0;
               private _productoService: ProductosService,
               private _carroCompra: CarroCompraService,
               private sanitizer: DomSanitizer) {
+    window.scrollTo(0, 0);
 }
     ngOnInit() {
        this.route.params.subscribe( parametros =>{
@@ -31,6 +32,7 @@ public totalAComprar:number = 0;
           this.parametros = parametros;
           this.getProductoById();
       });
+      window.scrollTo(0, 0);
   }
 public sanitizaUrlExtern(url){
   return this.sanitizer.bypassSecurityTrustResourceUrl(url);

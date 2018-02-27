@@ -52,12 +52,18 @@ switch($accion){
 		$rs=$model->getAnchoVehiculos();
 		$i=1;
 		while(!$rs->EOF){
+			if($rs->fields['ANCHO']!='6.50'){
 			$general2= array();	
 			$general2['title']=number_format($rs->fields['ANCHO'],0,'.','.');
+			//if($general2['title']==7){
+			//	$general2['title']=6.50;
+			//}
 			$general2['id']=$i;
-			$rs->movenext();
+			
 			$i++;
 			$general[]=$general2;
+			}
+			$rs->movenext();
 		}
 		
 	break;
