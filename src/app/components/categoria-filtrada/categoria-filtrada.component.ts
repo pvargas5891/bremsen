@@ -78,6 +78,8 @@ export class CategoriaFiltradaComponent implements OnInit {
               this.detallesCategoria.fin=this.detallesCategoria.totalProductos;
             }
             this.detallesCategoria.todasMarcas=data[1];
+         this.atributoRadio = data[2];
+         this.opcionesRadio = data[3];
 
 		    },
         error => this.errorMessage = <any>error);

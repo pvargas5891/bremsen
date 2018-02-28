@@ -9,6 +9,9 @@ import { ProductosService } from '../../services/productos.service';
 export class BremsenComponent implements OnInit {
   public productos = [];
   public errorMessage: String;
+  public nombreCompleto: String;
+  public email:String;
+  public mensaje:String;
   constructor(public _productoService: ProductosService) {
 
     this._productoService.getProductosHome('sugerido')
@@ -23,6 +26,18 @@ export class BremsenComponent implements OnInit {
    }
 
   ngOnInit() {
+  }
+  public estadoEnvio: boolean = false;
+  enviaCorreo =function(){
+    this._productoService.enviacontacto(this.nombreCompleto, this.email, this.mensaje).then(
+      data => {
+        this.estadoEnvio = true;
+      },
+      error =>{
+        console.debug(error);
+        this.estadoEnvio = true;
+      }
+    );
   }
 
 }

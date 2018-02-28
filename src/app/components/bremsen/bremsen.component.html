@@ -190,22 +190,31 @@ owl-carousel .product-thumb {
                 <div class="pad50"></div>
 
                 <h3 class="subtitle" style="color: #fff !important;">Contáctanos</h3>
-                <form class="form-horizontal">
+            
+                    <form name="form" class="form-horizontal" (ngSubmit)="f.form.valid && enviaCorreo()" #f="ngForm" novalidate>
                     <fieldset>
 
-                        <div class="form-group required">
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !nombreCompleto1.valid }">
                             <div class="col-md-10 col-sm-9">
-                                <input type="text" name="name" value="" id="input-name" class="form-control form-controlContacto" placeholder="Nombre" />
+                               
+                                    <input type="text" class="form-control form-controlContacto" id="nombreCompleto1" name="nombreCompleto1" #nombreCompleto1="ngModel" placeholder="Nombre Completo" [(ngModel)]="nombreCompleto" required>
+                                    
+                                    <div *ngIf="f.submitted && !nombreCompleto1.valid" class="help-block">Nombre completo es requerido</div>
                             </div>
                         </div>
-                        <div class="form-group required">
+                        
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email1.valid }">
                             <div class="col-md-10 col-sm-9">
-                                <input type="text" name="email" value="" id="input-email" class="form-control form-controlContacto" placeholder="Email" />
+                               
+                                <input type="email" class="form-control form-controlContacto" id="email1" name="email1" [(ngModel)]="email" #email1="ngModel" placeholder="Email" required>
+                                <div *ngIf="f.submitted && !email1.valid" class="help-block">Email es requerido</div>
                             </div>
                         </div>
-                        <div class="form-group required">
+
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !mensaje1.valid }">
                             <div class="col-md-10 col-sm-9">
-                                <textarea name="enquiry" rows="4" id="input-enquiry" class="form-control form-controlContacto" placeholder="Mensaje"></textarea>
+                                <textarea rows="4" id="mensaje1" name="mensaje1" [(ngModel)]="mensaje" #mensaje1="ngModel"  class="form-control form-controlContacto" placeholder="Mensaje" required></textarea>
+                                <div *ngIf="f.submitted && !mensaje1.valid" class="help-block">Mensaje es requerido</div>
                             </div>
                         </div>
                     </fieldset>
@@ -214,6 +223,7 @@ owl-carousel .product-thumb {
                             <input class="btn btn-default" type="submit" value="Contáctanos" />
                         </div>
                     </div>
+                    <div *ngIf="estadoEnvio" style="color: #fff !important;"> Hemos recibido tus datos, te contactaremos a la brevedad. </div>
                 </form>
 
 

@@ -77,10 +77,95 @@ switch($accion){
 			$rs->movenext();
 		}
 		$general[]=$general2;
+
+
+		$general2=array();
+		$rs=$model->getProductosFilter($_GET);
+		$general2temp=array();
+		while(!$rs->EOF){	
+			if($rs->fields['RUNFLAT']=='Si')		
+				$general2temp[]='Alta Seguridad (Runflat)';		
+			if($rs->fields['4x4']=='Si')		
+				$general2temp[]='4x4 (M/T)';
+			if($rs->fields['carretera']=='Si')		
+				$general2temp[]='Carretera (H/T)';			
+			$rs->movenext();
+		}
+		$general2temp=array_unique($general2temp);
+		//print_r($general2temp);
+		foreach($general2temp as $valor){
+			$general2[]=$valor;
+		}
+		
+		$general[]=$general2;
+
+		$general2=array();
+		$rs=$model->getProductosFilter($_GET);
+		$general2temp=array();
+		while(!$rs->EOF){	
+			if($rs->fields['OFERTA']=='Si')		
+				$general2temp[]='Oferta';		
+					
+			$rs->movenext();
+		}
+		$general2temp=array_unique($general2temp);
+		//print_r($general2temp);
+		foreach($general2temp as $valor){
+			$general2[]=$valor;
+		}
+
+		$general[]=$general2;
+
 		echo html_entity_decode(json_encode($general, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));
 
 	break;
 	case 'enviarDatos':
+		$rs=$model->getProductosAll();
+		$general=parseador($rs);
+		echo html_entity_decode(json_encode($general, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));
+
+	break;
+	case 'enviacontacto':
+	 	//params.append('nombre', nombre);
+        //params.append('email', email);
+        //params.append('mensaje', mensaje);
+		//params.append('accion', 'enviacontacto');
+$mail->From = "ventas@bremsen.cl";
+$mail->FromName = "Contacto Bremsen Web";
+$mail->Subject = "Contacto Via Web";
+$body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
+
+<title>Contacto</title>
+
+<body style="margin:0; padding:0; background-position:top center; font-family:Arial, Helvetica, sans-serif">';
+$table="Contacto Via Web:<br>";
+$table.="Nombre Completo:".$_GET['nombre']."<br>";
+$table.="Email:".$_GET['email']."<br>";
+$table.="Mensaje:".$_GET['mensaje']."<br>";
+$body .= $table;
+$body .= "</body>
+</html>";
+
+$mail->Body = $body;
+$mail->AddAddress('ventas@bremsen.cl', 'ventas@bremsen.cl');
+$mail->Send();
+$mail->ClearAddresses();
+
+$mail->Body = $body;
+$mail->AddAddress('pvargas.figueroa@gmail.com', 'pvargas.figueroa@gmail.com');
+$mail->Send();
+$mail->ClearAddresses();
+
+		$rs=$model->getProductosAll();
+		$general=parseador($rs);
+		echo html_entity_decode(json_encode($general, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));
+
+	break;
+	case 'enviaconfirmacion':
 		$rs=$model->getProductosAll();
 		$general=parseador($rs);
 		echo html_entity_decode(json_encode($general, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));

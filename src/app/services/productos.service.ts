@@ -121,13 +121,14 @@ export class ProductosService {
 
   }
 
-    public enviaConfirmacion(nombre:string,email:string): Promise<any> {
+    public enviaConfirmacion(nombre:string,email:string,producto:string): Promise<any> {
 
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         const params = new URLSearchParams();
         params.append('nombre', nombre); 
         params.append('email', email);
+        params.append('producto', producto);
         params.append('accion', 'enviaconfirmacion');
 
         return this.http.get(this.url + 'productos.php?' + params.toString(), options).toPromise()
@@ -135,7 +136,21 @@ export class ProductosService {
             .catch(this.handleErrorPromise);
 
     }
+    public enviacontacto(nombre: string, email: string, mensaje: string): Promise<any> {
 
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        const params = new URLSearchParams();
+        params.append('nombre', nombre);
+        params.append('email', email);
+        params.append('mensaje', mensaje);
+        params.append('accion', 'enviacontacto');
+
+        return this.http.get(this.url + 'productos.php?' + params.toString(), options).toPromise()
+            .then(this.extractData)
+            .catch(this.handleErrorPromise);
+
+    }
    private extractData(res: Response) {
         //console.debug(res);
         let body = res.json();

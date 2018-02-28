@@ -179,7 +179,7 @@ public emailclineteValue:string = "";
 public estadoEnvio:boolean = false;
   public enviaCorreoConfirmacion = function(){
       
-    this._productoService.enviaConfirmacion(this.nombreCompletoValue, this.emailclineteValue).then(
+    this._productoService.enviaConfirmacion(this.nombreCompletoValue, this.emailclineteValue, this.producto.ID).then(
       data=>{
         this.estadoEnvio = true;
       }
