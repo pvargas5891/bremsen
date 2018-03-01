@@ -132,15 +132,13 @@ slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos"
       <div class="image" style="line-height: 40px;"><a routerLink="/producto/{{producto.ID}}"><img src="assets/galerias/{{producto.JPG}}" class="img-responsive responsivo" /></a></div>
       <div class="caption">
           <h4><a routerLink="/producto/{{producto.ID}}">{{producto.MARCA}} {{producto.MODELO}}</a></h4>
+          <h6>{{producto.MEDIDA}}</h6>
           <p class="price">{{producto.PRECIO_FINAL | number | currencyFormat}} </p>
       </div>
       <div>
         <button class="btn btn-primary btn-sm" routerLink="/producto/{{producto.ID}}"><span>Ver producto</span></button>
       </div>
     </div>
-
-
-
  </owl-carousel>
 
 

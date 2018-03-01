@@ -187,65 +187,97 @@ public instalacionTres: boolean = false;
   public valorinstalacionDos: number = 0;
   public valorinstalacionTres: number = 0;
   public valorinstalacionCuatro: number=0;
+  public getRandomArbitrary = function(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
  public seleccionaInstalacion = function(comuna){
    this.validaRegion();
-   this._is.getInstalacionByComuna(comuna, this.id).then(data => {
-          console.debug(data);
-          this.instalacionUno = false;
-          this.instalacionDos = false;
-          this.instalacionTres = false;
-          this.instalacionCuatro = false;
-          this.valorinstalacionUno = 0;
-          this.valorinstalacionDos = 0;
-          this.valorinstalacionTres = 0;
-          this.valorinstalacionCuatro = 0;
-          if(data.length==0){
-             this.activaInstalacion=true;
-             this.activaErrorNoDisponible = true;
-          }
-          var activado=0;
-          for(var i=0; i<data.length;i++){
-              if(data[i].tipo=='1'){
-                this.activaInstalacion=true;
-                this.instalacionUno=true;
-                this.valorinstalacionUno = data[i].valor;
-                if(activado==0){
-                  this.tipoInstalacionBoton(1);
-                  activado = 1;
-                }
-              }
-            if (data[i].tipo=='2'){
-                this.activaInstalacion=true;
-                this.instalacionDos=true;
-              this.valorinstalacionDos = data[i].valor;
-              if (activado == 0) {
-                this.tipoInstalacionBoton(2);
-                activado = 1;
-              }
-              }
-            if (data[i].tipo=='3'){
-                this.activaInstalacion=true;
-                this.instalacionTres=true;
-              this.valorinstalacionTres = data[i].valor;
-              if (activado == 0) {
-                this.tipoInstalacionBoton(3);
-                activado = 1;
-              }
-              }
-            if (data[i].tipo=='4'){
-                this.activaInstalacion=true;
-                this.instalacionCuatro=true;
-              this.valorinstalacionCuatro = data[i].valor;
-              if (activado == 0) {
-                this.tipoInstalacionBoton(4);
-                activado = 1;
-              }
-              }
-          }
-    });
+   //alert(this.id);
+   if(typeof this.id === 'undefined'){
+      alert("nodefinido");
+
+    var codigotempusuario = this.getRandomArbitrary(50000, 100000);
+    var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
+    //console.debug(carroTemporal);
+    if (carroTemporal != null) {
+      for (var i = 0; i < carroTemporal.length; i++) {
+        this.carro.agregarCarro(carroTemporal[i].cantidad, carroTemporal[i].id_producto, codigotempusuario)
+          .then(
+            data => {
+              this.generainstalacion(comuna, codigotempusuario);
+
+            },
+            error => {
+
+            }
+          );
+      }
+
+    }
+   }else{
+     this.generainstalacion(comuna,this.id);
+   }
+   
  }
 
+public generainstalacion = function(comuna, usuario){
 
+  this._is.getInstalacionByComuna(comuna, usuario).then(data => {
+    console.debug(data);
+    this.instalacionUno = false;
+    this.instalacionDos = false;
+    this.instalacionTres = false;
+    this.instalacionCuatro = false;
+    this.valorinstalacionUno = 0;
+    this.valorinstalacionDos = 0;
+    this.valorinstalacionTres = 0;
+    this.valorinstalacionCuatro = 0;
+    if (data.length == 0) {
+      this.activaInstalacion = true;
+      this.activaErrorNoDisponible = true;
+    }
+    var activado = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].tipo == '1') {
+        this.activaInstalacion = true;
+        this.instalacionUno = true;
+        this.valorinstalacionUno = data[i].valor;
+        if (activado == 0) {
+          this.tipoInstalacionBoton(1);
+          activado = 1;
+        }
+      }
+      if (data[i].tipo == '2') {
+        this.activaInstalacion = true;
+        this.instalacionDos = true;
+        this.valorinstalacionDos = data[i].valor;
+        if (activado == 0) {
+          this.tipoInstalacionBoton(2);
+          activado = 1;
+        }
+      }
+      if (data[i].tipo == '3') {
+        this.activaInstalacion = true;
+        this.instalacionTres = true;
+        this.valorinstalacionTres = data[i].valor;
+        if (activado == 0) {
+          this.tipoInstalacionBoton(3);
+          activado = 1;
+        }
+      }
+      if (data[i].tipo == '4') {
+        this.activaInstalacion = true;
+        this.instalacionCuatro = true;
+        this.valorinstalacionCuatro = data[i].valor;
+        if (activado == 0) {
+          this.tipoInstalacionBoton(4);
+          activado = 1;
+        }
+      }
+    }
+  });
+
+}
  public aceptaInstalacion1Valido: boolean = false;
 
   guardaInstalacion1= function(){
