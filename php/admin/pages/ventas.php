@@ -177,14 +177,14 @@ echo '
     $tipoInstalacion="No Aplica";
     $detalleCompra="";
     if($rsDetalle->fields['tipoInstalacion']==1){
-      $tipoInstalacion="Instalación a domicilio";
-      $detalleCompra="<br><strong>Dirección</strong>:".$rsDetalle->fields['direccionInstalacion1value'];
-      $detalleCompra.="<br><strong>Nombre</strong>:".$rsDetalle->fields['nombresInstalacion1value'];
+      $tipoInstalacion="Instalación en talleres";
+      $detalleCompra="<br><strong>Taller</strong>:".$model->extraeNombreTalleres($rsDetalle->fields['tallerAsociadovalue']);
+      $detalleCompra.="<br><strong>Fecha instalación</strong>:".$rsDetalle->fields['fechaInstalacionvalue'];
+      $detalleCompra.="<br><strong>Bloque horario</strong>:".$rsDetalle->fields['bloqueHorariovalue'];
       $detalleCompra.="<br><strong>Region</strong>:".$model->extraeNombreRegion($rsDetalle->fields['regionInstalacion']);
       $detalleCompra.="<br><strong>Ciudad</strong>:".$model->extraeNombreCiudad($rsDetalle->fields['ciudadInstalacion']);
-      $detalleCompra.="<br><strong>Comuna:</strong>".$model->extraeNombreComuna($rsDetalle->fields['comunaInstalacion']);
-
-    }  
+      $detalleCompra.="<br><strong>Comuna</strong>:".$model->extraeNombreComuna($rsDetalle->fields['comunaInstalacion']);
+   }  
     if($rsDetalle->fields['tipoInstalacion']==2){
       $tipoInstalacion="Retiramos tu auto";
       $detalleCompra="<br><strong>Dirección</strong>:".$rsDetalle->fields['direccionInstalacion2value'];
@@ -195,13 +195,13 @@ echo '
       $detalleCompra.="<br><strong>Comuna</strong>:".$model->extraeNombreComuna($rsDetalle->fields['comunaInstalacion']);
     }  
     if($rsDetalle->fields['tipoInstalacion']==3){
-      $tipoInstalacion="Instalación en talleres";
-      $detalleCompra="<br><strong>Taller</strong>:".$model->extraeNombreTalleres($rsDetalle->fields['tallerAsociadovalue']);
-      $detalleCompra.="<br><strong>Fecha instalación</strong>:".$rsDetalle->fields['fechaInstalacionvalue'];
-      $detalleCompra.="<br><strong>Bloque horario</strong>:".$rsDetalle->fields['bloqueHorariovalue'];
+      $tipoInstalacion="Instalación a domicilio";
+      $detalleCompra="<br><strong>Dirección</strong>:".$rsDetalle->fields['direccionInstalacion3value'];
+      $detalleCompra.="<br><strong>Nombre</strong>:".$rsDetalle->fields['nombresInstalacion3value'];
       $detalleCompra.="<br><strong>Region</strong>:".$model->extraeNombreRegion($rsDetalle->fields['regionInstalacion']);
       $detalleCompra.="<br><strong>Ciudad</strong>:".$model->extraeNombreCiudad($rsDetalle->fields['ciudadInstalacion']);
-      $detalleCompra.="<br><strong>Comuna</strong>:".$model->extraeNombreComuna($rsDetalle->fields['comunaInstalacion']);
+      $detalleCompra.="<br><strong>Comuna:</strong>".$model->extraeNombreComuna($rsDetalle->fields['comunaInstalacion']);
+
     }  
     if($rsDetalle->fields['tipoInstalacion']==4){
       $tipoInstalacion="Despacho a domicilio"; 

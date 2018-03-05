@@ -29,7 +29,7 @@ export class HomeComponent {
   public aroGroup = [];
   public blogs: any[] = [];
   public productos = [];
-
+  public tieneBlog:boolean =false;
    @ViewChild(NgAutocompleteComponent) public completer: NgAutocompleteComponent;
 
 @ViewChild('owlElement') owlElement: OwlCarousel
@@ -39,14 +39,15 @@ export class HomeComponent {
     private router: Router,
     public _productoService: ProductosService
   ) {
-
+    console.debug(this.blogs);
     this.activaSugeridos();
     this.getMarcaVehiculos();
     this.getAnchoVehiculos();
 
       _is.getBlog().then(
           data => {
-
+              this.tieneBlog =true;
+            console.debug(data);
               this.blogs = data;
 
           });

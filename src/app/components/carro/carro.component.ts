@@ -28,8 +28,8 @@ export class CarroComponent implements OnInit {
   public ciudadInstalacion: string;
   public comunaInstalacion: string;
   public aceptaInstalacion1value: boolean = false
-  public nombresInstalacion1value: string;
-  public direccionInstalacion1value: string;
+  public nombresInstalacion3value: string;
+  public direccionInstalacion3value: string;
   public aceptaInstalacion2value: boolean = false
   public nombresInstalacion2value: string;
   public direccionInstalacion2value: string;
@@ -194,7 +194,7 @@ public instalacionTres: boolean = false;
    this.validaRegion();
    //alert(this.id);
    if(typeof this.id === 'undefined'){
-      alert("nodefinido");
+     // alert("nodefinido");
 
     var codigotempusuario = this.getRandomArbitrary(50000, 100000);
     var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
@@ -381,8 +381,8 @@ public generainstalacion = function(comuna, usuario){
         ciudadInstalacion: this.ciudadInstalacion,
         comunaInstalacion: this.comunaInstalacion,
         aceptaInstalacion1value: this.aceptaInstalacion1value,
-        nombresInstalacion1value: this.nombresInstalacion1value,
-        direccionInstalacion1value: this.direccionInstalacion1value,
+        nombresInstalacion3value: this.nombresInstalacion3value,
+        direccionInstalacion3value: this.direccionInstalacion3value,
         aceptaInstalacion2value: this.aceptaInstalacion2value,
         nombresInstalacion2value: this.nombresInstalacion2value,
         direccionInstalacion2value: this.direccionInstalacion2value,

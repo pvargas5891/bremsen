@@ -64,8 +64,8 @@ export class CarroCompraService {
       params.append('ciudadInstalacion',carro.ciudadInstalacion);
       params.append('comunaInstalacion',carro.comunaInstalacion);
       params.append('aceptaInstalacion1value',carro.aceptaInstalacion1value);
-      params.append('nombresInstalacion1value',carro.nombresInstalacion1value);
-      params.append('direccionInstalacion1value',carro.direccionInstalacion1value);
+      params.append('nombresInstalacion3value',carro.nombresInstalacion3value);
+      params.append('direccionInstalacion3value',carro.direccionInstalacion3value);
       params.append('aceptaInstalacion2value',carro.aceptaInstalacion2value);
       params.append('nombresInstalacion2value',carro.nombresInstalacion2value);
       params.append('direccionInstalacion2value',carro.direccionInstalacion2value);

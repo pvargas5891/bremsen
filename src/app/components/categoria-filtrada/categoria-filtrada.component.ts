@@ -14,8 +14,8 @@ export class CategoriaFiltradaComponent implements OnInit {
     public productos;
     errorMessage: String;
     public totalStock: number = 10;
-    public atributoRadio: string[]=['4x4','Runflat','Oferta','Carretera'];
-    public opcionesRadio: string[]=['Ofertas'];
+    public atributoRadio: string[]=[];
+    public opcionesRadio: string[]=[];
     public detallesCategoria = new DetalleCatProductos();
     public param1: string;
     public param2: string;
@@ -140,11 +140,17 @@ export class CategoriaFiltradaComponent implements OnInit {
       this.getProductosFiltrado();
   }
   public filtroAtributo = function(atributo){
+    if(atributo === 'all'){
+        atributo = '';
+      }
     this.detallesCategoria.atributo=atributo;
       this.getProductosFiltrado();
   }
   public filtroOpciones = function(opcion){
-    this.detallesCategoria.opcion=opcion;
+    if(opcion === 'all'){
+        opcion = '';
+      }
+    this.detallesCategoria.opciones=opcion;
     this.getProductosFiltrado();
   }
 

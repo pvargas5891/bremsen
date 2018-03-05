@@ -150,7 +150,7 @@ slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos"
 <br>
 </div>
 
-<div class="container">
+<div class="container" *ngIf="tieneBlog">
     <div class="row">
         <div class="col-md-4">
             <img class="img-responsive center-block" src="{{blogs[0].fotoprincipal}}">

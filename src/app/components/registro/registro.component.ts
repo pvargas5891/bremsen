@@ -151,6 +151,28 @@ export class RegistroComponent {
 	   this.estado = false;
    }
 
+   public iramisdatos = function(){
+    this.model.username=this.cliente.email;
+    this.model.password=this.cliente.password;
+    this.authenticationService.login(this.model.username, this.model.password)
+            .then(result => {
+                //console.debug(result);
+                if (result === true) {
+                    // login successful
+                    //this.router.navigate(['/']);
+                  var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                  //console.debug(currentUser);
+                    //this.nombreCliente = currentUser.usuario.nombre;
+                   //this.autenticado = true;
+                    this.loading2 = false;
+                    this.route.navigate(['/misdatos']);
+                } else {
+                    // login failed
+                    this.error2 = 'Usuario y password son incorrectos';
+                    this.loading2 = false;
+                }
+            });
+   }
    login() {
         this.loading2 = true;
         this.authenticationService.login(this.model.username, this.model.password)

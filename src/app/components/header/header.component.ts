@@ -45,9 +45,11 @@ export class HeaderComponent implements DoCheck{
                 this.id = currentUser.usuario.id;
                 this.getCarroAll();
             }
+          }else{
+            this.getCarroAllSinSesion();
           }
-           localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'muerto' }));
-           localStorage.setItem('carroUserTemporal', null);
+          // localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'muerto' }));
+           //localStorage.setItem('carroUserTemporal', null);
          }
           public activaLogin(){
             if(this.muestraLogin){

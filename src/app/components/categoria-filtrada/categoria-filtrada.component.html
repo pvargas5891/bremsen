@@ -40,6 +40,12 @@
           <h3 class="subtitle">Atributo</h3>
 
           <div class="box-category">
+              <div class="radio">
+                  <label>
+                    <input type="radio" name="atributomodel" (click)="filtroAtributo('all')" selected>&nbsp;&nbsp;
+                    Todas
+                  </label>
+                </div>
               <div class="radio" *ngFor="let atributo of atributoRadio">
                 <label>
                   <input type="radio" [value]="atributo" name="atributomodel" (click)="filtroAtributo(atributo)">&nbsp;&nbsp;
@@ -52,6 +58,12 @@
           <h3 class="subtitle">Opciones</h3>
 
           <div class="box-category">
+              <div class="radio">
+                  <label>
+                    <input type="radio" name="opcionesmodel" (click)="filtroOpciones('all')" selected="true">&nbsp;&nbsp;
+                    Todas
+                  </label>
+                </div>
               <div class="radio" *ngFor="let opcion of opcionesRadio">
                 <label>
                   <input type="radio" [value]="opcion" name="opcionesmodel" (click)="filtroOpciones(opcion)">&nbsp;&nbsp;

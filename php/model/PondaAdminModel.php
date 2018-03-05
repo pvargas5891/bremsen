@@ -123,7 +123,7 @@ class PondaAdminModel
 	}
 	 
     function getProductosFilter($get,$tipo="*"){
-	  	
+	  //	print_r($get);
       $sql="select ".$tipo." from productos where 1=1 ";
 		//if($get['marca']!='undefined')
 			//$sql.=" and lower(Marca) like lower('%".$get['marca']."%')";
@@ -139,16 +139,17 @@ class PondaAdminModel
 			if($get['atributo']=='Carretera (H/T)')
                 $sql.=" and lower(carretera) = 'si'";
             
-            if($get['atributo']=='Ultimos Dias')
-				$sql.=" and lower(OFERTA) = 'si'";      
-            if($get['atributo']=='Oferta')
-                $sql.=" and lower(OFERTA) = 'si'";  
-            if($get['atributo']=='Packs')
-                $sql.=" and lower(OFERTA) = 'si'";  
-            if($get['atributo']=='Instalación Gratis')
-				$sql.=" and lower(OFERTA) = 'si'";            
+                  
 		}
-		
+        
+        //if($get['opciones']=='Ultimos Dias')
+		//		$sql.=" and lower(OFERTA) = 'si'";      
+            if($get['opciones']=='Oferta')
+                $sql.=" and lower(OFERTA) = 'si'";  
+          //  if($get['opciones']=='Packs')
+         //       $sql.=" and lower(OFERTA) = 'si'";  
+         //   if($get['opciones']=='Instalación Gratis')
+		//		$sql.=" and lower(OFERTA) = 'si'";      
 		//if($get['modelo']!='undefined')
 		//	$sql.=" and lower(MODELO) like lower('%".$get['modelo']."%')";
 		
@@ -169,13 +170,13 @@ class PondaAdminModel
 				$sql.=" and lower(MODELO) like lower('%".$get['origen']."%') or lower(Marca) like lower('%".$get['origen']."%')";
 			}
 		}
-		if($ancho!='undefined')
+		if($ancho!='undefined' and $ancho!='')
 			$sql.=" and lower(ANCHO) like lower('%".$ancho."%')";
 		
-		if($perfil!='undefined')
+		if($perfil!='undefined' and $perfil!='')
 			$sql.=" and lower(PERFIL) like lower('%".$perfil."%')";
 		
-		if($aro!='undefined')
+		if($aro!='undefined' and $aro!='')
 			$sql.=" and lower(ARO) like lower('%".$aro."%')";
 		
 		$order="Marca ASC";
@@ -794,8 +795,8 @@ public function actualizaDetallesCompra($get){
      $insertSQL .= "'".$get['ciudadInstalacion']."',";
      $insertSQL .= "'".$get['comunaInstalacion']."',";
      $insertSQL .= "'".$get['aceptaInstalacion1value']."',";
-     $insertSQL .= "'".$get['nombresInstalacion1value']."',";
-     $insertSQL .= "'".$get['direccionInstalacion1value']."',";
+     $insertSQL .= "'".$get['nombresInstalacion3value']."',";
+     $insertSQL .= "'".$get['direccionInstalacion3value']."',";
      $insertSQL .= "'".$get['rutInstalacion2value']."',";
      $insertSQL .= "'".$get['nombresInstalacion2value']."',";
      $insertSQL .= "'".$get['direccionInstalacion2value']."',";

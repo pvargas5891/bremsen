@@ -32,6 +32,9 @@ export class BremsenComponent implements OnInit {
     this._productoService.enviacontacto(this.nombreCompleto, this.email, this.mensaje).then(
       data => {
         this.estadoEnvio = true;
+        this.nombreCompleto="";
+        this.email=""
+         this.mensaje="";
       },
       error =>{
         console.debug(error);
