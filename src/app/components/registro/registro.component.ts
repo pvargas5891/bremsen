@@ -165,7 +165,8 @@ export class RegistroComponent {
                     //this.nombreCliente = currentUser.usuario.nombre;
                    //this.autenticado = true;
                     this.loading2 = false;
-                    this.route.navigate(['/misdatos']);
+                   // this.route.navigate(['/misdatos']);
+                    window.location.href="index.html#/misdatos";
                 } else {
                     // login failed
                     this.error2 = 'Usuario y password son incorrectos';

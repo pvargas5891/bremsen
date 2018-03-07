@@ -64,12 +64,12 @@ export class CarroCompraService {
       params.append('ciudadInstalacion',carro.ciudadInstalacion);
       params.append('comunaInstalacion',carro.comunaInstalacion);
       params.append('aceptaInstalacion1value',carro.aceptaInstalacion1value);
-      params.append('nombresInstalacion3value',carro.nombresInstalacion3value);
-      params.append('direccionInstalacion3value',carro.direccionInstalacion3value);
-      params.append('aceptaInstalacion2value',carro.aceptaInstalacion2value);
       params.append('nombresInstalacion2value',carro.nombresInstalacion2value);
       params.append('direccionInstalacion2value',carro.direccionInstalacion2value);
-      params.append('rutInstalacion2value',carro.rutInstalacion2value);
+      params.append('aceptaInstalacion2value',carro.aceptaInstalacion2value);
+      params.append('nombresInstalacion3value',carro.nombresInstalacion3value);
+      params.append('direccionInstalacion3value',carro.direccionInstalacion3value);
+      params.append('rutInstalacion3value',carro.rutInstalacion3value);
       params.append('aceptaInstalacion3value',carro.aceptaInstalacion3value);
       params.append('tallerAsociadovalue',carro.tallerAsociadovalue);
       params.append('fechaInstalacionvalue',carro.fechaInstalacionvalue);

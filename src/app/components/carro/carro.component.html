@@ -214,7 +214,7 @@
     
                        <div class="checkbox">
                 <label>
-                  <input type="checkbox" name="aceptainstalacion1" [(ngModel)]="aceptaInstalacion1value"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
+                  <input type="checkbox" name="aceptainstalacion1" [(ngModel)]="aceptaInstalacion1value"> Acepto <a routerLink="/terminos" target="_blank" style="color:#6b8bc0;">Términos y Condiciones</a>
                      <div *ngIf="aceptaInstalacion1Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
                 </label>
                 </div>
@@ -227,80 +227,80 @@
     
                   </div>
 
-
-               <div role="tabpanel" class="{{classCaso2}}" id="retiramos-autos">
-
-                 <div class="col-md-6" style="padding-left: 0px;">
-                  <br>
-
-                 <form name="form" (ngSubmit)="finstalacion2.form.valid && guardaInstalacion2()" #finstalacion2="ngForm" novalidate>
-                  <div class="form-group" [ngClass]="{ 'has-error': finstalacion2.submitted && !direccionInstalacion2.valid }">
-                    <label for="ancho">Dirección</label>
-                    <input type="text" class="form-control" id="" placeholder="Calle y número"  #direccionInstalacion2="ngModel" name="direccionInstalacion2" [(ngModel)]="direccionInstalacion2value" required>
-                     <div *ngIf="finstalacion2.submitted && !direccionInstalacion2.valid" class="help-block">Debe ingresar una dirección</div>
-                  </div>
-
-                  <p>¿Quién entrega el auto?</p>
-
-                  <div class="form-group" [ngClass]="{ 'has-error': finstalacion2.submitted && !nombresInstalacion2.valid }">
-                    <label for="perfil">Nombre y apellido</label>
-                    <input type="text" class="form-control" id="perfil" placeholder="Nombre y apellido"  #nombresInstalacion2="ngModel" name="nombresInstalacion2" [(ngModel)]="nombresInstalacion2value" required>
-                     <div *ngIf="finstalacion2.submitted && !nombresInstalacion2.valid" class="help-block">Debe ingresar nombre y apellido</div>
-                  </div>
-
-                  <div class="form-group" [ngClass]="{ 'has-error': finstalacion2.submitted && !rutInstalacion2.valid }">
-                    <label for="perfil">R.U.T</label>
-                    <input type="text" class="form-control" [(ngModel)]="rutInstalacion2value"  #rutInstalacion2="ngModel" name="rutInstalacionDos" required>
-                     <div *ngIf="finstalacion2.submitted && !rutInstalacion2.valid" class="help-block">Debe ingresar un rut</div>
-                  </div>
-
-               		<div class="checkbox">
-						<label>
-              <input type="checkbox" name="aceptaInstalacion2" [(ngModel)]="aceptaInstalacion2value" > Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
-                 <div *ngIf="aceptaInstalacion2Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
-						</label>
-					  </div>
-
-                  <button type="submit" class="btn btn-default">GUARDAR DATOS</button>
-                </form>
-
-                 </div>
-                 <div class="col-md-6"></div>
-              </div>
-
-              <div role="tabpanel" class="{{classCaso3}}" id="intalacion-domicilio" *ngIf="!activaErrorNoDisponible">
-                  <form name="form" (ngSubmit)="finstalacion3.form.valid && guardaInstalacion3()" #finstalacion3="ngForm" novalidate>
-                    <div class="col-md-6" style="padding-left: 0px;">
-  
-                    <div class="form-group" [ngClass]="{ 'has-error': finstalacion3.submitted && !direccionInstalacion3.valid }">
-                      <br>
-                      <label for="ancho">Dirección</label>
-                      <input type="text" class="form-control" id="" placeholder="Calle y número" #direccionInstalacion3="ngModel" name="direccionInstalacion3value" [(ngModel)]="direccionInstalacion3value" required>
-                      <div *ngIf="finstalacion3.submitted && !direccionInstalacion3.valid" class="help-block">Debe ingresar una dirección</div>
-                    </div>
-  
-                    <p>¿Quién entrega el auto?</p>
-                    <div class="form-group" [ngClass]="{ 'has-error': finstalacion3.submitted && !nombresInstalacion3.valid }">
-                      <label for="perfil">Nombre y apellido</label>
-                      <input type="text" class="form-control" id="perfil" placeholder="Nombre y apellido" #nombresInstalacion3="ngModel" name="nombresInstalacion3value" [(ngModel)]="nombresInstalacion3value" required>
-                    <div *ngIf="finstalacion3.submitted && !nombresInstalacion3.valid" class="help-block">Debe ingresar nombre y apellido</div>
-                    </div>
-  
-  
-                     <div class="checkbox">
-              <label>
-                <input type="checkbox" name="aceptaInstalacion3" [(ngModel)]="aceptaInstalacion3value"> Acepto <a routerLink="/terminos" style="color:#6b8bc0;">Términos y Condiciones</a>
-                  <div *ngIf="aceptaInstalacion3Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
-              </label>
-              </div>
-  
-                    <button type="submit" class="btn btn-default">GUARDAR DATOS</button>
-  
-  
-                   </div>
-                   <div class="col-md-6"></div>
-                  </form>
+                  <div role="tabpanel" class="{{classCaso2}}" id="intalacion-domicilio" *ngIf="!activaErrorNoDisponible">
+                    <form name="form" (ngSubmit)="finstalacion2.form.valid && guardaInstalacion2()" #finstalacion2="ngForm" novalidate>
+                      <div class="col-md-6" style="padding-left: 0px;">
+    
+                      <div class="form-group" [ngClass]="{ 'has-error': finstalacion2.submitted && !direccionInstalacion2.valid }">
+                        <br>
+                        <label for="ancho">Dirección</label>
+                        <input type="text" class="form-control" id="" placeholder="Calle y número" #direccionInstalacion2="ngModel" name="direccionInstalacion2value" [(ngModel)]="direccionInstalacion2value" required>
+                        <div *ngIf="finstalacion2.submitted && !direccionInstalacion2.valid" class="help-block">Debe ingresar una dirección</div>
+                      </div>
+    
+                      <p>¿Quién entrega el auto?</p>
+                      <div class="form-group" [ngClass]="{ 'has-error': finstalacion2.submitted && !nombresInstalacion2.valid }">
+                        <label for="perfil">Nombre y apellido</label>
+                        <input type="text" class="form-control" id="perfil" placeholder="Nombre y apellido" #nombresInstalacion2="ngModel" name="nombresInstalacion2value" [(ngModel)]="nombresInstalacion2value" required>
+                      <div *ngIf="finstalacion2.submitted && !nombresInstalacion2.valid" class="help-block">Debe ingresar nombre y apellido</div>
+                      </div>
+    
+    
+                       <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="aceptaInstalacion2" [(ngModel)]="aceptaInstalacion2value"> Acepto <a routerLink="/terminos" target="_blank" style="color:#6b8bc0;">Términos y Condiciones</a>
+                    <div *ngIf="aceptaInstalacion2Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
+                </label>
                 </div>
+    
+                      <button type="submit" class="btn btn-default">GUARDAR DATOS</button>
+    
+    
+                     </div>
+                     <div class="col-md-6"></div>
+                    </form>
+                  </div>
+
+
+                  <div role="tabpanel" class="{{classCaso3}}" id="retiramos-autos">
+
+                    <div class="col-md-6" style="padding-left: 0px;">
+                     <br>
+   
+                    <form name="form" (ngSubmit)="finstalacion3.form.valid && guardaInstalacion3()" #finstalacion3="ngForm" novalidate>
+                     <div class="form-group" [ngClass]="{ 'has-error': finstalacion3.submitted && !direccionInstalacion3.valid }">
+                       <label for="ancho">Dirección</label>
+                       <input type="text" class="form-control" id="" placeholder="Calle y número"  #direccionInstalacion3="ngModel" name="direccionInstalacion3" [(ngModel)]="direccionInstalacion3value" required>
+                        <div *ngIf="finstalacion3.submitted && !direccionInstalacion3.valid" class="help-block">Debe ingresar una dirección</div>
+                     </div>
+   
+                     <p>¿Quién entrega el auto?</p>
+   
+                     <div class="form-group" [ngClass]="{ 'has-error': finstalacion3.submitted && !nombresInstalacion3.valid }">
+                       <label for="perfil">Nombre y apellido</label>
+                       <input type="text" class="form-control" id="perfil" placeholder="Nombre y apellido"  #nombresInstalacion3="ngModel" name="nombresInstalacion3" [(ngModel)]="nombresInstalacion3value" required>
+                        <div *ngIf="finstalacion3.submitted && !nombresInstalacion3.valid" class="help-block">Debe ingresar nombre y apellido</div>
+                     </div>
+   
+                     <div class="form-group" [ngClass]="{ 'has-error': finstalacion3.submitted && !rutInstalacion3.valid }">
+                       <label for="perfil">R.U.T</label>
+                       <input type="text" class="form-control" [(ngModel)]="rutInstalacion3value"  #rutInstalacion3="ngModel" name="rutInstalacionTres" required>
+                        <div *ngIf="finstalacion3.submitted && !rutInstalacion3.valid" class="help-block">Debe ingresar un rut</div>
+                     </div>
+   
+                      <div class="checkbox">
+               <label>
+                 <input type="checkbox" name="aceptaInstalacion3" [(ngModel)]="aceptaInstalacion3value" > Acepto <a routerLink="/terminos" target="_blank" style="color:#6b8bc0;">Términos y Condiciones</a>
+                    <div *ngIf="aceptaInstalacion3Valido" class="help-block">Debe aceptar los terminos y condiciones</div>
+               </label>
+               </div>
+   
+                     <button type="submit" class="btn btn-default">GUARDAR DATOS</button>
+                   </form>
+   
+                    </div>
+                    <div class="col-md-6"></div>
+                 </div>
 
                <div role="tabpanel" class="{{classCaso4}}" id="despacho-adomicilio">
                  <div class="col-md-6">

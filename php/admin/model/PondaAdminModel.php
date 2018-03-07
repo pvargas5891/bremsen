@@ -184,7 +184,7 @@ class PondaAdminModel
     }
     function insertaProducto($todalainfo){
 
-      $sql="select * from productos where CODIGO = '".$todalainfo[0]."'";
+     /* $sql="select * from productos where CODIGO = '".$todalainfo[0]."'";
       $rs=$this->db->execute($sql);
       $id="";
       if(!$rs->EOF){
@@ -192,32 +192,35 @@ class PondaAdminModel
         $sql="delete from productos where id = ".$id;
         $this->db->execute($sql);
 
-      }
+      }*/
+
+      
+
       if($todalainfo[33]=='NA')
             $todalainfo[33]=20001;
       if(!isset($todalainfo[34]))
         $todalainfo[34]="";      
-       $sql="insert into productos values ('".$id."',";
+       $sql="insert into productos_temp values ('',";
               $sql.="'".$todalainfo[0]."',";//codigo
               $sql.="'".$todalainfo[1]."',";//marca
               $sql.="'".$todalainfo[2]."',";//modelo
               $sql.="'".$todalainfo[3]."',";//medida
               $sql.="'".$todalainfo[4]."',";//cateroia
-              $sql.=$todalainfo[5].",";//ancho
+              $sql.="'".$todalainfo[5]."',";//ancho
               $sql.="'".$todalainfo[6]."',";//perfil
-              $sql.=$todalainfo[7].",";//aro
+              $sql.="'".$todalainfo[7]."',";//aro
               $sql.="'".$todalainfo[8]."',";//carga
               $sql.="'".$todalainfo[9]."',";//largo
-              $sql.=$todalainfo[10].",";//ancho2
+              $sql.="'".$todalainfo[10]."',";//ancho2
               $sql.="'".$todalainfo[11]."',";//alto
-              $sql.=$todalainfo[12].",";//peso
-              $sql.=$todalainfo[13].",";//neto
-              $sql.=$todalainfo[14].",";//unitario
-              $sql.=$todalainfo[15].",";//valor_instalacion
-              $sql.=$todalainfo[16].",";//total
+              $sql.="'".$todalainfo[12]."',";//peso
+              $sql.="'".$todalainfo[13]."',";//neto
+              $sql.="'".$todalainfo[14]."',";//unitario
+              $sql.="'".$todalainfo[15]."',";//valor_instalacion
+              $sql.="'".$todalainfo[16]."',";//total
               $sql.="'".$todalainfo[17]."',";//MC
-              $sql.=$todalainfo[18].",";//neto2
-              $sql.=$todalainfo[19].",";//`recio final
+              $sql.="'".$todalainfo[18]."',";//neto2
+              $sql.="'".$todalainfo[19]."',";//`recio final
               $sql.="'".$todalainfo[20]."',";//precio oferta
               $sql.="'".$todalainfo[21]."',";//modelo rueda
               $sql.="'".$todalainfo[22]."',";//jpg
@@ -232,10 +235,89 @@ class PondaAdminModel
               $sql.="'".$todalainfo[31]."',";//oferta
               $sql.="'".$todalainfo[32]."',";//carretera
               $sql.=$todalainfo[33].",";//stock
-              $sql.="'".$todalainfo[34]."')";//video
+              $sql.="'".$todalainfo[34]."',0)";//video
               $this->db->execute($sql);
     }
+    function vaciaProductosTemp(){
+        $sql="delete from productos_temp";
+        $this->db->execute($sql);
+    }
+    function procesadorInformacionProducto(){
 
+        $sql="select * from productos_temp group by Marca";
+        $rsMarcaTemp=$this->db->execute($sql);
+        while(!$rsMarcaTemp->EOF){
+            $sql="select * from productos where Marca = '".$rsMarcaTemp->fields['Marca']."'";
+            $rs=$this->db->execute($sql);
+           while(!$rs->EOF){
+                $sql="select * from productos_temp where CODIGO = '".$rs->fields['CODIGO']."'";
+                $rsDel=$this->db->execute($sql);
+                if($rsDel->EOF){
+                    $sql="update productos set estado=0 where CODIGO = '".$rs->fields['CODIGO']."'";
+                    $this->db->execute($sql);
+                }
+                $rs->movenext();
+            }
+
+            $sql="select * from productos_temp";
+            $rs=$this->db->execute($sql);
+            while(!$rs->EOF){
+                $sql="select * from productos where CODIGO = '".$rs->fields['CODIGO']."'";
+                $rsUdp=$this->db->execute($sql);
+                $id="";
+                if(!$rsUdp->EOF){
+                    $id=$rsUdp->fields['id'];
+                    $sql="delete from productos where id = ".$id;
+                    $this->db->execute($sql);
+                }    
+                    $sql="insert into productos values (";
+                    $sql.="'".$id."',";
+                    $sql.="'".$rs->fields['CODIGO']."',";
+                    $sql.="'".$rs->fields['Marca']."',";
+                    $sql.="'".$rs->fields['MODELO']."',";
+                    $sql.="'".$rs->fields['MEDIDA']."',";
+                    $sql.="'".$rs->fields['CATEGORIA']."',";
+                    $sql.="'".$rs->fields['ANCHO']."',";
+                    $sql.="'".$rs->fields['PERFIL']."',";
+                    $sql.="'".$rs->fields['ARO']."',";
+                    $sql.="'".$rs->fields['Carga']."',";
+                    $sql.="'".$rs->fields['LARGO']."',";
+                    $sql.="'".$rs->fields['ANCHO2']."',";
+                    $sql.="'".$rs->fields['ALTO']."',";
+                    $sql.="'".$rs->fields['Peso']."',";
+                    $sql.="'".$rs->fields['neto']."',";
+                    $sql.="'".$rs->fields['unitario']."',";
+                    $sql.="'".$rs->fields['VALOR_INSTALACION']."',";
+                    $sql.="'".$rs->fields['total']."',";
+                    $sql.="'".$rs->fields['MC']."',";
+                    $sql.="'".$rs->fields['neto2']."',";
+                    $sql.="'".$rs->fields['precio_final']."',";
+                    $sql.="'".$rs->fields['precio_oferta']."',";
+                    $sql.="'".$rs->fields['modelo_rueda']."',";
+                    $sql.="'".$rs->fields['JPG']."',";
+                    $sql.="'".$rs->fields['TITULO']."',";
+                    $sql.="'".$rs->fields['ATRIBUTOS']."',";
+                    $sql.="'".$rs->fields['DESCRIPCION']."',";
+                    $sql.="'".$rs->fields['Logo']."',";
+                    $sql.="'".$rs->fields['INCLUYE_INSTALACION']."',";
+                    $sql.="'".$rs->fields['DESPACHO']."',";
+                    $sql.="'".$rs->fields['4x4']."',";
+                    $sql.="'".$rs->fields['RUNFLAT']."',";
+                    $sql.="'".$rs->fields['OFERTA']."',";
+                    $sql.="'".$rs->fields['carretera']."',";
+                    $sql.="'".$rs->fields['STOCK']."',";
+                    $sql.="'".$rs->fields['VIDEO']."',1)";
+                    if($rs->fields['Marca']!=""){
+                        $this->db->execute($sql);
+                    }
+                    
+
+                
+                $rs->movenext();
+            }
+        $rsMarcaTemp->movenext();
+        }    
+    }
     function getProductosAll($start,$end){
         $sql="select * from productos ";
 

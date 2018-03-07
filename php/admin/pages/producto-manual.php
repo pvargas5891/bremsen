@@ -1,5 +1,5 @@
 <?php
-
+set_time_limit(100000);
 if(isset($_FILES['archivo'])){
 
 //        print_r($_FILES);
@@ -20,19 +20,19 @@ if(isset($_FILES['archivo'])){
                 break;
         }
     }else{
+		$model->changeDebugState(true);
+		$ruta_destino = 'excel/';
+		$inputFileName = $ruta_destino . str_replace(' ','_',$_FILES['archivo']['name']);
+		move_uploaded_file($_FILES['archivo']['tmp_name'], $inputFileName);    
 
-    $ruta_destino = 'excel/';
-    $inputFileName = $ruta_destino . str_replace(' ','_',$_FILES['archivo']['name']);
-    move_uploaded_file($_FILES['archivo']['tmp_name'], $inputFileName);    
 
-
-
+		$model->vaciaProductosTemp();
 	    if (($fichero = fopen($inputFileName, "r")) !== FALSE) {
 		    // Lee los nombres de los campos
-		    $nombres_campos = fgetcsv($fichero, 0, ";", "\"", "\"");
+		    $nombres_campos = fgetcsv($fichero, 0, ",", "\"", "\"");
 		    $num_campos = count($nombres_campos);
 		    // Lee los registros
-		    while (($datos = fgetcsv($fichero, 1000, ";", "\"", "\"")) !== FALSE) {
+		    while (($datos = fgetcsv($fichero, 1000, ",", "\"", "\"")) !== FALSE) {
 		        // Crea un array asociativo con los nombres y valores de los campos
 		        /*for ($icampo = 0; $icampo < $num_campos; $icampo++) {
 		            $registro[$nombres_campos[$icampo]] = $datos[$icampo];
@@ -51,15 +51,18 @@ if(isset($_FILES['archivo'])){
 		        echo "Nombre: " . $registros[$i]["nombre"] . "\n";
 		    }*/
 			//$model->changeDebugState(true);
+			
+		
 		    for ($i = 0; $i < count($todalainfo); $i++) {
 		      
 			   $model->insertaProducto($todalainfo[$i]);
 
 			}
-			$model->changeDebugState(false);
+			
 		    /*echo '<pre>';
 		    print_r($todalainfo);
-		    echo '<pre>';*/
+			echo '<pre>';*/
+			$model->procesadorInformacionProducto();
 		}
 	}
   }

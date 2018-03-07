@@ -191,7 +191,7 @@ owl-carousel .product-thumb {
 
                 <h3 class="subtitle" style="color: #fff !important;">Contáctanos</h3>
             
-                    <form name="form" class="form-horizontal" (ngSubmit)="f.form.valid && enviaCorreo()" #f="ngForm" novalidate>
+                    <form name="formContacto" class="form-horizontal" (ngSubmit)="f.form.valid && enviaCorreo()" #f="ngForm" novalidate>
                     <fieldset>
 
                         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !nombreCompleto1.valid }">

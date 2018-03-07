@@ -14,8 +14,11 @@ export class SearchComponent {
     public productos;
     errorMessage: String;
     public totalStock: number = 10;
-    public atributoRadio: string[]=['4x4','Runflat','Oferta','Carretera'];
-    public opcionesRadio: string[]=['Ofertas'];
+  //'Alta Seguridad (Runflat)', '4x4 (M/T)','Carretera (H/T)'
+  public atributoRadio: string[] = [];
+    //ncho| perfil | aro | indice - de - carga | marca | instalacion - gratis | despacho - gratis
+    //'Oferta'
+  public opcionesRadio: string[]=[];
     public detallesCategoria = new DetalleCatProductos();
     public param1: string;
     public origen: string;
@@ -39,7 +42,24 @@ export class SearchComponent {
           if(parametros.origen=='marca'){
              this.detallesCategoria.marcaFiltro=this.param1;
           }else{
-             this.detallesCategoria.origen=this.param1;
+            if(this.origen=='home'){
+              if(this.param1=='camioneta'){
+                this.param1="Camioneta (M/T)";
+                this.detallesCategoria.atributo=this.param1;                
+              }
+              if(this.param1=='automovil'){
+                this.param1="Automovil (H/T)";
+                this.detallesCategoria.atributo=this.param1;
+              }
+              if(this.param1=='runflat'){
+                this.param1="Alta Seguridad (Runflat)";
+                this.detallesCategoria.atributo=this.param1;
+              }
+              this.detallesCategoria.origen='undefined';
+            }else{
+              this.detallesCategoria.origen=this.param1;
+            }
+             
           }
 
       });
@@ -61,7 +81,8 @@ export class SearchComponent {
               this.detallesCategoria.fin=this.detallesCategoria.totalProductos;
             }
             this.detallesCategoria.todasMarcas=data[1];
-
+            this.atributoRadio =data[2];
+            this.opcionesRadio=data[3];
 		    },
         error => this.errorMessage = <any>error);
 

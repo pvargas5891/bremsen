@@ -93,6 +93,7 @@ function parseador($rs){
 			$general2['ARO']=$rs->fields['ARO'];
 			$general2['CARGA']=$rs->fields['Carga'];
 			$general2['LARGO']=$rs->fields['LARGO'];
+			$general2['ANCHO2']=$rs->fields['ANCHO2'];
 			$general2['ALTO']=$rs->fields['ALTO'];
 			$general2['PESO']=$rs->fields['Peso'];
 			$general2['NETO']=$rs->fields['neto'];
@@ -103,18 +104,36 @@ function parseador($rs){
 			$general2['NETO2']=$rs->fields['neto2'];
 			$general2['PRECIO_FINAL']=$rs->fields['precio_final'];
 			$general2['PRECIO_OFERTA']=$rs->fields['precio_oferta'];
-			//$general2['MODELO']=$rs->fields['MODELO'];
-			$general2['JPG']=$rs->fields['JPG'];
+			$general2['MODELO_RUEDA']=$rs->fields['modelo_rueda'];
+			$porciones = explode(".", $rs->fields['JPG']);
+			$general2['JPG']=strtoupper($porciones[0]).".".$porciones[1];
 			$general2['TITULO']=$rs->fields['TITULO'];
 			$general2['ATRIBUTOS']=$rs->fields['ATRIBUTOS'];
 			$general2['DESCRIPCION']=$rs->fields['DESCRIPCION'];
 			$general2['LOGO']=$rs->fields['Logo'];
 			$general2['INCLUYE_INSTALACION']=$rs->fields['INCLUYE_INSTALACION'];
 			$general2['DESPACHO']=$rs->fields['DESPACHO'];
-			$general2['ULTIMOS_DIAS']=$rs->fields['ultimos_dias'];
+			$general2['4x4']=$rs->fields['4x4'];
 			$general2['RUNFLAT']=$rs->fields['RUNFLAT'];
 			$general2['OFERTA']=$rs->fields['OFERTA'];
-			$general2['ALTO_DESEMPENO']=$rs->fields['alto_desempeno'];
+			$stock=array();
+			$contador=0;
+			if($rs->fields['STOCK']!=20001)
+				$contador=$rs->fields['STOCK'];
+			for($i=1;$i<=$contador;$i++){
+				$stock2=array();
+				$stock2['codigo']=$i;
+				$stock2['nombre']=$i;
+				$stock[]=$stock2;
+			}
+			if($contador==0){
+				$stock2=array();
+				$stock2['codigo']=0;
+				$stock2['nombre']=0;
+				$stock[]=$stock2;
+			}
+			$general2['STOCK']=$stock;
+			$general2['VIDEO']=$rs->fields['VIDEO'];
 			$general[]=$general2;
 			$rs->movenext();
 		}

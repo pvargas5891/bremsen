@@ -47,7 +47,7 @@ $rs=$model->getTipoInstalacionByComuna($_GET['comuna']);
              $rsPago=$model->getPagoByUsuario($_GET['cliente']);
               //$25.000 Compras >$250.000 and <= 400000
              if($rsPago->fields['TBK_MONTO']>250000 and $rsPago->fields['TBK_MONTO'] <= 400000){
-                $general2['valor']=-25000;
+                $general2['valor']=25000;
              }
            
             //gratis >400000

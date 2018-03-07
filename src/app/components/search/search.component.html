@@ -40,25 +40,38 @@
           <h3 class="subtitle">Atributo</h3>
 
           <div class="box-category">
-              <div class="radio" *ngFor="let atributo of atributoRadio">
+            <div class="radio">
                 <label>
-                  <input type="radio" [value]="atributo" name="atributomodel" (click)="filtroAtributo(atributo)">&nbsp;&nbsp;
-                  {{atributo}}
+                  <input type="radio" name="atributomodel" (click)="filtroAtributo('all')" selected>&nbsp;&nbsp;
+                  Todas
                 </label>
               </div>
+            <div class="radio" *ngFor="let atributo of atributoRadio">
+              <label>
+                <input type="radio" [value]="atributo" name="atributomodel" (click)="filtroAtributo(atributo)">&nbsp;&nbsp;
+                {{atributo}}
+              </label>
+            </div>
 
-          </div>
-          <div class="pad"></div>
-          <h3 class="subtitle">Opciones</h3>
+        </div>
+        <div class="pad"></div>
+        <h3 class="subtitle">Opciones</h3>
 
-          <div class="box-category">
-              <div class="radio" *ngFor="let opcion of opcionesRadio">
+        <div class="box-category">
+            <div class="radio">
                 <label>
-                  <input type="radio" [value]="opcion" name="opcionesmodel" (click)="filtroOpciones(opcion)">&nbsp;&nbsp;
-                  {{opcion}}
+                  <input type="radio" name="opcionesmodel" (click)="filtroOpciones('all')" selected="true">&nbsp;&nbsp;
+                  Todas
                 </label>
               </div>
-          </div>
+            <div class="radio" *ngFor="let opcion of opcionesRadio">
+              <label>
+                <input type="radio" [value]="opcion" name="opcionesmodel" (click)="filtroOpciones(opcion)">&nbsp;&nbsp;
+                {{opcion}}
+              </label>
+            </div>
+        </div>
+
 
 
         </aside>
@@ -168,7 +181,7 @@
             
                     </div>
                     <h4>
-                      <a routerLink="/producto/{{producto.ID}}"> {{producto.MARCA}} {{producto.MODELO}} </a>
+                      <a routerLink="/producto/{{producto.ID}}"> {{producto.MARCA}} {{producto.MODELO_RUEDA}} </a>
                     </h4>
                     <div>
                       <ul class="lista-producto">

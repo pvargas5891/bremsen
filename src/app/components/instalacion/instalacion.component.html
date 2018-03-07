@@ -380,7 +380,8 @@
                 <button type="button" routerLink="/categoria" class="btn btn-default btn-lg btn-block">Comprar</button>
               </td>
               <td class="col-sm-6">
-                <button type="submit" routerLink="/registro" class="btn btn-primary btn-lg btn-block">Crear cuenta</button>
+                <button *ngIf="sinsesion" type="submit" routerLink="/registro" class="btn btn-primary btn-lg btn-block">Crear cuenta</button>
+                <button *ngIf="!sinsesion" type="submit" routerLink="/misdatos" class="btn btn-primary btn-lg btn-block">Ir a mis datos</button>
               </td>
             </tr>
           </tbody>

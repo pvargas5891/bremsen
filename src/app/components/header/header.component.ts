@@ -66,6 +66,11 @@ export class HeaderComponent implements DoCheck{
             if(currentUser.token === 'active'){
 
               var cambiaCarro = JSON.parse(localStorage.getItem('cambiaCarro'));
+              this.nombreCliente = currentUser.usuario.nombre;
+              this.logueado = true;
+              this.autenticado = true;
+              this.loading = false;
+              
               //console.debug(cambiaCarro.estado);
               if(cambiaCarro.estado=='actualize'){
                 this.id = currentUser.usuario.id;

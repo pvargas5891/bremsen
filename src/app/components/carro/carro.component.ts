@@ -280,18 +280,43 @@ public generainstalacion = function(comuna, usuario){
 }
  public aceptaInstalacion1Valido: boolean = false;
 
+
+  public validaTalleres: boolean = false;
   guardaInstalacion1= function(){
      this.tipoInstalacion = 1;
+    if(!this.validaRegion())
+        return;
+   // console.debug(this.tallerAsociadovalue);
+    if(typeof this.tallerAsociadovalue == 'undefined' || this.tallerAsociadovalue == ""){
+        this.validaTalleres = true;
+        return;
+    }
+    this.validaTalleres = false;
+    
+    if (!this.aceptaInstalacion1value) {
+      this.aceptaInstalacion1Valido = true;
+      return;
+    } else {
+      this.aceptaInstalacion1Valido = false;
+    }
+    this.estado = true;
+    this.errorMessage = "";
+     //this.calculaTotales();
+     this.guardaTemportalData();
+  }
+  public aceptaInstalacion2Valido: boolean = false;
+  guardaInstalacion2= function(){
+     this.tipoInstalacion = 2;
      if(!this.validaRegion())
         return;
 
     
      //this.calculaTotales();
-    if(!this.aceptaInstalacion1value){
-      this.aceptaInstalacion1Valido=true;
+    if(!this.aceptaInstalacion2value){
+      this.aceptaInstalacion2Valido=true;
       return;
     }else{
-      this.aceptaInstalacion1Valido = false;
+      this.aceptaInstalacion2Valido = false;
     }
 
     this.estado = true;
@@ -300,40 +325,12 @@ public generainstalacion = function(comuna, usuario){
 
   }
   
-  public aceptaInstalacion2Valido: boolean = false;
-
-  guardaInstalacion2= function(){
-     this.tipoInstalacion = 2;
-    if(!this.validaRegion())
-        return;
-
-    
-    if (!this.aceptaInstalacion2value) {
-      this.aceptaInstalacion2Valido = true;
-      return;
-    } else {
-      this.aceptaInstalacion2Valido = false;
-    }
-    this.estado = true;
-    this.errorMessage = "";
-     //this.calculaTotales();
-     this.guardaTemportalData();
-  }
-
-
-
   public aceptaInstalacion3Valido: boolean = false;
-  public validaTalleres: boolean = false;
   guardaInstalacion3= function(){
      this.tipoInstalacion = 3;
     if(!this.validaRegion())
         return;
-    console.debug(this.tallerAsociadovalue);
-    if(typeof this.tallerAsociadovalue == 'undefined' || this.tallerAsociadovalue == ""){
-        this.validaTalleres = true;
-        return;
-    }
-    this.validaTalleres = false;
+
     
     if (!this.aceptaInstalacion3value) {
       this.aceptaInstalacion3Valido = true;
@@ -346,8 +343,6 @@ public generainstalacion = function(comuna, usuario){
      //this.calculaTotales();
      this.guardaTemportalData();
   }
-
-
 
   public direccionInstalacion4Valido: boolean = false;
   public aceptaInstalacion4Valido: boolean = false;
@@ -381,18 +376,23 @@ public generainstalacion = function(comuna, usuario){
         ciudadInstalacion: this.ciudadInstalacion,
         comunaInstalacion: this.comunaInstalacion,
         aceptaInstalacion1value: this.aceptaInstalacion1value,
+        aceptaInstalacion2value: this.aceptaInstalacion2value,
+        aceptaInstalacion3value: this.aceptaInstalacion3value,
+        aceptaInstalacion4value: this.aceptaInstalacion4value,
+
+        nombresInstalacion2value: this.nombresInstalacion2value,        
+        direccionInstalacion2value: this.direccionInstalacion2value,
+        
         nombresInstalacion3value: this.nombresInstalacion3value,
         direccionInstalacion3value: this.direccionInstalacion3value,
-        aceptaInstalacion2value: this.aceptaInstalacion2value,
-        nombresInstalacion2value: this.nombresInstalacion2value,
-        direccionInstalacion2value: this.direccionInstalacion2value,
-        rutInstalacion2value: this.rutInstalacion2value,
-        aceptaInstalacion3value: this.aceptaInstalacion3value,
+        rutInstalacion3value: this.rutInstalacion3value,
+        
         tallerAsociadovalue: this.tallerAsociadovalue,
         fechaInstalacionvalue: this.fechaInstalacionvalue,
         bloqueHorariovalue: this.bloqueHorariovalue,
+        
         direccionInstalacion4value: this.direccionInstalacion4value,
-        aceptaInstalacion4value: this.aceptaInstalacion4value,
+        
         tipoInstalacion: this.tipoInstalacion,
         costoNeumaticos: this.costoNeumaticos,
         costoInstalacion:this.costoFinalInstalacion,

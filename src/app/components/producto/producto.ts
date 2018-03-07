@@ -21,6 +21,7 @@ public MC: string;
 public NETO2: string;
 public PRECIO_FINAL: string;
 public PRECIO_OFERTA: string;
+public MODELO_RUEDA: string;
 public JPG: string;
 public TITULO: string;
 public ATRIBUTOS: string;

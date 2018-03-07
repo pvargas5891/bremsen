@@ -134,9 +134,9 @@ class PondaAdminModel
                 $sql.=" and lower(RUNFLAT) = 'si'";
             if($get['atributo']=='Alto Desempeño (Zr)')
                 $sql.=" and lower(RUNFLAT) = 'si'";       
-            if($get['atributo']=='4x4 (M/T)')
+            if($get['atributo']=='Camioneta (M/T)')
 				$sql.=" and lower(4x4) = 'si'";			
-			if($get['atributo']=='Carretera (H/T)')
+			if($get['atributo']=='Automovil (H/T)')
                 $sql.=" and lower(carretera) = 'si'";
             
                   
@@ -494,7 +494,7 @@ class PondaAdminModel
     
       function getPagosFinalizados($post)
 {
-    $sql = "select * from pagos,webpay where estado != 'pendiente'  and webpay.Tbk_orden_compra=pagosID";
+    $sql = "select * from pagos,webpay where estado != 'pendiente' and id_usuario=".$post['id']." and webpay.Tbk_orden_compra=pagosID";
     if ($post['orden'] != "")
         $sql .= " and pagosID = " . $post['orden'];
     if ($post['fechainicio'] != "") {
@@ -795,11 +795,11 @@ public function actualizaDetallesCompra($get){
      $insertSQL .= "'".$get['ciudadInstalacion']."',";
      $insertSQL .= "'".$get['comunaInstalacion']."',";
      $insertSQL .= "'".$get['aceptaInstalacion1value']."',";
-     $insertSQL .= "'".$get['nombresInstalacion3value']."',";
-     $insertSQL .= "'".$get['direccionInstalacion3value']."',";
-     $insertSQL .= "'".$get['rutInstalacion2value']."',";
      $insertSQL .= "'".$get['nombresInstalacion2value']."',";
      $insertSQL .= "'".$get['direccionInstalacion2value']."',";
+     $insertSQL .= "'".$get['rutInstalacion3value']."',";
+     $insertSQL .= "'".$get['nombresInstalacion3value']."',";
+     $insertSQL .= "'".$get['direccionInstalacion3value']."',";
      $insertSQL .= "'".$get['aceptaInstalacion3value']."',";
      $insertSQL .= "'".$get['tallerAsociadovalue']."',";
      $insertSQL .= "'".$get['fechaInstalacionvalue']."',";

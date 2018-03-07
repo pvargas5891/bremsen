@@ -64,6 +64,7 @@ public getProductoById = function (){
             this.producto.PRECIO_FINAL = data[0].PRECIO_FINAL;
             this.totalAComprar = this.producto.PRECIO_FINAL * this.cantidad;
             this.producto.PRECIO_OFERTA = data[0].PRECIO_OFERTA;
+            this.producto.MODELO_RUEDA = data[0].MODELO_RUEDA;
             this.producto.JPG = data[0].JPG;
             this.producto.TITULO = data[0].TITULO;
             this.producto.ATRIBUTOS = data[0].ATRIBUTOS;

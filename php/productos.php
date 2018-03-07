@@ -86,9 +86,9 @@ switch($accion){
 			if($rs->fields['RUNFLAT']=='Si')		
 				$general2temp[]='Alta Seguridad (Runflat)';		
 			if($rs->fields['4x4']=='Si')		
-				$general2temp[]='4x4 (M/T)';
+				$general2temp[]='Camioneta (M/T)';
 			if($rs->fields['carretera']=='Si')		
-				$general2temp[]='Carretera (H/T)';			
+				$general2temp[]='Automovil (H/T)';			
 			$rs->movenext();
 		}
 		$general2temp=array_unique($general2temp);
@@ -205,7 +205,8 @@ function parseador($rs){
 			$general2['PRECIO_FINAL']=$rs->fields['precio_final'];
 			$general2['PRECIO_OFERTA']=$rs->fields['precio_oferta'];
 			$general2['MODELO_RUEDA']=$rs->fields['modelo_rueda'];
-			$general2['JPG']=$rs->fields['JPG'];
+			$porciones = explode(".", $rs->fields['JPG']);
+			$general2['JPG']=strtoupper($porciones[0]).".".$porciones[1];
 			$general2['TITULO']=$rs->fields['TITULO'];
 			$general2['ATRIBUTOS']=$rs->fields['ATRIBUTOS'];
 			$general2['DESCRIPCION']=$rs->fields['DESCRIPCION'];
