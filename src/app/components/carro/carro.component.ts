@@ -62,7 +62,7 @@ export class CarroComponent implements OnInit {
     width:'100%',
 firstDayOfWeek:'mo',
 
-disableUntil:{ year: 2018, month: 2, day: 3 },
+disableUntil:{ year: new Date().getFullYear(), month: new Date().getMonth()+1, day: new Date().getDate()+2 },
 
 disableWeekends:
 false
@@ -436,7 +436,7 @@ public generainstalacion = function(comuna, usuario){
     );
     }
 
-  public getProductoById = function (carro): Producto{
+public getProductoById = function (carro): Producto{
     var producto = new Producto();
     this._productoService.getProductosById(carro.id_producto)
 	     .then( data => {
@@ -494,7 +494,9 @@ public generainstalacion = function(comuna, usuario){
         return producto;
 
 }
-public cambiaCantidad(id,cantidad){
+
+
+public cambiaCantidad(id,cantidad,producto){
   //actualizaCarro
  // console.debug(id);
  //console.debug(cantidad);
@@ -510,7 +512,11 @@ var currentUser = JSON.parse(localStorage.getItem('currentUser'));
           for(var id in data){
                this.carroCompra.push(this.getProductoById(data[id]));
           }
+
+          
+          if(typeof this.comunaInstalacion !== 'undefined')
           this.seleccionaInstalacion(this.comunaInstalacion);
+          localStorage.setItem('carroUserTemporal', JSON.stringify(this.carroCompra));
           localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
           this.calculaTotales();
     },
@@ -528,13 +534,15 @@ var currentUser = JSON.parse(localStorage.getItem('currentUser'));
       this.costoNeumaticos = 0;
 
       for (var i = 0; i < carroTemporal.length; i++) {
-        if (carroTemporal[i].id_producto==id){
+        if (carroTemporal[i].id_producto==producto){
             carroTemporal[i].cantidad=cantidad;
         }
         this.carroCompra.push(this.getProductoById(carroTemporal[i]));
       }
-      this.seleccionaInstalacion(this.comunaInstalacion);
-      localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+      if(typeof this.comunaInstalacion !== 'undefined')
+        this.seleccionaInstalacion(this.comunaInstalacion);
+        localStorage.setItem('carroUserTemporal', JSON.stringify(carroTemporal));
+        localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
       this.calculaTotales();
     }
   }

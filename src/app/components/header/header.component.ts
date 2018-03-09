@@ -81,12 +81,18 @@ export class HeaderComponent implements DoCheck{
             }
         }else{
           var cambiaCarro = JSON.parse(localStorage.getItem('cambiaCarro'));
-          //console.debug(cambiaCarro.estado);
-          if (cambiaCarro.estado == 'actualize') {
-            this.getCarroAllSinSesion();
-            // console.debug("cambio carro");
-            localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'muerto' }));
+         // console.debug(cambiaCarro);
+          if(typeof cambiaCarro === 'undefined' || cambiaCarro == null){
+              localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'muerto' }));
+          }else{
+             //console.debug(cambiaCarro.estado);
+              if (cambiaCarro.estado == 'actualize') {
+                this.getCarroAllSinSesion();
+                // console.debug("cambio carro");
+                localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'muerto' }));
+              }
           }
+         
 
         }
       }

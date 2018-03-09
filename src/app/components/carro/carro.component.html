@@ -53,7 +53,7 @@
                     </td>
 						<td class="text-left"><h4><b>{{producto.PRECIO_FINAL | number | currencyFormat}}</b></h4></td>
                     <td class="text-left" style="padding-top: 24px;">
-                        <select class="form-control" style="width: 75%;" #cantidadSeleccionada (change)="cambiaCantidad(producto.idCarro,cantidadSeleccionada.value)">
+                        <select class="form-control" style="width: 75%;" #cantidadSeleccionada (change)="cambiaCantidad(producto.idCarro,cantidadSeleccionada.value,producto.ID)">
                         <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo" [selected]="stock.codigo == producto.cantidadCarro">{{stock.nombre}}</option>
                       </select>
                     </td>
@@ -134,14 +134,25 @@
      
                    </li>
 
-              
+                   <li role="presentation" style="width: 25%" *ngIf="instalacionDos">
 
-              <li role="presentation text-center" style="width: 25%;" *ngIf="instalacionDos">
+                    <a href="#intalacion-domicilio" (click)="tipoInstalacionBoton(2)" aria-controls="intalacion-domicilio" role="tab" data-toggle="tab">
+                      <img class="img-responsive center-block noView" src="assets/image/Instalacion-a-domicilio-04.png">
+                        <h4 class="tabs-h4"><b>Instalación a domicilio</b></h4>
+                        <button type="button" class="btn btn-sm btn-default bremsen" (click)="tipoInstalacionBoton(2)">{{valorinstalacionDos  | number | currencyFormat}}</button>
+      
+                      </a>
+      
+      
+      
+                    </li>
 
-               <a href="#retiramos-autos" (click)="tipoInstalacionBoton(2)" aria-controls="retiramos-autos" role="tab" data-toggle="tab">
+              <li role="presentation text-center" style="width: 25%;" *ngIf="instalacionTres">
+
+               <a href="#retiramos-autos" (click)="tipoInstalacionBoton(3)" aria-controls="retiramos-autos" role="tab" data-toggle="tab">
                  <img class="img-responsive center-block noView" src="assets/image/retiro-a-domicilio-05.png">
                         <h4 class="tabs-h4"><b>Retiramos tu auto</b></h4>
-                          <button type="button" class="btn btn-sm btn-default bremsen " (click)="tipoInstalacionBoton(2)">{{valorinstalacionDos | number | currencyFormat}}</button>
+                          <button type="button" class="btn btn-sm btn-default bremsen " (click)="tipoInstalacionBoton(3)">{{valorinstalacionTres | number | currencyFormat}}</button>
                       </a>
 
 
@@ -149,18 +160,7 @@
 
               </li>
 
-              <li role="presentation" style="width: 25%" *ngIf="instalacionTres">
-
-                  <a href="#intalacion-domicilio" (click)="tipoInstalacionBoton(3)" aria-controls="intalacion-domicilio" role="tab" data-toggle="tab">
-                    <img class="img-responsive center-block noView" src="assets/image/Instalacion-a-domicilio-04.png">
-                      <h4 class="tabs-h4"><b>Instalación a domicilio</b></h4>
-                      <button type="button" class="btn btn-sm btn-default bremsen" (click)="tipoInstalacionBoton(3)">{{valorinstalacionTres  | number | currencyFormat}}</button>
-    
-                    </a>
-    
-    
-    
-                  </li>
+              
 
               <li role="presentation" style="width: 25%" *ngIf="instalacionCuatro">
                  <a href="#despacho-adomicilio" (click)="tipoInstalacionBoton(4)" aria-controls="despacho-adomicilio" role="tab" data-toggle="tab">

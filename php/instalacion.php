@@ -20,58 +20,70 @@ $rs=$model->getTipoInstalacionByComuna($_GET['comuna']);
         $general2=array();
         
         $general2['tipo']=$rs->fields['tipo'];
+        $valorTemp=0;
         if($rs->fields['tipo']==1){
             $rsCarro=$model->getCarroPorCliente($_GET['cliente']);
-            $general2['valor']=$rsCarro->fields['cantidad']*$rs->fields['precio'];
+            
             while(!$rsCarro->EOF){	
                 $producto=$model->getProductosById($rsCarro->fields['id_producto']);
                 if($producto->fields['ARO']>14){
-                    $general2['valor']=0;
+                    $valorTemp+=0;
+                }else{
+                    $valorTemp+=$rsCarro->fields['cantidad']*$rs->fields['precio'];
                 }
                 $rsCarro->movenext();
-		    }
+            }
+            $general2['valor']=$valorTemp;
         }
         if($rs->fields['tipo']==2){
            // 40000
-             $general2['valor']=$rs->fields['precio'];
+            
              $rsPago=$model->getPagoByUsuario($_GET['cliente']);
              //gratis >$400000
              if($rsPago->fields['TBK_MONTO']>400000){
                 $general2['valor']=0;
+             }else{
+                $general2['valor']=$rs->fields['precio'];
              }
              
         }
         if($rs->fields['tipo']==3){
             //40000
-            $general2['valor']=$rs->fields['precio'];
+            
              $rsPago=$model->getPagoByUsuario($_GET['cliente']);
               //$25.000 Compras >$250.000 and <= 400000
              if($rsPago->fields['TBK_MONTO']>250000 and $rsPago->fields['TBK_MONTO'] <= 400000){
                 $general2['valor']=25000;
-             }
-           
-            //gratis >400000
-              if($rsPago->fields['TBK_MONTO']>400000){
-                $general2['valor']=0;
-             }
+             }else{//gratis >400000
+                if($rsPago->fields['TBK_MONTO']>400000){
+                    $general2['valor']=0;
+                 }else{
+                    $general2['valor']=$rs->fields['precio'];
+                 }
+                
+             }         
+            
+              
         }
         if($rs->fields['tipo']==4){
             $entro=1;
-            $general2['valor']=$rs->fields['precio'];
+            $general2['valor']=0;
             $rsCarro=$model->getCarroPorCliente($_GET['cliente']);
+            $valorTemp=0;
             while(!$rsCarro->EOF){	
                 $producto=$model->getProductosById($rsCarro->fields['id_producto']);
                 if($producto->fields['ARO']<15){
-                    $general2['valor']=$rs->fields['menor15'];
-                }
-                if($producto->fields['ARO']==15){
-                    $general2['valor']=$rs->fields['igual15'];
-                }
-                if($producto->fields['ARO']>17){
-                    $general2['valor']=$rs->fields['mayor17'];
+                    $valorTemp+=$rs->fields['menor15'];
+                }elseif($producto->fields['ARO']==15){
+                    $valorTemp+=$rs->fields['igual15'];
+                }elseif($producto->fields['ARO']>17){
+                    $valorTemp+=$rs->fields['mayor17'];
+                }else{
+                    $general2['valor']=$rs->fields['precio'];
                 }
                 $rsCarro->movenext();
-		    }
+            }
+            $general2['valor']=$valorTemp;
         }
         
         $general[]=$general2;
@@ -85,19 +97,19 @@ $rs=$model->getTipoInstalacionByComuna($_GET['comuna']);
             
             $rsCarro=$model->getCarroPorCliente($_GET['cliente']);
             $general2['valor']=$rs->fields['precio'];
+            $valorTemp=$rs->fields['precio'];
             while(!$rsCarro->EOF){	
                 $producto=$model->getProductosById($rsCarro->fields['id_producto']);
                 if($producto->fields['ARO']<15){
-                    $general2['valor']=$rs->fields['menor15'];
-                }
-                if($producto->fields['ARO']==15){
-                    $general2['valor']=$rs->fields['igual15'];
-                }
-                if($producto->fields['ARO']>17){
-                    $general2['valor']=$rs->fields['mayor17'];
+                    $valorTemp+=$rs->fields['menor15'];
+                }elseif($producto->fields['ARO']==15){
+                    $valorTemp+=$rs->fields['igual15'];
+                }elseif($producto->fields['ARO']>17){
+                    $valorTemp+=$rs->fields['mayor17'];
                 }
                 $rsCarro->movenext();
-		    }
+            }
+            $general2['valor']=$valorTemp;
             $general[]=$general2;
         }
         

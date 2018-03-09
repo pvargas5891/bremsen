@@ -122,7 +122,7 @@ class PondaAdminModel
 		return $this->db->execute($sql);
 	}
 	 
-    function getProductosFilter($get,$tipo="*"){
+    function getProductosFilter($get,$tipo="*",$group=""){
 	  //	print_r($get);
       $sql="select ".$tipo." from productos where 1=1 ";
 		//if($get['marca']!='undefined')
@@ -199,7 +199,10 @@ class PondaAdminModel
 		}
 			
 		$start=$get['inicio'];
-		$end=$get['fin'];	
+        $end=$get['fin'];	
+        if($group!=""){
+            $sql.=" group by ".$group."";
+        }
 		$sql.=" order by ".$order."";
 		//if($tipo=='*')	
 			//$sql.=" limit $start,$end";

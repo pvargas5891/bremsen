@@ -70,7 +70,7 @@ switch($accion){
 		$general2['TOTALPRODUCTOS']=$rs->fields['TOTAL'];
 		$general[]=$general2;
 		
-		$rs=$model->getTodasLasMarcas();
+		$rs=$model->getProductosFilter($_GET,'*','Marca');
 		$general2=array();
 		while(!$rs->EOF){			
 			$general2[]=$rs->fields['Marca'];			
