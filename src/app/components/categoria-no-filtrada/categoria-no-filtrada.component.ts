@@ -161,12 +161,13 @@ export class CategoriaNoFiltradaComponent implements OnInit {
     this.detallesCategoria.opciones=opcion;
     this.getProductosFiltrado();
   }
-
+public mensajeSublime = false;
   public buscador1 = function(){
       this.detallesCategoria.ancho="";
       this.detallesCategoria.perfil="";
       this.detallesCategoria.aro="";
       this.detallesCategoria.origen=1;
+      this.mensajeSublime=true;
      this.getProductosFiltrado();
   }
     public buscador2 = function(){

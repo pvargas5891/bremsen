@@ -27,7 +27,7 @@ export class CategoriaFiltradaComponent implements OnInit {
     public p: number = 1;
     public itemsPerPage = 10;
     public mostrarLoading = true;
-
+    public mensajeSublime = false;
   constructor(private route: ActivatedRoute,
               private routeLink: Router,
               private _productoService: ProductosService,
@@ -42,6 +42,7 @@ export class CategoriaFiltradaComponent implements OnInit {
           this.origen=parametros.origen;
 
           if(parametros.origen=='1'){
+            this.mensajeSublime=true;
              this.detallesCategoria.marca=parametros.param1;
              this.detallesCategoria.modelo=parametros.param2;
              this.detallesCategoria.ano=parametros.param3;

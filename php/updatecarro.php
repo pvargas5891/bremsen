@@ -103,6 +103,9 @@ function parseador($rs){
 			$general2['MC']=$rs->fields['MC'];
 			$general2['NETO2']=$rs->fields['neto2'];
 			$general2['PRECIO_FINAL']=$rs->fields['precio_final'];
+			if(strtoupper($rs->fields['OFERTA'])=='SI'){
+				$general2['PRECIO_FINAL']=$rs->fields['precio_oferta'];
+			}
 			$general2['PRECIO_OFERTA']=$rs->fields['precio_oferta'];
 			$general2['MODELO_RUEDA']=$rs->fields['modelo_rueda'];
 			$porciones = explode(".", $rs->fields['JPG']);

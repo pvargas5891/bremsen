@@ -110,6 +110,13 @@
 
 
           <div class="product-filter" *ngIf="detallesCategoria.totalProductos > 0">
+              <div class="panel panel-default" *ngIf="mensajeSublime">
+                  <div class="panel-heading">
+                      <h3 class="panel-title">
+                          Los resultados por vehiculos se ofrecen a modo indicativo, verifique las dimensiones de sus neumáticos antes de realizar el pedido.   
+                      </h3>
+                    </div>                
+                </div>
             <div class="row">
               <div class="col-sm-6 text-left"> <label class="control-label" for="input-sort">Mostrando {{ detallesCategoria.inicio}} - {{ detallesCategoria.fin}} de {{detallesCategoria.totalProductos}} Productos</label></div>
               <div class="col-sm-3 text-right">

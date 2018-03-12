@@ -106,7 +106,7 @@ class PondaAdminModel
         return $this->db->execute($sql);
     }
     function getProductosAllTotal(){
-      $sql="select count(*) TOTAL from productos";
+      $sql="select count(*) TOTAL from productos where estado = 1";
       $rs=$this->db->execute($sql);
       return $rs->fields['TOTAL'];
     }
@@ -124,7 +124,7 @@ class PondaAdminModel
 	 
     function getProductosFilter($get,$tipo="*",$group=""){
 	  //	print_r($get);
-      $sql="select ".$tipo." from productos where 1=1 ";
+      $sql="select ".$tipo." from productos where estado=1 ";
 		//if($get['marca']!='undefined')
 			//$sql.=" and lower(Marca) like lower('%".$get['marca']."%')";
 		if($get['marcaFiltro']!='undefined')
@@ -209,7 +209,7 @@ class PondaAdminModel
       return $this->db->execute($sql);
     }
     function getProductosAll($start=0,$end=10,$order="Marca"){
-        $sql="select * from productos ";
+        $sql="select * from productos where estado = 1";
         $sql.=" order by ".$order." ASC limit $start,$end";
         return $this->db->execute($sql);
     }
