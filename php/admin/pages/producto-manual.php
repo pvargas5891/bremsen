@@ -29,10 +29,10 @@ if(isset($_FILES['archivo'])){
 		$model->vaciaProductosTemp();
 	    if (($fichero = fopen($inputFileName, "r")) !== FALSE) {
 		    // Lee los nombres de los campos
-		    $nombres_campos = fgetcsv($fichero, 0, ",", "\"", "\"");
+		    $nombres_campos = fgetcsv($fichero, 0, $_POST['tiposeparacion'], "\"", "\"");
 		    $num_campos = count($nombres_campos);
 		    // Lee los registros
-		    while (($datos = fgetcsv($fichero, 1000, ",", "\"", "\"")) !== FALSE) {
+		    while (($datos = fgetcsv($fichero, 1000, $_POST['tiposeparacion'], "\"", "\"")) !== FALSE) {
 		        // Crea un array asociativo con los nombres y valores de los campos
 		        /*for ($icampo = 0; $icampo < $num_campos; $icampo++) {
 		            $registro[$nombres_campos[$icampo]] = $datos[$icampo];
@@ -197,8 +197,11 @@ echo '<script src="'.$base_url.'/assets/library/jquery/jquery.min.js?v=v2.0.0-rc
 						 										<div class="widget widget-heading-simple widget-body-gray">
 						 											- Seleccione el archivo que desea cargar masivamente<br>
 						 											- Recuerde que cada producto nuevo será insertado y si ya existe será actualizado<br>
-						 											- Solo se permiten archivos en formato CSV con campos separados con punto y comma!!
-						 											<input type="file" name="archivo" id="archivo" class="form-control">
+						 											- Solo se permiten archivos en formato CSV
+						 											<br>Ingrese el separador de columna en el siguiente cuadro:
+																	<input type="text" name="tiposeparacion" class="form-control" style="width: 100px;" placeholder="">
+																	
+																	<br><input type="file" name="archivo" id="archivo" class="form-control">
 						 											<div style="text-align: center"><br><br>
 						 												<a href="javascript:void(0);" onclick="document.formaularioFile.submit();" class="btn btn-primary"><i class="fa fa-fw fa-download"></i> Cargar Archivo</a>						 												
 						 											</div>
