@@ -24,15 +24,18 @@ if(isset($_FILES['archivo'])){
 		$ruta_destino = 'excel/';
 		$inputFileName = $ruta_destino . str_replace(' ','_',$_FILES['archivo']['name']);
 		move_uploaded_file($_FILES['archivo']['tmp_name'], $inputFileName);    
-
+		$separacion=",";
+		if($_POST['tiposeparacion']!=''){
+			$separacion=$_POST['tiposeparacion'];
+		}
 
 		$model->vaciaProductosTemp();
 	    if (($fichero = fopen($inputFileName, "r")) !== FALSE) {
 		    // Lee los nombres de los campos
-		    $nombres_campos = fgetcsv($fichero, 0, $_POST['tiposeparacion'], "\"", "\"");
+		    $nombres_campos = fgetcsv($fichero, 0, $separacion, "\"", "\"");
 		    $num_campos = count($nombres_campos);
 		    // Lee los registros
-		    while (($datos = fgetcsv($fichero, 1000, $_POST['tiposeparacion'], "\"", "\"")) !== FALSE) {
+		    while (($datos = fgetcsv($fichero, 1000, $separacion, "\"", "\"")) !== FALSE) {
 		        // Crea un array asociativo con los nombres y valores de los campos
 		        /*for ($icampo = 0; $icampo < $num_campos; $icampo++) {
 		            $registro[$nombres_campos[$icampo]] = $datos[$icampo];
@@ -198,7 +201,7 @@ echo '<script src="'.$base_url.'/assets/library/jquery/jquery.min.js?v=v2.0.0-rc
 						 											- Seleccione el archivo que desea cargar masivamente<br>
 						 											- Recuerde que cada producto nuevo será insertado y si ya existe será actualizado<br>
 						 											- Solo se permiten archivos en formato CSV
-						 											<br>Ingrese el separador de columna en el siguiente cuadro:
+						 											<br>Ingrese el separador de columna en el siguiente cuadro (por defecto es comma):
 																	<input type="text" name="tiposeparacion" class="form-control" style="width: 100px;" placeholder="">
 																	
 																	<br><input type="file" name="archivo" id="archivo" class="form-control">
