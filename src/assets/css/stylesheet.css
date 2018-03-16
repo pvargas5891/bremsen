@@ -1,6 +1,7 @@
 /*-----------------------------------------------------------------------------------
 
-    Template Name: Marketshop eCommerce HTML Template
+	Template Name: Marketshop eCommerce HTML Template
+	
     Author: Harnish Design
     Author URI: http://harnishdesign.net
 
@@ -115,7 +116,7 @@ h2.bolder { font-size: 36px !important; }
 h3 {
 	color: #4a4a4a !important;
 }
-h4 { font-size: 16px !important; font-weight: bold !important; color: #1e1e1e; }
+h4 { font-size: 16px ; font-weight: bold !important; color: #1e1e1e; }
 
 
 h1.title { text-transform: uppercase;font-weight: bold; }
@@ -416,7 +417,7 @@ background: #ccc !important;
 #header #cart .dropdown-menu {
 	padding:8px;
 	margin:0;
-	z-index:1011;
+	z-index:3011;
 	background: #FFF;
 	border:3px solid #3e7cb4;
 	border-width:3px 0px 0px 0px;
@@ -1041,6 +1042,9 @@ visibility:hidden;
 	.bremsen3  {background-color:#383838; color:#ffffff; text-transform: uppercase;}
 	h1.nuestros-servicios  { text-transform: uppercase;  font-size: 50px; }
 
+
+
+
 	.owl-dots {
 		text-align: center;
 		padding-top:18px;
@@ -1110,16 +1114,47 @@ visibility:hidden;
 
 	.volver { float: left; }
 
-	@media (max-width: 460px) {
-  		 .video { width: 360px; height:203px; }
-  		h4.tabs-h4 { font-size: 11px !important; }
-		  .pad-upDown { padding: 10px }
-		  .responsivo {padding: 30px; }
-		 .pad-responsivo { padding-top: 20px;}
-		 .texto-tabs{ font-size:14px !important;
-		 }
+	/* Flashing */
+.hover13 figure:hover img {
+	opacity: 1;
+	-webkit-animation: flash 1.5s;
+	animation: flash 1.5s;
+  }
+  @-webkit-keyframes flash {
+	0% {
+	  opacity: .4;
 	}
+	100% {
+	  opacity: 1;
+	}
+  }
+  @keyframes flash {
+	0% {
+	  opacity: .4;
+	}
+	100% {
+	  opacity: 1;
+	}
+  }
+  /* Flashing */
 
+	@media (max-width: 560px) {
+  		.video { width: 360px; height:203px; }
+  		 h4.tabs-h4 { font-size: 11px !important; }
+		.pad-upDown { padding: 10px }
+		.responsivo {padding: 30px; }
+		.pad-responsivo { padding-top: 20px;}
+		.texto-tabs{ font-size:14px !important; }
+		.owl-nav  {display: none !important;}
+		.product-thumb h4 { height: 70px;}
+		.nav-tabs > li .btn-default { font-size: 9px;}
+		h4.tablacarro {font-size: 9px;}
+		.alinear { padding-left:0px !important; } 
+		.tablaScroll {overflow-x:scroll;}
+		.owl-prev  { display: none;}
+		.owl-next  { display: none;}
+		.tabs1 {margin-top: 16px;}
+	}
 
 	@media (max-width: 990px) {
 		.noView { display: none; }

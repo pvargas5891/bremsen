@@ -42,25 +42,25 @@
                   <tr class="borderTop" *ngFor="let producto of carroCompra">
                     <td class="text-center">
                       <a routerLink="/producto/{{producto.ID}}">
-                      <img src="assets/galerias/{{producto.JPG}}" width="50px" alt="Xitefun Causal Wear Fancy Shoes" title="">
+                      <img src="assets/galerias/{{producto.JPG}}" width="45px" alt="" title="">
                     </a>
                     </td>
                     <td class="text-left">
 
-                        <a routerLink="/producto/{{producto.ID}}"><h4><b>{{producto.MARCA}} {{producto.MODELO}}</b></h4>
+                        <a routerLink="/producto/{{producto.ID}}"><h4 class="tablacarro"><b>{{producto.MARCA}} {{producto.MODELO}}</b></h4>
                            Medida: <span>{{producto.MEDIDA}}</span>
                          </a>
                     </td>
-						<td class="text-left"><h4><b>{{producto.PRECIO_FINAL | number | currencyFormat}}</b></h4></td>
+						<td class="text-left"><h4 class="tablacarro"><b>{{producto.PRECIO_FINAL | number | currencyFormat}}</b></h4></td>
                     <td class="text-left" style="padding-top: 24px;">
-                        <select class="form-control" style="width: 75%;" #cantidadSeleccionada (change)="cambiaCantidad(producto.idCarro,cantidadSeleccionada.value,producto.ID)">
+                        <select class="form-control" style="width: 55px;" #cantidadSeleccionada (change)="cambiaCantidad(producto.idCarro,cantidadSeleccionada.value,producto.ID)">
                         <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo" [selected]="stock.codigo == producto.cantidadCarro">{{stock.nombre}}</option>
                       </select>
                     </td>
 					  <td class="text-left">
                			<table>
                				<tr>
-								        <td><h4><b>{{producto.totalParcial  | number | currencyFormat}}</b></h4></td>
+								        <td><h4 class="tablacarro"><b>{{producto.totalParcial  | number | currencyFormat}}</b></h4></td>
                					<td>&nbsp; &nbsp;<i style="color: red; font-size: 18px" class="fa fa-times-circle" (click)="eliminaProductoCarro(producto.idCarro)"></i></td>
                				</tr>
 
@@ -196,7 +196,7 @@
                       <div class="form-group" [ngClass]="{ 'has-error': finstalacion1.submitted && !fechaInstalacion.valid }">
                         <label for="date" class="control-label">Elige tu fecha de instalación</label>
                   <div class="input-group date" style="width: 100%;">
-                      <my-date-picker [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event)" [selDate]="fechaInstalacionvalue"></my-date-picker>
+                      <my-date-picker [options]="myDatePickerOptions" placeholder="Presionar el calendario" (dateChanged)="onDateChanged($event)" [selDate]="fechaInstalacionvalue"></my-date-picker>
                   </div>
                    <div *ngIf="finstalacion1.submitted && !fechaInstalacion.valid" class="help-block">Debe seleccionar una fecha de instalacion</div>
                       </div>
@@ -343,8 +343,8 @@
 		</div>
 
               <br>
-
-            <div class="col-sm-6" style="padding-left: 0px;">
+<div class="row">
+            <div class="col-md-6" >
                   <h2 class="titulo-light subtile">Ingresa tu código de descuento</h2>
               <div class="panel panel-default">
 
@@ -361,10 +361,10 @@
               </div>
             </div>
 
-            <div class="col-sm-6" style="padding-right: 0px;">
+            <div class="col-md-6" >
                <h2 class="titulo-light subtile">Resumen</h2>
             <div style="border: 1px solid #f2f2f2; padding: 10px;">
-              <table class="table table-precio" style="font-size: 14px;">
+              <table class="table table-precio tablaScroll" style="font-size: 14px;">
                 <tr>
                   <td class="text-left">Neumáticos</td>
                   <td class="text-right">{{costoNeumaticos  | number | currencyFormat}}</td>
@@ -404,6 +404,7 @@
        </div>
 
         </div>
+        </div><!-- cierre row-->
         <!--Middle Part End -->
       </div>
     </div>

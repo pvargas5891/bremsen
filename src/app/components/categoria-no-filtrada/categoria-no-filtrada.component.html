@@ -27,7 +27,7 @@
                 </label>
               </div>
               <div class="radio" *ngFor="let marca of detallesCategoria.todasMarcas">
-                <label>
+                <label  style="text-transform: uppercase;">
                   <input type="radio" [value]="marca" name="filtromarcamodel" (click)="filtroMarca(marca)">&nbsp;&nbsp;
 
                   {{marca}}
@@ -90,8 +90,8 @@
         <div class="" style="padding-top: 28px;">
 
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" style="width: 50%" class="active text-center"><a href="#comprarAro" aria-controls="comprarAro" role="tab" data-toggle="tab"><b style="font-size: 17.8px; text-transform: uppercase; ">Comprar por Auto</b></a></li>
-              <li role="presentation" style="width: 50%" class="text-center"><a href="#comprarMedida" aria-controls="comprarMedida" role="tab" data-toggle="tab"><b style="font-size: 17.8px; text-transform: uppercase; ">Comprar por medida</b></a></li>
+              <li role="presentation" style="width: 50%;" class="active text-center tabs1"><a href="#comprarAro" aria-controls="comprarAro" role="tab" data-toggle="tab"><b style="font-size: 17.8px; text-transform: uppercase; ">Comprar por Auto</b></a></li>
+              <li role="presentation" style="width: 50%;" class="text-center"><a href="#comprarMedida" aria-controls="comprarMedida" role="tab" data-toggle="tab"><b style="font-size: 17.8px; text-transform: uppercase; ">Comprar por medida</b></a></li>
             </ul>
 
 
@@ -258,7 +258,7 @@
                   </div>
 
                 </div>
-        <div class="col-md-4">
+        <div class="col-md-4 alinear">
           <table class="table2 table table-precio" style="padding-right: 0px;">
             <tr >
               <td>Cantidad</td>

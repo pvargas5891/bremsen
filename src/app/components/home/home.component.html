@@ -1,6 +1,6 @@
 
 
-<div class=" bg-home container-fluid" style="padding: 0px 50px;"> <!-- pasar el css-->
+<div class=" bg-home container-fluid" style="padding: 0px 20px;"> <!-- pasar el css-->
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -129,7 +129,7 @@ Múltiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
 slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos" *ngIf="productos.length>0">
 
       <div class="product-thumb" *ngFor="let producto of productos">
-      <div class="image" style="line-height: 40px;"><a routerLink="/producto/{{producto.ID}}"><img src="assets/galerias/{{producto.JPG}}" class="img-responsive responsivo" /></a></div>
+      <div class="image" style="line-height: 40px;"><a routerLink="/producto/{{producto.ID}}"><img src="assets/galerias/{{producto.JPG}}" class="img-responsive " /></a></div>
       <div class="caption">
           <h4><a routerLink="/producto/{{producto.ID}}">{{producto.MARCA}} {{producto.MODELO_RUEDA}}</a></h4>
           <h6>{{producto.MEDIDA}}</h6>
@@ -144,7 +144,7 @@ slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos"
 
 <style>
     .owl-carousel .owl-nav.disabled, .owl-carousel .owl-dots.disabled {
-    display: flex !important;}
+    display: flex ;}
 </style>
 
 <br>
@@ -154,7 +154,7 @@ slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos"
     <div class="row">
         <div class="col-md-4">
             <img class="img-responsive center-block" src="{{blogs[0].fotoprincipal}}">
-            <h3>{{blogs[0].titulo}} </h3>
+            <h4>{{blogs[0].titulo}} </h4>
             <p>{{blogs[0].contenido | slice:0:100}}</p>
             <button type="button" class="btn btn-primary " routerLink="/contenido/{{blogs[0].id}}">Leer</button>
 
@@ -163,19 +163,19 @@ slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos"
         <div class="col-md-8">
           <div class="row">
             <div class="col-md-6 pad-upDown">
-               <a routerLink="/search/home/camioneta"><img class="img-responsive center-block " src="assets/image/BANNERS_at-home.jpg"></a>
+               <a routerLink="/search/home/camioneta"><img class="img-responsive center-block " src="assets/image/OFERTA-V2.jpg"></a>
             </div>
             <div class="col-md-6">
-              <a routerLink="/search/home/automovil"> <img class="img-responsive center-block " src="assets/image/BANNERS_ht-home.jpg"></a>
+              <a routerLink="/search/home/automovil"> <img class="img-responsive center-block " src="assets/image/AUTO.jpg"></a>
             </div>
            </div>
            <br>
            <div class="row">
             <div class="col-md-6">
-               <a  routerLink="/search/home/camioneta"><img class="img-responsive center-block " src="assets/image/BANNERS_mt-home.jpg"></a>
+               <a  routerLink="/search/home/camioneta"><img class="img-responsive center-block " src="assets/image/OFF-ROAD.jpg"></a>
             </div>
             <div class="col-md-6 pad-upDown">
-              <a  routerLink="/search/home/runflat"> <img class="img-responsive center-block " src="assets/image/BANNERS_oferta-runflat.jpg"></a>
+              <a  routerLink="/search/home/runflat"> <img class="img-responsive center-block " src="assets/image/RUNFLAT.jpg"></a>
             </div>
           </div>
         </div>
@@ -187,6 +187,144 @@ slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos"
 <br><br>
 <br><br>
 <br><br>
+
+
+
+<div class="container">
+    <div class="row">
+          <div class="col-md-12 text-center" style="padding-bottom: 30px;">
+            <h1 class="title">Marcas </h1>
+        </div> 
+        
+        <div class="col-md-6">
+          <table class="table">
+            <tr>
+                <td class="hover13">
+                    <figure>
+                  <a routerLink="/search/marca/yokohama"><img class="img-responsive center-block" src="assets/image/yokohama.png"></a>
+                      </figure>
+                </td>
+
+                <td  class="hover13">
+                    <figure>
+                  <a routerLink="/search/marca/michelin"> <img class="img-responsive center-block" src="assets/image/michelin.png"></a>
+                      </figure>
+                </td>
+            </tr>
+          </table>    
+
+        </div>
+
+
+        <div class="col-md-6">
+          <table class="table">
+            <tr>
+                <td class="hover13">
+                    <figure>
+                  <a routerLink="/search/marca/BF Goodrich"> <img class="img-responsive center-block" src="assets/image/BFGoodrich.png"></a>
+                    </figure>
+                </td>
+
+                <td  class="hover13">
+                    <figure>
+                  <a routerLink="/search/marca/falken">  <img class="img-responsive center-block" src="assets/image/falken.png"></a>
+                      </figure>
+                </td>
+            </tr>
+          </table>
+
+        </div>
+
+
+        <div class="col-md-6">
+          <table class="table">
+            <tr>
+                <td  class="hover13">
+                    <figure>
+                  <a routerLink="/search/marca/Kumho"> <img class="img-responsive center-block" src="assets/image/KumhoTire.png"></a>
+                      </figure>
+                </td>
+
+                <td  class="hover13">
+                    <figure>
+                  <a routerLink="/search/marca/hankook"> <img class="img-responsive center-block" src="assets/image/hankook.png"></a>
+                      </figure>
+                </td>
+            </tr>
+          </table>
+
+        </div>
+
+        <div class="col-md-6">
+          <table class="table">
+            <tr>
+                <td  class="hover13">
+                    <figure>
+                  <a routerLink="/search/marca/Dunlop"> <img class="img-responsive center-block" src="assets/image/Dunlop.png"></a>
+                      </figure>
+                </td>
+
+                <td  class="hover13">
+                    <figure>
+                  <a routerLink="/search/marca/pirelli"> <img class="img-responsive center-block" src="assets/image/pirelli.png"></a>
+                      </figure>
+                </td>
+            </tr>
+          </table>
+
+        </div>
+
+
+
+        <div class="col-md-6">
+          <table class="table">
+            <tr>
+                <td  class="hover13">
+                    <figure>
+                  <a routerLink="/search/marca/westLake"> <img class="img-responsive center-block" src="assets/image/westLake.png"></a>
+                      </figure>
+                </td>
+
+                <td  class="hover13">
+                    <figure>
+                  <a routerLink="/search/marca/tigar">  <img class="img-responsive center-block" src="assets/image/tigar.png"></a>
+                      </figure>
+                </td>
+            </tr>
+          </table>
+
+        </div>
+
+
+        <div class="col-md-6">
+          <table class="table">
+            <tr>
+                <td  class="hover13">
+                    <figure>
+                  <a routerLink="/search/marca/sumitomo">  <img class="img-responsive center-block" src="assets/image/sumitomo.png"></a>
+                      </figure>
+                </td>
+
+                <td  class="hover13">
+                    <figure>
+                  <a routerLink="/search/marca/ohtsu">  <img class="img-responsive center-block" src="assets/image/ohtsu.png"></a>
+                      </figure>
+                </td>
+            </tr>
+          </table>
+
+        </div>
+       
+     
+    </div>
+</div>
+
+
+
+
+
+
+<!--
 
 <div class="container">
   <div class="row">
@@ -207,6 +345,7 @@ slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos"
       <div class="col-md-3" style="padding: 15px; padding-bottom: 30px;">
           <a routerLink="/search/marca/falken">  <img class="img-responsive center-block" src="assets/image/falken.png"></a>
       </div>
+
       <div class="col-md-3" style="padding: 15px; padding-bottom: 30px; ">
            <a routerLink="/search/marca/Kumho"> <img class="img-responsive center-block" src="assets/image/KumhoTire.png"></a>
       </div>
@@ -233,3 +372,4 @@ slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos"
       </div>
   </div>
 </div>
+-->

@@ -26,7 +26,7 @@
                 </label>
               </div>
               <div class="radio" *ngFor="let marca of detallesCategoria.todasMarcas">
-                <label>
+                <label style="text-transform: uppercase;">
                   <input type="radio" [value]="marca" name="filtromarcamodel" (click)="filtroMarca(marca)">&nbsp;&nbsp;
 
                   {{marca}}

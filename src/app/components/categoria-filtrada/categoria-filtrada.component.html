@@ -26,7 +26,7 @@
                 </label>
               </div>
               <div class="radio" *ngFor="let marca of detallesCategoria.todasMarcas">
-                <label>
+                <label  style="text-transform: uppercase;">
                   <input type="radio" [value]="marca" name="filtromarcamodel" (click)="filtroMarca(marca)">&nbsp;&nbsp;
 
                   {{marca}}
@@ -194,7 +194,7 @@
                   </div>
 
                 </div>
-        <div class="col-md-4">
+        <div class="col-md-4 alinear">
           <table class="table2 table table-precio" style="padding-right: 0px;">
             <tr>
               <td>Cantidad</td>
@@ -202,7 +202,7 @@
         
             </tr>
             <tr>
-              <td class="col-sm-6">
+              <td class="col-sm-6 ">
         
                <select class="form-control" style="width: 75%;" #selectCantidad>
                   <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo" [selected]="stock.codigo == 4">{{stock.nombre}}</option>
