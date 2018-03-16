@@ -549,7 +549,7 @@ var currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
 }
 
-public eliminaProductoCarro(id){
+public eliminaProductoCarro(id,producto){
   //actualizaCarro
   if(!confirm("Se eliminará el producto seleccionado, desea seguir?")){
     return;
@@ -581,7 +581,7 @@ public eliminaProductoCarro(id){
       this.costoNeumaticos = 0;
 
       for (var i = 0; i < carroTemporal.length; i++) {
-        if (carroTemporal[i].id_producto!=id)
+        if (carroTemporal[i].id_producto != producto)
           this.carroCompra.push(this.getProductoById(carroTemporal[i]));
       }
       this.seleccionaInstalacion(this.comunaInstalacion);
