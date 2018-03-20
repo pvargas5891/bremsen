@@ -14,7 +14,7 @@ Múltiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
         <div class="pest-home">
 
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation"  style="width: 50%" class="active text-center"><a href="#comprarAro" aria-controls="comprarAro" role="tab" data-toggle="tab">
+              <li role="presentation"  style="width: 50%" class="active text-center "><a class="tabchico" href="#comprarAro" aria-controls="comprarAro" role="tab" data-toggle="tab">
                 <p class="titulosDetalles">buscar por auto</p></a></li>
 
               <li role="presentation" class="text-center"  style="width: 50%"><a href="#comprarMedida" aria-controls="comprarMedida" role="tab" data-toggle="tab">
@@ -131,12 +131,12 @@ slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos"
       <div class="product-thumb" *ngFor="let producto of productos">
       <div class="image" style="line-height: 40px;"><a routerLink="/producto/{{producto.ID}}"><img src="assets/galerias/{{producto.JPG}}" class="img-responsive " /></a></div>
       <div class="caption">
-          <h4><a routerLink="/producto/{{producto.ID}}">{{producto.MARCA}} {{producto.MODELO_RUEDA}}</a></h4>
+          <h4 class="producto1"><a routerLink="/producto/{{producto.ID}}">{{producto.MARCA}} {{producto.MODELO_RUEDA}}</a></h4>
           <h6>{{producto.MEDIDA}}</h6>
           <p class="price">{{producto.PRECIO_FINAL | number | currencyFormat}} </p>
       </div>
       <div>
-        <button class="btn btn-primary btn-sm" routerLink="/producto/{{producto.ID}}"><span>Ver producto</span></button>
+        <button class="btn btn-primary btn-sm" routerLink="/producto/{{producto.ID}}"><span class="verpro">Ver producto</span></button>
       </div>
     </div>
  </owl-carousel>
@@ -156,7 +156,7 @@ slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos"
             <img class="img-responsive center-block" src="{{blogs[0].fotoprincipal}}">
             <h4>{{blogs[0].titulo}} </h4>
             <p>{{blogs[0].contenido | slice:0:100}}</p>
-            <button type="button" class="btn btn-primary " routerLink="/contenido/{{blogs[0].id}}">Leer</button>
+            <button type="button" class="btn btn-primary " style="margin-bottom:50px;" routerLink="/contenido/{{blogs[0].id}}">Leer</button>
 
         </div>
 

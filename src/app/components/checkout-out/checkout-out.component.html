@@ -210,14 +210,14 @@
 
 
 <div *ngIf="desactivaBotones">
-        <div class="col-md-6" style="padding-top: 25px; padding-left: 0px;">
+        <div class="col-md-6 redCompra" style="padding-top: 25px;">
               <button [disabled]="loading" type="submit" (click)="insertaClave(1)" class="btn btn-primary btn-block">Pagar <b>Web</b> <b style="color:#ff9222;">Pay</b></button>
            
 
          <p class="p-botnes" >Puedes pagar con Tarjeta de crédito o Redcompra.</p>
         </div>
 
-         <div class="col-md-6"  style="padding-top: 25px; padding-right: 0px;">
+         <div class="col-md-6 transferencia"  style="padding-top: 25px; ">
                 <button class="btn btn-default  btn-block" (click)="insertaClave(2)"type="submit">
                       Transferencia Bancaria
               </button>
