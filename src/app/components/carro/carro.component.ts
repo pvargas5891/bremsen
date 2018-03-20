@@ -423,6 +423,8 @@ public generainstalacion = function(comuna, usuario){
 
        // console.debug(data);
           for(var id in data){
+            var producto = this.getProductoById(data[id]);
+            if (producto.CODIGO != "")
                this.carroCompra.push(this.getProductoById(data[id]));
           }
 
@@ -601,7 +603,9 @@ public eliminaProductoCarro(id,producto){
     //console.debug(carroTemporal);
     if (carroTemporal != null) {
       for (var i = 0; i < carroTemporal.length; i++) {
-        this.carroCompra.push(this.getProductoById(carroTemporal[i]));
+        var producto = this.getProductoById(carroTemporal[i]);
+        if(producto.CODIGO!="")
+          this.carroCompra.push(producto);
       }
 
     } else {

@@ -55,6 +55,10 @@ export class SearchComponent {
                 this.param1="Alta Seguridad (Runflat)";
                 this.detallesCategoria.atributo=this.param1;
               }
+              if (this.param1 == 'ofertas') {
+                this.param1 = "Oferta";
+                this.detallesCategoria.opciones = this.param1;
+              }
               this.detallesCategoria.origen='undefined';
             }else{
               this.detallesCategoria.origen=this.param1;
