@@ -1138,37 +1138,37 @@ visibility:hidden;
 	}
   }
   /* Flashing */
+  @media (max-width: 560px) {
+	.video { width: 360px; height:203px; }
+	 h4.tabs-h4 { font-size: 11px !important; }
+  .pad-upDown { padding: 10px }
+  .responsivo {padding: 30px; }
+  .pad-responsivo { padding-top: 20px;}
+  .texto-tabs{ font-size:14px !important; }
+  .owl-nav  {display: none !important;}
+  /*.product-thumb h4 { height: 76px;}*/
+  h4.producto1 { height: 77px;}
+  .nav-tabs > li .btn-default { font-size: 9px;}
+  h4.tablacarro {font-size: 9px;}
+  .alinear { padding-left:0px !important; } 
+  .tablaScroll {overflow-x:scroll;}
+  .owl-prev  { display: none;}
+  .owl-next  { display: none;}
+  .tabs1 {margin-top: 16px;}
+  span.verpro {font-size: 8px;}
+  .tablaResponsiva  { overflow-x:auto;}
+  .resumen {font-size: 10px;}
+  
+}
 
-	@media (max-width: 560px) {
-  		.video { width: 360px; height:203px; }
-  		 h4.tabs-h4 { font-size: 11px !important; }
-		.pad-upDown { padding: 10px }
-		.responsivo {padding: 30px; }
-		.pad-responsivo { padding-top: 20px;}
-		.texto-tabs{ font-size:14px !important; }
-		.owl-nav  {display: none !important;}
-		/*.product-thumb h4 { height: 76px;}*/
-		h4.producto1 { height: 77px;}
-		.nav-tabs > li .btn-default { font-size: 9px;}
-		h4.tablacarro {font-size: 9px;}
-		.alinear { padding-left:0px !important; } 
-		.tablaScroll {overflow-x:scroll;}
-		.owl-prev  { display: none;}
-		.owl-next  { display: none;}
-		.tabs1 {margin-top: 16px;}
-		span.verpro {font-size: 8px;}
-		.tablaResponsiva  { overflow-x:auto;}
-		
-	}
+@media (max-width: 990px) {
+  .noView { display: none; }
+  .redCompra { padding: 0px;}
+.transferencia { padding: 0px;}
+  
+}
 
-	@media (max-width: 990px) {
-		.noView { display: none; }
-		.redCompra { padding: 0px;}
-	.transferencia { padding: 0px;}
-		
-	}
-
-	@media only screen and (max-width: 467px) and (min-width: 428px)
+@media only screen and (max-width: 467px) and (min-width: 428px)
 {
 
 .tab22 {height: 65px;}
@@ -1187,27 +1187,28 @@ visibility:hidden;
 
 
 
-	
-	@media only screen and (max-width: 392px) and (min-width: 363px)
-	{
 
-		.tabchico { height: 75px;}
-		.product-list .product-thumb h4 { padding-bottom: 15px;}
-	}
+@media only screen and (max-width: 400px) and (min-width: 355px)
+{
+
+  .tabchico { height: 75px;}
+  .tabchico2 { height: 75px;}
+  .product-list .product-thumb h4 { padding-bottom: 15px;}
+}
 
 
 
-	@media (min-width: 990px) {
-		.View { display: none; }
-		.bg-home {padding-top: 112px !important;}
-		#header {     
-			position: fixed;
-			width: 100%;
-			z-index: 99;
-		}
-		#container { padding-top: 112px;}
+@media (min-width: 990px) {
+  .View { display: none; }
+  .bg-home {padding-top: 112px !important;}
+  #header {     
+	  position: fixed;
+	  width: 100%;
+	  z-index: 99;
+  }
+  #container { padding-top: 112px;}
 
-	}
+}
 
 
 

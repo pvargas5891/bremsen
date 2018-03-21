@@ -17,7 +17,7 @@ Múltiples formas de instalación y el mejor servicio al estilo Bremsen.cl</p>
               <li role="presentation"  style="width: 50%" class="active text-center "><a class="tabchico" href="#comprarAro" aria-controls="comprarAro" role="tab" data-toggle="tab">
                 <p class="titulosDetalles">buscar por auto</p></a></li>
 
-              <li role="presentation" class="text-center"  style="width: 50%"><a href="#comprarMedida" aria-controls="comprarMedida" role="tab" data-toggle="tab">
+              <li role="presentation" class="text-center"  style="width: 50%"><a class="tabchico2" href="#comprarMedida" aria-controls="comprarMedida" role="tab" data-toggle="tab">
                 <p class="titulosDetalles">buscar por medida</p></a></li>
             </ul>
 
@@ -153,15 +153,19 @@ slideSpeed : 300, paginationSpeed : 400, singleItem : true}" [items]="productos"
 <div class="container" *ngIf="tieneBlog">
     <div class="row">
         <div class="col-md-4">
+            <h1>Blog</h1>
             <img class="img-responsive center-block" src="{{blogs[0].fotoprincipal}}">
             <h4>{{blogs[0].titulo}} </h4>
             <p>{{blogs[0].contenido | slice:0:100}}</p>
-            <button type="button" class="btn btn-primary " style="margin-bottom:50px;" routerLink="/contenido/{{blogs[0].id}}">Leer</button>
+            <button type="button" class="btn btn-primary " style="margin-bottom:60px;" routerLink="/contenido/{{blogs[0].id}}">Leer</button>
 
         </div>
 
         <div class="col-md-8">
           <div class="row">
+              <div class="col-md-12">
+                  <h1>Categorías</h1>
+               </div>
             <div class="col-md-6 pad-upDown">
                <a routerLink="/search/home/ofertas"><img class="img-responsive center-block " src="assets/image/OFERTA-V2.jpg"></a>
             </div>

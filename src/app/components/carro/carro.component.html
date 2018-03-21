@@ -364,7 +364,7 @@
             <div class="col-md-6" >
                <h2 class="titulo-light subtile">Resumen</h2>
             <div style="border: 1px solid #f2f2f2; padding: 10px;">
-              <table class="table table-precio tablaScroll" style="font-size: 14px;">
+              <table class="table table-precio tablaScroll resumen">
                 <tr>
                   <td class="text-left">Neumáticos</td>
                   <td class="text-right">{{costoNeumaticos  | number | currencyFormat}}</td>
@@ -381,8 +381,11 @@
                   <td class="text-left"><strong>TOTAL</strong></td>
                   <td class="text-right"><h4><b>{{totalTotales  | number | currencyFormat}}</b></h4></td>
                 </tr>
+                </table>
+
+                <table class="table table-precio tablaScroll resumen">
                 <tr>
-                 <td></td>
+                <td class=col-md-6></td>
                   <td  class="text-right">
                   <div *ngIf="consesion">
                     <button *ngIf="!activaErrorNoDisponible" type="button" class="btn btn-default btn-block" (click)="checking()">Continuar con tu pedido</button><br>
