@@ -33,7 +33,7 @@ export class HeaderComponent implements DoCheck{
         private _productoService: ProductosService,
         private sanitizer: DomSanitizer
       ) {
-
+       //localStorage.setItem('carroUserTemporal', JSON.stringify(null));
           var currentUser = JSON.parse(localStorage.getItem('currentUser'));
           this.muestraLogin=false;
           if(currentUser != null){
@@ -176,7 +176,8 @@ export class HeaderComponent implements DoCheck{
       //console.debug(carroTemporal);
       if (carroTemporal != null) {
         for (var i = 0; i < carroTemporal.length; i++) {
-          this.carroCompra.push(this.getProductoById(carroTemporal[i]));
+          if (carroTemporal[i]!=null)
+            this.carroCompra.push(this.getProductoById(carroTemporal[i]));
         }
 
       }

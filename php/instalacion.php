@@ -96,16 +96,19 @@ $rs=$model->getTipoInstalacionByComuna($_GET['comuna']);
             $general2['tipo']=$rs->fields['tipo'];
             
             $rsCarro=$model->getCarroPorCliente($_GET['cliente']);
-            $general2['valor']=$rs->fields['precio'];
-            $valorTemp=$rs->fields['precio'];
+            //$general2['valor']=$rs->fields['precio'];
+            //
+            $valorTemp=0;
             while(!$rsCarro->EOF){	
                 $producto=$model->getProductosById($rsCarro->fields['id_producto']);
                 if($producto->fields['ARO']<15){
-                    $valorTemp+=$rs->fields['menor15'];
-                }elseif($producto->fields['ARO']==15){
-                    $valorTemp+=$rs->fields['igual15'];
+                    $valorTemp+=$rsCarro->fields['cantidad']*$rs->fields['menor15'];
+                }elseif($producto->fields['ARO']>=15){
+                    $valorTemp+=$rsCarro->fields['cantidad']*$rs->fields['igual15'];
                 }elseif($producto->fields['ARO']>17){
-                    $valorTemp+=$rs->fields['mayor17'];
+                    $valorTemp+=$rsCarro->fields['cantidad']*$rs->fields['mayor17'];
+                }else{
+                    $valorTemp=$rs->fields['precio'];
                 }
                 $rsCarro->movenext();
             }

@@ -581,11 +581,15 @@ public eliminaProductoCarro(id,producto){
     if (carroTemporal != null) {
       this.carroCompra =  [];
       this.costoNeumaticos = 0;
-
+      var carroTemporal2 = [];
       for (var i = 0; i < carroTemporal.length; i++) {
-        if (carroTemporal[i].id_producto != producto)
+        if (carroTemporal[i].id_producto != producto){
+          carroTemporal2.push(carroTemporal[i]);
           this.carroCompra.push(this.getProductoById(carroTemporal[i]));
+        }  
       }
+      console.debug(carroTemporal2);
+      localStorage.setItem('carroUserTemporal', JSON.stringify(carroTemporal2));
       this.seleccionaInstalacion(this.comunaInstalacion);
       localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
       this.calculaTotales();
