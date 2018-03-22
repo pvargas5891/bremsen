@@ -60,12 +60,10 @@ export class CarroComponent implements OnInit {
     { 1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic' },
     todayBtnTxt:'Hoy',
     width:'100%',
-firstDayOfWeek:'mo',
-
-disableUntil:{ year: new Date().getFullYear(), month: new Date().getMonth()+1, day: new Date().getDate()+2 },
-
-disableWeekends:
-false
+    firstDayOfWeek:'mo',
+    disableWeekdays:['su'],
+    disableUntil:{ year: new Date().getFullYear(), month: new Date().getMonth()+1, day: new Date().getDate()+2 },
+    disableWeekends: false
   };
 
 
