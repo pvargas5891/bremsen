@@ -103,12 +103,13 @@ export class CarroComponent implements OnInit {
 
   }
 
-  public classCaso1 = "tab-pane";
-  public classCaso2 = "tab-pane";
-  public classCaso3 = "tab-pane";
-  public classCaso4 = "tab-pane";
+  public classCaso1 = "";
+  public classCaso2 = "";
+  public classCaso3 = "";
+  public classCaso4 = "";
   tipoInstalacionBoton(tipo: number):void{
         //this.validaRegion();
+        //console.debug();
         this.tipoInstalacion = tipo;
 
         if(tipo==1){
@@ -235,44 +236,59 @@ public generainstalacion = function(comuna, usuario){
       this.activaErrorNoDisponible = true;
     }
     var activado = 0;
+    console.debug(data);
+
     for (var i = 0; i < data.length; i++) {
       if (data[i].tipo == '1') {
         this.activaInstalacion = true;
         this.instalacionUno = true;
         this.valorinstalacionUno = data[i].valor;
-        if (activado == 0) {
-          this.tipoInstalacionBoton(1);
-          activado = 1;
-        }
+  
       }
       if (data[i].tipo == '2') {
         this.activaInstalacion = true;
         this.instalacionDos = true;
         this.valorinstalacionDos = data[i].valor;
-        if (activado == 0) {
-          this.tipoInstalacionBoton(2);
-          activado = 1;
-        }
+        
       }
       if (data[i].tipo == '3') {
         this.activaInstalacion = true;
         this.instalacionTres = true;
         this.valorinstalacionTres = data[i].valor;
-        if (activado == 0) {
-          this.tipoInstalacionBoton(3);
-          activado = 1;
-        }
+        
       }
       if (data[i].tipo == '4') {
         this.activaInstalacion = true;
         this.instalacionCuatro = true;
         this.valorinstalacionCuatro = data[i].valor;
-        if (activado == 0) {
-          this.tipoInstalacionBoton(4);
-          activado = 1;
-        }
+        
       }
     }
+    var activadoForm=0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].tipo == '1') {
+        this.tipoInstalacionBoton(1);
+        activadoForm=1;
+      }
+    } 
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].tipo == '2' && activadoForm==0) {
+        this.tipoInstalacionBoton(1);
+        activadoForm = 1;
+      }
+    } 
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].tipo == '3' && activadoForm == 0) {
+        this.tipoInstalacionBoton(1);
+        activadoForm = 1;
+      }
+    } 
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].tipo == '4' && activadoForm == 0) {
+        this.tipoInstalacionBoton(1);
+        activadoForm = 1;
+      }
+    } 
   });
 
 }
@@ -280,23 +296,30 @@ public generainstalacion = function(comuna, usuario){
 
 
   public validaTalleres: boolean = false;
+  public validaCalendario: boolean = false;
   guardaInstalacion1= function(){
      this.tipoInstalacion = 1;
     if(!this.validaRegion())
         return;
-   // console.debug(this.tallerAsociadovalue);
-    if(typeof this.tallerAsociadovalue == 'undefined' || this.tallerAsociadovalue == ""){
+
+   console.debug(this.tallerAsociadovalue);
+    if (typeof this.tallerAsociadovalue == 'undefined' || this.tallerAsociadovalue == ""){
         this.validaTalleres = true;
         return;
     }
     this.validaTalleres = false;
-    
+    if (typeof this.fechaInstalacionvalue == 'undefined' || this.fechaInstalacionvalue==""){
+      this.validaCalendario=true;
+    }
+    this.validaCalendario = false;
     if (!this.aceptaInstalacion1value) {
       this.aceptaInstalacion1Valido = true;
       return;
     } else {
       this.aceptaInstalacion1Valido = false;
     }
+    
+   
     this.estado = true;
     this.errorMessage = "";
      //this.calculaTotales();

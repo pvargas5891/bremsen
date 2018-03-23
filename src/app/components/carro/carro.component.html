@@ -75,12 +75,12 @@
 
             <br>
 
-       <h2 class="titulo-light subtile" *ngIf="incluyeInstalacion">2- Elige tu Despacho o Instalación</h2>
-       <div class="col-md-12 gris" style="padding: 10px;" *ngIf="incluyeInstalacion">
+       <h2 class="titulo-light subtile" >2- Elige tu Despacho o Instalación</h2>
+       <div class="col-md-12 gris" style="padding: 10px;" >
        					<p>Haz click en el tipo de instalación que deseas. Conoce más <a  routerLink="/instalacion"><b style="color:#6b8bc0;">Aquí</b></a></p>
        				</div>
 
-       <div class=" col-md-12 borderCaja" *ngIf="incluyeInstalacion">
+       <div class=" col-md-12 borderCaja" >
        				<br>
 
 					<div class="col-md-6">
@@ -193,12 +193,12 @@
                         <div *ngIf="validaTalleres" class="help-block">Debe seleccionar un taller asociado</div>
                       </div>
                <br>
-                      <div class="form-group" [ngClass]="{ 'has-error': finstalacion1.submitted && !fechaInstalacion.valid }">
+                      <div class="form-group" [ngClass]="{ 'has-error': validaCalendario }">
                         <label for="date" class="control-label">Elige tu fecha de instalación</label>
                   <div class="input-group date" style="width: 100%;">
-                      <my-date-picker [options]="myDatePickerOptions" placeholder="Presionar el calendario" (dateChanged)="onDateChanged($event)" [selDate]="fechaInstalacionvalue"></my-date-picker>
+                      <my-date-picker [options]="myDatePickerOptions" placeholder="Presionar el calendario" [selDate]="fechaInstalacionvalue"></my-date-picker>
                   </div>
-                   <div *ngIf="finstalacion1.submitted && !fechaInstalacion.valid" class="help-block">Debe seleccionar una fecha de instalacion</div>
+                   <div *ngIf="validaCalendario" class="help-block">Debe seleccionar una fecha de instalacion</div>
                       </div>
     
                      <div class="form-group" [ngClass]="{ 'has-error': finstalacion1.submitted && !bloqueHorario.valid }">
