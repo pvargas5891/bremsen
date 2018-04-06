@@ -32,7 +32,7 @@
               <table class="table">
                   <tr>
                       <td>Tarjeta:</td>
-                      <td>XXXX-6623</td>
+                      <td>XXXX-{{data.Tbk_numero_final_tarjeta}}</td>
                   </tr>
                   <tr>
                       <td>N° Orden de compra:</td>
@@ -44,11 +44,11 @@
                   </tr>
                   <tr>
                       <td>URL del comercio:</td>
-                      <td>http://bremsen.cl</td>
+                      <td>http://www.bremsen.cl</td>
                   </tr>
                   <tr>
                       <td>Monto:</td>
-                      <td>$ 66.550</td>
+                      <td>{{data.Tbk_monto | number | currencyFormat}}</td>
                   </tr>
                   <tr>
                       <td>Moneda:</td>
@@ -56,15 +56,15 @@
                   </tr>
                   <tr>
                       <td>Fecha transacción:</td>
-                      <td>03/01/2018</td>
+                      <td>{{data.Tbk_fecha_transaccion}}</td>
                   </tr>
                   <tr>
                       <td>Nombre Comprador:</td>
-                      <td>Esteban Muñoz</td>
+                      <td>{{data.nombreCliente}}</td>
                   </tr>
                   <tr>
                       <td>Código Autorización:</td>
-                      <td>7235</td>
+                      <td>{{data.Tbk_codigo_autorizacion}}</td>
                   </tr>
                   <tr>
                       <td>Tipo de transacción:</td>
@@ -72,20 +72,28 @@
                   </tr>
                   <tr>
                       <td>Tipo de Cuota</td>
-                      <td>Normales</td>
+                      <td>{{data.tipo_cuotas}}</td>
                   </tr>
                   <tr>
                       <td>Tipo de Pago</td>
-                      <td>Credito</td>
+                      <td>{{data.Tbk_tipo_pago}}</td>
                   </tr>
                   <tr>
                       <td>Número de cuotas</td>
-                      <td>3</td>
+                      <td>{{data.Tbk_numero_cuotas}}</td>
                   </tr>
                   <tr>
                       <td><b>Descripción del Producto</b></td>
-                      <td><b>Producto</b></td>
+                      <td><b>Cantidad</b></td>
                   </tr>
+                <tr *ngFor="let producto of data.productosComprados">
+                    <td>
+                        <b>{{producto.MARCA}} {{producto.MODELO}} {{producto.MEDIDA}}</b>
+                    </td>
+                    <td>
+                        <b>{{producto.CANTIDAD}}</b>
+                    </td>
+                </tr>
               </table>
                  <br>
                  <p>Te hemos enviado un mail de confirmación con los detalles  de tu compra</p>

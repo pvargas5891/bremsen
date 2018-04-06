@@ -444,8 +444,8 @@ public generainstalacion = function(comuna, usuario){
 
        // console.debug(data);
           for(var id in data){
-            var producto = this.getProductoById(data[id]);
-            if (producto.CODIGO != "")
+            //var producto = this.getProductoById(data[id]);
+            //if (producto.CODIGO != "")
                this.carroCompra.push(this.getProductoById(data[id]));
           }
 

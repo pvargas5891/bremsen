@@ -11,6 +11,96 @@ if(isset($_GET['debug']))
 
 
 switch($accion){
+	case 'venta':
+		$datos=array();
+		
+		
+		$rsWebpay=$model->getWebPayByPago($_POST['id']);
+		$datos['Tbk_tipo_transaccion']=$rsWebpay->fields['Tbk_tipo_transaccion'];
+		$datos['Tbk_respuesta']=$rsWebpay->fields['Tbk_respuesta'];
+		$datos['Tbk_orden_compra']=$rsWebpay->fields['Tbk_orden_compra'];
+		$datos['Tbk_id_sesion']=$rsWebpay->fields['Tbk_id_sesion'];
+		$datos['Tbk_codigo_autorizacion']=$rsWebpay->fields['Tbk_codigo_autorizacion'];
+		$datos['Tbk_monto']=$rsWebpay->fields['Tbk_monto'];
+		$datos['Tbk_numero_tarjeta']=$rsWebpay->fields['Tbk_numero_tarjeta'];
+		$datos['Tbk_numero_final_tarjeta']=$rsWebpay->fields['Tbk_numero_final_tarjeta'];
+		$datos['Tbk_fecha_expiracion']=$rsWebpay->fields['Tbk_fecha_expiracion'];
+		$datos['Tbk_fecha_contable']=$rsWebpay->fields['Tbk_fecha_contable'];
+		$datos['Tbk_fecha_transaccion']=$rsWebpay->fields['Tbk_fecha_transaccion'];
+		$datos['Tbk_hora_transaccion']=$rsWebpay->fields['Tbk_hora_transaccion'];
+		$datos['Tbk_id_transaccion']=$rsWebpay->fields['Tbk_id_transaccion'];
+		$datos['Tbk_tipo_pago']=$rsWebpay->fields['Tbk_tipo_pago'];
+
+		$trs_tipo_pago = $datos['Tbk_tipo_pago'];
+
+$trs_nro_cuotas = $rsWebpay->fields['Tbk_numero_cuotas'];
+
+if ($trs_nro_cuotas=='0'){$trs_nro_cuotas='00';}
+
+$tipo_pago_descripcion="";$tipo_pago=" Credito";
+
+if ($trs_tipo_pago=="VN"){	$tipo_pago_descripcion=" Sin Cuotas";}
+
+if ($trs_tipo_pago=="VC"){	$tipo_pago_descripcion=" Normales";}
+
+if ($trs_tipo_pago=="SI"){	$tipo_pago_descripcion=" Sin inter&eacute;s";}
+
+if ($trs_tipo_pago=="CIC"){	$tipo_pago_descripcion=" Cuotas Comercio";}
+
+if ($trs_tipo_pago=="VD"){	$tipo_pago_descripcion=" Debito";$tipo_pago=" Debito";}
+		$datos['tipo_cuotas']=$tipo_pago_descripcion;
+		$datos['Tbk_tipo_pago']=$tipo_pago;
+		$datos['Tbk_numero_cuotas']=$trs_nro_cuotas ;
+		$datos['Tbk_mac']=$rsWebpay->fields['Tbk_mac'];
+		$datos['Tbk_monto_cuota']=$rsWebpay->fields['Tbk_monto_cuota'];
+		$datos['Tbk_tasa_interes_max']=$rsWebpay->fields['Tbk_tasa_interes_max'];
+		$datos['Tbk_ip']=$rsWebpay->fields['Tbk_ip'];
+		$datos['token']=$rsWebpay->fields['token'];
+
+		$rsDetalle=$model->getDetalleCompra($_POST['id']);
+		$datos['usuario']=$rsDetalle->fields['usuario'];
+		$datos['pagoId']=$rsDetalle->fields['pagoId'];
+		$datos['regionInstalacion']=$rsDetalle->fields['regionInstalacion'];
+		$datos['ciudadInstalacion']=$rsDetalle->fields['ciudadInstalacion'];
+		$datos['comunaInstalacion']=$rsDetalle->fields['comunaInstalacion'];
+		$datos['aceptaInstalacion1value']=$rsDetalle->fields['aceptaInstalacion1value'];
+		$datos['nombresInstalacion2value']=$rsDetalle->fields['nombresInstalacion2value'];
+		$datos['direccionInstalacion2value']=$rsDetalle->fields['direccionInstalacion2value'];
+		$datos['rutInstalacion3value']=$rsDetalle->fields['rutInstalacion3value'];
+		$datos['nombresInstalacion3value']=$rsDetalle->fields['nombresInstalacion3value'];
+		$datos['direccionInstalacion3value']=$rsDetalle->fields['direccionInstalacion3value'];
+		$datos['aceptaInstalacion3value']=$rsDetalle->fields['aceptaInstalacion3value'];
+		$datos['tallerAsociadovalue']=$rsDetalle->fields['tallerAsociadovalue'];
+		$datos['fechaInstalacionvalue']=$rsDetalle->fields['fechaInstalacionvalue'];
+		$datos['bloqueHorariovalue']=$rsDetalle->fields['bloqueHorariovalue'];
+		$datos['direccionInstalacion4value']=$rsDetalle->fields['direccionInstalacion4value'];
+		$datos['aceptaInstalacion4value']=$rsDetalle->fields['aceptaInstalacion4value'];
+		$datos['tipoInstalacion']=$rsDetalle->fields['tipoInstalacion'];
+		$datos['costoNeumaticos']=$rsDetalle->fields['costoNeumaticos'];	
+		$datos['costoInstalacion']=$rsDetalle->fields['costoInstalacion'];
+		$datos['descuentoAplicado']=$rsDetalle->fields['descuentoAplicado'];
+		$datos['totalTotales']=$rsDetalle->fields['totalTotales'];
+		
+		$cliente=$model->User_Data($datos['usuario']);
+		$datos['nombreCliente']=$cliente->fields['nombres'];	
+		$datos['email']=$cliente->fields['email'];
+		$rsCarro=$model->getCarroPorPago($_POST['id']);
+
+		//$datos['productosComprados']=array();
+		while(!$rsCarro->EOF){
+			  $rsProducto=$model->getProductoById($rsCarro->fields['id_producto']);
+			  $general2['MARCA']=$rsProducto->fields['Marca'];
+			  $general2['MODELO']=$rsProducto->fields['MODELO'];
+			  $general2['MEDIDA']=$rsProducto->fields['MEDIDA'];
+			  $general2['CANTIDAD']=$rsCarro->fields['cantidad'];
+			  $general[]=$general2;
+			  
+			$rsCarro->movenext();
+		} ;
+		$datos['productosComprados']=$general;
+		echo html_entity_decode(json_encode($datos, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));
+
+	break;
 	case 'detalle':
 	
 		$general=array();
