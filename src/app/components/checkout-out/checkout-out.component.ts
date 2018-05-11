@@ -68,6 +68,10 @@ export class CheckoutOutComponent {
           }
     this.tipoLoginCompra = JSON.parse(localStorage.getItem('tipoLoginCompra'));
     console.debug(this.tipoLoginCompra);      
+    if (typeof this.tipoLoginCompra === 'undefined' || this.tipoLoginCompra == null || this.tipoLoginCompra == 0){
+      localStorage.setItem('tipoLoginCompra', JSON.stringify({ estado: 2 }));
+      this.tipoLoginCompra = JSON.parse(localStorage.getItem('tipoLoginCompra'));
+    }
 
     this.datosCarro = JSON.parse(localStorage.getItem('instalacionTemporal'));
           //console.debug(datosCarro);

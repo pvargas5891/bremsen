@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class UserService {
 
-    url:string = 'http://bremsen.kodamas.cl/maqueta/';
+    url: string = '//www.bremsen.cl/php/';
     constructor(public http:Http) { }
 
 

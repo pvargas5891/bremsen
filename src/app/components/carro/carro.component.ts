@@ -434,6 +434,7 @@ public generainstalacion = function(comuna, usuario){
     this.validaRegion();
     this._is.getComunas(selectedCiudad);
   }
+
   private getCarroAll = function (){
 
     this.carro.getCarroAll(this.id).then(
@@ -644,8 +645,8 @@ public sanitizaUrlExtern(url){
   return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
   public nopuedecontinuar = false;
-public checking = function(){
-
+public checking = function(tipo){
+  localStorage.setItem('tipoLoginCompra', JSON.stringify({ estado: tipo }));
   if(!this.estado){
     this.validaRegion();
     this.nopuedecontinuar=true;

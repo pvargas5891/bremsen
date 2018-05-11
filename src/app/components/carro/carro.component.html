@@ -388,13 +388,13 @@
                 <td class=col-md-6></td>
                   <td  class="text-right">
                   <div *ngIf="consesion">
-                    <button *ngIf="!activaErrorNoDisponible" type="button" class="btn btn-default btn-block" (click)="checking()">Continuar con tu pedido</button><br>
+                    <button *ngIf="!activaErrorNoDisponible" type="button" class="btn btn-default btn-block" (click)="checking(1)">Continuar con tu pedido</button><br>
                   </div> 
                     <div *ngIf="!consesion">
-                    <button *ngIf="!activaErrorNoDisponible" type="button" class="btn btn-default btn-block" (click)="checking()">Comprar con mi cuenta</button>
+                    <button *ngIf="!activaErrorNoDisponible" type="button" class="btn btn-default btn-block" (click)="checking(1)">Comprar con mi cuenta</button>
                     <br>
                      <a href="javascript:void(0);" routerlink="/registro"><small>¿Aun no tienes cuenta?</small></a><br>
-                     <button type="button" class="btn btn-primary btn-block" (click)="checking()">Comprar como visita</button>
+                     <button type="button" class="btn btn-primary btn-block" (click)="checking(2)">Comprar como visita</button>
                    </div> 
                    
                    <div class="form-group" [ngClass]="{ 'has-error': nopuedecontinuar }">

@@ -8,7 +8,7 @@ import { promise } from 'selenium-webdriver';
 @Injectable()
 export class ProductosService {
 
-  url:string = 'http://bremsen.kodamas.cl/maqueta/';
+    url: string = '//www.bremsen.cl/php/';
 
   constructor( private http:Http) {
 
