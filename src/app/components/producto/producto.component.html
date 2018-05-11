@@ -54,10 +54,9 @@
             <tr>
               <td class="col-sm-3">
                   <div class="form-group" [ngClass]="{ 'has-error': cantidadValido }">
-                 <!--   <select class="form-control" name="cantidad" #cantidadSelected id="cantidad" [(ngModel)]="cantidad" (change)="cambiaCantidad(cantidadSelected.value)">
+                 <select class="form-control" name="cantidad" #cantidadSelected id="cantidad" [(ngModel)]="cantidad" (change)="cambiaCantidad(cantidadSelected.value)">
                     <option *ngFor="let stock of producto.STOCK" [value]="stock.codigo">{{stock.nombre}}</option>
-                    </select>-->
-                    <div *ngIf="producto.STOCK[0].codigo==0" class="help-block">Verificar Stock</div>
+                    </select>
                      <div *ngIf="cantidadValido" class="help-block">Debe seleccionar una cantidad</div>
                      </div>
               </td>
@@ -70,7 +69,7 @@
           </table>
     <hr class="hr1">
 
-          <table class="table2 table table-precio" *ngIf="producto.STOCK[0].codigo>0">
+          <table class="table2 table table-precio">
 
             <tr  >
               <td class="col-sm-6">
@@ -84,7 +83,7 @@
 
           </table>
 
-          <table class="table2 table table-precio" *ngIf="producto.STOCK[0].codigo>0">
+          <table class="table2 table table-precio">
                 <tr>
               <td>
                 <button  type="submit" class="btn btn-primary bremsen3" (click)="agregarCarro(2)" ><i class="fa fa-plus"></i> Carro</button>
@@ -99,7 +98,7 @@
               </td>
             </tr>
               </table>
-              <table class="table2 table table-precio" *ngIf="producto.STOCK[0].codigo==0">
+              <!--table class="table2 table table-precio" >
                 <tbody>
                   <tr>
               
@@ -124,10 +123,6 @@
                                 required>
                               <div *ngIf="f.submitted && !emailcliente.valid" class="help-block">Email es requerido</div>
                             </div>
-
-                            <!--div class="form-group">
-                               <label for="exampleInputEmail1">Cantidad de neumáticos</label>
-                                <input type="number" class="form-control" id="number" placeholder="0"> </div-->
                           
                           <button type="submit" class="btn btn-default bremsen">Enviar</button>
                           </form>
@@ -137,7 +132,7 @@
                     </td>
                   </tr>
                 </tbody>
-              </table>
+              </table-->
 
 <div *ngIf="estadoCarro" [ngClass] = "'success'"> Producto fue agregado correctamente. </div>
                 <div *ngIf="errorMessage" [ngClass] = "'error'"> {{errorMessage}} </div>
@@ -198,7 +193,7 @@
 
 
 
-                <iframe class="video" width="632"  height="365" [src]="producto.VIDEO" frameborder="0" allowfullscreen></iframe>
+                <!--iframe class="video" width="632"  height="365" [src]="producto.VIDEO" frameborder="0" allowfullscreen></iframe-->
 
               </div>
             </div>
