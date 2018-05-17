@@ -143,7 +143,7 @@ private getDatosPersonales = function (){
       this.userService.saveFactura(this.cliente).then(
         data => {
 
-             window.location.href="http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario="+this.id;
+             window.location.href="http://www.bremsen.cl/webpay/tbk-normal.php?usuario="+this.id;
 
         },
       error => {
@@ -156,11 +156,11 @@ private getDatosPersonales = function (){
 
           //guardar todo y redirect a webpay
 
-          window.location.href="http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario="+this.id;
+          window.location.href="http://www.bremsen.cl/webpay/tbk-normal.php?usuario="+this.id;
     }
 
   public realizaTransferencia = function(){
-    window.location.href = "http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?transferencia=true&usuario=" + this.id;
+    window.location.href = "http://www.bremsen.cl/webpay/tbk-normal.php?transferencia=true&usuario=" + this.id;
   }
 
 }

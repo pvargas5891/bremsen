@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 export class CarroCompraService {
 
   url: string = '//www.bremsen.cl/php/';
-
+  //url: string = 'http://bremsen.kodamas.cl/maqueta/';
   constructor( private http:Http) {
 
      // this.cargar_productos();

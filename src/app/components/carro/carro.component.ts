@@ -539,10 +539,11 @@ var currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
           
           if(typeof this.comunaInstalacion !== 'undefined')
-          this.seleccionaInstalacion(this.comunaInstalacion);
-          localStorage.setItem('carroUserTemporal', JSON.stringify(this.carroCompra));
-          localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
-          this.calculaTotales();
+          
+            localStorage.setItem('carroUserTemporal', JSON.stringify(this.carroCompra));
+            localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+            this.seleccionaInstalacion(this.comunaInstalacion);
+            this.calculaTotales();
     },
     error=>{
 
@@ -564,9 +565,10 @@ var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.carroCompra.push(this.getProductoById(carroTemporal[i]));
       }
       if(typeof this.comunaInstalacion !== 'undefined')
-        this.seleccionaInstalacion(this.comunaInstalacion);
+        
         localStorage.setItem('carroUserTemporal', JSON.stringify(carroTemporal));
         localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+      this.seleccionaInstalacion(this.comunaInstalacion);
       this.calculaTotales();
     }
   }
@@ -612,8 +614,8 @@ public eliminaProductoCarro(id,producto){
       }
       console.debug(carroTemporal2);
       localStorage.setItem('carroUserTemporal', JSON.stringify(carroTemporal2));
-      this.seleccionaInstalacion(this.comunaInstalacion);
       localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+      this.seleccionaInstalacion(this.comunaInstalacion);
       this.calculaTotales();
     }
   }

@@ -10,7 +10,7 @@ export class InformacionService {
 
   info:any = {};
   cargada:boolean = false;
-  //url:string = 'http://localhost:90/servidor/';
+  //url: string = 'http://bremsen.kodamas.cl/maqueta/';
   url:string = '//www.bremsen.cl/php/';
   public regiones: any[] = [];
   public ciudades: any[] = [];

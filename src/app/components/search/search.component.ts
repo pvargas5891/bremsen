@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductosService } from '../../services/productos.service';
 import { DetalleCatProductos } from '../categoria-no-filtrada/detalleCatProductos';
 import { CarroCompraService } from '../../services/carro-compra.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -31,6 +31,7 @@ export class SearchComponent {
 
   constructor(private route: ActivatedRoute,
               private _productoService: ProductosService,
+              private routeLink: Router,
               private _carroCompra: CarroCompraService) {
 
       route.params.subscribe( parametros =>{
@@ -154,34 +155,90 @@ export class SearchComponent {
     this.getProductosFiltrado();
   }
 
-public agregarCarro = function (indice,cantidad,producto) {
+  public agregarCarro = function (indice, cantidad, producto) {
 
-  //this.cantidadValido = false;
+    //this.cantidadValido = false;
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if(typeof cantidad == 'undefined'){
-      this.cantidadValido=true;
+    if (typeof cantidad == 'undefined') {
+      this.cantidadValido = true;
+      return;
+    }
+
+
+
+    if (currentUser == null) {
+
+      var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
+
+      if (carroTemporal == null) {
+        var object = new Array();
+        var carro = {
+          id_producto: producto,
+          cantidad: cantidad,
+          id_carro: producto
+        };
+        object.push(carro);
+        localStorage.setItem('carroUserTemporal', JSON.stringify(object));
+      } else {
+        var existe = false;
+
+        for (var i = 0; i < carroTemporal.length; i++) {
+          if (carroTemporal[i].id_producto == producto) {
+            carroTemporal[i].cantidad = parseInt(carroTemporal[i].cantidad) + parseInt(cantidad);
+            existe = true;
+          }
+        }
+        if (!existe) {
+          var carro = {
+            id_producto: producto,
+            cantidad: cantidad,
+            id_carro: producto
+          };
+          carroTemporal.push(carro);
+        }
+
+        localStorage.setItem('carroUserTemporal', JSON.stringify(carroTemporal));
+      }
+      var carroTemporal = JSON.parse(localStorage.getItem('carroUserTemporal'));
+      localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+      if (indice == 1) {
+        this.routeLink.navigate(['/carro']);
+        //document.getElementById("openModalButton").click();
+      } else {
+        document.getElementById("openModalButton").click();
+      }
       return;
     }
 
     var usuario = currentUser.usuario.id;
-    this._carroCompra.agregarCarro(cantidad,producto, usuario)
-    .then(
-      data => {
-          if(data=='STOCK'){
+    this._carroCompra.agregarCarro(cantidad, producto, usuario)
+      .then(
+        data => {
+          console.debug(data);
+          if (data == 'STOCK') {
             this.errorMessage = 'No hay stock suficiente para tu pedido';
             return;
           }
-          if(data=='STOCKTEMP'){
+          if (data == 'STOCKTEMP') {
             this.errorMessage = 'No hay stock suficiente para tu pedido';
             return;
           }
 
-           this.estadoCarro = true;
-      },
-      error => {
+          this.estadoCarro = true;
+          localStorage.setItem('cambiaCarro', JSON.stringify({ estado: 'actualize' }));
+          var cambiaCarro = JSON.parse(localStorage.getItem('cambiaCarro'));
+          if (indice == 1) {
+            this.routeLink.navigate(['/carro']);
+            // document.getElementById("openModalButton").click();
+          } else {
+            document.getElementById("openModalButton").click();
+          }
 
-      }
-    );
+        },
+        error => {
+          console.debug(error);
+        }
+      );
   }
 
   public validaNombreRequerido = false;

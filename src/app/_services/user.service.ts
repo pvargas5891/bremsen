@@ -8,6 +8,7 @@ import 'rxjs/add/operator/toPromise';
 export class UserService {
 
     url: string = '//www.bremsen.cl/php/';
+    //url: string = 'http://bremsen.kodamas.cl/maqueta/';
     constructor(public http:Http) { }
 
 

@@ -303,14 +303,14 @@ cambiaCiudadEmpresa(selectedRegion: string): void{
         this.carro.agregarCarro(carroTemporal[i].cantidad, carroTemporal[i].id_producto, usuario)
           .then();
       }
-      this.carro.setDetallesCarro(this.datosCarro, usuario).then(
+      this.carro.setDetallesCarro(this.datosCarro[0], usuario).then(
         data => {
           console.debug(data);
           this.codigoCompra = data[0].pagosID;
           this.desactivaBotones = false;
           var claveFunction = JSON.parse(localStorage.getItem('claveFunction'));
           if(claveFunction.estado==1)
-            window.location.href = "http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?usuario=" + usuario;
+            window.location.href = "http://www.bremsen.cl/webpay/tbk-normal.php?usuario=" + usuario;
           else
             this.activaTransferencia = true;
         },
@@ -331,7 +331,7 @@ cambiaCiudadEmpresa(selectedRegion: string): void{
     localStorage.setItem('claveFunction', JSON.stringify({ estado: dato }));
   }
   public realizaTransferencia = function () {
-    window.location.href = "http://bremsen.kodamas.cl/entrega/webpay/tbk-normal.php?transferencia=true&usuario=" + this.id;
+    window.location.href = "http://www.bremsen.cl/webpay/tbk-normal.php?transferencia=true&usuario=" + this.id;
   }
   public loading2=false;
   public error2="";
