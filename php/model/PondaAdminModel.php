@@ -427,9 +427,9 @@ class PondaAdminModel
       $this->db->execute($sql);
     }
     function getPasswordByEmail($email){
-        $sql="select password from clientes where email = '".$email."'";
+        $sql="select * from clientes where email = '".$email."'";
         $rs=$this->db->execute($sql);
-        return $rs->fields['password'];
+        return $rs;
     }
     function updateCliente($post){
       $sql="update clientes set ";

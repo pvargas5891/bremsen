@@ -263,7 +263,7 @@ cambiaCiudadEmpresa(selectedRegion: string): void{
               return;
          }
       }
-     this.userService.create(this.cliente)
+     this.userService.createSinSesion(this.cliente)
 	     .then( data => {
              this.errorMessage = "";
            if(data=='OK'){

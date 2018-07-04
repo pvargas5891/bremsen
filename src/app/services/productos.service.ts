@@ -4,14 +4,16 @@ import { Observable } from 'rxjs';
 import { DetalleCatProductos } from '../components/categoria-no-filtrada/detalleCatProductos';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import { Router } from '@angular/router';
 import { promise } from 'selenium-webdriver';
 @Injectable()
 export class ProductosService {
 
-    url: string = '//www.bremsen.cl/php/';
+    url: string = window.location + '/php/';
     //url: string = 'http://bremsen.kodamas.cl/maqueta/';
-  constructor( private http:Http) {
-
+    constructor(private http: Http, private router: Router) {
+      this.url = this.router.url + "php/";
+      console.log(this.router.url);
      // this.cargar_productos();
 
   }

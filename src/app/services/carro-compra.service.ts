@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions,Response, Headers  } from '@angular/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -7,10 +8,11 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class CarroCompraService {
 
-  url: string = '//www.bremsen.cl/php/';
+  url: string = window.location + '/php/';
   //url: string = 'http://bremsen.kodamas.cl/maqueta/';
-  constructor( private http:Http) {
-
+  constructor(private http: Http, private router: Router) {
+    this.url = this.router.url+"php/";
+    console.log(this.router.url);
      // this.cargar_productos();
 
   }

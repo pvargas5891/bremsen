@@ -61,9 +61,8 @@ export class CarroComponent implements OnInit {
     todayBtnTxt:'Hoy',
     width:'100%',
     firstDayOfWeek:'mo',
-    disableWeekdays:['su'],
-    disableUntil:{ year: new Date().getFullYear(), month: new Date().getMonth()+1, day: new Date().getDate()+2 },
-    disableWeekends: false
+    disableUntil:{ year: new Date().getFullYear(), month: new Date().getMonth()+1, day: new Date().getDate()+4 },
+    disableWeekends: true
   };
 
 

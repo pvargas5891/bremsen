@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions,Response, Headers  } from '@angular/http';
 import { Cliente } from '../components/registro/cliente';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -10,8 +11,11 @@ export class InformacionService {
 
   info:any = {};
   cargada:boolean = false;
+  
   //url: string = 'http://bremsen.kodamas.cl/maqueta/';
-  url:string = '//www.bremsen.cl/php/';
+  url: string = window.location +'/php/';
+  //url: string = 'http://bremsen.kodamas.cl/maqueta/';
+
   public regiones: any[] = [];
   public ciudades: any[] = [];
   public comunas:any[] = [];
@@ -34,14 +38,17 @@ export class InformacionService {
 
   public talleres: any[]=[];
 
-  constructor( public http:Http ) {
+  constructor(public http: Http, private router: Router) {
+    this.url = this.router.url+"php/";
+    console.log(this.router.url);
 
     this.getRegiones();
     this.getCiudades("1");
     this.getComunas("1");
-
+    
     //this.getVehiculos(1);
   }
+
   public getDescuento(codigo): Promise<any>{
     return this.http.get(this.url + "getdescuento.php?codigo="+codigo).toPromise()
       .then(this.extractData)

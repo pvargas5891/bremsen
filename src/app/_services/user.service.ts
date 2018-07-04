@@ -2,14 +2,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Http, RequestOptions,Response, Headers  } from '@angular/http';
 import { Cliente } from '../components/registro/cliente';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UserService {
 
-    url: string = '//www.bremsen.cl/php/';
+    url: string = window.location + '/php/';
     //url: string = 'http://bremsen.kodamas.cl/maqueta/';
-    constructor(public http:Http) { }
+    constructor(public http: Http, private router: Router) { 
+        this.url = this.router.url + "php/";
+        console.log(this.router.url);
+    }
 
 
     getById(id: string) {
@@ -140,6 +144,28 @@ export class UserService {
 
 
   }
+    public createSinSesion(registro: Cliente): Promise<string> {
+
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+        let options = new RequestOptions({ headers: headers });
+        const params = new URLSearchParams();
+        params.append('nombreCompleto', registro.nombreCompleto);
+        params.append('comuna', registro.comuna);
+        params.append('ciudad', registro.ciudad);
+        params.append('region', registro.region);
+        params.append('direccion', registro.direccion);
+        params.append('genero', registro.genero);
+        params.append('telefono', registro.telefono);
+        params.append('email', registro.email);
+        params.append('password', registro.password);
+
+        let body = params.toString();
+        return this.http.post(this.url + 'registro2.php', body, options).toPromise()
+            .then(this.extractData)
+            .catch(this.handleErrorPromise);
+
+
+    }
 public createWithFactura(registro: Cliente): Promise<string>{
 
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
@@ -164,7 +190,7 @@ public createWithFactura(registro: Cliente): Promise<string>{
         params.append('comunaempresa', registro.comunaempresa);
 
         let body = params.toString();
-        return this.http.post(this.url+ 'registro.php', body, options).toPromise()
+        return this.http.post(this.url+ 'registro2.php', body, options).toPromise()
 	           .then(this.extractData)
              .catch(this.handleErrorPromise);
 
